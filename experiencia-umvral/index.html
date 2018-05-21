@@ -13,35 +13,32 @@
     </script>
   </head>
   <body>
-    <a-scene>
+    <a-scene cursor="rayOrigin: mouse">
+      <a-sky color="#6EBAA7"></a-sky>
       <a-entity laser-controls="hand: right"></a-entity>
-
-      <a-entity> <a-camera look-controls-enabled wasd-controls-enabled mouse-cursor></a-camera></a-entity>
-
-      <!-- BEGIN INPUTS/KEYBOARD -->
-      <a-keyboard></a-keyboard>
-      <a-input position="-0.7 1 -2.5" placeholder="Username" color="black" width="1"></a-input>
-      <a-input position="-0.7 0.8 -2.5" type="password" placeholder="Password" color="black" width="1"></a-input>
-      <!-- END INPUTS/KEYBOARD -->
+      <a-entity camera look-controls position="0 0 -1" wasd-controls>
+        <a-entity cursor="fuse: true; fuseTimeout: 1500"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            material="color: black; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
+               fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
+               fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+          </a-entity>
+      </a-entity>
 
       <!-- BEGIN FORM -->
-      <a-rounded position="0.5 0.5 -2.5" width="4" height="3.1" radius="0.05" rotation="0 -20 0" scale="0.3 0.3 0.3">
+      <a-rounded position="0 0 -2.5" width="4" height="3.1" radius="0.05" rotation="0 0 0" scale="0.3 0.3 0.3">
         <a-form>
-          <a-switch position="0.2 2.7 0" enabled="true"></a-switch>
-          <a-radio position="0.2 2.4 0" width="3" name="food" label="Burger with fries and pizza" value="pizza"></a-radio>
-          <a-radio position="0.2 2.1 0" width="3" name="food" label="Veggies" checked="true" disabled="true"></a-radio>
-          <a-radio position="0.2 1.8 0" width="3" name="food" label="Ice cream"></a-radio>
-          <a-checkbox position="0.2 1.5 0" width="3" name="stuff" label="I am a checkbox" checked="true"></a-checkbox>
-          <a-checkbox position="0.2 1.2 0" width="3" name="stuff" label="And I am another one" checked="true" disabled="true"></a-checkbox>
-          <a-button position="0.2 0.8 0" name="stuff" value="Click me" type="raised"></a-button>
-          <a-button position="0.2 0.35 0" width="3" name="stuff" value="You cannot click me" disabled="true"></a-button>
+          <a-entity text="value: Seleccione el tipo de objeto;"></a-entity>
+          <a-radio position="0.2 2.4 0" width="3" name="obj" label="Cilindro"></a-radio>
+          <a-radio position="0.2 2.1 0" width="3" name="obj" label="Cubo"></a-radio>
+          <a-radio position="0.2 1.8 0" width="3" name="obj" label="Esfera"></a-radio>
+          <a-button position="0.2 0.8 0" name="stuff" value="Empezar experiencia" type="raised"></a-button>
         </a-form>
       </a-rounded>
       <!-- END FORM -->
-
-      <!-- BEGIN TOAST -->
-      <a-toast message="This is a toast" action="Got it"></a-toast>
-      <!-- END TOAST -->
 
       <!-- BEGIN ENVIRONEMENT -->
       <a-gradient-sky material="shader: gradient; topColor: 255 0 0; bottomColor: 0 121 255;"></a-gradient-sky>
@@ -49,12 +46,11 @@
     </a-scene>
     <script type="text/javascript">
       let button = document.querySelector('a-button');
-      let toast = document.querySelector('a-toast');
-      toast.addEventListener('actionclick', ()=>{
-        toast.hide();
-      })
+      let form = document.querySelector('a-rounded');
+      let sky = document.querySelector('a-sky');
       button.addEventListener('click', ()=> {
-        toast.show();
+        form.setAttribute('visible', false);
+        sky.setAttribute('src', 'assets/images/space.png');
       })
     </script>
   </body>
