@@ -1,15 +1,32 @@
-# umVRal - Producto Minimo Viable 
+# A-Frame Material Boilerplate
 
-Primer acercamiento del proyecto. El presente proyecto, busca a través de A-Frame, obtener un producto mínimo viable, con el desarrollo de una experiencia: caída libre.
+### Installation
 
-## Instrucciones
+First make sure you have Node installed.
 
-* Clonar, o descargar el repositorio
-* Correr los siguientes comandos en terminal:
-´´´
+On Mac OS X, it's recommended to use [Homebrew](http://brew.sh/) to install Node + [npm](https://www.npmjs.com):
+
+    brew install node
+
+To install the Node dependencies:
+
     npm install
-		npm start
-´´´
-En consola, saldrá una URL con la dirección de su PC en su Red Wifi, y el puerto 3000. Acceda a esta URL a través de su teléfono móvil, para poder probar la aplicación en este.
 
 
+### Local Development
+
+To serve the site from a simple Node development server:
+
+    npm start
+
+Then launch the site from your favorite browser:
+
+[__http://localhost:3000/__](http://localhost:3000/)
+
+If you wish to serve the site from a different port:
+
+    PORT=8000 npm start
+
+## License
+
+Distributed under an [MIT License](LICENSE).

@@ -2,87 +2,60 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>umVRal - Caida Libre</title>
-    <meta name="description" content="Hello, World! - A-Frame">
+    <title>aframe-material😲😆😛</title>
+    <meta name="description" content="Aframe-Material">
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
-		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
+    <script src="https://cdn.rawgit.com/etiennepinchon/aframe-material/master/dist/aframe-material.min.js"></script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
   </head>
   <body>
+    <a-scene>
+      <a-entity laser-controls="hand: right"></a-entity>
 
-<a-scene fog="type: linear; color: #FFEBDE; far:195" >
-        <a-assets>
-            <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
-        </a-assets>
+      <a-entity> <a-camera look-controls-enabled wasd-controls-enabled mouse-cursor></a-camera></a-entity>
 
-         <!--a-entity camera
-            universal-controls
-            jump-ability
-            kinematic-body
-            position="0 2 10">
-        </a-entity-->
-<a-entity id="rig" movement-controls >
-  <a-entity camera
-						universal-controls
-						jump-ability
-            position="0 2 10"
-            look-controls="pointerLockEnabled: true"></a-entity>
-</a-entity>
+      <!-- BEGIN INPUTS/KEYBOARD -->
+      <a-keyboard></a-keyboard>
+      <a-input position="-0.7 1 -2.5" placeholder="Username" color="black" width="1"></a-input>
+      <a-input position="-0.7 0.8 -2.5" type="password" placeholder="Password" color="black" width="1"></a-input>
+      <!-- END INPUTS/KEYBOARD -->
 
-        <a-box color="red"
-            dynamic-body
-            position="0 10 0"
-            height="4"></a-box>
+      <!-- BEGIN FORM -->
+      <a-rounded position="0.5 0.5 -2.5" width="4" height="3.1" radius="0.05" rotation="0 -20 0" scale="0.3 0.3 0.3">
+        <a-form>
+          <a-switch position="0.2 2.7 0" enabled="true"></a-switch>
+          <a-radio position="0.2 2.4 0" width="3" name="food" label="Burger with fries and pizza" value="pizza"></a-radio>
+          <a-radio position="0.2 2.1 0" width="3" name="food" label="Veggies" checked="true" disabled="true"></a-radio>
+          <a-radio position="0.2 1.8 0" width="3" name="food" label="Ice cream"></a-radio>
+          <a-checkbox position="0.2 1.5 0" width="3" name="stuff" label="I am a checkbox" checked="true"></a-checkbox>
+          <a-checkbox position="0.2 1.2 0" width="3" name="stuff" label="And I am another one" checked="true" disabled="true"></a-checkbox>
+          <a-button position="0.2 0.8 0" name="stuff" value="Click me" type="raised"></a-button>
+          <a-button position="0.2 0.35 0" width="3" name="stuff" value="You cannot click me" disabled="true"></a-button>
+        </a-form>
+      </a-rounded>
+      <!-- END FORM -->
 
-        <a-cylinder color="#ddb424"
-           position="-5 10 0"
-           dynamic-body></a-cylinder>
+      <!-- BEGIN TOAST -->
+      <a-toast message="This is a toast" action="Got it"></a-toast>
+      <!-- END TOAST -->
 
-        <a-sphere color="#ddb424"
-           position="5 5 0"
-           dynamic-body></a-sphere>
-
-        <a-entity static-body collada-model="#ground"></a-entity>
+      <!-- BEGIN ENVIRONEMENT -->
+      <a-gradient-sky material="shader: gradient; topColor: 255 0 0; bottomColor: 0 121 255;"></a-gradient-sky>
+      <!-- END ENVIRONEMENT -->
     </a-scene>
-    <!--a-scene vr-mode-ui="enabled: true">
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-    </a-scene-->
+    <script type="text/javascript">
+      let button = document.querySelector('a-button');
+      let toast = document.querySelector('a-toast');
+      toast.addEventListener('actionclick', ()=>{
+        toast.hide();
+      })
+      button.addEventListener('click', ()=> {
+        toast.show();
+      })
+    </script>
   </body>
 </html>
-<script>
-window.addEventListener('load', function () {
-AFRAME.registerComponent('auto-enter-vr', {
-  init: function () {
-    this.el.sceneEl.enterVR();
-  }
-});
-	/*
-  var scene = document.querySelector('a-scene');
-  if (scene.hasLoaded) {
-    scene.enterVR();
-  } else {
-    el.addEventListener('loaded', function () {
-      scene.enterVR();
-    });
-  }
-});
-*/
-
-AFRAME.registerComponent('auto-init-vr', {
-    init: function () {
-
-        var scene = this;
-
-        scene.el.addEventListener('loaded', function () {
-            setTimeout(function(){
-                console.log('Automatically entering VR...');
-                scene.el.sceneEl.enterVR();
-            },1000);
-        });
-    }
-});
-</script>
