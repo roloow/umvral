@@ -7,13 +7,22 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
 		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
 		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+    <!--script type="text/jscript"> AFRAME.ASSETS_PATH="./objetos"></script-->
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
+    <script src="https://cdn.rawgit.com/etiennepinchon/aframe-material/master/dist/aframe-material.min.js"></script>
+
   </head>
   <body>
 
-<a-scene fog="type: linear; color: #FFEBDE; far:195" >
+<a-scene fog="type: linear; color: #FFEBDE; far:195" physics="gravity:-9.81 ; firction:0 ; restitution:0 " >
         <a-assets>
             <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
+
         </a-assets>
+
+
+
 
          <!--a-entity camera
             universal-controls
@@ -21,28 +30,55 @@
             kinematic-body
             position="0 2 10">
         </a-entity-->
-<a-entity id="rig" movement-controls >
-  <a-entity camera
-						universal-controls
-						jump-ability
-            position="0 2 10"
-            look-controls="pointerLockEnabled: true"></a-entity>
-</a-entity>
 
-        <a-box color="red"
-            dynamic-body
-            position="0 10 0"
-            height="4"></a-box>
 
-        <a-cylinder color="#ddb424"
-           position="-5 10 0"
-           dynamic-body></a-cylinder>
+<a-entity camera look-controls position="0 10 10" wasd-controls>
+        <a-entity cursor="fuse: true; fuseTimeout: 1000"
+            position="0 10 8"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            material="color: black; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+          </a-entity>
+      </a-entity>
 
-        <a-sphere color="#ddb424"
-           position="5 5 0"
+
+<a-assets>
+    <a-asset-item id="camino" src="objetos/entity.gltf"></a-asset-item>
+</a-assets>
+
+<a-button position="2.5 100 -20"  scale ="5 5 5" value="100 metros" type="raised"></a-button>
+<a-button position="2.5 35 -20"  scale ="5 5 5" value="35 metros" type="raised"></a-button>
+<a-button position="2.5 15 -20"  scale ="5 5 5" value="15 metros" type="raised"></a-button>
+<a-button position="2.5 5 -20"  scale ="5 5 5" value="5 metros" type="raised" onclick=""></a-button>
+
+<a-text position="2 90 -20" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+<a-text position="2 80 -20" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+<a-text position="2 70 -20" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+<a-text position="2 60 -20" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+<a-text position="2 50 -20" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+<a-text position="2 40 -20" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+<a-text position="2 30 -20" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+<a-text position="2 20 -20" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+<a-text position="2 10 -20" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+
+<a-text position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00"></a-text>
+
+<a-sky color="white"></a-sky>
+
+        <a-cylinder color="black"
+           position="2 50.5 -20"
+           scale="0.05 100 0.1"
+           static-body></a-cylinder>
+
+        <a-sphere color="red"
+           position="0 100 -20"
+           scale="0.3 0.3 0.3"
+           visibility = "false"
            dynamic-body></a-sphere>
 
-        <a-entity static-body collada-model="#ground"></a-entity>
+
+        <a-entity static-body collada-model="#ground" position="0 0 0"></a-entity>
     </a-scene>
     <!--a-scene vr-mode-ui="enabled: true">
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
@@ -81,7 +117,7 @@ AFRAME.registerComponent('auto-init-vr', {
             setTimeout(function(){
                 console.log('Automatically entering VR...');
                 scene.el.sceneEl.enterVR();
-            },1000);
+            },3000);
         });
     }
 });
