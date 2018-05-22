@@ -33,13 +33,17 @@
       <!-- Fin de Controles -->
       <!-- Inicio Escena #1 -->
       <a-rounded id="scene1" position="0 0.3 -2.5" width="4" height="3.1" radius="0.05" rotation="0 0 0" scale="0.6 0.6 0.6" color="#CCCCCC">
-        <a-form id="form1">
-          <a-text value="Seleccione un objeto" color="#000000" position="0.2 2.8 0"></a-text>
-          <a-button position="0.2 2.4 0" width="3" name="obj" label="Esfera  5 [kg]" value="5"></a-button>
-          <a-button position="0.2 2.1 0" width="3" name="obj" label="Esfera 10 [kg]" value="10"></a-button>
-          <a-button position="0.2 1.8 0" width="3" name="obj" label="Esfera 20 [kg]" value="20"></a-button>
-          <a-button position="1.2 0.8 0" name="stuff" value="COMENZAR" type="raised"></a-button>
-        </a-form>
+          <a-text value="Seleccione el lugar:" color="#000000" position="0.2 2.8 0"></a-text>
+          <a-button id="l1" position="0.2 2.4 0" name="lugar1"  value="Tierra" button-color="#08147B"></a-button>
+          <a-button id="l2" position="1.5 2.4 0" name="lugar2"  value="Luna"></a-button>
+          <a-button id="l3" position="2.8 2.4 0" name="lugar3"  value="Marte"></a-button>
+
+          <a-text value="Seleccione el peso del objeto" color="#000000" position="0.2 1.8 0"></a-text>
+          <a-button id="p1" position="0.2 1.4 0" name="peso1"  value="5 kg" button-color="#08147B"></a-button>
+          <a-button id="p2" position="1.5 1.4 0" name="peso2"  value="10 kg"></a-button>
+          <a-button id="p3" position="2.8 1.4 0" name="peso3"  value="20 kg"></a-button>
+
+          <a-button position="1.2 0.8 0" id="begin" name="stuff" value="COMENZAR" button-color="green" type="raised"></a-button>
       </a-rounded>
       <!-- Fin Escena #1 -->
 
@@ -51,31 +55,97 @@
 
 
     <script type="text/javascript">
-    function nextScene() {
-    document.getElementById('scene1').setAttribute('visible', 'false')
-    //document.getElementById('scene2').setAttribute('visible', 'true')
+    function backScene() {
+      document.getElementById('scene1').setAttribute('visible', 'true')
+      //document.getElementById('scene2').setAttribute('visible', 'false')
     }
-    function getRadio() {
-      radios = document.getElementsByName('obj');
-      for (i=0; i < radios.length; i++){
-        console.log(i);
-        console.log(radios[i]);
-        console.log(radios[i].attributes);
-        console.log(radios[i].attributes.checked);
-        console.log(radios[i].attributes.checked.value);
-        if (radios[i].attributes.checked == 'true'){
-          console.log(i);
+
+    function nextScene() {
+      document.getElementById('scene1').setAttribute('visible', 'false')
+      //document.getElementById('scene2').setAttribute('visible', 'true')
+    }
+
+    function changeColor(value) {
+      if (value == 'l1' || value == 'l2' || value == 'l3'){
+        if (value == 'l1') {
+          l1.setAttribute('button-color', '#08147B');
+          l2.setAttribute('button-color', '#4076fd');
+          l3.setAttribute('button-color', '#4076fd');
+          world = 'tierra';
+          gravity = "-9.8";
+        }
+        else if (value == 'l2') {
+          l1.setAttribute('button-color', '#4076fd');
+          l2.setAttribute('button-color', '#08147B');
+          l3.setAttribute('button-color', '#4076fd');
+          world = 'luna';
+          gravity = "-1.62";
+        }
+        else if (value == 'l3') {
+          l1.setAttribute('button-color', '#4076fd');
+          l2.setAttribute('button-color', '#4076fd');
+          l3.setAttribute('button-color', '#08147B');
+          world = 'marte';
+          gravity = "-3.71";
+        }
+      }
+      if (value == 'p1' || value == 'p2' || value == 'p3'){
+        if (value == 'p1') {
+          p1.setAttribute('button-color', '#08147B');
+          p2.setAttribute('button-color', '#4076fd');
+          p3.setAttribute('button-color', '#4076fd');
+          weight = "5"
+        }
+        else if (value == 'p2') {
+          p1.setAttribute('button-color', '#4076fd');
+          p2.setAttribute('button-color', '#08147B');
+          p3.setAttribute('button-color', '#4076fd');
+          weight = "10"
+        }
+        else if (value == 'p3') {
+          p1.setAttribute('button-color', '#4076fd');
+          p2.setAttribute('button-color', '#4076fd');
+          p3.setAttribute('button-color', '#08147B');
+          weight = "20"
         }
       }
     }
 
-
-    let button = document.querySelector('a-button');
+    let l1 = document.getElementById('l1');
+    let l2 = document.getElementById('l2');
+    let l3 = document.getElementById('l3');
+    let p1 = document.getElementById('p1');
+    let p2 = document.getElementById('p2');
+    let p3 = document.getElementById('p3');
+    let begin = document.getElementById('begin');
     let sky = document.querySelector('a-sky');
-    button.addEventListener('click', ()=> {
-      nextScene();
-      getRadio();
-      sky.setAttribute('src', 'assets/images/bg4.jpg');
+
+    let world = "tierra";
+    let gravity = "-9.8";
+    let weight = "5";
+
+    l1.addEventListener('click', ()=> {
+      changeColor('l1');
+    });
+    l2.addEventListener('click', ()=> {
+      changeColor('l2');
+    });
+    l3.addEventListener('click', ()=> {
+      changeColor('l3');
+    });
+    p1.addEventListener('click', ()=> {
+      changeColor('p1');
+    });
+    p2.addEventListener('click', ()=> {
+      changeColor('p2');
+    });
+    p3.addEventListener('click', ()=> {
+      changeColor('p3');
+    });
+
+    begin.addEventListener('click', ()=> {
+      image = world + '.jpg';
+      sky.setAttribute('src', 'assets/images/'+image);
     })
     </script>
   </body>
