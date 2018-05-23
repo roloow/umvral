@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+		 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+    <title>umVRal - Caida Libre</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+
+<a-scene fog="type: linear; color: #FFEBDE; far:195" >
+        <a-assets>
+            <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
+        </a-assets>
+
+				<a-entity id="rig" movement-controls >
+					<a-entity camera position="0 2 0"
+						look-controls="pointerLockEnabled: true">
+						<a-entity cursor
+											position="0 0 -1"
+											geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;"
+											material="color: #CCC; shader: flat;"></a-entity>
+					</a-entity>
+				</a-entity>
+
+				<a-entity>
+					<a-cylinder id="cyl" color="#ddb424"
+						 position="-5 10 -15"
+						 dynamic-body></a-cylinder>
+
+					<a-box id="box" color="red"
+							dynamic-body
+							position="0 10 -15"
+							height="3"></a-box>
+
+					<a-sphere id="esfera" color="#ddb424"
+						 position="5 5 -15"
+						 dynamic-body></a-sphere>
+
+					<a-box id="resetbox5" color="green"
+							position="-5 0 -10"
+							height="2">
+					</a-box>
+					<a-box id="resetbox10" color="green"
+							position="0 0 -10"
+							height="2">
+					</a-box>
+					<a-box id="resetbox15" color="green"
+							position="5 0 -10"
+							height="2">
+					</a-box>
+
+					</a-entity>
+
+        <a-entity static-body collada-model="#ground"></a-entity>
+    </a-scene>
+  </body>
+</html>
+<script>
+
+	var	reset5 	= document.querySelector('#resetbox5');
+	var	reset10 = document.querySelector('#resetbox10');
+	var	reset15 = document.querySelector('#resetbox15');
+	var	cyl 		= document.querySelector('#cyl');
+	var	box 		= document.querySelector('#box');
+	var	esfera 	= document.querySelector('#esfera') ;
+
+	reset5.addEventListener("click", function(){
+		setHeight(5);
+	});
+
+	reset10.addEventListener("click", function(){
+		setHeight(10);
+	});
+
+	reset15.addEventListener("click", function(){
+		setHeight(15);
+	});
+
+	function setHeight(height) {
+		dettachDin();
+		esfera.object3D.position.set(5, height, -15);
+		box.object3D.position.set(0, height, -15);
+		cyl.object3D.position.set(-5, height, -15);
+		attachDin();
+	}
+
+	function dettachDin() {
+		esfera.removeAttribute("dynamic-body");
+		box.removeAttribute("dynamic-body");
+		cyl.removeAttribute("dynamic-body");
+	}
+	function attachDin() {
+		esfera.setAttribute("dynamic-body", "");
+		box.setAttribute("dynamic-body", "");
+		cyl.setAttribute("dynamic-body", "");
+	}
+
+
+
+</script>
+
+
+
+    <!--a-scene vr-mode-ui="enabled: true">
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene-->
