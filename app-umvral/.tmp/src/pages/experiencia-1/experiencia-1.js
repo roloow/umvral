@@ -13,7 +13,7 @@ var Experiencia1Page = (function () {
     }
     Experiencia1Page = __decorate([
         Component({
-            selector: 'page-experiencia-1',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia-1.html"*/'<ion-header>\n    <ion-navbar no-border-bottom>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Experiencia 1</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la acción:</h3>\n    <p>\n        <button ion-button color="primary" block>Video</button>\n    </p>\n    <p>\n        <button ion-button color="primary" block>Iniciar Experiencia</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia-1.html"*/
+            selector: 'page-experiencia-1',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia-1.html"*/'<ion-header>\n    <ion-navbar no-border-bottom>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Caída Libre</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la acción:</h3>\n    <p>\n        <button ion-button color="primary" block>Video</button>\n    </p>\n    <p>\n        <button ion-button color="primary" block>Iniciar Experiencia</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia-1.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], Experiencia1Page);

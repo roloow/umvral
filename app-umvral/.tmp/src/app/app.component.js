@@ -8,54 +8,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, ViewChild } from '@angular/core';
-import { Events, MenuController, Nav, Platform } from 'ionic-angular';
+import { MenuController, Nav, Platform } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
-import { AboutPage } from '../pages/about/about';
-import { AccountPage } from '../pages/account/account';
-import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
-import { SignupPage } from '../pages/signup/signup';
-import { TabsPage } from '../pages/tabs-page/tabs-page';
-import { TutorialPage } from '../pages/tutorial/tutorial';
-import { SchedulePage } from '../pages/schedule/schedule';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
-import { SupportPage } from '../pages/support/support';
-import { ConferenceData } from '../providers/conference-data';
-import { UserData } from '../providers/user-data';
 import { ExperienceListPage } from '../pages/experience-list/experience-list';
 var ConferenceApp = (function () {
-    function ConferenceApp(events, userData, menu, platform, confData, storage, splashScreen) {
-        this.events = events;
-        this.userData = userData;
+    function ConferenceApp(menu, platform, splashScreen) {
         this.menu = menu;
         this.platform = platform;
-        this.confData = confData;
-        this.storage = storage;
         this.splashScreen = splashScreen;
-        // List of pages that can be navigated to from the left menu
-        // the left menu only works after login
-        // the login page disables the left menu
-        this.appPages = [
-            { title: 'Schedule', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-            { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
-            { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-            { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
-        ];
-        this.loggedInPages = [
-            { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
-            { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-            { title: 'Logout', name: 'TabsPage', component: TabsPage, icon: 'log-out', logsOut: true }
-        ];
-        this.loggedOutPages = [
-            { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
-            { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-            { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
-        ];
         // Check if the user has already seen the tutorial
         this.rootPage = ExperienceListPage;
-        // load the conference data
-        confData.load();
         this.enableMenu(true);
     }
     ConferenceApp.prototype.openPage = function (page) {
@@ -78,25 +40,6 @@ var ConferenceApp = (function () {
                 console.log("Didn't set nav root: " + err);
             });
         }
-        if (page.logsOut === true) {
-            // Give the menu time to close before changing to logged out
-            this.userData.logout();
-        }
-    };
-    ConferenceApp.prototype.openTutorial = function () {
-        this.nav.setRoot(TutorialPage);
-    };
-    ConferenceApp.prototype.listenToLoginEvents = function () {
-        var _this = this;
-        this.events.subscribe('user:login', function () {
-            _this.enableMenu(true);
-        });
-        this.events.subscribe('user:signup', function () {
-            _this.enableMenu(true);
-        });
-        this.events.subscribe('user:logout', function () {
-            _this.enableMenu(false);
-        });
     };
     ConferenceApp.prototype.enableMenu = function (loggedIn) {
         this.menu.enable(loggedIn, 'loggedInMenu');
@@ -130,12 +73,8 @@ var ConferenceApp = (function () {
     ConferenceApp = __decorate([
         Component({template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/app/app.template.html"*/'<!-- logged out menu -->\n  <ion-menu id="loggedOutMenu" [content]="content">\n\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>Menu</ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content class="outer-content">\n\n      <ion-list>\n        <ion-list-header>\n          Navigate\n        </ion-list-header>\n        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n          <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>\n          {{p.title}}\n        </button>\n      </ion-list>\n\n      <ion-list>\n        <ion-list-header>\n          Tutorial\n        </ion-list-header>\n        <button ion-item menuClose (click)="openTutorial()">\n          <ion-icon item-start name="hammer"></ion-icon>\n          Show Tutorial\n        </button>\n      </ion-list>\n    </ion-content>\n\n  </ion-menu>\n<!-- main navigation -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false" main name="app"></ion-nav>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/app/app.template.html"*/
         }),
-        __metadata("design:paramtypes", [Events,
-            UserData,
-            MenuController,
+        __metadata("design:paramtypes", [MenuController,
             Platform,
-            ConferenceData,
-            Storage,
             SplashScreen])
     ], ConferenceApp);
     return ConferenceApp;
