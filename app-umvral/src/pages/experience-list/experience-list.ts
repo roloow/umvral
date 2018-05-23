@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Experiencia1Page } from '../experiencia-1/experiencia-1';
 
 @Component({
@@ -7,9 +7,9 @@ import { Experiencia1Page } from '../experiencia-1/experiencia-1';
   templateUrl: 'experience-list.html'
 })
 export class ExperienceListPage {
-  @ViewChild(Nav) nav: Nav;
   
-  constructor() {
+  constructor(public nav: NavController) {
+    this.nav = nav;
   }
 
   openExperiencia1Page() {
