@@ -2,3 +2,5 @@
 app-umvral/node_modules/
 
 app-umvral/\.tmp/
+
+app-umvral/\.sourcemaps/
