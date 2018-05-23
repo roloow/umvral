@@ -8,12 +8,18 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
 		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
 		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+    <!--script type="text/jscript"> AFRAME.ASSETS_PATH="./objetos"></script-->
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
+    <script src="https://cdn.rawgit.com/etiennepinchon/aframe-material/master/dist/aframe-material.min.js"></script>
+
   </head>
   <body>
 
-<a-scene fog="type: linear; color: #FFEBDE; far:195" >
+<a-scene fog="type: linear; color: #FFEBDE; far:195" physics="gravity:-9.81 ; firction:0 ; restitution:0 " >
         <a-assets>
             <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
+
         </a-assets>
 
 				<a-entity id="rig" movement-controls >
@@ -31,11 +37,53 @@
 						 position="-5 10 -15"
 						 dynamic-body></a-cylinder>
 
+          </a-entity>
 					<a-box id="box" color="red"
 							dynamic-body
 							position="0 10 -15"
 							height="3"></a-box>
 
+
+          <a-animation attribute="position"
+                dur="5000"
+                easing="linear"
+                to="0 5 -3"></a-animation>
+      </a-entity>
+
+
+<a-assets>
+    <a-asset-item id="camino" src="objetos/entity.gltf"></a-asset-item>
+</a-assets>
+
+<a-button position="2.5 100 -15"  scale ="5 5 5" value="100 metros" type="raised"></a-button>
+<a-button position="2.5 35 -15"  scale ="5 5 5" value="35 metros" type="raised"></a-button>
+<a-button position="2.5 15 -15"  scale ="5 5 5" value="15 metros" type="raised"></a-button>
+<a-button position="2.5 5 -15"  scale ="5 5 5" value="5 metros" type="raised" onclick=""></a-button>
+
+<a-text position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+<a-text position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+<a-text position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+<a-text position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+<a-text position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+<a-text position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+<a-text position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+<a-text position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+<a-text position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+
+<a-text position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00"></a-text>
+
+<a-sky color="white"></a-sky>
+
+        <a-cylinder color="black"
+           position="2 50.5 -15"
+           scale="0.05 100 0.1"
+           static-body></a-cylinder>
+
+        <a-sphere color="red"
+           position="0 100 -15"
+           scale="0.3 0.3 0.3"
+           visibility = "false"
+           dynamic-body></a-sphere>
 					<a-sphere id="esfera" color="#ddb424"
 						 position="5 5 -15"
 						 dynamic-body></a-sphere>
@@ -112,3 +160,18 @@
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
     </a-scene-->
+
+AFRAME.registerComponent('auto-init-vr', {
+    init: function () {
+
+        var scene = this;
+
+        scene.el.addEventListener('loaded', function () {
+            setTimeout(function(){
+                console.log('Automatically entering VR...');
+                scene.el.sceneEl.enterVR();
+            },1000);
+        });
+    }
+});
+</script>
