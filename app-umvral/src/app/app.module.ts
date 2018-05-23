@@ -11,13 +11,16 @@ import { ConferenceApp } from './app.component';
 
 import { ExperienceListPage } from '../pages/experience-list/experience-list';
 import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
-
+import { Experiencia2Page } from '../pages/experiencia-2/experiencia-2';
+import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 
 @NgModule({
   declarations: [
     ConferenceApp,
     ExperienceListPage,
-    Experiencia1Page
+    Experiencia1Page,
+    Experiencia2Page,
+    Experiencia3Page
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,9 @@ import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
   entryComponents: [
     ConferenceApp,
     ExperienceListPage,
-    Experiencia1Page
+    Experiencia1Page,
+    Experiencia2Page,
+    Experiencia3Page
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
