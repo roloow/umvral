@@ -40,9 +40,19 @@
 						 position="5 5 -15"
 						 dynamic-body></a-sphere>
 
-        <a-box id="resetbox" color="green"
-            position="0 0 -10"
-            height="2"></a-box>
+					<a-box id="resetbox5" color="green"
+							position="-5 0 -10"
+							height="2">
+					</a-box>
+					<a-box id="resetbox10" color="green"
+							position="0 0 -10"
+							height="2">
+					</a-box>
+					<a-box id="resetbox15" color="green"
+							position="5 0 -10"
+							height="2">
+					</a-box>
+
 					</a-entity>
 
         <a-entity static-body collada-model="#ground"></a-entity>
@@ -51,19 +61,32 @@
 </html>
 <script>
 
-	var		reset = document.querySelector('#resetbox');
-	var		cyl = document.querySelector('#cyl');
-	var		box = document.querySelector('#box');
-	var		esfera = document.querySelector('#esfera') ;
+	var	reset5 	= document.querySelector('#resetbox5');
+	var	reset10 = document.querySelector('#resetbox10');
+	var	reset15 = document.querySelector('#resetbox15');
+	var	cyl 		= document.querySelector('#cyl');
+	var	box 		= document.querySelector('#box');
+	var	esfera 	= document.querySelector('#esfera') ;
 
-	reset.addEventListener("click", function(){
-			console.log("hola");
-			dettachDin();
-			esfera.object3D.position.set(5, 5, -15);
-			box.object3D.position.set(0, 10, -15);
-			cyl.object3D.position.set(-5, 10, -15);
-			attachDin();
+	reset5.addEventListener("click", function(){
+		setHeight(5);
 	});
+
+	reset10.addEventListener("click", function(){
+		setHeight(10);
+	});
+
+	reset15.addEventListener("click", function(){
+		setHeight(15);
+	});
+
+	function setHeight(height) {
+		dettachDin();
+		esfera.object3D.position.set(5, height, -15);
+		box.object3D.position.set(0, height, -15);
+		cyl.object3D.position.set(-5, height, -15);
+		attachDin();
+	}
 
 	function dettachDin() {
 		esfera.removeAttribute("dynamic-body");
