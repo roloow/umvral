@@ -32,14 +32,21 @@
         </a-entity-->
 
 
-<a-entity camera look-controls position="0 10 10" wasd-controls>
+<a-entity camera look-controls position="0 100 100" wasd-controls>
         <a-entity cursor="fuse: true; fuseTimeout: 1000"
-            position="0 10 8"
+            position="0 0 -1"
             geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-            material="color: black; shader: flat">
+            material="color: yellow; shader: flat">
+     <!--a-text value="00:00:00" position="-1.5 -1.5 -1.5"material="color: yellow; shader: flat"></a-text-->
             <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
             <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
           </a-entity>
+
+
+          <a-animation attribute="position"
+                dur="5000"
+                easing="linear"
+                to="0 5 -3"></a-animation>
       </a-entity>
 
 
@@ -47,38 +54,40 @@
     <a-asset-item id="camino" src="objetos/entity.gltf"></a-asset-item>
 </a-assets>
 
-<a-button position="2.5 100 -20"  scale ="5 5 5" value="100 metros" type="raised"></a-button>
-<a-button position="2.5 35 -20"  scale ="5 5 5" value="35 metros" type="raised"></a-button>
-<a-button position="2.5 15 -20"  scale ="5 5 5" value="15 metros" type="raised"></a-button>
-<a-button position="2.5 5 -20"  scale ="5 5 5" value="5 metros" type="raised" onclick=""></a-button>
+<a-button position="2.5 100 -15"  scale ="5 5 5" value="100 metros" type="raised"></a-button>
+<a-button position="2.5 35 -15"  scale ="5 5 5" value="35 metros" type="raised"></a-button>
+<a-button position="2.5 15 -15"  scale ="5 5 5" value="15 metros" type="raised"></a-button>
+<a-button position="2.5 5 -15"  scale ="5 5 5" value="5 metros" type="raised" onclick=""></a-button>
 
-<a-text position="2 90 -20" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
-<a-text position="2 80 -20" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
-<a-text position="2 70 -20" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
-<a-text position="2 60 -20" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
-<a-text position="2 50 -20" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
-<a-text position="2 40 -20" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
-<a-text position="2 30 -20" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
-<a-text position="2 20 -20" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
-<a-text position="2 10 -20" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+<a-text position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+<a-text position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+<a-text position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+<a-text position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+<a-text position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+<a-text position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+<a-text position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+<a-text position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+<a-text position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
 
 <a-text position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00"></a-text>
 
 <a-sky color="white"></a-sky>
 
         <a-cylinder color="black"
-           position="2 50.5 -20"
+           position="2 50.5 -15"
            scale="0.05 100 0.1"
            static-body></a-cylinder>
 
         <a-sphere color="red"
-           position="0 100 -20"
+           position="0 100 -15"
            scale="0.3 0.3 0.3"
            visibility = "false"
            dynamic-body></a-sphere>
 
 
-        <a-entity static-body collada-model="#ground" position="0 0 0"></a-entity>
+
+
+        <a-entity static-body collada-model="#ground" position="0 0 0 "></a-entity>
     </a-scene>
     <!--a-scene vr-mode-ui="enabled: true">
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
@@ -120,5 +129,9 @@ AFRAME.registerComponent('auto-init-vr', {
             },3000);
         });
     }
+
+
+
+
 });
 </script>
