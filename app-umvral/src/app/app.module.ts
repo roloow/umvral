@@ -28,6 +28,8 @@ import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { ExperienceListPage } from '../pages/experience-list/experience-list';
+import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
+    ExperienceListPage,
+    Experiencia1Page,
     SupportPage
   ],
   imports: [
@@ -86,6 +90,8 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
+    ExperienceListPage,
+    Experiencia1Page,
     SupportPage
   ],
   providers: [

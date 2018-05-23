@@ -18,6 +18,7 @@ import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { ExperienceListPage } from '../pages/experience-list/experience-list';
 
 export interface PageInterface {
   title: string;
@@ -70,26 +71,12 @@ export class ConferenceApp {
   ) {
 
     // Check if the user has already seen the tutorial
-    this.storage.get('hasSeenTutorial')
-      .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
-          this.rootPage = TabsPage;
-        } else {
-          this.rootPage = TutorialPage;
-        }
-        this.platformReady()
-      });
+    this.rootPage = ExperienceListPage;
 
     // load the conference data
     confData.load();
 
-    // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
-    });
     this.enableMenu(true);
-
-    this.listenToLoginEvents();
   }
 
   openPage(page: PageInterface) {
