@@ -1,202 +1,238 @@
 <!DOCTYPE html>
 <html>
   <head>
-		 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-		 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+    <meta charset="utf-8">
     <title>umVRal - Caida Libre</title>
-    <meta name="description" content="Hello, World! - A-Frame">
+    <meta name="description" content="Experiencia VR de caida libre">
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
-		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
-    <script type="text/jscript"> AFRAME.ASSETS_PATH="./objetos"></script>
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
     <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
     <script src="https://cdn.rawgit.com/etiennepinchon/aframe-material/master/dist/aframe-material.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
 
+    <!-- ASSETS PATH -->
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
+    <!-- /ASSETS PATH -->
   </head>
   <body>
+    <!-- Inicio Marco -->
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: worker; gravity:-9.81 ; friction:0 ; restitution:0;" >
+      <!-- Inicio BackGround y Suelo -->
+      <a-sky src="assets/images/bg2.jpg"></a-sky>
+      <a-assets>
+          <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
+      </a-assets>
+      <!-- Fin BackGround y Suelo -->
+      <!-- Inicio de Controles -->
+      <a-entity laser-controls="hand: right"></a-entity>
+      <a-entity id="cam" camera look-controls position="0 0 3" wasd-controls>
+        <a-entity cursor="fuse: true; fuseTimeout: 1000"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            material="color: black; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+          </a-entity>
+      </a-entity>
+      <!-- Fin de Controles -->
 
-<a-scene fog="type: linear; color: #FFEBDE; far:195" physics="gravity:-9.81 ; firction:0 ; restitution:0 " >
+      <!-- Inicio Escena #1 -->
+      <a-rounded id="scene1" position="4 0.3 -1" width="4" height="3.1" radius="0.05" rotation="0 -90 0" scale="0.6 0.6 0.6" color="#CCCCCC">
+          <a-text value="Seleccione el lugar:" color="#000000" position="0.2 2.8 0"></a-text>
+          <a-button id="l1" position="0.2 2.4 0" name="lugar1"  value="Tierra" button-color="#08147B"></a-button>
+          <a-button id="l2" position="1.5 2.4 0" name="lugar2"  value="Luna"></a-button>
+          <a-button id="l3" position="2.8 2.4 0" name="lugar3"  value="Marte"></a-button>
 
-        <a-assets>
-            <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
-        </a-assets>
+          <a-text value="Seleccione el peso del objeto" color="#000000" position="0.2 1.8 0"></a-text>
+          <a-button id="p1" position="0.2 1.4 0" name="peso1"  value="0.5 kg" button-color="#08147B"></a-button>
+          <a-button id="p2" position="1.5 1.4 0" name="peso2"  value="10 kg"></a-button>
+          <a-button id="p3" position="2.8 1.4 0" name="peso3"  value="100 kg"></a-button>
 
+          <a-button position="1.2 0.8 0" id="begin" name="stuff" value="COMENZAR" button-color="green" type="raised"></a-button>
+      </a-rounded>
+      <!-- Fin Escena #1 -->
 
-				<a-entity camera look-controls position="0 100 100" wasd-controls>
-						<a-entity cursor								position="0 0 -1"
-								geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-								material="color: yellow; shader: flat">
-								<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-								<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-						</a-entity>
+      <!-- Inicio Escena #2 -->
+      <a-entity id="m100" visible="false" geometry="primitive: box" position="2.5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
+			<a-entity id="m35" visible="false" geometry="primitive: box" position="2.5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
+			<a-entity id="m15" visible="false" geometry="primitive: box" position="2.5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
+			<a-entity id="m5" visible="false" geometry="primitive: box" position="2.5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
 
-						<a-animation attribute="position"
-									dur="5000"
-									easing="linear"
-									to="0 5 -3">
-						</a-animation>
-			</a-entity>
+			<a-text id="regla90" visible="false" position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+			<a-text id="regla80" visible="false" position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+			<a-text id="regla70" visible="false" position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+			<a-text id="regla60" visible="false" position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+			<a-text id="regla50" visible="false" position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+			<a-text id="regla40" visible="false" position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+			<a-text id="regla30" visible="false" position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+			<a-text id="regla20" visible="false" position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+			<a-text id="regla10" visible="false" position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
 
-				<!-- Camara Andrés -->
-				<!--
-				<a-entity id="rig" movement-controls >
-					<a-entity camera position="0 2 0"
-						look-controls="pointerLockEnabled: true">
-						<a-entity cursor
-											position="0 0 -1"
-											geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;"
-											material="color: #CCC; shader: flat;">
-						</a-entity>
-					</a-entity>
-				</a-entity>
-				-->
-				<!-- Fin Camara Andrés-->
-
-				<!-- Camara Felipe -->
-				<!--
-				<a-entity camera look-controls position="0 100 100" wasd-controls>
-						<a-entity cursor="fuse: true; fuseTimeout: 1000"
-								position="0 0 -1"
-								geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-								material="color: yellow; shader: flat">
-				 <a-text value="00:00:00" position="-1.5 -1.5 -1.5"material="color: yellow; shader: flat"></a-text>
-								<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-								<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-						</a-entity>
-
-						<a-animation attribute="position"
-									dur="5000"
-									easing="linear"
-									to="0 5 -3">
-						</a-animation>
-			</a-entity>
-				-->
-				<!-- Fin Camara Felipe-->
-
-			<!-- Parte Felipe -->
-			<a-assets>
-					<a-asset-item id="camino" src="objetos/entity.gltf"></a-asset-item>
-			</a-assets>
-
-				<a-entity id="m100" geometry="primitive: box" position="2.5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
-				<a-entity id="m35" geometry="primitive: box" position="2.5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
-				<a-entity id="m15" geometry="primitive: box" position="2.5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
-				<a-entity id="m5" geometry="primitive: box" position="2.5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
-
-				<a-text position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
-				<a-text position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
-				<a-text position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
-				<a-text position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
-				<a-text position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
-				<a-text position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
-				<a-text position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
-				<a-text position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
-				<a-text position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
-
-				<a-text position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00"></a-text>
-<!--a-sky color="white"></a-sky-->
-
-        <a-cylinder color="black"
-           position="2 50.5 -15"
-           scale="0.05 100 0.1"
-           static-body></a-cylinder>
-
-        <a-sphere id="objeto" color="red"
-           position="0 100 -15"
-           scale="0.3 0.3 0.3"
-           visibility = "false"
-           dynamic-body="mass: 10" ></a-sphere>
-
- <!-- Fin parte Felipe -->
-
- <!-- Parte Andres -->
- <!--
-					<a-entity>
-						<a-sphere id="esfera" color="#ddb424"
-							 position="5 5 -15"
-							 dynamic-body></a-sphere>
-
-						<a-cylinder id="cyl" color="#ddb424"
-							 position="-5 10 -15"
-							 dynamic-body></a-cylinder>
-
-						<a-box id="box" color="red"
-								dynamic-body
-								position="0 10 -15"
-								height="3"></a-box>
-					</a-entity>
-
-					<a-box id="resetbox5" color="green"
-							position="-5 0 -10"
-							height="2">
-					</a-box>
-					<a-box id="resetbox10" color="green"
-							position="0 0 -10"
-							height="2">
-					</a-box>
-					<a-box id="resetbox15" color="green"
-							position="5 0 -10"
-							height="2">
-					</a-box>
-					-->
- <!-- Fin Parte Andres -->
-
-        <a-entity static-body collada-model="#ground"></a-entity>
-
+			<a-text id="chron" position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00" visible="false"></a-text>
+      <a-sphere id="objeto" color="red"
+         position="0 100 -15"
+         scale="0.3 0.3 0.3"
+         dynamic-body="mass: 0.5;"
+         visible="false" ></a-sphere>
+      <a-entity static-body collada-model="#ground" visible="false"></a-entity>
+      <!-- Fin Escena #2 -->
     </a-scene>
+    <!-- Fin Marco -->
+
+    <script type="text/javascript">
+    function nextScene() {
+      //document.getElementById('scene1').setAttribute('visible', 'false')
+      document.getElementById('m100').setAttribute('visible', 'true')
+      document.getElementById('m35').setAttribute('visible', 'true')
+      document.getElementById('m15').setAttribute('visible', 'true')
+      document.getElementById('m5').setAttribute('visible', 'true')
+      document.getElementById('regla90').setAttribute('visible', 'true')
+      document.getElementById('regla80').setAttribute('visible', 'true')
+      document.getElementById('regla70').setAttribute('visible', 'true')
+      document.getElementById('regla60').setAttribute('visible', 'true')
+      document.getElementById('regla50').setAttribute('visible', 'true')
+      document.getElementById('regla40').setAttribute('visible', 'true')
+      document.getElementById('regla30').setAttribute('visible', 'true')
+      document.getElementById('regla20').setAttribute('visible', 'true')
+      document.getElementById('regla10').setAttribute('visible', 'true')
+      document.getElementById('chron').setAttribute('visible', 'true')
+      document.getElementById('objeto').setAttribute('visible', 'true')
+    }
+
+    function backScene() {
+      document.getElementById('scene1').setAttribute('visible', 'false')
+      //document.getElementById('scene2').setAttribute('visible', 'true')
+    }
+
+    function changeColor(value) {
+      if (value == 'l1' || value == 'l2' || value == 'l3'){
+        if (value == 'l1') {
+          l1.setAttribute('button-color', '#08147B');
+          l2.setAttribute('button-color', '#4076fd');
+          l3.setAttribute('button-color', '#4076fd');
+          world = 'tierra';
+          gravity = "-9.8";
+        }
+        else if (value == 'l2') {
+          l1.setAttribute('button-color', '#4076fd');
+          l2.setAttribute('button-color', '#08147B');
+          l3.setAttribute('button-color', '#4076fd');
+          world = 'luna';
+          gravity = "-1.62";
+        }
+        else if (value == 'l3') {
+          l1.setAttribute('button-color', '#4076fd');
+          l2.setAttribute('button-color', '#4076fd');
+          l3.setAttribute('button-color', '#08147B');
+          world = 'marte';
+          gravity = "-3.71";
+        }
+      }
+      if (value == 'p1' || value == 'p2' || value == 'p3'){
+        if (value == 'p1') {
+          p1.setAttribute('button-color', '#08147B');
+          p2.setAttribute('button-color', '#4076fd');
+          p3.setAttribute('button-color', '#4076fd');
+          weight = "0.5"
+        }
+        else if (value == 'p2') {
+          p1.setAttribute('button-color', '#4076fd');
+          p2.setAttribute('button-color', '#08147B');
+          p3.setAttribute('button-color', '#4076fd');
+          weight = "10"
+        }
+        else if (value == 'p3') {
+          p1.setAttribute('button-color', '#4076fd');
+          p2.setAttribute('button-color', '#4076fd');
+          p3.setAttribute('button-color', '#08147B');
+          weight = "100"
+        }
+      }
+    }
+
+    function dettachDin() {
+  		objeto.removeAttribute("dynamic-body");
+      console.log(objeto);
+  	}
+
+  	function attachDin() {
+      var attr = document.createAttribute('dynamic-body');
+  		attr.value = 'mass: '+ weight + ';';
+      objeto.setAttributeNode(attr)
+      console.log(objeto);
+  	}
+
+    function setHeight(height) {
+  		dettachDin();
+  		objeto.object3D.position.set(0, height, -15);
+  		attachDin();
+  	}
+
+    let l1 = document.getElementById('l1');
+    let l2 = document.getElementById('l2');
+    let l3 = document.getElementById('l3');
+    let p1 = document.getElementById('p1');
+    let p2 = document.getElementById('p2');
+    let p3 = document.getElementById('p3');
+    let begin = document.getElementById('begin');
+    let sky = document.querySelector('a-sky');
+    let	reset5 	= document.getElementById('m5');
+  	let	reset15 = document.getElementById('m15');
+  	let	reset35 = document.getElementById('m35');
+  	let	reset100 = document.getElementById('m100');
+  	let	objeto	 = document.getElementById('objeto');
+
+    let world = "tierra";
+    let gravity = "-9.8";
+    let weight = "0.5";
+
+    l1.addEventListener('click', ()=> {
+      changeColor('l1');
+    });
+    l2.addEventListener('click', ()=> {
+      changeColor('l2');
+    });
+    l3.addEventListener('click', ()=> {
+      changeColor('l3');
+    });
+    p1.addEventListener('click', ()=> {
+      changeColor('p1');
+    });
+    p2.addEventListener('click', ()=> {
+      changeColor('p2');
+    });
+    p3.addEventListener('click', ()=> {
+      changeColor('p3');
+    });
+
+    reset5.addEventListener("click", function(){
+  		setHeight(5);
+  	});
+
+  	reset15.addEventListener("click", function(){
+  		setHeight(15);
+  	});
+
+  	reset35.addEventListener("click", function(){
+  		setHeight(35);
+  	});
+
+  	reset100.addEventListener("click", function(){
+  		setHeight(100);
+  	});
+
+    begin.addEventListener('click', ()=> {
+      image = world + '.jpg';
+      sky.setAttribute('src', 'assets/images/'+image);
+      source = document.getElementById('source');
+      var attrG = document.createAttribute('physics');
+  		attrG.value = 'driver: worker; gravity:'+gravity+' ; friction:0 ; restitution:0;';
+      source.setAttributeNode(attrG)
+      nextScene();
+    })
+    </script>
   </body>
 </html>
-<script>
-
-	var	reset5 	= document.querySelector('#m5');
-	var	reset15 = document.querySelector('#m15');
-	var	reset35 = document.querySelector('#m35');
-	var	reset100 = document.querySelector('#m100');
-	var	objeto	 = document.querySelector('#objeto');
-	//var	cyl 		= document.querySelector('#cyl');
-	//var	box 		= document.querySelector('#box');
-	//var	esfera 	= document.querySelector('#esfera') ;
-
-	reset5.addEventListener("click", function(){
-		console.log("si!");
-		setHeight(5);
-	});
-
-	reset15.addEventListener("click", function(){
-		setHeight(15);
-	});
-
-	reset35.addEventListener("click", function(){
-		setHeight(35);
-	});
-
-	reset100.addEventListener("click", function(){
-		setHeight(100);
-	});
-
-	function setHeight(height) {
-		dettachDin();
-		//esfera.object3D.position.set(5, height, -15);
-		//box.object3D.position.set(0, height, -15);
-		//cyl.object3D.position.set(-5, height, -15);
-		objeto.object3D.position.set(0, height, -15);
-		attachDin();
-	}
-
-	function dettachDin() {
-		//esfera.removeAttribute("dynamic-body");
-		//box.removeAttribute("dynamic-body");
-		//cyl.removeAttribute("dynamic-body");
-		objeto.removeAttribute("dynamic-body");
-	}
-	function attachDin() {
-		//esfera.setAttribute("dynamic-body", "");
-		//box.setAttribute("dynamic-body", "");
-		//cyl.setAttribute("dynamic-body", "");
-		objeto.setAttribute("dynamic-body", "");
-	}
-
-
-
-</script>
