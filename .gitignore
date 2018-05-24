@@ -32,7 +32,6 @@ coverage
 build/Release
 
 # Dependency directories
-node_modules1
 node_modules
 jspm_packages
 assets
