@@ -1,10 +1,21 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+
 
 @Component({
-  selector: 'page-experiencia-1',
-  templateUrl: 'experiencia-1.html'
+  selector: 'page-exp',
+  templateUrl: 'experiencia.html'
 })
-export class Experiencia1Page {
-  constructor() {
+export class ExpPage {
+  constructor(
+    public navCtrl: NavController,
+    private iab: InAppBrowser
+  ) {
+    
+  }
+  openLink(){
+    this.iab.create("https://www.google.com/","_blank");
   }
 }

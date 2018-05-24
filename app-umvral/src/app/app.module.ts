@@ -5,7 +5,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { SplashScreen   } from '@ionic-native/splash-screen';
 
 import { ConferenceApp } from './app.component';
 
@@ -14,6 +14,7 @@ import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
 import { Experiencia2Page } from '../pages/experiencia-2/experiencia-2';
 import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { HelpVideoPage } from '../pages/experiencia-1/video/video';
+import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HelpVideoPage } from '../pages/experiencia-1/video/video';
     Experiencia1Page,
     Experiencia2Page,
     Experiencia3Page,
-    HelpVideoPage
+    HelpVideoPage,
+    ExpPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { HelpVideoPage } from '../pages/experiencia-1/video/video';
     Experiencia1Page,
     Experiencia2Page,
     Experiencia3Page,
-    HelpVideoPage
+    HelpVideoPage,
+    ExpPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
