@@ -19,15 +19,16 @@
   </head>
   <body>
     <!-- Inicio Marco -->
-    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: worker; gravity:-9.81 ; friction:0 ; restitution:0;" >
+    <a-scene id="source" cursor="rayOrigin: mouse" >
+      <a-assets>
+        <img id="thumMarte" src="assets/images/thum_marte.jpg">
+        <img id="thumTierra" src="assets/images/thum_tierra.jpg">
+        <img id="thumLuna" src="assets/images/thum_luna.jpg">
+      </a-assets>
       <!-- Inicio BackGround y Suelo -->
       <a-sky src="assets/images/bg2.jpg"></a-sky>
-      <a-assets>
-          <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
-      </a-assets>
       <!-- Fin BackGround y Suelo -->
       <!-- Inicio de Controles -->
-      <a-entity laser-controls="hand: right"></a-entity>
       <a-entity id="cam" camera look-controls position="0 0 3" wasd-controls>
         <a-entity cursor="fuse: true; fuseTimeout: 1000"
             position="0 0 -1"
@@ -40,7 +41,7 @@
       <!-- Fin de Controles -->
 
       <!-- Inicio Escena #1 -->
-      <a-rounded id="scene1" position="4 0.3 -1" width="4" height="3.1" radius="0.05" rotation="0 -90 0" scale="0.6 0.6 0.6" color="#CCCCCC">
+      <a-rounded id="scene1" position="4 0.3 -1" width="4" height="3.1" radius="0.05" rotation="0 0 0" scale="0.6 0.6 0.6" color="#CCCCCC">
           <a-text value="Seleccione el lugar:" color="#000000" position="0.2 2.8 0"></a-text>
           <a-button id="l1" position="0.2 2.4 0" name="lugar1"  value="Tierra" button-color="#08147B"></a-button>
           <a-button id="l2" position="1.5 2.4 0" name="lugar2"  value="Luna"></a-button>
@@ -51,61 +52,19 @@
           <a-button id="p2" position="1.5 1.4 0" name="peso2"  value="10 kg"></a-button>
           <a-button id="p3" position="2.8 1.4 0" name="peso3"  value="100 kg"></a-button>
 
-          <a-button position="1.2 0.8 0" id="begin" name="stuff" value="COMENZAR" button-color="green" type="raised"></a-button>
+          <a-button position="1.2 0.8 0" id="begin" name="stuff" value="COMENZAR" href="gravedad98.html" button-color="green" type="raised"></a-button>
       </a-rounded>
       <!-- Fin Escena #1 -->
 
-      <!-- Inicio Escena #2 -->
-      <a-entity id="m100" visible="false" geometry="primitive: box" position="2.5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
-			<a-entity id="m35" visible="false" geometry="primitive: box" position="2.5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
-			<a-entity id="m15" visible="false" geometry="primitive: box" position="2.5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
-			<a-entity id="m5" visible="false" geometry="primitive: box" position="2.5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
-
-			<a-text id="regla90" visible="false" position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
-			<a-text id="regla80" visible="false" position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
-			<a-text id="regla70" visible="false" position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
-			<a-text id="regla60" visible="false" position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
-			<a-text id="regla50" visible="false" position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
-			<a-text id="regla40" visible="false" position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
-			<a-text id="regla30" visible="false" position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
-			<a-text id="regla20" visible="false" position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
-			<a-text id="regla10" visible="false" position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
-
-			<a-text id="chron" position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00" visible="false"></a-text>
-      <a-sphere id="objeto" color="red"
-         position="0 100 -15"
-         scale="0.3 0.3 0.3"
-         dynamic-body="mass: 0.5;"
-         visible="false" ></a-sphere>
-      <a-entity static-body collada-model="#ground" visible="false"></a-entity>
-      <!-- Fin Escena #2 -->
+      <a-link href="gravedad98.html" title="Tierra" image="#thumTierra"></a-link>
+      <a-link href="" title="Luna" image="#thumLuna"></a-link>
+      <a-link href="" title="Marte" image="#thumMarte"></a-link>
     </a-scene>
     <!-- Fin Marco -->
 
-    <script type="text/javascript">
-    function nextScene() {
-      //document.getElementById('scene1').setAttribute('visible', 'false')
-      document.getElementById('m100').setAttribute('visible', 'true')
-      document.getElementById('m35').setAttribute('visible', 'true')
-      document.getElementById('m15').setAttribute('visible', 'true')
-      document.getElementById('m5').setAttribute('visible', 'true')
-      document.getElementById('regla90').setAttribute('visible', 'true')
-      document.getElementById('regla80').setAttribute('visible', 'true')
-      document.getElementById('regla70').setAttribute('visible', 'true')
-      document.getElementById('regla60').setAttribute('visible', 'true')
-      document.getElementById('regla50').setAttribute('visible', 'true')
-      document.getElementById('regla40').setAttribute('visible', 'true')
-      document.getElementById('regla30').setAttribute('visible', 'true')
-      document.getElementById('regla20').setAttribute('visible', 'true')
-      document.getElementById('regla10').setAttribute('visible', 'true')
-      document.getElementById('chron').setAttribute('visible', 'true')
-      document.getElementById('objeto').setAttribute('visible', 'true')
-    }
 
-    function backScene() {
-      document.getElementById('scene1').setAttribute('visible', 'false')
-      //document.getElementById('scene2').setAttribute('visible', 'true')
-    }
+
+    <script type="text/javascript">
 
     function changeColor(value) {
       if (value == 'l1' || value == 'l2' || value == 'l3'){
@@ -114,21 +73,18 @@
           l2.setAttribute('button-color', '#4076fd');
           l3.setAttribute('button-color', '#4076fd');
           world = 'tierra';
-          gravity = "-9.8";
         }
         else if (value == 'l2') {
           l1.setAttribute('button-color', '#4076fd');
           l2.setAttribute('button-color', '#08147B');
           l3.setAttribute('button-color', '#4076fd');
           world = 'luna';
-          gravity = "-1.62";
         }
         else if (value == 'l3') {
           l1.setAttribute('button-color', '#4076fd');
           l2.setAttribute('button-color', '#4076fd');
           l3.setAttribute('button-color', '#08147B');
           world = 'marte';
-          gravity = "-3.71";
         }
       }
       if (value == 'p1' || value == 'p2' || value == 'p3'){
@@ -153,24 +109,6 @@
       }
     }
 
-    function dettachDin() {
-  		objeto.removeAttribute("dynamic-body");
-      console.log(objeto);
-  	}
-
-  	function attachDin() {
-      var attr = document.createAttribute('dynamic-body');
-  		attr.value = 'mass: '+ weight + ';';
-      objeto.setAttributeNode(attr)
-      console.log(objeto);
-  	}
-
-    function setHeight(height) {
-  		dettachDin();
-  		objeto.object3D.position.set(0, height, -15);
-  		attachDin();
-  	}
-
     let l1 = document.getElementById('l1');
     let l2 = document.getElementById('l2');
     let l3 = document.getElementById('l3');
@@ -179,15 +117,6 @@
     let p3 = document.getElementById('p3');
     let begin = document.getElementById('begin');
     let sky = document.querySelector('a-sky');
-    let	reset5 	= document.getElementById('m5');
-  	let	reset15 = document.getElementById('m15');
-  	let	reset35 = document.getElementById('m35');
-  	let	reset100 = document.getElementById('m100');
-  	let	objeto	 = document.getElementById('objeto');
-
-    let world = "tierra";
-    let gravity = "-9.8";
-    let weight = "0.5";
 
     l1.addEventListener('click', ()=> {
       changeColor('l1');
@@ -207,32 +136,6 @@
     p3.addEventListener('click', ()=> {
       changeColor('p3');
     });
-
-    reset5.addEventListener("click", function(){
-  		setHeight(5);
-  	});
-
-  	reset15.addEventListener("click", function(){
-  		setHeight(15);
-  	});
-
-  	reset35.addEventListener("click", function(){
-  		setHeight(35);
-  	});
-
-  	reset100.addEventListener("click", function(){
-  		setHeight(100);
-  	});
-
-    begin.addEventListener('click', ()=> {
-      image = world + '.jpg';
-      sky.setAttribute('src', 'assets/images/'+image);
-      source = document.getElementById('source');
-      var attrG = document.createAttribute('physics');
-  		attrG.value = 'driver: worker; gravity:'+gravity+' ; friction:0 ; restitution:0;';
-      source.setAttributeNode(attrG)
-      nextScene();
-    })
     </script>
   </body>
 </html>

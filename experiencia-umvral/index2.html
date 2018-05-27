@@ -16,7 +16,7 @@
   </head>
   <body>
 
-<a-scene fog="type: linear; color: #FFEBDE; far:195" physics="gravity:-9.81 ; firction:0 ; restitution:0 " >
+<a-scene fog="type: linear; color: #FFEBDE; far:195" physics="driver: worker; gravity:-9.81 ; friction:0 ; restitution:0 " >
 
         <a-assets>
             <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
@@ -79,22 +79,22 @@
 					<a-asset-item id="camino" src="objetos/entity.gltf"></a-asset-item>
 			</a-assets>
 
-				<a-entity id="m100" geometry="primitive: box" position="2.5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
-				<a-entity id="m35" geometry="primitive: box" position="2.5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
-				<a-entity id="m15" geometry="primitive: box" position="2.5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
-				<a-entity id="m5" geometry="primitive: box" position="2.5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
+			<a-entity id="m100" geometry="primitive: box" position="2.5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
+			<a-entity id="m35" geometry="primitive: box" position="2.5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
+			<a-entity id="m15" geometry="primitive: box" position="2.5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
+			<a-entity id="m5" geometry="primitive: box" position="2.5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
 
-				<a-text position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
-				<a-text position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
-				<a-text position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
-				<a-text position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
-				<a-text position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
-				<a-text position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
-				<a-text position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
-				<a-text position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
-				<a-text position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+			<a-text position="2 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+			<a-text position="2 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+			<a-text position="2 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+			<a-text position="2 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+			<a-text position="2 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+			<a-text position="2 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+			<a-text position="2 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+			<a-text position="2 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+			<a-text position="2 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
 
-				<a-text position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00"></a-text>
+			<a-text position="-7 1 -20" scale="5 5 5" id = "cronometro" color ="black" value="00:00:00"></a-text>
 <!--a-sky color="white"></a-sky-->
 
         <a-cylinder color="black"
