@@ -97,7 +97,7 @@
              scale="10000 0.5 10000"
              dinamic-body></a-cylinder>
 
-          <a-text id="chron" position="-14 0 -13" scale="10 10 10" rotation ="-45 40 0" id = "cronometro" color ="black" value="00:00:00"></a-text>
+          <a-text id="chron" clock-text position="-14 0 -13" scale="10 10 10" rotation ="-45 40 0" id = "cronometro" color ="black" value="00:00:00"></a-text>
           <a-entity
           geometry="primitive: box"
           material = "color : blue"
@@ -107,6 +107,7 @@
           ></a-entity>
 
          <a-cylinder
+           id= 'suelo'
            position="2 -1.5 -15"
            material= "color: #c4d7d8"
            scale="7.5 0.5 7.5"
@@ -132,17 +133,18 @@
     function setHeight(height) {
   		dettachDin();
   		objeto.object3D.position.set(0, height, -15);
-      startChron();
+      resetChron();
   		attachDin();
   	}
 
-    function restChron(){
-
+    function resetChron(){
+      currentTimestamp = moment();
+      clockrun = true;
     }
 
 
 
-    let chron = document.getElementById('chron');
+    let cronometro = document.getElementById('chron');
     let l1 = document.getElementById('l1');
     let l2 = document.getElementById('l2');
     let l3 = document.getElementById('l3');
@@ -156,10 +158,12 @@
   	let	reset35 = document.getElementById('m35');
   	let	reset100 = document.getElementById('m100');
   	let	objeto	 = document.getElementById('objeto');
-
+    var currentTimestamp = moment();
+    var clockrun = false;
     let weight = 1;
 
     function startChron() {
+      cronometro.setAttribute("value","200");
 
     }
 
@@ -178,6 +182,45 @@
   	reset100.addEventListener("click", function(){
   		setHeight(99);
   	});
+
+    cronometro.addEventListener("click",function(){
+      clockrun = false;
+    })
+
+/*
+    object.addEventListener('collide',function(e){
+
+        if(e.object3D.position.y > "-0.7") {
+          clockrun = true;
+        }
+    })*/
+
+
+    AFRAME.registerComponent('clock-text', {
+      init: function() {
+        var el = this.el;
+        this.ready = false;
+          el.addEventListener('textfontset', function() {
+          this.ready = true;
+        }.bind(this));
+      },
+      tick: function() {
+        var el = this.el;
+        if (!this.ready) {
+          return;
+        }
+        if(clockrun){
+          var timer = moment.duration(moment().diff(currentTimestamp));
+          el.setAttribute('value', timer.asSeconds());
+        }
+
+
+      }
+    });
+
+
+
+
     </script>
   </body>
 </html>
