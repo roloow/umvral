@@ -19,9 +19,9 @@
   </head>
   <body>
     <!-- Inicio Marco -->
-    <a-scene id="source" cursor="rayOrigin: mouse" physics="gravity:-9.81 ; friction:0 ; restitution:0 ; iterations: 1000" >
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="gravity:-1.62 ; friction:0 ; restitution:0 ; iterations: 1000">
       <!-- Inicio BackGround y Suelo -->
-      <a-sky src="assets/images/uyuni.jpeg"></a-sky>
+      <a-sky src="assets/images/stars.jpeg"></a-sky> <!--LUNA -->
       <a-assets>
           <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
       </a-assets>
@@ -59,30 +59,40 @@
       <!-- Fin Escena #1 -->
 
       <!-- Inicio Escena #2 -->
-      <a-entity id="m100"  geometry="primitive: box" position="5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
-			<a-entity id="m35"  geometry="primitive: box" position="5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
-			<a-entity id="m15"  geometry="primitive: box" position="5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
-			<a-entity id="m5"  geometry="primitive: box" position="5 4 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
+      <a-entity id="m100"  geometry="primitive: box" position="5 99 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
+			<a-entity id="m35"  geometry="primitive: box" position="5 34 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
+			<a-entity id="m15"  geometry="primitive: box" position="5 14 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
+			<a-entity id="m5"  geometry="primitive: box" color= "white" position="5 4 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
 
-			<a-text id="regla90" position="2 89 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
-			<a-text id="regla80" position="2 79 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
-			<a-text id="regla70" position="2 69 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
-			<a-text id="regla60" position="2 59 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
-			<a-text id="regla50" position="2 49 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
-			<a-text id="regla40" position="2 39 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
-			<a-text id="regla30" position="2 29 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
-			<a-text id="regla20" position="2 19 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
-			<a-text id="regla10" position="2 9 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
-
+			<a-text id="regla90" position="2 89 -15" scale="5 5 5" name="obj" label="15" color="white" value= "90 m"></a-text>
+			<a-text id="regla80" position="2 79 -15" scale="5 5 5" name="obj" label="15" color="white" value= "80 m"></a-text>
+			<a-text id="regla70" position="2 69 -15" scale="5 5 5" name="obj" label="15" color="white" value= "70 m"></a-text>
+			<a-text id="regla60" position="2 59 -15" scale="5 5 5" name="obj" label="15" color="white" value= "60 m"></a-text>
+			<a-text id="regla50" position="2 49 -15" scale="5 5 5" name="obj" label="15" color="white" value= "50 m"></a-text>
+			<a-text id="regla40" position="2 39 -15" scale="5 5 5" name="obj" label="15" color="white" value= "40 m"></a-text>
+			<a-text id="regla30" position="2 29 -15" scale="5 5 5" name="obj" label="15" color="white" value= "30 m"></a-text>
+			<a-text id="regla20" position="2 19 -15" scale="5 5 5" name="obj" label="15" color="white" value= "20 m"></a-text>
+			<a-text id="regla10" position="2 9 -15" scale="5 5 5" name="obj" label="15" color="white" value= "10 m"></a-text>
+      <a-text id="regla10" position="3 4 -14.75" scale="5 5 5" name="obj" label="15" color="black" value= "5 m"></a-text>
+      <a-text id="regla10" position="3 14 -14.75" scale="5 5 5" name="obj" label="15" color="black" value= "15 m"></a-text>
+      <a-text id="regla10" position="3 34 -14.75" scale="5 5 5" name="obj" label="15" color="black" value= "35 m"></a-text>
+      <a-text id="regla10" position="3 99 -14.75" scale="5 5 5" name="obj" label="15" color="black" value= "100 m"></a-text>
 			  <a-sphere id="objeto" color="red"
          position="0 99 -15"
          radius="0.3"
          dynamic-body="mass: 0.5; sphereRadius: 0.3;"
           ></a-sphere>
-         <a-cylinder color="black"
+         <a-cylinder color="white"
            position="2 49 -15"
            scale="0.05 100 0.1"
            static-body></a-cylinder>
+
+           <a-cylinder
+             position="2 -2 -15"
+             material= "color: white"
+             scale="10000 0.5 10000"
+             dinamic-body></a-cylinder>
+
 
          <a-cylinder
            position="2 -1.5 -15"
@@ -95,31 +105,8 @@
     <!-- Fin Marco -->
 
     <script type="text/javascript">
-    function nextScene() {
-      //document.getElementById('scene1').setAttribute('visible', 'false')
-      document.getElementById('m100').setAttribute('visible', 'true')
-      document.getElementById('m35').setAttribute('visible', 'true')
-      document.getElementById('m15').setAttribute('visible', 'true')
-      document.getElementById('m5').setAttribute('visible', 'true')
-      document.getElementById('regla90').setAttribute('visible', 'true')
-      document.getElementById('regla80').setAttribute('visible', 'true')
-      document.getElementById('regla70').setAttribute('visible', 'true')
-      document.getElementById('regla60').setAttribute('visible', 'true')
-      document.getElementById('regla50').setAttribute('visible', 'true')
-      document.getElementById('regla40').setAttribute('visible', 'true')
-      document.getElementById('regla30').setAttribute('visible', 'true')
-      document.getElementById('regla20').setAttribute('visible', 'true')
-      document.getElementById('regla10').setAttribute('visible', 'true')
-      document.getElementById('chron').setAttribute('visible', 'true')
-      document.getElementById('objeto').setAttribute('visible', 'true')
-    }
 
-    function backScene() {
-      document.getElementById('scene1').setAttribute('visible', 'false')
-
-    }
-
-
+    
 
     function dettachDin() {
   		objeto.removeAttribute("dynamic-body");
@@ -152,10 +139,10 @@
   	let	reset35 = document.getElementById('m35');
   	let	reset100 = document.getElementById('m100');
   	let	objeto	 = document.getElementById('objeto');
-
+    let scene = document.querySelector('#source');
     let weight = 1;
 
-
+    scene.enterVR()
     reset5.addEventListener("click", function(){
   		setHeight(4);
   	});
