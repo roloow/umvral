@@ -22,7 +22,7 @@
     <!-- Inicio Marco -->
     <a-scene id="source" cursor="rayOrigin: mouse" physics="gravity:-3.71 ; friction:0 ; restitution:0 ; iterations: 1000" >
       <!-- Inicio BackGround y Suelo -->
-      <a-sky src="assets/images/stars.jpeg"></a-sky> <!--marte -->
+      <a-sky src="assets/images/stars3.png"></a-sky> <!--marte -->
       <a-assets>
           <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
       </a-assets>
@@ -111,7 +111,7 @@
            position="2 -1.5 -15"
            material= "color: #c4d7d8"
            scale="7.5 0.5 7.5"
-           dinamic-body></a-cylinder>
+           static-body></a-cylinder>
       <a-entity static-body collada-model="#ground" visible = "false" position= "0 -1 0"></a-entity>
       <!-- Fin Escena #2 -->
     </a-scene>

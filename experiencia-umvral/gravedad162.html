@@ -140,11 +140,12 @@
     let weight = 1;
 
     reset5.addEventListener("click", function(){
-  		setHeight(4);
+      setHeight(4);
   	});
 
   	reset15.addEventListener("click", function(){
-  		setHeight(14);
+      setHeight(14);
+      document.querySelector("a-scene").setAttribute('physics','gravity:-10');
   	});
 
   	reset35.addEventListener("click", function(){
