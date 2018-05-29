@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>umVRal - Caida Libre</title>
+    <meta name="description" content="Experiencia VR de caida libre">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
+    <script src="https://cdn.rawgit.com/etiennepinchon/aframe-material/master/dist/aframe-material.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+
+    <script type="text/javascript">
+      $ = (sel) => document.querySelector(sel)
+      $$ = (sel) => document.querySelectorAll(sel)
+      on = (elem, type, hand) => elem.addEventListener(type,hand)
+    </script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
+  </head>
+  <body>
+    <!-- Inicio Marco -->
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="">
+      <a-assets>
+        <a-asset-item id="engine" src="assets/models/engine.dae"></a-asset-item>
+        <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
+        <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+        <audio id="blip1" src="assets/audio/321103__nsstudios__blip1.wav"></audio>
+        <audio id="blip2" src="assets/audio/321104__nsstudios__blip2.wav"></audio>
+        <img id="thumMarte" src="assets/images/thum_marte.jpg">
+        <img id="uyuni" src="assets/images/uyuni.jpeg">
+        <img id="thumTierra" src="assets/images/thum_tierra.jpg">
+        <img id="thumLuna" src="assets/images/thum_luna.jpg">
+        <img id="glow1" src="assets/images/glow1.png">
+        <img id="spacestation" src="assets/images/spacestation.jpg">
+      </a-assets>
+
+      <!-- Inicio de Controles -->
+      <a-entity id="cam" camera look-controls position="0 0 3" wasd-controls>
+        <a-entity cursor="fuse: true; fuseTimeout: 1000"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            material="color: black; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+          </a-entity>
+      </a-entity>
+      <!-- Fin de Controles -->
+      <!-- Lights. -->
+      <a-light id="lightFront" type="point" color="#94c6ff" distance="15" position="0 0 -12">
+        <a-animation attribute="intensity" from="0" to="2" delay="750" dur="500" fill="both"></a-animation>
+      </a-light>
+      <a-light id="lightBack" type="point" color="#94c6ff" distance="17" position="0 0 -6">
+        <a-animation attribute="intensity" from="0" to="1" delay="500" dur="500" fill="both"></a-animation>
+      </a-light>
+      <a-light id="ambient" type="ambient" color="#FFFFFF" ></a-light>
+      <!-- /Lights -->
+      <!-- Escena #1 -->
+      <a-entity id="scene1" visible="true">
+        <!-- Engine -->
+        <a-entity position="0 0 -3">
+          <a-collada-model src="#engine" rotation="90 0 0" scale="18 18 18"></a-collada-model>
+        </a-entity>
+
+        <a-entity id="wall-lights" position="-7.25 1.5 2.9" rotation="0 90 0" scale="1.25 1.25 1.25">
+          <a-entity position="0 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="350" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="1 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="400" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="2 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="450" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="3 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="500" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="4 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="550" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="5 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="600" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="6 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="650" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="7 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="700" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="8 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="750" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="9 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="800" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="10 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="850" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="11 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="900" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="12 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="950" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="13 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="1000" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+        </a-entity>
+        <!-- /Engine -->
+        <!-- Portales -->
+        <a-text value="Tierra" color="#FFFFFF" position="-5 2 -3.5" rotation="0 90 0"></a-text>
+        <a-circle id="portal1" src='#thumTierra' radius="0.85" rotation='0 90 0' position='-5 0.5 -4'></a-circle>
+        <a-text value="Luna" color="#FFFFFF" position="-5 2 0.25" rotation="0 90 0"></a-text>
+        <a-circle id="portal2" src='#thumLuna' radius="0.85" rotation='0 90 0' position='-5 0.5 0'></a-circle>
+        <a-text value="Marte" color="#FFFFFF" position="-5 2 4.3" rotation="0 90 0"></a-text>
+        <a-circle id="portal3" src='#thumMarte' radius="0.85" rotation='0 90 0' position='-5 0.5 4'></a-circle>
+        <!-- /Portales -->
+        <a-rounded  position="4 0.3 -1" width="4" height="3.1" radius="0.05" rotation="0 0 0" scale="0.6 0.6 0.6" color="#CCCCCC">
+            <a-text value="Seleccione el lugar:" color="#000000" position="0.2 2.8 0"></a-text>
+            <a-button id="l1" position="0.2 2.4 0" name="lugar1"  value="Tierra" button-color="#08147B"></a-button>
+            <a-button id="l2" position="1.5 2.4 0" name="lugar2"  value="Luna"></a-button>
+            <a-button id="l3" position="2.8 2.4 0" name="lugar3"  value="Marte"></a-button>
+
+            <a-text value="Seleccione el peso del objeto" color="#000000" position="0.2 1.8 0"></a-text>
+            <a-button id="p1" position="0.2 1.4 0" name="peso1"  value="0.5 kg" button-color="#08147B"></a-button>
+            <a-button id="p2" position="1.5 1.4 0" name="peso2"  value="10 kg"></a-button>
+            <a-button id="p3" position="2.8 1.4 0" name="peso3"  value="100 kg"></a-button>
+        </a-rounded>
+      </a-entity>
+      <!-- /Escena #1 -->
+
+      <!-- World -->
+      <a-entity id="world1">
+        <a-sky src="assets/images/stars3.png"></a-sky>
+        <a-entity id="m100"  geometry="primitive: box" position="5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
+  			<a-entity id="m35"  geometry="primitive: box" position="5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
+  			<a-entity id="m15"  geometry="primitive: box" position="5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
+  			<a-entity id="m5"  geometry="primitive: box" position="5 4 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
+
+  			<a-text id="regla90" position="2 89 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+  			<a-text id="regla80" position="2 79 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+  			<a-text id="regla70" position="2 69 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+  			<a-text id="regla60" position="2 59 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+  			<a-text id="regla50" position="2 49 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+  			<a-text id="regla40" position="2 39 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+  			<a-text id="regla30" position="2 29 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+  			<a-text id="regla20" position="2 19 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+  			<a-text id="regla10" position="2 9 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+
+  			<a-sphere id="objeto" color="red" position="0 2 -15" radius="0.3" dynamic-body="mass: 0.5; sphereRadius: 0.3;"></a-sphere>
+        <a-cylinder id="regla" color="black" position="2 49 -15" scale="0.05 100 0.1" static-body></a-cylinder>
+        <a-cylinder position="2 -1.5 -15" material= "color: #c4d7d8" scale="7.5 0.5 7.5" static-body></a-cylinder>
+        <a-cylinder id="piso" position="2 -2 -15" material= "color:  #bc402a" scale="10000 0.5 10000" dinamic-body></a-cylinder>
+        <a-cylinder id='suelo' position="2 -1.5 -15" material= "color: #c4d7d8" scale="7.5 0.5 7.5" dinamic-body></a-cylinder>
+        <a-text id="chron" clock-text position="-14 0 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="00:00:00"></a-text>
+        <a-entity geometry="primitive: box" material = "color : blue" position = "-10 -2 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
+        <a-entity static-body collada-model="#ground" visible = "false" position= "0 -1.1 0"></a-entity>
+
+        <a-text value="Space Station" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
+        <a-circle id="portal4" src='#spacestation' radius="0.85" rotation='0 -90 0' position='8 2 3'></a-circle>
+      </a-entity>
+      <!-- /World -->
+
+      <!-- Marte -->
+      <!-- /Marte -->
+
+      <!-- Luna -->
+      <!-- /Luna -->
+    </a-scene>
+    <!-- Fin Marco -->
+
+    <script type="text/javascript">
+      // VARIABLES
+      let l1 = $('#l1');
+      let l2 = $('#l2');
+      let l3 = $('#l3');
+      let p1 = $('#p1');
+      let p2 = $('#p2');
+      let p3 = $('#p3');
+      let	reset5 	= $('#m5');
+    	let	reset15 =$('#m15');
+    	let	reset35 = $('#m35');
+    	let	reset100 = $('#m100');
+    	let	objeto	 = $('#objeto');
+      let begin = $('#begin')
+      let sky = $('a-sky')
+      var currentTimestamp = moment();
+      var clockrun = false;
+      let weight = 1;
+      let cronometro = $('#chron');
+      let scene2 = $('#world1');
+      let scene1 = $('#scene1');
+      let portal1 = $('#portal1');
+      let portal2 = $('#portal2');
+      let portal3 = $('#portal3');
+      let portal4 = $('#portal4');
+      let world = 'luna';
+
+    </script>
+
+    <script type="text/javascript">
+      // FUNCIONES
+      function setScene() {
+        if (world == 'luna') {
+          $('#regla').setAttribute('color', 'cyan');
+          $('#piso').setAttribute('material', 'color: white');
+          $('#ambient').setAttribute('color', '#white');
+          $('a-scene').systems.physics.driver.world.gravity.y = -1.62;
+        }
+        if (world == 'tierra') {
+          $('#regla').setAttribute('color', 'black');
+          $('#piso').setAttribute('material', 'color: green');
+          $('#ambient').setAttribute('color', '#4f6487');
+          $('a-scene').systems.physics.driver.world.gravity.y = -9.8;
+        }
+        if (world == 'marte') {
+          $('#regla').setAttribute('color', 'white');
+          $('#piso').setAttribute('material', 'color: #bc402a');
+          $('#ambient').setAttribute('color', '#4f6487');
+          $('a-scene').systems.physics.driver.world.gravity.y = -3.7;
+        }
+      }
+
+      function changeScene(sn1, sn2) {
+        var father = sn1.parentNode;
+        removeScene(father,sn1);
+        createScene(father,sn2);
+        setScene()
+      }
+
+      function removeScene(father, child) {
+        father.removeChild(child);
+      }
+
+      function createScene(father, child) {
+        father.appendChild(child);
+      }
+
+      function hide(scn) {
+        scn.setAttribute('visible', 'false')
+      }
+
+      function show(scn){
+        scn.setAttribute('visible', 'false');
+      }
+
+      function dettachDin() {
+    		objeto.removeAttribute("dynamic-body");
+    	}
+
+    	function attachDin() {
+        var attr = document.createAttribute('dynamic-body');
+    		attr.value = 'mass: '+ weight + '; sphereRadius: 0.3;';
+        objeto.setAttributeNode(attr)
+    	}
+
+      function startChron() {
+        cronometro.setAttribute("value","200");
+      }
+
+      function resetChron(){
+        currentTimestamp = moment();
+        clockrun = true;
+      }
+
+      function setHeight(height) {
+        dettachDin();
+        objeto.object3D.position.set(0, height, -15);
+        resetChron();
+        attachDin();
+      }
+
+      function changeColor(value) {
+        if (value == 'l1' || value == 'l2' || value == 'l3'){
+          if (value == 'l1') {
+            l1.setAttribute('button-color', '#08147B');
+            l2.setAttribute('button-color', '#4076fd');
+            l3.setAttribute('button-color', '#4076fd');
+            world = 'tierra';
+          }
+          else if (value == 'l2') {
+            l1.setAttribute('button-color', '#4076fd');
+            l2.setAttribute('button-color', '#08147B');
+            l3.setAttribute('button-color', '#4076fd');
+            world = 'luna';
+          }
+          else if (value == 'l3') {
+            l1.setAttribute('button-color', '#4076fd');
+            l2.setAttribute('button-color', '#4076fd');
+            l3.setAttribute('button-color', '#08147B');
+            world = 'marte';
+          }
+        }
+        if (value == 'p1' || value == 'p2' || value == 'p3'){
+          if (value == 'p1') {
+            p1.setAttribute('button-color', '#08147B');
+            p2.setAttribute('button-color', '#4076fd');
+            p3.setAttribute('button-color', '#4076fd');
+            weight = "0.5"
+          }
+          else if (value == 'p2') {
+            p1.setAttribute('button-color', '#4076fd');
+            p2.setAttribute('button-color', '#08147B');
+            p3.setAttribute('button-color', '#4076fd');
+            weight = "10"
+          }
+          else if (value == 'p3') {
+            p1.setAttribute('button-color', '#4076fd');
+            p2.setAttribute('button-color', '#4076fd');
+            p3.setAttribute('button-color', '#08147B');
+            weight = "100"
+          }
+        }
+      }
+    </script>
+    <script type="text/javascript">
+      // EVENTOS
+      l1.addEventListener('click', ()=> {
+        changeColor('l1');
+      });
+      l2.addEventListener('click', ()=> {
+        changeColor('l2');
+      });
+      l3.addEventListener('click', ()=> {
+        changeColor('l3');
+      });
+      p1.addEventListener('click', ()=> {
+        changeColor('p1');
+      });
+      p2.addEventListener('click', ()=> {
+        changeColor('p2');
+      });
+      p3.addEventListener('click', ()=> {
+        changeColor('p3');
+      });
+      reset5.addEventListener("click", function(){
+    		setHeight(4);
+    	});
+
+    	reset15.addEventListener("click", function(){
+    		setHeight(14);
+    	});
+
+    	reset35.addEventListener("click", function(){
+    		setHeight(34);
+    	});
+
+    	reset100.addEventListener("click", function(){
+    		setHeight(99);
+    	});
+      portal1.addEventListener("click", function () {
+        world = 'tierra';
+        changeScene(scene1, scene2);
+      });
+      portal2.addEventListener("click", function () {
+        world = 'luna';
+        changeScene(scene1, scene2);
+      });
+      portal3.addEventListener("click", function () {
+        world = 'marte';
+        changeScene(scene1, scene2);
+      });
+      portal4.addEventListener("click", function () {
+        world = 'space'; //Default
+        changeScene(scene2, scene1);
+      })
+
+      cronometro.addEventListener("click",function(){
+        clockrun = false;
+      })
+    </script>
+    <script type="text/javascript">
+      // Registro de componentes
+      AFRAME.registerComponent('clock-text', {
+        init: function() {
+          var el = this.el;
+          this.ready = false;
+            el.addEventListener('textfontset', function() {
+            this.ready = true;
+          }.bind(this));
+        },
+        tick: function() {
+          var el = this.el;
+          if (!this.ready) {
+            return;
+          }
+          if(clockrun){
+            var timer = moment.duration(moment().diff(currentTimestamp));
+            el.setAttribute('value', timer.asSeconds());
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript">
+      removeScene(scene2.parentNode, scene2)
+    </script>
+  </body>
+</html>
