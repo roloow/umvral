@@ -35,6 +35,7 @@
         <img id="thumTierra" src="assets/images/thum_tierra.jpg">
         <img id="thumLuna" src="assets/images/thum_luna.jpg">
         <img id="glow1" src="assets/images/glow1.png">
+        <img id="spacestation" src="assets/images/spacestation.jpg">
       </a-assets>
 
       <!-- Inicio de Controles -->
@@ -212,6 +213,9 @@
         <a-text id="chron" clock-text position="-14 0 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="00:00:00"></a-text>
         <a-entity geometry="primitive: box" material = "color : blue" position = "-10 -2 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
         <a-entity static-body collada-model="#ground" visible = "false" position= "0 -1.1 0"></a-entity>
+
+        <a-text value="Space Station" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
+        <a-circle id="portal4" src='#spacestation' radius="0.85" rotation='0 -90 0' position='8 2 3'></a-circle>
       </a-entity>
       <!-- /World -->
 
@@ -247,6 +251,7 @@
       let portal1 = $('#portal1');
       let portal2 = $('#portal2');
       let portal3 = $('#portal3');
+      let portal4 = $('#portal4');
       let world = 'luna';
 
     </script>
@@ -413,6 +418,10 @@
         world = 'marte';
         changeScene(scene1, scene2);
       });
+      portal4.addEventListener("click", function () {
+        world = 'space'; //Default
+        changeScene(scene2, scene1);
+      })
 
       cronometro.addEventListener("click",function(){
         clockrun = false;
