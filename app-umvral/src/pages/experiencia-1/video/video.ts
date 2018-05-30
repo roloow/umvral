@@ -8,7 +8,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class HelpVideoPage {
     video: any = {
-        url: 'https://www.youtube.com/watch?v=HZ86lhZ2a6M',
+        url: 'https://www.youtube.com/embed/HZ86lhZ2a6M',
         title: 'Caida Libre - Julio profe'
     };
 
