@@ -47,6 +47,7 @@
   <body>
     <!-- Inicio Marco -->
     <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local;">
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; iterations: 100;">
       <a-assets>
         <a-asset-item id="engine" src="assets/models/engine.dae"></a-asset-item>
         <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
@@ -347,6 +348,7 @@
 
       function setHeight(height) {
         objeto.body.position.set(0, height, -15);
+        objeto.body.velocity.set(0, 0, 0);
         resetChron();
       }
 
