@@ -11,6 +11,7 @@
     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
 		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
 
     <script type="text/javascript">
       $ = (sel) => document.querySelector(sel)
@@ -18,26 +19,44 @@
       on = (elem, type, hand) => elem.addEventListener(type,hand)
     </script>
     <script type="text/javascript">
+      // Registro de componentes
+      AFRAME.registerComponent('clock-text', {
+        init: function() {
+          var el = this.el;
+          this.ready = false;
+            el.addEventListener('textfontset', function() {
+            this.ready = true;
+          }.bind(this));
+        },
+        tick: function() {
+          var el = this.el;
+          if (!this.ready) {
+            return;
+          }
+          if(clockrun){
+            var timer = moment.duration(moment().diff(currentTimestamp));
+            el.setAttribute('value', timer.asSeconds());
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript">
       AFRAME.ASSETS_PATH = "./assets";
     </script>
   </head>
   <body>
     <!-- Inicio Marco -->
-    <a-scene id="source" cursor="rayOrigin: mouse" physics="">
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; debug: true;">
       <a-assets>
         <a-asset-item id="engine" src="assets/models/engine.dae"></a-asset-item>
         <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
         <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
-        <audio id="blip1" src="assets/audio/321103__nsstudios__blip1.wav"></audio>
-        <audio id="blip2" src="assets/audio/321104__nsstudios__blip2.wav"></audio>
         <img id="thumMarte" src="assets/images/thum_marte.jpg">
-        <img id="uyuni" src="assets/images/uyuni.jpeg">
         <img id="thumTierra" src="assets/images/thum_tierra.jpg">
         <img id="thumLuna" src="assets/images/thum_luna.jpg">
         <img id="glow1" src="assets/images/glow1.png">
         <img id="spacestation" src="assets/images/spacestation.jpg">
       </a-assets>
-
       <!-- Inicio de Controles -->
       <a-entity id="cam" camera look-controls position="0 0 3" wasd-controls>
         <a-entity cursor="fuse: true; fuseTimeout: 1000"
@@ -50,6 +69,7 @@
       </a-entity>
       <!-- Fin de Controles -->
       <!-- Lights. -->
+      <a-entity id="lights">
       <a-light id="lightFront" type="point" color="#94c6ff" distance="15" position="0 0 -12">
         <a-animation attribute="intensity" from="0" to="2" delay="750" dur="500" fill="both"></a-animation>
       </a-light>
@@ -57,7 +77,11 @@
         <a-animation attribute="intensity" from="0" to="1" delay="500" dur="500" fill="both"></a-animation>
       </a-light>
       <a-light id="ambient" type="ambient" color="#FFFFFF" ></a-light>
+      </a-entity>
       <!-- /Lights -->
+      <!-- Environment -->
+      <a-entity id="env" environment="active: false; preset: default"></a-entity>
+      <!-- /Environment -->
       <!-- Escena #1 -->
       <a-entity id="scene1" visible="true">
         <!-- Engine -->
@@ -186,10 +210,9 @@
         </a-rounded>
       </a-entity>
       <!-- /Escena #1 -->
-
       <!-- World -->
-      <a-entity id="world1">
-        <a-sky src="assets/images/stars3.png"></a-sky>
+      <a-entity id="world1" >
+
         <a-entity id="m100"  geometry="primitive: box" position="5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
   			<a-entity id="m35"  geometry="primitive: box" position="5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
   			<a-entity id="m15"  geometry="primitive: box" position="5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
@@ -206,13 +229,11 @@
   			<a-text id="regla10" position="2 9 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
 
   			<a-sphere id="objeto" color="red" position="0 2 -15" radius="0.3" dynamic-body="mass: 0.5; sphereRadius: 0.3;"></a-sphere>
-        <a-cylinder id="regla" color="black" position="2 49 -15" scale="0.05 100 0.1" static-body></a-cylinder>
-        <a-cylinder position="2 -1.5 -15" material= "color: #c4d7d8" scale="7.5 0.5 7.5" static-body></a-cylinder>
-        <a-cylinder id="piso" position="2 -2 -15" material= "color:  #bc402a" scale="10000 0.5 10000" dinamic-body></a-cylinder>
-        <a-cylinder id='suelo' position="2 -1.5 -15" material= "color: #c4d7d8" scale="7.5 0.5 7.5" dinamic-body></a-cylinder>
-        <a-text id="chron" clock-text position="-14 0 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="00:00:00"></a-text>
+        <a-cylinder id="regla" color="black" position="2 50 -15" scale="0.05 100 0.1" static-body></a-cylinder>
+        <a-plane static-body visible="false" height="50" width="50" rotation="-90 0 0"></a-plane>
+        <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="00:00:00"></a-text>
         <a-entity geometry="primitive: box" material = "color : blue" position = "-10 -2 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
-        <a-entity static-body collada-model="#ground" visible = "false" position= "0 -1.1 0"></a-entity>
+        <!-- <a-entity static-body collada-model="#ground" visible = "false" position= "0 -1.1 0"></a-entity> -->
 
         <a-text value="Space Station" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
         <a-circle id="portal4" src='#spacestation' radius="0.85" rotation='0 -90 0' position='8 2 3'></a-circle>
@@ -241,10 +262,6 @@
     	let	reset100 = $('#m100');
     	let	objeto	 = $('#objeto');
       let begin = $('#begin')
-      let sky = $('a-sky')
-      var currentTimestamp = moment();
-      var clockrun = false;
-      let weight = 1;
       let cronometro = $('#chron');
       let scene2 = $('#world1');
       let scene1 = $('#scene1');
@@ -252,30 +269,48 @@
       let portal2 = $('#portal2');
       let portal3 = $('#portal3');
       let portal4 = $('#portal4');
-      let world = 'luna';
-
+      let env = $('#env')
+      //DEFAULT
+      let place = 'space';
+      var currentTimestamp = moment();
+      var clockrun = false;
+      let weight = 1;
     </script>
 
     <script type="text/javascript">
       // FUNCIONES
-      function setScene() {
+      function setScene(world) {
         if (world == 'luna') {
+          env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
+          env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {preset: 'starry', active: 'true', grid: false, playArea: 1.1, groundColor: '#858585', groundColor2: '#898585', dressing: 'stones', dressingColor: '#6f6c6c', ground: 'canyon'});
           $('#regla').setAttribute('color', 'cyan');
-          $('#piso').setAttribute('material', 'color: white');
-          $('#ambient').setAttribute('color', '#white');
           $('a-scene').systems.physics.driver.world.gravity.y = -1.62;
         }
         if (world == 'tierra') {
+          env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
+          env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {active: true, seed: 8, skyType: 'atmosphere', skyColor: '#2642b3', horizonColor: '#eff9b7', fog: 0.8, playArea: 1.2, ground: 'noise', groundYScale: 4.18, groundTexture: 'walkernoise', groundColor: '#17351c', groundColor2: '#2d2e1f', dressing: 'trees', dressingAmount: 80, dressingColor: '#003c00', dressingScale: 1, gridColor: '#c5a543', preset: 'forest'});
+          env.setAttribute('environment', {shadow: true})
           $('#regla').setAttribute('color', 'black');
-          $('#piso').setAttribute('material', 'color: green');
-          $('#ambient').setAttribute('color', '#4f6487');
           $('a-scene').systems.physics.driver.world.gravity.y = -9.8;
         }
         if (world == 'marte') {
+          env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
+          env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {active: true, preset: 'yavapai', skyType: 'atmosphere',skyColor: '#3c0404', horizonColor: '#ffaaaa', fog: 0.8, playArea: 1.1, dressingAmount: 165});
+          env.setAttribute('environment', {shadow: true});
+          $('#lights').setAttribute('visible', false);
           $('#regla').setAttribute('color', 'white');
-          $('#piso').setAttribute('material', 'color: #bc402a');
-          $('#ambient').setAttribute('color', '#4f6487');
           $('a-scene').systems.physics.driver.world.gravity.y = -3.7;
+        }
+        if (world == 'space') {
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {active: 'false'});
+          $('#lights').setAttribute('visible', true);
         }
       }
 
@@ -283,7 +318,7 @@
         var father = sn1.parentNode;
         removeScene(father,sn1);
         createScene(father,sn2);
-        setScene()
+        setScene(place)
       }
 
       function removeScene(father, child) {
@@ -329,26 +364,6 @@
       }
 
       function changeColor(value) {
-        if (value == 'l1' || value == 'l2' || value == 'l3'){
-          if (value == 'l1') {
-            l1.setAttribute('button-color', '#08147B');
-            l2.setAttribute('button-color', '#4076fd');
-            l3.setAttribute('button-color', '#4076fd');
-            world = 'tierra';
-          }
-          else if (value == 'l2') {
-            l1.setAttribute('button-color', '#4076fd');
-            l2.setAttribute('button-color', '#08147B');
-            l3.setAttribute('button-color', '#4076fd');
-            world = 'luna';
-          }
-          else if (value == 'l3') {
-            l1.setAttribute('button-color', '#4076fd');
-            l2.setAttribute('button-color', '#4076fd');
-            l3.setAttribute('button-color', '#08147B');
-            world = 'marte';
-          }
-        }
         if (value == 'p1' || value == 'p2' || value == 'p3'){
           if (value == 'p1') {
             p1.setAttribute('button-color', '#08147B');
@@ -372,16 +387,6 @@
       }
     </script>
     <script type="text/javascript">
-      // EVENTOS
-      l1.addEventListener('click', ()=> {
-        changeColor('l1');
-      });
-      l2.addEventListener('click', ()=> {
-        changeColor('l2');
-      });
-      l3.addEventListener('click', ()=> {
-        changeColor('l3');
-      });
       p1.addEventListener('click', ()=> {
         changeColor('p1');
       });
@@ -407,19 +412,19 @@
     		setHeight(99);
     	});
       portal1.addEventListener("click", function () {
-        world = 'tierra';
+        place = 'tierra';
         changeScene(scene1, scene2);
       });
       portal2.addEventListener("click", function () {
-        world = 'luna';
+        place = 'luna';
         changeScene(scene1, scene2);
       });
       portal3.addEventListener("click", function () {
-        world = 'marte';
+        place = 'marte';
         changeScene(scene1, scene2);
       });
       portal4.addEventListener("click", function () {
-        world = 'space'; //Default
+        place = 'space'; //Default
         changeScene(scene2, scene1);
       })
 
@@ -428,29 +433,7 @@
       })
     </script>
     <script type="text/javascript">
-      // Registro de componentes
-      AFRAME.registerComponent('clock-text', {
-        init: function() {
-          var el = this.el;
-          this.ready = false;
-            el.addEventListener('textfontset', function() {
-            this.ready = true;
-          }.bind(this));
-        },
-        tick: function() {
-          var el = this.el;
-          if (!this.ready) {
-            return;
-          }
-          if(clockrun){
-            var timer = moment.duration(moment().diff(currentTimestamp));
-            el.setAttribute('value', timer.asSeconds());
-          }
-        }
-      });
-    </script>
-    <script type="text/javascript">
-      removeScene(scene2.parentNode, scene2)
+      removeScene(scene2.parentNode, scene2);
     </script>
   </body>
 </html>
