@@ -19,7 +19,7 @@ export class ExpPage {
     this.orientacion = screenOrientation.type;
     this.screenOrientation.onChange().subscribe(
       () => {
-        if(screenOrientation.type == 'landscape-primary') {
+        if ((screenOrientation.type == 'landscape-primary') || (screenOrientation.type == 'landscape-secondary')) {
           this.hideNavBar = false;
           console.log("Cambio a Landscape"); 
         } else {
@@ -31,6 +31,6 @@ export class ExpPage {
   }
 
   openLink(){
-    this.iab.create("https://www.google.com/","_blank");
+    this.iab.create("https://www.google.com/","_self");
   }
 }

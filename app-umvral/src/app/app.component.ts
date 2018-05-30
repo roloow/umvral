@@ -37,6 +37,10 @@ export class ConferenceApp {
     // Check if the user has already seen the tutorial
     this.rootPage = ExperienceListPage;
     this.enableMenu(true);
+
+    this.platform.ready().then(() => {
+      this.splashScreen.hide();
+    });
   }
 
   openPage(page: PageInterface) {
