@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.conferenceapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>app-umvral</name>
-    <description>An Ionic Framework application for the Ionic Conference.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="cl.umvral.android" version="0.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>umVRal</name>
+    <description>Aplicación umVRal para plataforma Android.</description>
+    <author email="hi@ionicframework" href="http://deepgrow.cl/">DeepGrow</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -76,11 +76,11 @@
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="0" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="^2.3.0">
         <variable name="XWALK_VERSION" value="22+" />
         <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
-        <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
+        <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect --ignore-gpu-blacklist" />
         <variable name="XWALK_MODE" value="embedded" />
         <variable name="XWALK_MULTIPLEAPK" value="true" />
     </plugin>
@@ -90,8 +90,9 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.15" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.3" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.2" />
-    <engine name="ios" spec="^4.5.2" />
-    <engine name="android" spec="7.0.0" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
+    <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
+    <engine name="ios" spec="^4.5.2" />
+    <engine name="android" spec="7.0.0" />
 </widget>

@@ -36,7 +36,10 @@ export class ConferenceApp {
   ) {
     // Check if the user has already seen the tutorial
     this.rootPage = ExperienceListPage;
-    this.enableMenu(true);
+
+    this.platform.ready().then(() => {
+      this.splashScreen.hide();
+    });
   }
 
   openPage(page: PageInterface) {
@@ -60,18 +63,6 @@ export class ConferenceApp {
         console.log(`Didn't set nav root: ${err}`);
       });
     }
-  }
-
-  enableMenu(loggedIn: boolean) {
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
-
-  platformReady() {
-    // Call any initial plugins when ready
-    this.platform.ready().then(() => {
-      this.splashScreen.hide();
-    });
   }
 
   isActive(page: PageInterface) {

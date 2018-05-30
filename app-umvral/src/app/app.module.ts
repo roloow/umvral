@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SplashScreen   } from '@ionic-native/splash-screen';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { ConferenceApp } from './app.component';
 
@@ -44,7 +45,9 @@ import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     InAppBrowser,
-    SplashScreen
-  ]
+    SplashScreen,
+    ScreenOrientation
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

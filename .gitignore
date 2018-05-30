@@ -48,3 +48,7 @@ experiencia-umvral/node_modules/
 app-umvral/\.tmp/
 
 app-umvral/\.sourcemaps/
+
+app-umvral/platforms/
+
+experiencia-umvral/node_modules/
