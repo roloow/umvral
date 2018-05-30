@@ -20,6 +20,7 @@
     </script>
     <script type="text/javascript">
       // Registro de componentes
+      // RELOJ
       AFRAME.registerComponent('clock-text', {
         init: function() {
           var el = this.el;
@@ -59,7 +60,7 @@
       </a-assets>
       <!-- Inicio de Controles -->
       <a-entity id="cam" camera look-controls position="0 0 3" wasd-controls>
-        <a-entity cursor="fuse: true; fuseTimeout: 1000"
+        <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
             position="0 0 -1"
             geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
             material="color: black; shader: flat">
@@ -197,48 +198,53 @@
         <a-text value="Marte" color="#FFFFFF" position="-5 2 4.3" rotation="0 90 0"></a-text>
         <a-circle id="portal3" src='#thumMarte' radius="0.85" rotation='0 90 0' position='-5 0.5 4'></a-circle>
         <!-- /Portales -->
-        <a-sphere position="5 1 -1.7" radius="0.25" color="red">
+        <a-sphere id="obj1" position="5 1 -1.7" radius="0.25" color="red">
             <a-animation attribute="position" from="5 1 -1.7" to="5 1.5 -1.7" dur="1500" direction="alternate" repeat="indefinite"></a-animation>
         </a-sphere>
-        <a-box color="gray" depth="2" height="0.5" width="2" position="5 -0.5 -1.7"></a-box>
-        <a-button id="p1" position="4 -0.5 -2.3" rotation="0 -90 0" name="peso1"  value="0.5 kg" button-color="#08147B"></a-button>
+        <a-box id="box1" color="gray" depth="2" height="0.5" width="2" position="5 -0.5 -1.7"></a-box>
+        <a-button id="p1" position="4 -0.5 -2.3" rotation="0 -90 0" name="peso1"  value="0.5 kg"></a-button>
 
-        <a-sphere position="5 1 1.5" radius="0.6" color="red">
+        <a-sphere id="obj2" position="5 1 1.5" radius="0.6" color="blue">
           <a-animation attribute="position" from="5 1 1.5" to="5 1.5 1.5" dur="2000" direction="alternate" repeat="indefinite"></a-animation>
         </a-sphere>
-        <a-box color="gray" depth="2" height="0.5" width="2" position="5 -0.5 1.5"></a-box>
+        <a-box id="box2" color="gray" depth="2" height="0.5" width="2" position="5 -0.5 1.5"></a-box>
         <a-button id="p2" position="4 -0.5 1" rotation="0 -90 0" name="peso2"  value="10 kg"></a-button>
 
-        <a-sphere position="5 1 4.9" radius="1" color="red">
+        <a-sphere id="obj3" position="5 1 4.9" radius="1" color="blue">
           <a-animation attribute="position" from="5 1 4.9" to="5 1.5 4.9" dur="2500" direction="alternate" repeat="indefinite"></a-animation>
         </a-sphere>
-        <a-box color="gray" depth="2" height="0.5" width="2" position="5 -0.5 4.9"></a-box>
+        <a-box id="box3" color="gray" depth="2" height="0.5" width="2" position="5 -0.5 4.9"></a-box>
         <a-button id="p3" position="4 -0.5 4.3" rotation="0 -90 0" name="peso3"  value="100 kg"></a-button>
       </a-entity>
       <!-- /Escena #1 -->
       <!-- World -->
       <a-entity id="world1" >
+        <!-- botones de la regla-->
+        <a-entity id="m100"  geometry="primitive: box" material="color: #9dee96 " position="8 100 -15" rotation="45 0 0" scale ="10 3 0.5" value="100 metros" ></a-entity>
+        <a-entity id="m35"  geometry="primitive: box" material="color: #9dee96 " position="6.5 35 -15" rotation="30 0 0"  scale ="7.5 2 0.5"  value="35 metros" ></a-entity>
+        <a-entity id="m15"  geometry="primitive: box" material="color: #9dee96 " position="5.3 15 -15" rotation="15 0 0"  scale ="5 1 0.5" value="15 metros"></a-entity>
+        <a-entity id="m5"  geometry="primitive: box" material="color: #9dee96 " position="5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
 
-        <a-entity id="m100"  geometry="primitive: box" position="5 100 -15"  scale ="5 1 0.5" value="100 metros" ></a-entity>
-  			<a-entity id="m35"  geometry="primitive: box" position="5 35 -15"  scale ="5 1 0.5" value="35 metros" ></a-entity>
-  			<a-entity id="m15"  geometry="primitive: box" position="5 15 -15"  scale ="5 1 0.5" value="15 metros"></a-entity>
-  			<a-entity id="m5"  geometry="primitive: box" position="5 4 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
+        <a-text id="regla5" position="3.5 5 -14.7" scale="5 5 5" name="obj" label="15" color="black" value= "5 m"></a-text>
+        <a-text id="regla15" position="3.5 14.8 -14.7" scale="6 6 6" rotation="15 0 0"  name="obj" label="15" color="black" value= "15 m"></a-text>
+        <a-text id="regla35" position="4.5 35 -14.7" scale="7.5 7.5 7.5" rotation="30 0 0" name="obj" label="15" color="black" value= "35 m"></a-text>
+        <a-text id="regla100" position="5 99.5 -14.7" scale="11 11 11" rotation="45 0 0" name="obj" label="15" color="black" value= "100 m"></a-text>
 
-  			<a-text id="regla90" position="2 89 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
-  			<a-text id="regla80" position="2 79 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
-  			<a-text id="regla70" position="2 69 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
-  			<a-text id="regla60" position="2 59 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
-  			<a-text id="regla50" position="2 49 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
-  			<a-text id="regla40" position="2 39 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
-  			<a-text id="regla30" position="2 29 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
-  			<a-text id="regla20" position="2 19 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
-  			<a-text id="regla10" position="2 9 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+        <a-text id="regla90" position="3 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+  			<a-text id="regla80" position="3 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+  			<a-text id="regla70" position="3 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+  			<a-text id="regla60" position="3 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+  			<a-text id="regla50" position="3 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+  			<a-text id="regla40" position="3 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+  			<a-text id="regla30" position="3 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+  			<a-text id="regla20" position="3 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+  			<a-text id="regla10" position="3 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
 
         <a-entity id='ball' position="0 2 -15" material="color:red;" geometry="primitive:sphere; radius: 0.5;" dynamic-body="mass: 0.5"></a-entity>
         <a-cylinder id="regla" color="black" position="2 50 -15" scale="0.05 100 0.1" static-body></a-cylinder>
         <a-plane id="plane" static-body visible="false" height="50" width="50" rotation="-90 0 0"></a-plane>
-        <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="00:00:00"></a-text>
-        <a-entity geometry="primitive: box" material = "color : blue" position = "-10 -2 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
+        <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="0"></a-text>
+        <a-entity id="chronbox" geometry="primitive: box" material = "color :  #6c6c6c " position = "-10 -2 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
 
         <a-text value="Space Station" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
         <a-circle id="portal4" src='#spacestation' radius="0.85" rotation='0 -90 0' position='8 2 3'></a-circle>
@@ -269,7 +275,7 @@
       let place = 'space';
       let radius = 0.25
       var currentTimestamp = moment();
-      var clockrun = false;
+      var clockrun = false
       // let weight = 0.5; No usado por el momento
     </script>
 
@@ -281,7 +287,8 @@
           env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
           env.removeAttribute('environment');
           env.setAttribute('environment', {preset: 'starry', active: 'true', grid: false, playArea: 1.1, groundColor: '#858585', groundColor2: '#898585', dressing: 'stones', dressingColor: '#6f6c6c', ground: 'canyon'});
-          $('#regla').setAttribute('color', 'cyan');
+          colorRegla('cyan');
+          $('#selector').setAttribute('material','color: yellow; shader: flat');
           $('a-scene').systems.physics.driver.world.gravity.y = -1.62;
           $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
         }
@@ -291,7 +298,8 @@
           env.removeAttribute('environment');
           env.setAttribute('environment', {active: true, seed: 8, skyType: 'atmosphere', skyColor: '#2642b3', horizonColor: '#eff9b7', fog: 0.8, playArea: 1.2, ground: 'noise', groundYScale: 4.18, groundTexture: 'walkernoise', groundColor: '#17351c', groundColor2: '#2d2e1f', dressing: 'trees', dressingAmount: 80, dressingColor: '#003c00', dressingScale: 1, gridColor: '#c5a543', preset: 'forest'});
           env.setAttribute('environment', {shadow: true})
-          $('#regla').setAttribute('color', 'black');
+          colorRegla('black');
+          $('#regla100').setAttribute('visibility','');
           $('a-scene').systems.physics.driver.world.gravity.y = -9.8;
           $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
         }
@@ -302,12 +310,13 @@
           env.setAttribute('environment', {active: true, preset: 'yavapai', skyType: 'atmosphere',skyColor: '#3c0404', horizonColor: '#ffaaaa', fog: 0.8, playArea: 1.1, dressingAmount: 165});
           env.setAttribute('environment', {shadow: true});
           $('#lights').setAttribute('visible', false);
-          $('#regla').setAttribute('color', 'white');
+          colorRegla('black');
           $('a-scene').systems.physics.driver.world.gravity.y = -3.7;
           $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
         }
         if (world == 'space') {
           env.removeAttribute('environment');
+          $('#selector').setAttribute('material','color: black; shader: flat');
           env.setAttribute('environment', {active: 'false'});
           $('#lights').setAttribute('visible', true);
           stopChron();
@@ -315,6 +324,19 @@
           cleanButton(p2);
           cleanButton(p3);
         }
+      }
+
+      function colorRegla(color){
+        $('#regla').setAttribute('color', color);
+        $('#regla10').setAttribute('color', color);
+        $('#regla20').setAttribute('color', color);
+        $('#regla30').setAttribute('color', color);
+        $('#regla40').setAttribute('color', color);
+        $('#regla50').setAttribute('color', color);
+        $('#regla60').setAttribute('color', color);
+        $('#regla70').setAttribute('color', color);
+        $('#regla80').setAttribute('color', color);
+        $('#regla90').setAttribute('color', color);
       }
 
       function changeScene(sn1, sn2) {
@@ -361,53 +383,89 @@
 
       function changeColor(value) {
         if (value == 'p1') {
-          p1.setAttribute('button-color', '#08147B');
-          p2.setAttribute('button-color', '#4076fd');
-          p3.setAttribute('button-color', '#4076fd');
+          $('#obj1').setAttribute('color', 'red')
+          $('#obj2').setAttribute('color', 'blue')
+          $('#obj3').setAttribute('color', 'blue')
           weight = "0.5";
           radius = "0.25";
         }
         else if (value == 'p2') {
-          p1.setAttribute('button-color', '#4076fd');
-          p2.setAttribute('button-color', '#08147B');
-          p3.setAttribute('button-color', '#4076fd');
+          $('#obj1').setAttribute('color', 'blue')
+          $('#obj2').setAttribute('color', 'red')
+          $('#obj3').setAttribute('color', 'blue')
           weight = "10";
           radius = "0.6";
         }
         else if (value == 'p3') {
-          p1.setAttribute('button-color', '#4076fd');
-          p2.setAttribute('button-color', '#4076fd');
-          p3.setAttribute('button-color', '#08147B');
+          $('#obj1').setAttribute('color', 'blue')
+          $('#obj2').setAttribute('color', 'blue')
+          $('#obj3').setAttribute('color', 'red')
           weight = "100";
           radius = "1";
         }
       }
     </script>
     <script type="text/javascript">
-      p1.addEventListener('click', ()=> {
+      p1.addEventListener('click', function () {
         changeColor('p1');
       });
-      p2.addEventListener('click', ()=> {
+      p2.addEventListener('click', function () {
         changeColor('p2');
       });
-      p3.addEventListener('click', ()=> {
+      p3.addEventListener('click', function () {
+        changeColor('p3');
+      });
+      $('#obj1').addEventListener('click', function () {
+        changeColor('p1');
+      });
+      $('#obj2').addEventListener('click', function () {
+        changeColor('p2');
+      });
+      $('#obj3').addEventListener('click', function () {
+        changeColor('p3');
+      });
+      $('#box1').addEventListener('click', function () {
+        changeColor('p1');
+      });
+      $('#box2').addEventListener('click', function () {
+        changeColor('p2');
+      });
+      $('#box3').addEventListener('click', function () {
         changeColor('p3');
       });
       reset5.addEventListener("click", function(){
-    		setHeight(4);
+    		setHeight(5);
     	});
+
+      $('#regla5').addEventListener("click", function(){
+        setHeight(5);
+      });
+
 
     	reset15.addEventListener("click", function(){
     		setHeight(15);
     	});
 
+      $('#regla15').addEventListener("click", function(){
+        setHeight(15);
+      });
+
     	reset35.addEventListener("click", function(){
     		setHeight(35);
     	});
 
-    	reset100.addEventListener("click", function(){
-    		setHeight(99);
+      $('#regla35').addEventListener("click", function(){
+    		setHeight(35);
     	});
+
+    	reset100.addEventListener("click", function(){
+    		setHeight(100);
+    	});
+
+      $('#regla100').addEventListener("click", function(){
+    		setHeight(100);
+    	});
+
       portal1.addEventListener("click", function () {
         place = 'tierra';
         changeScene(scene1, scene2);
@@ -424,11 +482,16 @@
         place = 'space'; //Default
         changeScene(scene2, scene1);
       })
+      $('#chronbox').addEventListener("click",function(){
+        stopChron();
+      })
       cronometro.addEventListener("click",function(){
-        clockrun = false;
+        stopChron();
       })
       on(objeto, 'collide', (e) => {
         stopChron();
+
+
         // En el eventual caso que siga cayendo la pelota, aqui colocar la posición especifica
       });
     </script>
