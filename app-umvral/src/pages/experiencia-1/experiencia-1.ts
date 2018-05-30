@@ -45,6 +45,6 @@ export class Experiencia1Page {
       location: 'no',
       hardwareback: 'no',
     }
-    this.iab.create("http://vps.csaldias.cl/umvral/", "_self", options);
+    this.iab.create("http://vps.csaldias.cl/umvral/", "_blank", options);
   }
 }

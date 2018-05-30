@@ -93,7 +93,6 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
     <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
-    <allow-navigation href="http://192.168.0.18:8100" />
     <engine name="ios" spec="^4.5.2" />
     <engine name="android" spec="7.0.0" />
 </widget>
