@@ -8,8 +8,8 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class HelpVideoPage {
     video: any = {
-        url: 'https://www.youtube.com/embed/Mtf7pocKg-E',
-        title: 'Awesome video'
+        url: 'https://www.youtube.com/watch?v=HZ86lhZ2a6M',
+        title: 'Caida Libre - Julio profe'
     };
 
     trustedVideoUrl: SafeResourceUrl;
