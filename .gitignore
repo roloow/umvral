@@ -43,6 +43,8 @@ jspm_packages
 
 app-umvral/node_modules/
 
+experiencia-umvral/node_modules/
+
 app-umvral/\.tmp/
 
 app-umvral/\.sourcemaps/
