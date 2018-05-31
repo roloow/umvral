@@ -353,23 +353,25 @@
         father.appendChild(child);
       }
 
-      function startChron() {
-        cronometro.setAttribute("value","200");
+      function initChron() {
+        cronometro.setAttribute("value","00:00:00");
       }
 
       function resetChron(){
         currentTimestamp = moment();
-        clockrun = true;
       }
 
       function stopChron () {
         clockrun = false;
       }
 
+      function startChron() {
+        clockrun = true;
+      }
+
       function setHeight(height) {
         objeto.body.position.set(0, height, -15);
         objeto.body.velocity.set(0, 0, 0);
-        resetChron();
       }
 
       function cleanButton (btn) {
@@ -435,48 +437,67 @@
       });
       reset5.addEventListener("click", function(){
     		setHeight(5);
+        resetChron();
+        startChron();
     	});
 
       $('#regla5').addEventListener("click", function(){
         setHeight(5);
+        resetChron();
+        startChron();
       });
 
 
     	reset15.addEventListener("click", function(){
     		setHeight(15);
+        resetChron();
+        startChron();
     	});
 
       $('#regla15').addEventListener("click", function(){
         setHeight(15);
+        resetChron();
+        startChron();
       });
 
     	reset35.addEventListener("click", function(){
     		setHeight(35);
+        resetChron();
+        startChron();
     	});
 
       $('#regla35').addEventListener("click", function(){
     		setHeight(35);
+        resetChron();
+        startChron();
     	});
 
     	reset100.addEventListener("click", function(){
     		setHeight(100);
+        resetChron();
+        startChron();
     	});
 
       $('#regla100').addEventListener("click", function(){
     		setHeight(100);
+        resetChron();
+        startChron();
     	});
 
       portal1.addEventListener("click", function () {
         place = 'tierra';
         changeScene(scene1, scene2);
+        initChron();
       });
       portal2.addEventListener("click", function () {
         place = 'luna';
         changeScene(scene1, scene2);
+        initChron();
       });
       portal3.addEventListener("click", function () {
         place = 'marte';
         changeScene(scene1, scene2);
+        initChron();
       });
       portal4.addEventListener("click", function () {
         place = 'space'; //Default
