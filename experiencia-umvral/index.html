@@ -6,10 +6,9 @@
     <meta name="description" content="Experiencia VR de caida libre">
     <script src="assets/javascripts/aframe.min.js"></script>
     <script src="assets/javascripts/aframe-mouse-cursor-component.min.js"></script>
-    <script src="assets/javascripts/gradientsky.min.js"></script>
+		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
     <script src="assets/javascripts/aframe-material.min.js"></script>
     <script src="assets/javascripts/aframe-extras.min.js"></script>
-		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
 
@@ -46,7 +45,6 @@
   </head>
   <body>
     <!-- Inicio Marco -->
-    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local;">
     <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; iterations: 100;">
       <a-assets>
         <a-asset-item id="engine" src="assets/models/engine.dae"></a-asset-item>
