@@ -241,7 +241,7 @@
 
         <a-entity id='ball' position="0 2 -15" material="color:red;" geometry="primitive:sphere; radius: 0.5;" dynamic-body="mass: 0.5"></a-entity>
         <a-cylinder id="regla" color="black" position="2 50 -15" scale="0.05 100 0.1" static-body></a-cylinder>
-        <a-plane id="plane" static-body visible="false" height="50" width="50" rotation="-90 0 0"></a-plane>
+        <a-box id="plane" visible="false" static-body color="blue" height="50" width="50" depth="50" position="0 -25 0"></a-box>
         <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="0"></a-text>
         <a-entity id="chronbox" geometry="primitive: box" material = "color :  #6c6c6c " position = "-10 -2 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
 
@@ -505,9 +505,11 @@
       })
       $('#chronbox').addEventListener("click",function(){
         stopChron();
+        initChron();
       })
       cronometro.addEventListener("click",function(){
         stopChron();
+        initChron();
       })
       on(objeto, 'collide', (e) => {
         stopChron();
