@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api',
+    'web',
 ]
 
 MIDDLEWARE = [
@@ -99,10 +101,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'storage')
+MEDIA_URL = '/storage/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
-
+LOGIN_URL = '/signin'
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
