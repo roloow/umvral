@@ -28,3 +28,8 @@ def login_method(request):
             return render(request, 'web/home.html', context)
         context['error'] = True
         return render(request, 'web/login.html', context)
+
+@login_required
+def home(request):
+    context = get_base_context(request)
+    return render(request, 'web/home.html', context)
