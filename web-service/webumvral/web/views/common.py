@@ -10,7 +10,6 @@ def get_base_context(request, *args, **kwargs):
     }
     return base_context
 
-
 def logout_method(request):
     logout(request)
     return redirect('web:home')
@@ -28,6 +27,10 @@ def login_method(request):
             return render(request, 'web/home.html', context)
         context['error'] = True
         return render(request, 'web/login.html', context)
+
+def register(request):
+    context = get_base_context(request)
+    return render(request, 'web/login.html', context)
 
 @login_required
 def home(request):

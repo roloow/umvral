@@ -4,7 +4,7 @@ Login page
 ***/
 /* logo page */
 .login {
-  background-color: #666 !important; }
+  background-color: #150E0C !important; }
 
 .login .logo {
   margin: 60px auto 20px auto;
@@ -12,7 +12,7 @@ Login page
   text-align: center; }
 
 .login .content {
-  background: url(../img/bg-white-lock.png) repeat;
+  background: url(../img/bg-opacity.png) repeat;
   width: 360px;
   margin: 0 auto;
   margin-bottom: 0px;
@@ -26,10 +26,10 @@ Login page
   border-radius: 7px; }
 
 .login .content h3 {
-  color: #eee; }
+  color: #150E0C; }
 
 .login .content h4 {
-  color: #eee; }
+  color: #150E0C; }
 
 .login .content p,
 .login .content label {
