@@ -1,114 +1,528 @@
 <!DOCTYPE html>
 <html>
   <head>
-		 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-		 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+    <meta charset="utf-8">
     <title>umVRal - Caida Libre</title>
-    <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
-		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+    <meta name="description" content="Experiencia VR de caida libre">
+    <script src="assets/javascripts/aframe.min.js"></script>
+    <script src="assets/javascripts/aframe-mouse-cursor-component.min.js"></script>
+		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
+    <script src="assets/javascripts/aframe-material.min.js"></script>
+    <script src="assets/javascripts/aframe-extras.min.js"></script>
+    <script src="assets/javascripts/moment-with-locales.js"></script>
+    <script src="assets/javascripts/aframe-environment-component.min.js"></script>
+
+    <script type="text/javascript">
+      $ = (sel) => document.querySelector(sel)
+      $$ = (sel) => document.querySelectorAll(sel)
+      on = (elem, type, hand) => elem.addEventListener(type,hand)
+    </script>
+    <script type="text/javascript">
+      // Registro de componentes
+      // RELOJ
+      AFRAME.registerComponent('clock-text', {
+        init: function() {
+          var el = this.el;
+          this.ready = false;
+            el.addEventListener('textfontset', function() {
+            this.ready = true;
+          }.bind(this));
+        },
+        tick: function() {
+          var el = this.el;
+          if (!this.ready) {
+            return;
+          }
+          if(clockrun){
+            var timer = moment.duration(moment().diff(currentTimestamp));
+            el.setAttribute('value', timer.asSeconds());
+          }
+        }
+      });
+    </script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
   </head>
   <body>
+    <!-- Inicio Marco -->
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; iterations: 100;">
+      <a-assets>
+        <a-asset-item id="engine" src="assets/models/engine.dae"></a-asset-item>
+        <a-asset-item id="ground" src="assets/models/floor.dae"></a-asset-item>
+        <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+        <img id="thumMarte" src="assets/images/thum_marte.jpg">
+        <img id="thumTierra" src="assets/images/thum_tierra.jpg">
+        <img id="thumLuna" src="assets/images/thum_luna.jpg">
+        <img id="glow1" src="assets/images/glow1.png">
+        <img id="spacestation" src="assets/images/spacestation.jpg">
+      </a-assets>
+      <!-- Inicio de Controles -->
+      <a-entity id="camWrapper" position="0 0 4">
+        <a-entity id="cam" camera look-controls wasd-controls>
+          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="color: black; shader: flat">
+              <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+              <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+        </a-entity>
+      </a-entity>
+      <!-- Fin de Controles -->
+      <!-- Lights. -->
+      <a-entity id="lights">
+      <a-light id="lightFront" type="point" color="#94c6ff" distance="15" position="0 0 -12">
+        <a-animation attribute="intensity" from="0" to="2" delay="750" dur="500" fill="both"></a-animation>
+      </a-light>
+      <a-light id="lightBack" type="point" color="#94c6ff" distance="17" position="0 0 -6">
+        <a-animation attribute="intensity" from="0" to="1" delay="500" dur="500" fill="both"></a-animation>
+      </a-light>
+      <a-light id="ambient" type="ambient" color="#FFFFFF" ></a-light>
+      </a-entity>
+      <!-- /Lights -->
+      <!-- Environment -->
+      <a-entity id="env" environment="active: false; preset: default"></a-entity>
+      <!-- /Environment -->
+      <!-- Escena #1 -->
+      <a-entity id="scene1" visible="true">
+        <!-- Engine -->
+        <a-entity position="0 0 -3">
+          <a-collada-model src="#engine" rotation="90 0 0" scale="18 18 18"></a-collada-model>
+        </a-entity>
 
-<a-scene fog="type: linear; color: #FFEBDE; far:195" >
-        <a-assets>
-            <a-asset-item id="ground" src="https://cdn.rawgit.com/7ammer/testfiles/master/aframe-ground-physics/floor.dae"></a-asset-item>
-        </a-assets>
+        <a-entity id="wall-lights" position="-7.25 1.5 2.9" rotation="0 90 0" scale="1.25 1.25 1.25">
+          <a-entity position="0 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="350" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-				<a-entity id="rig" movement-controls >
-					<a-entity camera position="0 2 0"
-						look-controls="pointerLockEnabled: true">
-						<a-entity cursor
-											position="0 0 -1"
-											geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02;"
-											material="color: #CCC; shader: flat;"></a-entity>
-					</a-entity>
-				</a-entity>
+          <a-entity position="1 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="400" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-				<a-entity>
-					<a-cylinder id="cyl" color="#ddb424"
-						 position="-5 10 -15"
-						 dynamic-body></a-cylinder>
+          <a-entity position="2 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="450" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-					<a-box id="box" color="red"
-							dynamic-body
-							position="0 10 -15"
-							height="3"></a-box>
+          <a-entity position="3 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="500" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-					<a-sphere id="esfera" color="#ddb424"
-						 position="5 5 -15"
-						 dynamic-body></a-sphere>
+          <a-entity position="4 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="550" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-					<a-box id="resetbox5" color="green"
-							position="-5 0 -10"
-							height="2">
-					</a-box>
-					<a-box id="resetbox10" color="green"
-							position="0 0 -10"
-							height="2">
-					</a-box>
-					<a-box id="resetbox15" color="green"
-							position="5 0 -10"
-							height="2">
-					</a-box>
+          <a-entity position="5 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="600" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-					</a-entity>
+          <a-entity position="6 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="650" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
 
-        <a-entity static-body collada-model="#ground"></a-entity>
+          <a-entity position="7 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="700" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="8 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="750" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="9 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="800" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="10 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="850" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="11 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="900" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="12 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="950" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+
+          <a-entity position="13 0 0" scale="0.05 0.05 0.05">
+            <a-plane width="1" height="4" shader="flat" color="#B4E2F8">
+              <a-animation attribute="visible" from="false" to="true" delay="1000" dur="1" fill="both"></a-animation>
+            </a-plane>
+            <a-plane width="6" height="4" color="#586266" opacity="0.6" position="0 0 -.01"></a-plane>
+          </a-entity>
+        </a-entity>
+        <!-- /Engine -->
+        <!-- Portales -->
+        <a-text value="Tierra" color="#FFFFFF" position="-5 2 -3.5" rotation="0 90 0"></a-text>
+        <a-circle id="portal1" src='#thumTierra' radius="0.85" rotation='0 90 0' position='-5 0.5 -4'></a-circle>
+        <a-text value="Luna" color="#FFFFFF" position="-5 2 0.25" rotation="0 90 0"></a-text>
+        <a-circle id="portal2" src='#thumLuna' radius="0.85" rotation='0 90 0' position='-5 0.5 0'></a-circle>
+        <a-text value="Marte" color="#FFFFFF" position="-5 2 4.3" rotation="0 90 0"></a-text>
+        <a-circle id="portal3" src='#thumMarte' radius="0.85" rotation='0 90 0' position='-5 0.5 4'></a-circle>
+        <!-- /Portales -->
+        <a-sphere id="obj1" position="5 1 -1.7" radius="0.25" color="red">
+            <a-animation attribute="position" from="5 1 -1.7" to="5 1.5 -1.7" dur="1500" direction="alternate" repeat="indefinite"></a-animation>
+        </a-sphere>
+        <a-box id="box1" color="gray" depth="2" height="0.5" width="2" position="5 -0.3 -1.7"></a-box>
+        <a-button id="p1" position="4 -0.3 -2.3" rotation="0 -90 0" name="peso1"  value="0.5 kg"></a-button>
+
+        <a-sphere id="obj2" position="5 1 1.5" radius="0.6" color="blue">
+          <a-animation attribute="position" from="5 1 1.5" to="5 1.5 1.5" dur="2000" direction="alternate" repeat="indefinite"></a-animation>
+        </a-sphere>
+        <a-box id="box2" color="gray" depth="2" height="0.5" width="2" position="5 -0.3 1.5"></a-box>
+        <a-button id="p2" position="4 -0.3 1" rotation="0 -90 0" name="peso2"  value="10 kg"></a-button>
+
+        <a-sphere id="obj3" position="5 1 4.9" radius="1" color="blue">
+          <a-animation attribute="position" from="5 1 4.9" to="5 1.5 4.9" dur="2500" direction="alternate" repeat="indefinite"></a-animation>
+        </a-sphere>
+        <a-box id="box3" color="gray" depth="2" height="0.5" width="2" position="5 -0.3 4.9"></a-box>
+        <a-button id="p3" position="4 -0.3 4.3" rotation="0 -90 0" name="peso3"  value="100 kg"></a-button>
+      </a-entity>
+      <!-- /Escena #1 -->
+      <!-- World -->
+      <a-entity id="world1" >
+        <!-- botones de la regla-->
+        <a-entity id="m100"  geometry="primitive: box" material="color: #9dee96 " position="8 100 -15" rotation="45 0 0" scale ="10 3 0.5" value="100 metros" ></a-entity>
+        <a-entity id="m35"  geometry="primitive: box" material="color: #9dee96 " position="6.5 35 -15" rotation="30 0 0"  scale ="7.5 2 0.5"  value="35 metros" ></a-entity>
+        <a-entity id="m15"  geometry="primitive: box" material="color: #9dee96 " position="5.3 15 -15" rotation="15 0 0"  scale ="5 1 0.5" value="15 metros"></a-entity>
+        <a-entity id="m5"  geometry="primitive: box" material="color: #9dee96 " position="5 5 -15"  scale ="5 1 0.5" value="5 metros"></a-entity>
+
+        <a-text id="regla5" position="3.5 5 -14.7" scale="5 5 5" name="obj" label="15" color="black" value= "5 m"></a-text>
+        <a-text id="regla15" position="3.5 14.8 -14.7" scale="6 6 6" rotation="15 0 0"  name="obj" label="15" color="black" value= "15 m"></a-text>
+        <a-text id="regla35" position="4.5 35 -14.7" scale="7.5 7.5 7.5" rotation="30 0 0" name="obj" label="15" color="black" value= "35 m"></a-text>
+        <a-text id="regla100" position="5 99.5 -14.7" scale="11 11 11" rotation="45 0 0" name="obj" label="15" color="black" value= "100 m"></a-text>
+
+        <a-text id="regla90" position="3 90 -15" scale="5 5 5" name="obj" label="15" color="black" value= "90 m"></a-text>
+  			<a-text id="regla80" position="3 80 -15" scale="5 5 5" name="obj" label="15" color="black" value= "80 m"></a-text>
+  			<a-text id="regla70" position="3 70 -15" scale="5 5 5" name="obj" label="15" color="black" value= "70 m"></a-text>
+  			<a-text id="regla60" position="3 60 -15" scale="5 5 5" name="obj" label="15" color="black" value= "60 m"></a-text>
+  			<a-text id="regla50" position="3 50 -15" scale="5 5 5" name="obj" label="15" color="black" value= "50 m"></a-text>
+  			<a-text id="regla40" position="3 40 -15" scale="5 5 5" name="obj" label="15" color="black" value= "40 m"></a-text>
+  			<a-text id="regla30" position="3 30 -15" scale="5 5 5" name="obj" label="15" color="black" value= "30 m"></a-text>
+  			<a-text id="regla20" position="3 20 -15" scale="5 5 5" name="obj" label="15" color="black" value= "20 m"></a-text>
+  			<a-text id="regla10" position="3 10 -15" scale="5 5 5" name="obj" label="15" color="black" value= "10 m"></a-text>
+
+        <a-entity id='ball' position="0 2 -15" material="color:red;" geometry="primitive:sphere; radius: 0.5;" dynamic-body="mass: 0.5"></a-entity>
+        <a-cylinder id="regla" color="black" position="2 50 -15" scale="0.05 100 0.1" static-body></a-cylinder>
+        <a-box id="plane" visible="false" static-body color="blue" height="50" width="50" depth="50" position="0 -25 0"></a-box>
+        <a-text position="-14 2.2 -13" scale="4 4 4" rotation ="-45 40 0" color ="black" value="Tiempo de caida (s): "></a-text>
+        <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="0"></a-text>
+        <a-entity id="chronbox" geometry="primitive: box" material = "color :  #6c6c6c " position = "-10 -1 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
+
+        <a-text value="Space Station" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
+        <a-circle id="portal4" src='#spacestation' radius="0.85" rotation='0 -90 0' position='8 2 3'></a-circle>
+      </a-entity>
+      <!-- /World -->
     </a-scene>
+    <!-- Fin Marco -->
+
+    <script type="text/javascript">
+      // VARIABLES
+      let p1 = $('#p1');
+      let p2 = $('#p2');
+      let p3 = $('#p3');
+      let	reset5 	= $('#m5');
+    	let	reset15 =$('#m15');
+    	let	reset35 = $('#m35');
+    	let	reset100 = $('#m100');
+    	let	objeto	 = $('#ball');
+      let cronometro = $('#chron');
+      let scene2 = $('#world1');
+      let scene1 = $('#scene1');
+      let portal1 = $('#portal1');
+      let portal2 = $('#portal2');
+      let portal3 = $('#portal3');
+      let portal4 = $('#portal4');
+      let env = $('#env')
+      //DEFAULT
+      let place = 'space';
+      let radius = 0.25
+      var currentTimestamp = moment();
+      var clockrun = false
+      // let weight = 0.5; No usado por el momento
+    </script>
+
+    <script type="text/javascript">
+      // FUNCIONES
+      function setScene(world) {
+        if (world == 'luna') {
+          env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
+          env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {preset: 'starry', active: 'true', grid: false, playArea: 1.1, groundColor: '#858585', groundColor2: '#898585', dressing: 'stones', dressingColor: '#6f6c6c', ground: 'canyon'});
+          colorRegla('cyan');
+          $('#selector').setAttribute('material','color: yellow; shader: flat');
+          $('a-scene').systems.physics.driver.world.gravity.y = -1.62;
+          $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+        }
+        if (world == 'tierra') {
+          env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
+          env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {active: true, seed: 8, skyType: 'atmosphere', skyColor: '#2642b3', horizonColor: '#eff9b7', fog: 0.8, playArea: 1.2, ground: 'noise', groundYScale: 4.18, groundTexture: 'walkernoise', groundColor: '#17351c', groundColor2: '#2d2e1f', dressing: 'trees', dressingAmount: 80, dressingColor: '#003c00', dressingScale: 1, gridColor: '#c5a543', preset: 'forest'});
+          env.setAttribute('environment', {shadow: true})
+          colorRegla('black');
+          $('#regla100').setAttribute('visibility','');
+          $('a-scene').systems.physics.driver.world.gravity.y = -9.8;
+          $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+        }
+        if (world == 'marte') {
+          env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
+          env.querySelectorAll("a-sky").forEach(e => e.parentNode.removeChild(e));
+          env.removeAttribute('environment');
+          env.setAttribute('environment', {active: true, preset: 'yavapai', skyType: 'atmosphere',skyColor: '#3c0404', horizonColor: '#ffaaaa', fog: 0.8, playArea: 1.1, dressingAmount: 165});
+          env.setAttribute('environment', {shadow: true});
+          $('#lights').setAttribute('visible', false);
+          colorRegla('black');
+          $('a-scene').systems.physics.driver.world.gravity.y = -3.7;
+          $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+        }
+        if (world == 'space') {
+          env.removeAttribute('environment');
+          $('#selector').setAttribute('material','color: black; shader: flat');
+          env.setAttribute('environment', {active: 'false'});
+          $('#lights').setAttribute('visible', true);
+          stopChron();
+          cleanButton(p1);
+          cleanButton(p2);
+          cleanButton(p3);
+        }
+      }
+
+      function colorRegla(color){
+        $('#regla').setAttribute('color', color);
+        $('#regla10').setAttribute('color', color);
+        $('#regla20').setAttribute('color', color);
+        $('#regla30').setAttribute('color', color);
+        $('#regla40').setAttribute('color', color);
+        $('#regla50').setAttribute('color', color);
+        $('#regla60').setAttribute('color', color);
+        $('#regla70').setAttribute('color', color);
+        $('#regla80').setAttribute('color', color);
+        $('#regla90').setAttribute('color', color);
+      }
+
+      function changeScene(sn1, sn2) {
+        var father = sn1.parentNode;
+        removeScene(father,sn1);
+        createScene(father,sn2);
+        setScene(place)
+      }
+
+      function removeScene(father, child) {
+        father.removeChild(child);
+      }
+
+      function createScene(father, child) {
+        father.appendChild(child);
+      }
+
+      function initChron() {
+        cronometro.setAttribute("value","00:00:00");
+      }
+
+      function resetChron(){
+        currentTimestamp = moment();
+      }
+
+      function stopChron () {
+        clockrun = false;
+      }
+
+      function startChron() {
+        clockrun = true;
+      }
+
+      function setHeight(height) {
+        objeto.body.position.set(0, height, -15);
+        objeto.body.velocity.set(0, 0, 0);
+      }
+
+      function cleanButton (btn) {
+        var temp = btn.querySelectorAll("a-entity");
+        if (temp.length != 1){
+          temp[0].parentNode.removeChild(temp[0]);
+          temp[1].parentNode.removeChild(temp[1]);
+        }
+        btn.querySelectorAll("a-sound").forEach(e => e.parentNode.removeChild(e));
+      }
+
+      function changeColor(value) {
+        if (value == 'p1') {
+          $('#obj1').setAttribute('color', 'red')
+          $('#obj2').setAttribute('color', 'blue')
+          $('#obj3').setAttribute('color', 'blue')
+          weight = "0.5";
+          radius = "0.25";
+        }
+        else if (value == 'p2') {
+          $('#obj1').setAttribute('color', 'blue')
+          $('#obj2').setAttribute('color', 'red')
+          $('#obj3').setAttribute('color', 'blue')
+          weight = "10";
+          radius = "0.6";
+        }
+        else if (value == 'p3') {
+          $('#obj1').setAttribute('color', 'blue')
+          $('#obj2').setAttribute('color', 'blue')
+          $('#obj3').setAttribute('color', 'red')
+          weight = "100";
+          radius = "1";
+        }
+      }
+    </script>
+    <script type="text/javascript">
+      p1.addEventListener('click', function () {
+        changeColor('p1');
+      });
+      p2.addEventListener('click', function () {
+        changeColor('p2');
+      });
+      p3.addEventListener('click', function () {
+        changeColor('p3');
+      });
+      $('#obj1').addEventListener('click', function () {
+        changeColor('p1');
+      });
+      $('#obj2').addEventListener('click', function () {
+        changeColor('p2');
+      });
+      $('#obj3').addEventListener('click', function () {
+        changeColor('p3');
+      });
+      $('#box1').addEventListener('click', function () {
+        changeColor('p1');
+      });
+      $('#box2').addEventListener('click', function () {
+        changeColor('p2');
+      });
+      $('#box3').addEventListener('click', function () {
+        changeColor('p3');
+      });
+      reset5.addEventListener("click", function(){
+    		setHeight(5);
+        resetChron();
+        startChron();
+    	});
+
+      $('#regla5').addEventListener("click", function(){
+        setHeight(5);
+        resetChron();
+        startChron();
+      });
+
+
+    	reset15.addEventListener("click", function(){
+    		setHeight(15);
+        resetChron();
+        startChron();
+    	});
+
+      $('#regla15').addEventListener("click", function(){
+        setHeight(15);
+        resetChron();
+        startChron();
+      });
+
+    	reset35.addEventListener("click", function(){
+    		setHeight(35);
+        resetChron();
+        startChron();
+    	});
+
+      $('#regla35').addEventListener("click", function(){
+    		setHeight(35);
+        resetChron();
+        startChron();
+    	});
+
+    	reset100.addEventListener("click", function(){
+    		setHeight(100);
+        resetChron();
+        startChron();
+    	});
+
+      $('#regla100').addEventListener("click", function(){
+    		setHeight(100);
+        resetChron();
+        startChron();
+    	});
+
+      portal1.addEventListener("click", function () {
+        place = 'tierra';
+        changeScene(scene1, scene2);
+        initChron();
+      });
+      portal2.addEventListener("click", function () {
+        place = 'luna';
+        changeScene(scene1, scene2);
+        initChron();
+      });
+      portal3.addEventListener("click", function () {
+        place = 'marte';
+        changeScene(scene1, scene2);
+        initChron();
+      });
+      portal4.addEventListener("click", function () {
+        place = 'space'; //Default
+        changeScene(scene2, scene1);
+      })
+      $('#chronbox').addEventListener("click",function(){
+        stopChron();
+        initChron();
+      })
+      cronometro.addEventListener("click",function(){
+        stopChron();
+        initChron();
+      })
+      on(objeto, 'collide', (e) => {
+        stopChron();
+
+
+        // En el eventual caso que siga cayendo la pelota, aqui colocar la posición especifica
+      });
+    </script>
+    <script type="text/javascript">
+      removeScene(scene2.parentNode, scene2);
+    </script>
   </body>
 </html>
-<script>
-
-	var	reset5 	= document.querySelector('#resetbox5');
-	var	reset10 = document.querySelector('#resetbox10');
-	var	reset15 = document.querySelector('#resetbox15');
-	var	cyl 		= document.querySelector('#cyl');
-	var	box 		= document.querySelector('#box');
-	var	esfera 	= document.querySelector('#esfera') ;
-
-	reset5.addEventListener("click", function(){
-		setHeight(5);
-	});
-
-	reset10.addEventListener("click", function(){
-		setHeight(10);
-	});
-
-	reset15.addEventListener("click", function(){
-		setHeight(15);
-	});
-
-	function setHeight(height) {
-		dettachDin();
-		esfera.object3D.position.set(5, height, -15);
-		box.object3D.position.set(0, height, -15);
-		cyl.object3D.position.set(-5, height, -15);
-		attachDin();
-	}
-
-	function dettachDin() {
-		esfera.removeAttribute("dynamic-body");
-		box.removeAttribute("dynamic-body");
-		cyl.removeAttribute("dynamic-body");
-	}
-	function attachDin() {
-		esfera.setAttribute("dynamic-body", "");
-		box.setAttribute("dynamic-body", "");
-		cyl.setAttribute("dynamic-body", "");
-	}
-
-
-
-</script>
-
-
-
-    <!--a-scene vr-mode-ui="enabled: true">
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-    </a-scene-->
