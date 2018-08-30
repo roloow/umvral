@@ -64,6 +64,7 @@ experiencia-umvral/node_modules/
 [Ll]ib64
 [Ll]ocal
 /[Ss]cripts
+/[Ee]nv
 pyvenv.cfg
 .venv
 pip-selfcheck.json

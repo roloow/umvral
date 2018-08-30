@@ -10,7 +10,7 @@ Es imperativo la instalación de *Python* que en nuestro caso utilizaremos [Pyth
 
 Aconsejamos la utilización de dos herramientas *virtualenv* y *pip*, dado que se instalarán algunos paquetes de python se aconseja la utilización de un ambiente virtual para no instalar globalmente paquetes posiblemente basura, y pip (gestor de paquetes) permitirá la instalación más sencilla de estos mismos.
 
-Lo primero será crear y activar el ambiente de desarrollo en la carpeta donde se encuentre nuestro proyecto
+Lo primero será crear y activar el ambiente de desarrollo en la carpeta donde se encuentre nuestro proyecto (*WINDOWS*)
 
 ```
 :> cd CarpetaDestino

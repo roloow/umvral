@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class ClientModel(models.Model):
     isProfessor = models.BooleanField(default=False, help_text='Indica si el usuario es profesor.')
-    auth_user = models.OneToOneField(User, related_name='profile')
+    auth_user = models.OneToOneField(User, on_delete=models.CASCADE ,related_name='profile')
 
     @property
     def full_name(self):
