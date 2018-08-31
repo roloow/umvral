@@ -18,10 +18,17 @@ from django.conf.urls import url
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url, include
+from tastypie.api import Api
+from api.resources import ExperienceResource
+
+experience = ExperienceResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('/', include(administration.urls)) TO BE CREATED
     #path('api/', include('api.urls')),
     path('web/', include('web.urls')),
+    url(r'^api/', include(experience.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
