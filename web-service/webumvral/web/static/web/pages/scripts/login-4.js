@@ -253,7 +253,17 @@ var Login = function () {
             handleForgetPassword();
             handleRegister();
 
-      
+						// init background slide images
+				$.backstretch([
+						"static/web/pages/media/bg/1.jpg",
+						"static/web/pages/media/bg/2.jpg",
+						"static/web/pages/media/bg/3.jpg",
+						"static/web/pages/media/bg/4.jpg"
+						], {
+							fade: 1000,
+							duration: 8000
+					}
+					);
         }
     };
 

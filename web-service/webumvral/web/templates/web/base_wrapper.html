@@ -42,7 +42,7 @@
                 <div class="page-header-inner ">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
-                        <a href="{% url 'buscador:home' %}" class="center">
+                        <a href="{% url 'web:home' %}" class="center">
                             </a>
                         <div class="menu-toggler sidebar-toggler">
                             <span></span>
@@ -136,7 +136,7 @@
                                 <ul class="sub-menu">
                                   {% if request.user.profile %}
                                   <li class="nav-item">
-                                      <a href="{% url 'buscador:profile' request.user.profile.pk %}" class="nav-link">
+                                      <a href="" class="nav-link">
                                           <i class="icon-users"></i>
                                           <span class="title">Mi Perfil</span>
                                       </a>
