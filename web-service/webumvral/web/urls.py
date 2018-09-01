@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 app_name="web"
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('login/', views.login_method, name='login'),
-    path('logout/', views.logout_method, name='logout'),
-    path('register/', views.register, name='register'),
+    re_path(r'home/$', views.home, name='home'),
+    re_path(r'logout/$', views.logout_method, name='logout'),
+    re_path(r'login/$', views.login_method, name='login'),
+    re_path(r'register/$', views.register, name='register'),
 ]

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from web.models import ClientModel
 import urllib
 
 def get_base_context(request, *args, **kwargs):
@@ -18,7 +19,7 @@ def login_method(request):
     context = get_base_context(request)
     if (request.method == 'GET'):
         if (request.user.is_authenticated):
-            return render(request, 'web/home.html', context)
+            return redirect('web:home')
         return render(request, 'web/login.html', context)
     if (request.method == 'POST'):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
@@ -30,7 +31,25 @@ def login_method(request):
 
 def register(request):
     context = get_base_context(request)
-    return render(request, 'web/login.html', context)
+    if (request.method == 'GET'):
+        if (request.user.is_authenticated):
+            return redirect('web:home')
+        return redirect('web:login')
+    if (request.method == 'POST'):
+        if User.objects.filter(email=request.POST['email']):
+            context['error_registro'] = True
+            return render(request, 'web/login.html', context)
+        user = User.objects.create_user(request.POST['email'],request.POST['email'],request.POST['password'])
+        user.first_name = request.POST['firstname']
+        user.last_name = request.POST['lastname']
+        user.save()
+        client = ClientModel()
+        client.auth_user = user
+        client.isProfessor = True
+        client.save()
+        login(request, user)
+        return redirect('web:home')
+    return redirect('web:login')
 
 @login_required
 def home(request):
