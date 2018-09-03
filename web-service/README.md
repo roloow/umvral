@@ -23,7 +23,7 @@ Lo primero será crear y activar el ambiente de desarrollo en la carpeta donde s
 Una vez aparesca el **(CARPET)** significará que se ha activado correctamente. Es tiempo de instalar los paquetes de python
 
 ```
-(CARPET) :CarpetaDestino> pip install -r requirements.txt
+(CARPET) :CarpetaDestino> pip3 install -r requirements.txt
 ```
 Habiendo realizado esto podemos proceder a los ajustes iniciales de la aplicación. Para esto deberemos utilizar comandos* del sistema. (*Los comandos se encuentran más detallados en la sección Comandos*)
 
