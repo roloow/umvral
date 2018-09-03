@@ -51,7 +51,26 @@ def register(request):
         return redirect('web:home')
     return redirect('web:login')
 
+def page404(request):
+    context = get_base_context(request)
+    return render(request, 'web/404.html', context)
+
 @login_required
 def home(request):
     context = get_base_context(request)
     return render(request, 'web/home.html', context)
+
+@login_required
+def profile(request, client_id):
+    context = get_base_context(request)
+    context['my_profile'] = False
+    if request.user.profile.pk == int(client_id):
+        context['my_profile'] = True
+        client = request.user.profile
+    else:
+        try:
+            client = ClientModel.objects.get(pk=client_id)
+        except:
+            return redirect('web:404')
+    context['client'] = client
+    return render(request, 'web/profile.html', context)
