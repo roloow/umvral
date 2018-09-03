@@ -4,6 +4,7 @@ import { MenuController, Nav, Platform } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { ExperienceListPage } from '../pages/experience-list/experience-list';
+import { PerfilPage } from "../pages/perfil/perfil";
 
 export interface PageInterface {
   title: string;
@@ -63,6 +64,10 @@ export class ConferenceApp {
         console.log(`Didn't set nav root: ${err}`);
       });
     }
+  }
+
+  openPerfilPage() {
+    this.nav.push(PerfilPage);
   }
 
   isActive(page: PageInterface) {
