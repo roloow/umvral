@@ -17,6 +17,8 @@ import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { HelpVideoPage } from '../pages/experiencia-1/video/video';
 import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { NotasPage } from '../pages/notas/notas';
+import { CursosPage } from '../pages/cursos/cursos';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { PerfilPage } from '../pages/perfil/perfil';
     Experiencia3Page,
     HelpVideoPage,
     ExpPage,
-    PerfilPage
+    PerfilPage,
+    NotasPage,
+    CursosPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,9 @@ import { PerfilPage } from '../pages/perfil/perfil';
     Experiencia3Page,
     HelpVideoPage,
     ExpPage,
-    PerfilPage
+    PerfilPage,
+    NotasPage,
+    CursosPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

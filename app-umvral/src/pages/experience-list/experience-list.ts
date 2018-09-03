@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { Experiencia1Page } from '../experiencia-1/experiencia-1';
 import { Experiencia2Page } from '../experiencia-2/experiencia-2';
 import { Experiencia3Page } from '../experiencia-3/experiencia-3';
-import { PerfilPage } from '../perfil/perfil';
 
 @Component({
   selector: 'page-experience-list',

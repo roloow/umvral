@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { ExperienceListPage } from '../pages/experience-list/experience-list';
 import { PerfilPage } from "../pages/perfil/perfil";
+import { NotasPage } from '../pages/notas/notas';
+import { CursosPage } from '../pages/cursos/cursos';
 
 export interface PageInterface {
   title: string;
@@ -68,6 +70,12 @@ export class ConferenceApp {
 
   openPerfilPage() {
     this.nav.push(PerfilPage);
+  }
+  openNotasPage() {
+    this.nav.push(NotasPage);
+  }
+  openCursosPage() {
+    this.nav.push(CursosPage);
   }
 
   isActive(page: PageInterface) {
