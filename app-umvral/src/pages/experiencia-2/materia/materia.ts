@@ -3,12 +3,12 @@ import { NavController } from 'ionic-angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-    selector: 'page-video',
-    templateUrl: 'video.html'
+    selector: 'page-materia',
+    templateUrl: 'materia.html'
 })
 
 
-export class HelpVideo1Page {
+export class HelpMateria2Page {
     video: any = {
         url: 'https://www.youtube.com/embed/HZ86lhZ2a6M',
         title: 'Caida Libre - Julio profe'

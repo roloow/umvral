@@ -14,9 +14,9 @@ import { ExperienceListPage } from '../pages/experience-list/experience-list';
 import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
 import { Experiencia2Page } from '../pages/experiencia-2/experiencia-2';
 import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
-import { HelpVideo1Page } from '../pages/experiencia-1/video/video';
-import { HelpVideo2Page } from '../pages/experiencia-2/video/video';
-import { HelpVideo3Page } from '../pages/experiencia-3/video/video';
+import { HelpMateria1Page } from '../pages/experiencia-1/materia/materia';
+import { HelpMateria2Page } from '../pages/experiencia-2/materia/materia';
+import { HelpMateria3Page } from '../pages/experiencia-3/materia/materia';
 import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 
 @NgModule({
@@ -26,9 +26,9 @@ import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
     Experiencia1Page,
     Experiencia2Page,
     Experiencia3Page,
-    HelpVideo1Page,
-    HelpVideo2Page,
-    HelpVideo3Page,
+    HelpMateria1Page,
+    HelpMateria2Page,
+    HelpMateria3Page,
     ExpPage
   ],
   imports: [
@@ -43,9 +43,9 @@ import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
     Experiencia1Page,
     Experiencia2Page,
     Experiencia3Page,
-    HelpVideo1Page,
-    HelpVideo2Page,
-    HelpVideo3Page,
+    HelpMateria1Page,
+    HelpMateria2Page,
+    HelpMateria3Page,
     ExpPage
   ],
   providers: [
