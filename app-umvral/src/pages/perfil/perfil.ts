@@ -5,14 +5,20 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
   selector: 'page-perfil',
   templateUrl: 'perfil.html',
 })
+
 export class PerfilPage {
   username: string;
   nombre: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController
+  ) {
     this.username = "alumno";
     this.nombre = "Alumno umVRal";
     this.navCtrl = navCtrl;
+    console.log('constructor PerfilPage');
   }
 
   ionViewDidLoad() {
