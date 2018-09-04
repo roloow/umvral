@@ -14,4 +14,8 @@ export class CursosPage {
     console.log('ionViewDidLoad CursosPage');
   }
 
+  addCurso() {
+    console.log('addCurso has been pressed');
+  }
+
 }

@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-  <div padding-top text-center *ngIf="notas.length == 0">
-    <h5>No tienes notas ingresadas</h5>
+  <div padding-top *ngIf="notas.length == 0">
+    <h3>No tienes notas ingresadas.</h3>
   </div>
   <div padding-top text-center *ngIf="notas.length > 0">
     <ion-list>
