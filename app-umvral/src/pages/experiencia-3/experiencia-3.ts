@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HelpMateria3Page } from '../experiencia-3/materia/materia';
+import { HelpVideo3Page } from '../experiencia-3/video/video';
 //import { ExpPage } from '../experiencia-3/experiencia/experiencia';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,8 +21,8 @@ export class Experiencia3Page {
     this.nav = nav;
   }
 
-  openMateriaPage() {
-    this.nav.push(HelpMateria3Page);
+  openVideoPage() {
+    this.nav.push(HelpVideo3Page);
   }
 
   openExpPage() {
