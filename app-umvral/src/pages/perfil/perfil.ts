@@ -12,6 +12,7 @@ export class PerfilPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.username = "alumno";
     this.nombre = "Alumno umVRal";
+    this.navCtrl = navCtrl;
   }
 
   ionViewDidLoad() {
