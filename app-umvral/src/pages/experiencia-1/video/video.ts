@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
@@ -6,6 +6,8 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
     selector: 'page-video',
     templateUrl: 'video.html'
 })
+
+
 export class HelpVideoPage {
     video: any = {
         url: 'https://www.youtube.com/embed/HZ86lhZ2a6M',
