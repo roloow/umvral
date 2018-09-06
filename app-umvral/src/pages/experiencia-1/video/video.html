@@ -1,13 +1,99 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="primary">
         <ion-title>
-            Video Caida Libre
+            Caida Libre
         </ion-title>
     </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-        <iframe width="100%" height="315" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
-        
-        <h2>{{ video?.title }}</h2>
-    </ion-content>
+<ion-content padding>    
+    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+    <h3>Video: {{ video?.title }}</h3>
+
+    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>
+        <div>
+            <h3>Descripción de Caida Libre</h3>
+            <p>
+                Cuando un objeto es soltado (liberado sin aplicar alguna fuerza) desde una altura por sobre
+                 el nivel de medición definido (Nivel del suelo, por ejemplo) se dice que el cuerpo cae 
+                 libremente.
+            </p>
+            <p>
+                Cuando un cuerpo está en caída libre, la única fuerza que aporta al movimiento es la ejercida
+                 por la aceleración de gravedad en donde se está evaluando el fenómeno.
+            </p>
+            
+            <h6> F<sub>Total</sub> = m*a, </h6>
+            
+            <h6> F<sub>gravedad</sub> = m*g, </h6>
+
+            <h6> F<sub>T</sub> = F<sub>g</sub>. </h6>
+            
+            <p>
+                Finalmente se tiene que a = g. Es necesario recalcar que para efectos de álgebra, las constantes 
+                 son positivas, pero la dirección de la fuerza es contrario a la dirección del eje, por lo
+                 que el valor que tomará la gravedad es negativo, por ejemplo, en la tierra se tienen 
+                 valores cercanos de la gravedad a = - 9,8 [m/s<sup>2</sup>].
+            </p>
+
+            <h3>Velocidad en Caida Libre</h3>
+
+            <p>En respecto a la velocidad en el tiempo, se sabe que esta depende de la fuerza aplicada,
+                 lo que significa que depende finalmente de la aceleración de gravedad en el sistema:
+            </p>
+
+            <h6> v(t) = v<sub>0</sub> + a*t </h6>
+            
+            <p>
+                Teniendo que v<sub>0</sub> es la velocidad inicial <b>DESDE QUE CAE</b> el cuerpo,
+                 esta es igual a 0, por lo que finalmente se tiene que: 
+            </p>
+            
+            <h6>v(t) = a*t</h6>
+            
+            <p>
+                Se observa que la velocidad será negativa, esto es debido a que el cuerpo se va acercando al punto
+                 y = 0, lo que significa que la distancia entre el objeto y el origen disminuye, dando finalmente
+                 una velocidad negativa (y<sub>f</sub> - y<sub>i</sub> < 0).
+            </p>
+
+            <h3>Posición en Caida Libre</h3>
+
+            <p>
+                Para la posición del objeto a través del tiempo, se tiene que sabe que depende tanto de
+                 la velocidad que presenta el cuerpo, como de la aceleración, por lo que se tiene:  
+            </p>
+            
+            <h6>y(t) = y<sub>0</sub> + v<sub>0</sub>*t + ½ a*t<sup>2</sup></h6>
+            
+            <p>
+                En la ecuación anterior se tiene y<sub>0</sub>, que significa la posición inicial del objeto antes
+                 de comenzar la caída, es decir, la altura h desde la que se suelta, por lo que finalmente se tiene:
+            </p>
+
+            <h6>y(t) = h + ½a*t<sup>2</sup></h6>
+            
+            <p>
+                En esta ecuación se observa de nuevo que y(t) va disminuyendo en el transcurso del tiempo, lo que es
+                 esperable al ser caida libre.
+            </p>
+
+            <h3>Energía en Caida Libre</h3>
+
+            <p>
+                En relación a la energía que posee el cuerpo, se sabe que en cualquier momento es posible evaluar la
+                 energía cinética (K) y la potencial (U), las cuales están dadas por las siguientes ecuaciones:
+            </p>
+            
+            <h6> K = ½ * m * v<sup>2</sup> </h6>
+            
+            <h6> U = m * g * h </h6>
+            
+
+        </div>
+    </ion-scroll>
+    
+</ion-content>
+
+

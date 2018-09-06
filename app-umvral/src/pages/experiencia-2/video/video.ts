@@ -8,9 +8,9 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 })
 
 
-export class HelpVideo1Page {
+export class HelpVideo2Page {
     video: any = {
-        url: 'https://www.youtube.com/embed/HZ86lhZ2a6M',
+        url: 'https://www.youtube.com/embed/YfJzRX78UlM',
         title: 'Video Explicativo'
     };
 
