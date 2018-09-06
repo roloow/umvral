@@ -32,7 +32,7 @@ import { CursosPage } from '../pages/cursos/cursos';
     HelpVideo1Page,
     HelpVideo2Page,
     HelpVideo3Page,
-    ExpPage
+    ExpPage,
     PerfilPage,
     NotasPage,
     CursosPage
