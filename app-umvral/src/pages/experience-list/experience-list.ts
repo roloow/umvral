@@ -25,4 +25,5 @@ export class ExperienceListPage {
   openExperiencia3Page() {
     this.nav.push(Experiencia3Page);
   }
+
 }
