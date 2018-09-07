@@ -21,8 +21,12 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from tastypie.api import Api
 from api.resources import ExperienceResource
+from api.resources import MessageResource
+from api.resources import ExpdispResource
 
 experience = ExperienceResource()
+message = MessageResource()
+expdisp = ExpdispResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +34,6 @@ urlpatterns = [
     #path('api/', include('api.urls')),
     path('web/', include('web.urls')),
     url(r'^api/', include(experience.urls)),
+    url(r'^api/', include(message.urls)),
+    url(r'^api/', include(expdisp.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
