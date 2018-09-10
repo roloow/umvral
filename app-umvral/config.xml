@@ -4,14 +4,16 @@
     <description>Aplicación umVRal para plataforma Android.</description>
     <author email="hi@ionicframework" href="http://deepgrow.cl/">DeepGrow</author>
     <content src="index.html" />
-    <access origin="*" />
+    <access launch-external="yes" origin="*" />
     <allow-intent href="http://*/*" />
+    <allow-intent href="file://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://*/*" />
+    <allow-navigation href="file://*/*" />
     <allow-navigation href="tel:*" />
     <allow-navigation href="mailto:*" />
     <platform name="android">
@@ -92,5 +94,6 @@
         <variable name="XWALK_MULTIPLEAPK" value="true" />
     </plugin>
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.2" />
+    <plugin name="cordova-plugin-httpd" spec="^0.9.3" />
     <engine name="android" spec="^7.0.0" />
 </widget>

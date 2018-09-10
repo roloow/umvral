@@ -7,6 +7,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Httpd } from '@ionic-native/httpd';
 
 import { ConferenceApp } from './app.component';
 
@@ -61,7 +62,8 @@ import { CursosPage } from '../pages/cursos/cursos';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     InAppBrowser,
     SplashScreen,
-    ScreenOrientation
+    ScreenOrientation,
+    Httpd
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
