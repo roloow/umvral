@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from web.models import ClientModel
+from django.core.paginator import Paginator
+from web.models import *
 import urllib
 
 def get_base_context(request, *args, **kwargs):
@@ -74,3 +75,121 @@ def profile(request, client_id):
             return redirect('web:404')
     context['client'] = client
     return render(request, 'web/profile.html', context)
+
+@login_required
+def profile_edit(request, client_id):
+    context = get_base_context(request)
+    if (not request.user.is_staff):
+        if (request.user.profile.pk != int(client_id)):
+            return redirect('web:404')
+    try:
+        client = ClientModel.objects.get(pk=client_id)
+        context['client'] = client
+        if (request.user.profile.pk == client.pk):
+            context['my_profile'] = True
+    except:
+        return redirect('web:404')
+    if (request.method == 'GET'):
+        context['tab1'] = True
+        return render(request, 'web/profile_edit.html', context)
+    if (request.method == 'POST'):
+        # 0 => Información personal
+        if (int(request.POST['formulario']) == 0):
+            fname = request.POST['fname']
+            lname = request.POST['lname']
+            user = client.auth_user
+            user.first_name = fname
+            user.last_name = lname
+            user.save()
+            context['tab1'] = True
+            context['post1'] = True
+            context['success1'] = True
+            return render(request, 'web/profile_edit.html', context)
+        # 1 => Cambio contraseña
+        if (int(request.POST['formulario']) == 1):
+            current = request.POST['currentp']
+            new = request.POST['newp']
+            repeat = request.POST['rnewp']
+            context['tab3'] = True
+            context['post3'] = True
+            context['success3'] = True
+            if (new != repeat):
+                context['match'] = True
+                context['success3'] = False
+                return render(request, 'web/profile_edit.html', context)
+            user = client.auth_user
+            if (not user.check_password(current)):
+                context['old'] = True
+                context['success3'] = False
+                return render(request, 'web/profile_edit.html', context)
+            user.set_password(new)
+            user.save()
+            return render(request, 'web/profile_edit.html', context)
+    return redirect('web:404')
+
+@login_required
+def message_view(request, client_id, inbox_type):
+    context = get_base_context(request)
+    try:
+        client = ClientModel.objects.get(pk=client_id)
+        context['client'] = client
+    except:
+        return redirect('web:404')
+    # inbox_type:  0- open my inbox; 1- read a msg; 2- write a msg; 3- write a msg to certain person(post)
+    if (int(inbox_type) == 0):
+        context['inbox'] = True
+        context['header'] = 'Bandeja de entrada'
+        if (request.method == "GET"):
+            context['label0'] = True
+            messages = MessageModel.objects.filter(receiver=client, deleted=False)
+            paginator = Paginator(messages, 25)
+            page = request.GET.get("page")
+            msgs = paginator.get_page(page)
+            context['messages'] = msgs
+        if (request.method == "POST"):
+            # Entrada
+            if (int(request.POST['folder']) == 0):
+                messages = MessageModel.objects.filter(receiver=client, deleted=False)
+                paginator = Paginator(messages, 25)
+                page = request.GET.get("page")
+                msgs = paginator.get_page(page)
+                context['messages'] = msgs
+                context['label0'] = True
+            # Importante
+            if (int(request.POST['folder']) == 1):
+                messages = MessageModel.objects.filter(receiver=client, deleted=False, important=True)
+                paginator = Paginator(messages, 25)
+                page = request.GET.get("page")
+                msgs = paginator.get_page(page)
+                context['messages'] = msgs
+                context['label1'] = True
+            # Enviados
+            if (int(request.POST['folder']) == 2):
+                messages = MessageModel.objects.filter(sender=client)
+                paginator = Paginator(messages, 25)
+                page = request.GET.get("page")
+                msgs = paginator.get_page(page)
+                context['messages'] = msgs
+                context['label2'] = True
+            # Basurero
+            if (int(request.POST['folder']) == 3):
+                messages = MessageModel.objects.filter(receiver=client, deleted=True)
+                paginator = Paginator(messages, 25)
+                page = request.GET.get("page")
+                msgs = paginator.get_page(page)
+                context['messages'] = msgs
+                context['label3'] = True
+        return render(request, 'web/inbox.html', context)
+    if (int(inbox_type) == 1):
+        context['read'] = True
+        context['header'] = 'Bandeja de entrada > Mensaje'
+        return render(request, 'web/inbox.html', context)
+    if (int(inbox_type) == 2):
+        context['compose'] = True
+        context['header'] = 'Bandeja de entrada > Redactar'
+        return render(request, 'web/inbox.html', context)
+    if (int(inbox_type) == 3):
+        context['compose'] = True
+        context['header'] = 'Bandeja de entrada > Redactar'
+        return render(request, 'web/inbox.html', context)
+    return redirect('web:404')

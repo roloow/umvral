@@ -1,7 +1,7 @@
 {% extends "web/base_page.html" %}
 {% load static %}
-{% block title %}UMVRAL{% endblock %}
-{% block breadcrumb %}Perfil de Usuario > {{client.full_name}}{% endblock %}
+{% block title %}Perfil de usuario{% endblock %}
+{% block breadcrumb %}Usuario > {{client.full_name}} > Resumen{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-12">
@@ -16,7 +16,7 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> {{client.full_name}} </div>
-                    <div class="profile-usertitle-job"> {% if client.is_moderator %}Moderador{% else %}Usuario común{% endif %} </div>
+                    <div class="profile-usertitle-job"> {% if client.isProfessor %}Profesor{% else %}Estudiante{% endif %} </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
@@ -37,12 +37,12 @@
                         </li>
                         {% if my_profile %}
                         <li>
-                            <a href="{% url 'web:profile' 0 %}">
+                            <a href="{% url 'web:profile_edit' client.pk %}">
                                 <i class="icon-settings"></i> Editar cuenta </a>
                         </li>
                         {% endif %}
                         <li>
-                            <a href="{% url 'web:profile' 0 %}">
+                            <a href="{% url 'web:404' %}">
                                 <i class="icon-info"></i> Ayuda </a>
                         </li>
                     </ul>
@@ -57,12 +57,12 @@
                 <div class="row list-separated profile-stat">
                     <div class="col-md-6 col-sm-6 col-xs-6">
                       <!-- TODO: Resumen real -->
-                        <div class="uppercase profile-stat-title"> 1203 </div>
-                        <div class="uppercase profile-stat-text"> Búsquedas </div>
+                        <div class="uppercase profile-stat-title"> 0 </div>
+                        <div class="uppercase profile-stat-text"> Cursos </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 719 </div>
-                        <div class="uppercase profile-stat-text"> Calificaciones </div>
+                        <div class="uppercase profile-stat-title"> 0 </div>
+                        <div class="uppercase profile-stat-text"> Alumnos </div>
                     </div>
                 </div>
                 <!-- END STAT -->
@@ -98,24 +98,10 @@
                                       <td> {{client.last_name}} </td>
                                   </tr>
                                   <tr>
-                                      <td class="text-right" colspan="">
-                                        <b>Perfil cognitivo:</b>
-                                      </td>
-                                      <td>
-                                        {% if client.kolb_profile %}
-                                          {{client.kolb_profile.nombre}}
-                                        {% else %}
-                                          Encuesta pendiente
-                                        {% endif %}
-                                      </td>
-                                  </tr>
-                                  <tr>
                                       <td class="text-right">
-                                        <b>Tipo Usuario:</b>
+                                        <b>Correo:</b>
                                       </td>
-                                      <td>
-                                        {% if client.is_moderator %} Moderador {%else%} Usuario común{% endif %}
-                                      </td>
+                                      <td> {{client.email}} </td>
                                   </tr>
                                   <tr>
                                       <td >
@@ -137,16 +123,16 @@
                         <div class="portlet-title">
                             <div class="caption caption-md">
                                 <i class="icon-bar-chart theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase">Actividad (SOON)</span>
+                                <span class="caption-subject font-blue-madison bold uppercase">SECCION POR DEFINIR</span>
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-                                        <input type="radio" name="options" class="toggle" id="option1">Hoy</label>
+                                        <input type="radio" name="options" class="toggle" id="option1">OP1</label>
                                     <label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-                                        <input type="radio" name="options" class="toggle" id="option2">Semana</label>
+                                        <input type="radio" name="options" class="toggle" id="option2">OP2</label>
                                     <label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-                                        <input type="radio" name="options" class="toggle" id="option2">Mes</label>
+                                        <input type="radio" name="options" class="toggle" id="option3">OP3</label>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +145,7 @@
                                             <div id="sparkline_bar"></div>
                                         </div>
                                         <div class="stat-number">
-                                            <div class="title"> Búsquedas </div>
+                                            <div class="title"> VALOR 1 </div>
                                             <div class="number"> 1203 </div>
                                         </div>
                                     </div>
@@ -171,7 +157,7 @@
                                             <div id="sparkline_bar2"></div>
                                         </div>
                                         <div class="stat-number">
-                                            <div class="title"> Calificaciones </div>
+                                            <div class="title"> VALOR 2 </div>
                                             <div class="number"> 719 </div>
                                         </div>
                                     </div>
@@ -181,9 +167,9 @@
                                 <table class="table table-hover table-light">
                                     <thead>
                                         <tr class="uppercase">
-                                            <th colspan="2"> BÚSQUEDA </th>
-                                            <th> RESULTADOS </th>
-                                            <th> CALIFICADO </th>
+                                            <th colspan="2"> TIPO 1 </th>
+                                            <th> TIPO 2 </th>
+                                            <th> TIPO 3 </th>
                                         </tr>
                                     </thead>
                                     <tr>
