@@ -3,15 +3,15 @@ import { NavController } from 'ionic-angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-    selector: 'page-video',
-    templateUrl: 'video.html'
+    selector: 'page-materia',
+    templateUrl: 'materia.html'
 })
 
 
-export class HelpVideo3Page {
+export class HelpMateria1Page {
     video: any = {
         url: 'https://www.youtube.com/embed/HZ86lhZ2a6M',
-        title: 'Temperatura y dilatación'
+        title: 'Video Explicativo'
     };
 
     trustedVideoUrl: SafeResourceUrl;
