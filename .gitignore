@@ -79,3 +79,5 @@ db.sqlite3
 storage
 .env
 tcl
+
+app-umvral/plugins/
