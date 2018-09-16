@@ -1,0 +1,22 @@
+{% extends "web/base_page.html" %}
+{% load static %}
+{% block title %}
+Cursos Disponibles
+{% endblock %}
+{% block content %}
+<form action="{% url 'web:course_edit' %}" method="POST">
+	{% csrf_token %}
+  Nombre curso:<br>
+	<input type="text" name="name" {% if course %}value={{ course.name }}{% endif %}>
+  <br>
+  Descripción Curso:<br>
+  <input type="text" name="description"{% if course %}value={{ course.description }}{% endif %}>
+  <br><br>
+  <input type="submit" value="Submit">
+	{% if course %}
+	<input type="hidden" value="1">
+	{% endif %}
+</form> 
+{% endblock %}
+{% block javascript %}
+{% endblock %}
