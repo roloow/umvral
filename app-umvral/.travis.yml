@@ -1,8 +1,3 @@
-branches:
-  only:
-  - master
-  - develop
-  - feature/integracion-travisci
 matrix:
   include:
   - os: linux
