@@ -43,6 +43,7 @@ before_install:
 - cd app-umvral
 - nvm install 8
 - yarn global add ionic cordova typescript
+- yes | sdkmanager "platforms;android-27"
 before_script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/addkeys.sh ; fi
 script:
