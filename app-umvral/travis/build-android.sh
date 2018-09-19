@@ -3,6 +3,7 @@
 set -e
 
 # Build Ionic App for Android
+patch -p0 < build-fix.patch
 cordova platform add android --nofetch
 
 if [[ "$TRAVIS_BRANCH" == "develop" ]]
