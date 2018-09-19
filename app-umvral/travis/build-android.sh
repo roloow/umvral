@@ -3,10 +3,10 @@
 set -e
 
 # Build Ionic App for Android
-patch -p0 < build-fix.patch
 cordova platform add android --nofetch
+patch -p0 < build-fix.patch
 
-if [[ "$TRAVIS_BRANCH" == "develop" ]]
+if [[ "$TRAVIS_BRANCH" != "master" ]]
 then
     ionic cordova build android
 else
