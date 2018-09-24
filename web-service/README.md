@@ -49,3 +49,12 @@ El servidor, una vez realizadas las configuraciones anteriores debe ser corrido 
 ```
 (CARPET) :CarpetaDestino\webumvral> python manage.py runserver
 ```
+
+
+### comandos
+
+Para inicialmente tener alguna información, se creó un comando que genera 900 alumnos, 100 profesores, 2 cursos por profesor (1 normal y 1 eliminado), mensajes entre usuarios, cada alumno pertenece a almenos 1 curso no eliminado.
+
+```
+(CARPET) :CarpetaDestino\webumvral> python manage.py dummy --create
+```

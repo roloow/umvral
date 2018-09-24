@@ -57,20 +57,17 @@
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" class="img-circle"  src="{% static 'web/layouts/layout/img/avatar.png' %}" width="29px">
-                                    <!-- TODO: Agregar nombre usuario -->
                                     <span class="username username-hide-on-mobile"> {{request.user.profile.full_name}} </span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
-                                        <!-- TODO: Hacer página de perfil -->
-                                        <a href="">
+                                        <a href="{% url 'web:profile' request.user.profile.pk %}">
                                             <i class="icon-user"></i> Mi perfil
                                         </a>
                                     </li>
                                     <li class="divider"> </li>
                                     <li>
-                                        <!-- TODO: Hacer funcion de deslogeo -->
                                         <a href="{% url 'web:logout' %}">
                                             <i class="icon-key"></i> Cerrar Sesión </a>
                                     </li>
@@ -78,7 +75,6 @@
                             </li>
                         </ul>
                         {% else %}
-                        <!-- TODO: Hacer inicio de sesion y registro -->
                         <a href="" class="btn btn-danger pull-right">
                           <span>Registrarme</span>
                         </a>
@@ -119,7 +115,7 @@
                             <!-- END SIDEBAR TOGGLER BUTTON -->
                             <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
                             <li class="nav-item start {% if dashboard %}active{% endif %}">
-                                <a href="" class="nav-link">
+                                <a href="{% url 'web:home' %}" class="nav-link">
                                     <i class="icon-home"></i>
                                     <span class="title">Inicio</span>
                                 </a>
@@ -136,7 +132,7 @@
                                 <ul class="sub-menu">
                                   {% if request.user.profile %}
                                   <li class="nav-item">
-                                      <a href="" class="nav-link">
+                                      <a href="{% url 'web:profile' request.user.profile.pk %}" class="nav-link">
                                           <i class="icon-users"></i>
                                           <span class="title">Mi Perfil</span>
                                       </a>
