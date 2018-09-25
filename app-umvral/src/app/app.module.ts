@@ -22,6 +22,7 @@ import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { NotasPage } from '../pages/notas/notas';
 import { CursosPage } from '../pages/cursos/cursos';
+import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { CursosPage } from '../pages/cursos/cursos';
     InAppBrowser,
     SplashScreen,
     ScreenOrientation,
-    Httpd
+    Httpd,
+    UmvralApiProvider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
