@@ -25,7 +25,8 @@ class UserResource(ModelResource):
 
     def login(self, request, **kwargs):
         self.method_check(request, allowed=['post'])
-        print ('hola')
+        print(request.POST)
+
         #data = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
         username = request.POST.get('username', '')
         password = request.POST.get('password','')

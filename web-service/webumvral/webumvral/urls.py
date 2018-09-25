@@ -23,12 +23,20 @@ from tastypie.api import Api
 from api.resources import ExperienceResource
 from api.resources import MessageResource
 from api.resources import ExpdispResource
+from api.resources import ClientResource
+from api.resources import StudentResource
 from api.login import UserResource
+from api.resources import CourseResource
+from api.resources import ExpcourseResource
 
 experience = ExperienceResource()
 message = MessageResource()
 expdisp = ExpdispResource()
 user = UserResource()
+client = ClientResource()
+student = StudentResource()
+course = CourseResource()
+expcourse = ExpcourseResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +47,8 @@ urlpatterns = [
     url(r'^api/', include(message.urls)),
     url(r'^api/', include(expdisp.urls)),
     url(r'^api/', include(user.urls)),
+    url(r'^api/', include(client.urls)),
+    url(r'^api/', include(student.urls)),
+    url(r'^api/', include(course.urls)),
+    url(r'^api/', include(expcourse.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
