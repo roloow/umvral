@@ -1,22 +1,77 @@
 {% extends "web/base_page.html" %}
 {% load static %}
 {% block title %}
-Cursos Disponibles
+{% if course.pk %}
+Edición de curso - {{course.name}}
+{% else %}
+Creación de curso
+{% endif %}
+{% endblock %}
+{% block breadcrumb %}
+<li>
+  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>
+    {% if material.pk %}
+    Editando Curso #{{ course.pk }}
+    {% else %}
+    Nuevo Curso
+    {% endif %}
+  </span>
+</li>
 {% endblock %}
 {% block content %}
-<form action="{% url 'web:course_edit' %}" method="POST">
-	{% csrf_token %}
-  Nombre curso:<br>
-	<input type="text" name="name" {% if course %}value={{ course.name }}{% endif %}>
-  <br>
-  Descripción Curso:<br>
-  <input type="text" name="description"{% if course %}value={{ course.description }}{% endif %}>
-  <br><br>
-  <input type="submit" value="Submit">
-	{% if course %}
-	<input type="hidden" value="1">
-	{% endif %}
-</form> 
-{% endblock %}
-{% block javascript %}
+<div class="row">
+  <div class="col-md-12 ">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+      <div class="portlet-body form">
+        <form class="form-horizontal"
+        action="{% if course.pk %}{% url 'web:course_edit' course.pk %}{% else %}{% url 'web:course_create' %}{% endif %}"
+        role="form" method="POST">
+        {% csrf_token %}
+        <div class="form-body">
+          <div>
+            <h3>Datos del Curso</h3>
+          </div>
+          <div class="form-group {% if 'codigo' in error_registro %}has-error{% endif %}">
+            <label class="col-md-3 control-label">
+              Nombre<span class="required"> * </span>
+            </label>
+            <div class="col-md-9">
+              <input id="name" name="name" type="text"
+                     class="form-control input-medium"
+                     placeholder="Ingresar un nombre"
+                     value="{{ course.name|default:'' }}">
+            </div>
+          </div>
+          <div class="form-group {% if 'nombre' in error_registro %}has-error{% endif %}">
+            <label class="col-md-3 control-label">Descripción<span class="required"> * </span></label>
+            <div class="col-md-9">
+              <input id="description" name="description" type="text"
+                     class="form-control input-large"
+                     placeholder="Ingresar una descripción"
+                     value="{{ course.description|default:'' }}">
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <button type="submit" class="btn green">
+                <i class="icon-note"></i>
+                Guardar Curso
+              </button>
+              <a href="{% url 'web:course_list' %}" class="btn default">Cancelar</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- END SAMPLE FORM PORTLET-->
+</div>
+</div>
 {% endblock %}

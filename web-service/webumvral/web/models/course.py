@@ -13,7 +13,7 @@ class CourseModel(models.Model):
         return newcourse
 
     def deleteCourse(self):
-        self.erase = 1
+        self.erase = True
         self.save()
         return self
 
@@ -25,4 +25,3 @@ class CourseModel(models.Model):
 
 
     #def deleteCourse(self, course)
-        

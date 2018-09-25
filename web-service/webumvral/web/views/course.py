@@ -12,25 +12,25 @@ def courses_list(request):
 
 def course_edit(request, course=None):
     context = get_base_context(request)
+    editing = False
     if course:
         try:
             courseobj = CourseModel.objects.get(pk=course)
+            editing = True
+            context["course"] = courseobj
         except:
-            return redirect('web:course_list')
-    if request.method == 'POST':
-        user = request.user
+            return redirect('web:404')
+    if (request.method == 'GET'):
+        return render(request, 'web/course_edit.html', context)
+    if (request.method == 'POST'):
+        user = request.user.profile
         name = request.POST.get('name', '')
         description = request.POST.get('description', '')
-        if course:
-            #CourseModel.objects.filter(pk=course).update(
-            #        name=name, description=description)
-            #courseobj.name = name
-            #courseobj.description = description
-            #courseobj.save()
+        if (editing):
             courseobj.editCourse(name=name, description=description)
         else:
-            CourseModel.objects.create(name=name, erase=0,
-                    description=description, professor_id=user.id)
+            CourseModel.objects.create(name=name, erase=False,
+                    description=description, professor=user)
         return redirect('web:course_list')
     elif course:
         courseobj = CourseModel.objects.filter(id=course).values()[0]
@@ -46,6 +46,16 @@ def course_delete(request, course=None):
     #return HttpResponse('200')
     return redirect('web:course_list')
 
+def course_read(request, course):
+    context = get_base_context(request)
+    try:
+        courseobj = CourseModel.objects.get(pk=course)
+        context['course'] = courseobj
+    except:
+        return redirect('web:404')
+    if (courseobj.professor != request.user.profile):
+        return redirect('web:404')
+    return render(request, 'web/course_read.html', context)
 
 class CourseListJson(BaseDatatableView):
     model = CourseModel
@@ -62,6 +72,7 @@ class CourseListJson(BaseDatatableView):
         return CourseModel.objects.filter(
                 professor_id=self.request.user.id, erase=0)
 
+    #TODO: Crear filtros de busqueda
     def filter_queryset(self, qs):
         # use parameters passed in GET request to filter queryset
 
