@@ -1,4 +1,4 @@
---- platforms/android/app/build.gradle.old	2018-09-09 17:53:10.000000000 -0300
+--- platforms/android/app/build.gradle	2018-09-09 17:53:10.000000000 -0300
 +++ platforms/android/app/build.gradle	2018-09-09 17:53:25.000000000 -0300
 @@ -33,6 +33,12 @@
      }
