@@ -55,6 +55,8 @@ def course_read(request, course):
         return redirect('web:404')
     if (courseobj.professor != request.user.profile):
         return redirect('web:404')
+    #TODO: cortocircuitos de totales
+    #context['tot_stu'] = courseobj.students.count()
     return render(request, 'web/course_read.html', context)
 
 class CourseListJson(BaseDatatableView):

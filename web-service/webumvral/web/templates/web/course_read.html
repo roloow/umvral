@@ -22,7 +22,7 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div class="mt-element-ribbon bg-red">
       <a href="{% url 'web:404' %}">
         <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
@@ -31,7 +31,7 @@
       </a>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div class="mt-element-ribbon bg-green">
       <a href="{% url 'web:404' %}">
         <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
@@ -40,6 +40,24 @@
       </a>
     </div>
   </div>
+<div class="col-md-3">
+    <div class="mt-element-ribbon bg-blue">
+    <a href="{% url 'web:404' %}">
+      <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
+          <div class="ribbon-sub ribbon-clip"></div> EVALUACIONES </div>
+      <p class="ribbon-content"></p>
+    </a>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="mt-element-ribbon bg-yellow">
+    <a href="{% url 'web:404' %}">
+      <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
+          <div class="ribbon-sub ribbon-clip"></div> PROMEDIO </div>
+      <p class="ribbon-content"></p>
+    </a>
+  </div>
+</div>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -59,45 +77,30 @@
         </div>
         <div class="portlet-body">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <div class="portlet light">
                     <div class="card-icon">
-                        <a href="{% url 'web:404' %}"> <i class="icon-book-open font-red-sunglo theme-font"></i></a>
+                        <a href="{% url 'web:course_students' course.pk %}"> <i class="icon-users font-green-sunglo theme-font"></i></a>
                     </div>
                     <div class="card-title">
                       <ul class="nav nav-pills nav-stacked">
                           <li class="active">
-                              <a href="javascript:;"> ALUMNOS </a>
+                              <a href="{% url 'web:course_students' course.pk %}"> ALUMNOS </a>
                           </li>
                       </ul>
                     </div>
                 </div>
               </div>
                 <div class="margin-bottom-10 visible-sm"> </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="portlet light">
                       <div class="card-icon">
-                          <a href="{% url 'web:404' %}"> <i class="icon-book-open font-red-sunglo theme-font"></i></a>
+                          <a href="{% url 'web:404' %}"> <i class="icon-book-open font-gray-sunglo theme-font"></i></a>
                       </div>
                       <div class="card-title">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
-                                <a href="javascript:;"> Home </a>
-                            </li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
-                <div class="margin-bottom-10 visible-sm"> </div>
-                <div class="col-md-4">
-                  <div class="portlet light">
-                      <div class="card-icon">
-                          <a href="{% url 'web:404' %}"> <i class="icon-book-open font-red-sunglo theme-font"></i></a>
-                      </div>
-                      <div class="card-title">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="active">
-                                <a href="javascript:;"> Home </a>
+                                <a href="javascript:;"> EXPERIENCIAS </a>
                             </li>
                         </ul>
                       </div>

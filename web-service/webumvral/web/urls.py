@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from . import views
-from .views.course import CourseListJson
+from .views import CourseListJson, StudentListJson
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 
@@ -19,6 +19,10 @@ urlpatterns = [
     re_path(r'course/delete/$', views.course_delete, name='course_delete'),
     re_path(r'course/delete/(?P<course>\w+)$', views.course_delete, name='course_delete'),
     re_path(r'course/read/(?P<course>\w+)$', views.course_read, name='course_read'),
+    re_path(r'course/read/(?P<course>\w+)/students/$', views.course_students, name='course_students'),
+    url(r'^my/datatable/data/stud$', login_required(StudentListJson.as_view()), name='course_student_list_json'),
+    re_path(r'course/read/(?P<course>\w+)/experience/$', views.course_students, name='course_experience'),
+    url(r'^my/datatable/data/exp$', login_required(CourseListJson.as_view()), name='course_experience_list_json'),
     url(r'^my/datatable/data/$', login_required(CourseListJson.as_view()), name='course_list_json'),
     re_path(r'404/$', views.page404, name='404'),
     re_path(r'user/(?P<client_id>\d+)/profile/$', views.profile, name='profile'),
