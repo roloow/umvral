@@ -39903,3 +39903,55 @@ page-materia-2 .scroll-content {
 page-materia-3 .scroll-content {
   overflow: hidden !important;
 }
+
+page-login .login-content .logo-row {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+page-login .login-content .login-box {
+  background: #FFE1E1;
+  padding: 20px 20px 0px 20px;
+  margin-top: 30px;
+}
+
+page-login .login-content ion-row {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+page-login .login-content ion-item {
+  border-radius: 30px !important;
+  padding-left: 30px !important;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  border: 1px solid #ffffff;
+  border-bottom: 0px !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+page-login .login-content .signup-col {
+  margin: 0px 16px 0px 16px;
+  padding-bottom: 20px;
+}
+
+page-login .login-content .item-inner {
+  border-bottom-color: #ffffff !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+page-login .login-content .submit-btn {
+  background: #ff4848;
+  border-radius: 30px !important;
+  border: 1px solid #ffffff;
+}
+
+page-login .login-content .register-btn {
+  color: #ff4848;
+  font-size: 0.8em;
+}
