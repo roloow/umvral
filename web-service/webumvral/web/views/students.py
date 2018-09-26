@@ -4,7 +4,7 @@ from ..models import CourseModel, StudentModel, ClientModel
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.utils.html import escape
 from django.http import HttpResponse
-
+from django.core.mail import send_mail
 
 def course_students(request, course):
     context = get_base_context(request)
@@ -42,6 +42,14 @@ def course_invite(request, course):
         for i in invited_students:
             try:
                 u = ClientModel.objects.get(pk=int(i))
+                text = 'Hola '+u.first_name+'!, bienvenido a umVRal. En unos momentos, podras utilizar la Realidad Virtual para poder complementar tus estudios, y mejorar tu comprensión. Ingresa el siguiente código en tu telefono, para poder activar el curso en que te inscribiste'
+                send_mail(
+                    '¡Bienvenido a umVRal!',
+                    text,
+                    'appumvral@gmail.com',
+                    [u.email],
+                    fail_silently=False,
+                )
                 invited_students_objects.append(u)
             except:
                 print("Usuario con identificador", i, "no encontrado.")
