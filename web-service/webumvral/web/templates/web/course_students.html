@@ -44,17 +44,17 @@ Cursos Disponibles
 <script>
 moment.locale("es");
 
-var render_checkbox = function(course_id) {
+var render_checkbox = function(student_id) {
   return `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
             <input type="checkbox" class="checkboxes" name="selected_user"
-                   value="${course_id}" />
+                   value="${student_id}" />
             <span></span>
           </label>`;
 };
-var render_options = function(student_id, sprofile_id){
-	var url1 = "{% url 'web:course_edit' 0 %}".replace('0', student_id);
-  var url2 = "{% url 'web:course_delete' 0 %}".replace('0', student_id);
-  var url3 = "{% url 'web:course_delete' 0 %}".replace('0', student_id);
+var render_options = function(student_id, sprofile_id, course_id, user_id){
+	var url1 = "{% url 'web:profile' 0 %}".replace('0', sprofile_id);
+  var url2 = "{% url 'web:msg_view' 0 1 %}".replace('0', user_id).replace('1', 2);
+  var url3 = "{% url 'web:course_ban' 0 1 %}".replace('0', course_id).replace('1',student_id);
   return `<div class="btn-group">
             <button class="btn btn-xs orange dropdown-toggle" type="button"
                     data-toggle="dropdown" aria-expanded="false">
@@ -67,23 +67,28 @@ var render_options = function(student_id, sprofile_id){
               <i class="icon-user"></i> Ver perfil </a>
             </li>
             <li>
-              <a href="${url1}">
+            <form method="POST" action="${url2}"
+              <a href="javascript:;" onclick="parentNode.submit();">
+              <input type="hidden" name="to" value="${sprofile_id}">
+              <input type="hidden" name="topic" value="">
               <i class="fa fa-envelope-o"></i> Mensaje directo </a>
+            </form>
             </li>
               <li class="divider" role="separator"></li>
               <li>
-                <a href="${url2}">
-                <i class="icon-ban"></i> Eliminar curso </a>
+                <a href="${url3}">
+                <i class="icon-ban"></i> Desmatricular alumno </a>
               </li>
             </ul>
           </div>`
 };
-var render_name = function(course_id, name){
-	var url = "{% url 'web:course_read' 0 %}".replace('0', course_id);
+var render_name = function(sprofile_id, name){
+	var url = "{% url 'web:profile' 0 %}".replace('0', sprofile_id);
 	return `<a href="${url}"> ${name} </a>`
 }
 $(document).ready(function() {
 		var course_id = {{course.pk}}
+    var user_id = {{request.user.profile.pk}}
     var dt_table = $('#table').DataTable({
 			processing: true,
 			serverSide: true,
@@ -108,7 +113,7 @@ $(document).ready(function() {
 	          searchable: true,
 	          targets: 1,
 						render: function(data, type, row){
-							return row[1]
+							return render_name(row[3], row[1])
 						}
         },
         {
@@ -125,7 +130,7 @@ $(document).ready(function() {
             searchable: false,
             targets: 3,
 						render: function(data, type, row){
-							return render_options(row[0], row[3]);
+							return render_options(row[0], row[3], course_id, user_id);
 						}
 				},
       ],

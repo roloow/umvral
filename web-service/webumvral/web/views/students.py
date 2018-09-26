@@ -15,6 +15,15 @@ def course_students(request, course):
         return redirect('web:404')
     return render(request, 'web/course_students.html', context)
 
+def course_ban(request, course, student_id):
+    context = get_base_context(request)
+    try:
+        student = StudentModel.objects.get(pk=student_id)
+        student.course = None
+        student.save()
+    except:
+        return redirect('web:404')
+    return redirect('web:course_read', {"course": course})
 def course_invite(request, course):
     context = get_base_context(request)
     try:
