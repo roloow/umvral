@@ -1,7 +1,7 @@
 {% extends "web/base_list.html" %}
 {% load static %}
 {% block title %}
-Cursos Disponibles
+Mis alumnos
 {% endblock %}
 {% block breadcrumb %}
 <li>
@@ -51,10 +51,12 @@ var render_checkbox = function(student_id) {
             <span></span>
           </label>`;
 };
-var render_options = function(student_id, sprofile_id, course_id, user_id){
+var render_options = function(student_id, sprofile_id, course_id, user_id, course_name){
 	var url1 = "{% url 'web:profile' 0 %}".replace('0', sprofile_id);
-  var url2 = "{% url 'web:msg_view' 0 1 %}".replace('0', user_id).replace('1', 2);
-  var url3 = "{% url 'web:course_ban' 0 1 %}".replace('0', course_id).replace('1',student_id);
+  var url2 = "{% url 'web:msg_direct' 0 %}".replace('0', user_id);
+  console.log(course_id);
+  console.log(student_id);
+  var url3 = "{% url 'web:course_ban' 88888888 99999999 %}".replace('88888888', course_id).replace('99999999', student_id);
   return `<div class="btn-group">
             <button class="btn btn-xs orange dropdown-toggle" type="button"
                     data-toggle="dropdown" aria-expanded="false">
@@ -65,14 +67,6 @@ var render_options = function(student_id, sprofile_id, course_id, user_id){
             <li>
               <a href="${url1}">
               <i class="icon-user"></i> Ver perfil </a>
-            </li>
-            <li>
-            <form method="POST" action="${url2}"
-              <a href="javascript:;" onclick="parentNode.submit();">
-              <input type="hidden" name="to" value="${sprofile_id}">
-              <input type="hidden" name="topic" value="">
-              <i class="fa fa-envelope-o"></i> Mensaje directo </a>
-            </form>
             </li>
               <li class="divider" role="separator"></li>
               <li>
@@ -87,8 +81,9 @@ var render_name = function(sprofile_id, name){
 	return `<a href="${url}"> ${name} </a>`
 }
 $(document).ready(function() {
-		var course_id = {{course.pk}}
-    var user_id = {{request.user.profile.pk}}
+		var course_id = {{course.pk}};
+    var course_name = "{{course.name}}";
+    var user_id = {{request.user.profile.pk}};
     var dt_table = $('#table').DataTable({
 			processing: true,
 			serverSide: true,
@@ -130,7 +125,7 @@ $(document).ready(function() {
             searchable: false,
             targets: 3,
 						render: function(data, type, row){
-							return render_options(row[0], row[3], course_id, user_id);
+							return render_options(row[0], row[3], course_id, user_id, course_name);
 						}
 				},
       ],

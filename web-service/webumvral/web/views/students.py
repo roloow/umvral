@@ -8,6 +8,7 @@ from django.http import HttpResponse
 
 def course_students(request, course):
     context = get_base_context(request)
+    print (course)
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context["course"] = courseobj
@@ -18,12 +19,14 @@ def course_students(request, course):
 def course_ban(request, course, student_id):
     context = get_base_context(request)
     try:
+        print ("HOLA", course, student_id)
         student = StudentModel.objects.get(pk=student_id)
-        student.course = None
-        student.save()
+        print (student)
+        student.delete()
     except:
         return redirect('web:404')
-    return redirect('web:course_read', {"course": course})
+    return redirect('web:course_students', course=course)
+
 def course_invite(request, course):
     context = get_base_context(request)
     try:
