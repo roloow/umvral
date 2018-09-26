@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .common import get_base_context
-from ..models import CourseModel, StudentModel
+from ..models import CourseModel, StudentModel, ClientModel
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.utils.html import escape
 from django.http import HttpResponse
@@ -14,6 +14,45 @@ def course_students(request, course):
     except:
         return redirect('web:404')
     return render(request, 'web/course_students.html', context)
+
+def course_invite(request, course):
+    context = get_base_context(request)
+    try:
+        courseobj = CourseModel.objects.get(pk=course)
+        context["course"] = courseobj
+    except:
+        return redirect('web:404')
+    students = ClientModel.objects.filter(isProfessor=False)
+    context['students'] = students
+    if (request.method == "POST"):
+        if (request.POST['to'] == '' or request.POST['to'] == 'No hay selección'):
+            context['error'] = True
+            return render(request, 'web/course_invite.html', context)
+        invited_students = list()
+        for k,v in request.POST.items():
+            if ("to" == k):
+                invited_students.append(v)
+            elif ("group-b" in k):
+                if (v == "None"):
+                    continue
+                if (v == "No hay selección"):
+                    continue
+                invited_students.append(v)
+        invited_students_objects = list()
+        for i in invited_students:
+            try:
+                u = ClientModel.objects.get(pk=int(i))
+                invited_students_objects.append(u)
+            except:
+                print("Usuario con identificador", i, "no encontrado.")
+
+        # TODO: CREAR FUNCION PARA ENVIAR Correo
+        # LA LISTA INVITED_STUDENTS_OBJECTS TIENE CLIENTMODEL objects
+        # PARA ACCEDER A SUS CORREOS:
+        # FOR I IN INVITED_STUDENTS_OBJECTS:
+        #     I.EMAIL
+        context["Ok"] = True
+    return render(request, 'web/course_invite.html', context)
 
 class StudentListJson(BaseDatatableView):
     model = StudentModel

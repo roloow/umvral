@@ -22,9 +22,9 @@ Cursos Disponibles
 
 {% endblock %}
 {% block page_actions %}
-<a href="{% url 'web:course_create' %}" class="btn btn-fit-height default" role="button">
+<a href="{% url 'web:course_invite' course.pk %}" class="btn btn-fit-height default" role="button">
   <i class="icon-plus"></i>
-  Nuevo Alumno
+  Invitar Alumno
 </a>
 
 {% endblock %}
