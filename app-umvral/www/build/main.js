@@ -1,6 +1,57 @@
 webpackJsonp([0],{
 
-/***/ 102:
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExperienceListPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__ = __webpack_require__(106);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ExperienceListPage = (function () {
+    function ExperienceListPage(nav) {
+        this.nav = nav;
+        this.nav = nav;
+    }
+    ExperienceListPage.prototype.openExperiencia1Page = function () {
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__["a" /* Experiencia1Page */]);
+    };
+    ExperienceListPage.prototype.openExperiencia2Page = function () {
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__["a" /* Experiencia2Page */]);
+    };
+    ExperienceListPage.prototype.openExperiencia3Page = function () {
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__["a" /* Experiencia3Page */]);
+    };
+    ExperienceListPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-experience-list',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experience-list/experience-list.html"*/'<ion-header>\n    <ion-navbar no-border-bottom color="primary">\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Experiencias</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la experiencia a realizar:</h3>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia1Page()" block>Caída Libre</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia2Page()"block>Lanzamiento de Proyectil</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia3Page()"block>Temperatura y Dilatación</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experience-list/experience-list.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+    ], ExperienceListPage);
+    return ExperienceListPage;
+}());
+
+//# sourceMappingURL=experience-list.js.map
+
+/***/ }),
+
+/***/ 104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +59,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_materia_materia__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(42);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -95,7 +146,7 @@ var Experiencia1Page = (function () {
 
 /***/ }),
 
-/***/ 103:
+/***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -172,7 +223,7 @@ var Experiencia2Page = (function () {
 
 /***/ }),
 
-/***/ 104:
+/***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -249,68 +300,7 @@ var Experiencia3Page = (function () {
 
 /***/ }),
 
-/***/ 105:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UmvralApiProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/*
-  Generated class for the UmvralApiProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var UmvralApiProvider = (function () {
-    function UmvralApiProvider(http) {
-        this.http = http;
-        this.apiUrl = 'http://192.168.0.3:8000/api';
-        this.isLoggedIn = false;
-        console.log('Hello UmvralApiProvider Provider');
-    }
-    UmvralApiProvider.prototype.isUserLoggedIn = function () {
-        return this.isLoggedIn;
-    };
-    UmvralApiProvider.prototype.login = function (data) {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        console.log("username=" + data.username + "&password=" + data.password);
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.username + "&password=" + data.password, options)
-                .subscribe(function (res) {
-                resolve(res);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]) === "function" && _a || Object])
-    ], UmvralApiProvider);
-    return UmvralApiProvider;
-    var _a;
-}());
-
-//# sourceMappingURL=umvral-api.js.map
-
-/***/ }),
-
-/***/ 118:
+/***/ 119:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -323,11 +313,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 118;
+webpackEmptyAsyncContext.id = 119;
 
 /***/ }),
 
-/***/ 161:
+/***/ 162:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -340,58 +330,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 161;
-
-/***/ }),
-
-/***/ 204:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExperienceListPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__ = __webpack_require__(104);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var ExperienceListPage = (function () {
-    function ExperienceListPage(nav) {
-        this.nav = nav;
-        this.nav = nav;
-    }
-    ExperienceListPage.prototype.openExperiencia1Page = function () {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__["a" /* Experiencia1Page */]);
-    };
-    ExperienceListPage.prototype.openExperiencia2Page = function () {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__["a" /* Experiencia2Page */]);
-    };
-    ExperienceListPage.prototype.openExperiencia3Page = function () {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__["a" /* Experiencia3Page */]);
-    };
-    ExperienceListPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experience-list',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experience-list/experience-list.html"*/'<ion-header>\n    <ion-navbar no-border-bottom color="primary">\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Experiencias</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la experiencia a realizar:</h3>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia1Page()" block>Caída Libre</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia2Page()"block>Lanzamiento de Proyectil</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia3Page()"block>Temperatura y Dilatación</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experience-list/experience-list.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
-    ], ExperienceListPage);
-    return ExperienceListPage;
-}());
-
-//# sourceMappingURL=experience-list.js.map
+webpackEmptyAsyncContext.id = 162;
 
 /***/ }),
 
@@ -540,6 +479,7 @@ var HelpMateria3Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(53);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -586,43 +526,118 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 
 
+
 var PerfilPage = (function () {
-    function PerfilPage(navCtrl, navParams, alertCtrl) {
+    function PerfilPage(navCtrl, navParams, alertCtrl, umvralApiProvider, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
-        this.username = "alumno";
-        this.nombre = "Alumno umVRal";
+        this.umvralApiProvider = umvralApiProvider;
+        this.loadingCtrl = loadingCtrl;
         this.navCtrl = navCtrl;
         console.log('constructor PerfilPage');
+        this.getUserData();
     }
     PerfilPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad PerfilPage');
     };
-    PerfilPage.prototype.changeUsername = function () {
+    PerfilPage.prototype.mostrarCargando = function () {
+        this.loading = this.loadingCtrl.create({
+            content: 'Cargando...',
+            dismissOnPageChange: true
+        });
+        this.loading.present();
+    };
+    PerfilPage.prototype.mostrarError = function (text) {
+        this.loading.dismiss();
+        var alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: text,
+            buttons: ['OK']
+        });
+        alert.present(prompt);
+    };
+    PerfilPage.prototype.getUserData = function () {
+        var _this = this;
+        this.umvralApiProvider.getUserData()
+            .then(function (data) {
+            _this.userData = data;
+            console.log(JSON.stringify(_this.userData));
+        });
+    };
+    PerfilPage.prototype.updateFirstName = function (name) {
+        var _this = this;
+        this.mostrarCargando();
+        this.umvralApiProvider.updateFirstName(name)
+            .then(function (result) {
+            var resultData = JSON.parse(JSON.stringify(result));
+            console.log("Cambio de nombre satisfactorio: " + resultData.status + " " + resultData.statusText);
+            _this.loading.dismiss();
+        }, function (err) {
+            var errorData = JSON.parse(JSON.stringify(err));
+            console.log("Error al cambiar el nombre: " + errorData.status + " " + errorData.statusText);
+            console.log(errorData);
+            _this.mostrarError("Error al actualizar nombre: " + errorData.statusText);
+        });
+        this.getUserData();
+    };
+    PerfilPage.prototype.updateLastName = function (name) {
+        var _this = this;
+        this.mostrarCargando();
+        this.umvralApiProvider.updateLastName(name)
+            .then(function (result) {
+            var resultData = JSON.parse(JSON.stringify(result));
+            console.log("Cambio de apellido satisfactorio: " + resultData.status + " " + resultData.statusText);
+            _this.loading.dismiss();
+        }, function (err) {
+            var errorData = JSON.parse(JSON.stringify(err));
+            console.log("Error al cambiar el apellido: " + errorData.status + " " + errorData.statusText);
+            console.log(errorData);
+            _this.mostrarError("Error al actualizar apellido: " + errorData.statusText);
+        });
+        this.getUserData();
+    };
+    PerfilPage.prototype.updatePassword = function (password) {
+        var _this = this;
+        this.mostrarCargando();
+        this.umvralApiProvider.updatePassword(password)
+            .then(function (result) {
+            var resultData = JSON.parse(JSON.stringify(result));
+            console.log("Cambio de contraseña satisfactorio: " + resultData.status + " " + resultData.statusText);
+            _this.loading.dismiss();
+        }, function (err) {
+            var errorData = JSON.parse(JSON.stringify(err));
+            console.log("Error al cambiar la contraseña: " + errorData.status + " " + errorData.statusText);
+            console.log(errorData);
+            _this.mostrarError("Error al actualizar contraseña: " + errorData.statusText);
+        });
+        this.getUserData();
+    };
+    PerfilPage.prototype.changeFirstName = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             var alert;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.alertCtrl.create({
-                            title: 'Cambiar Nombre de Usuario',
-                            message: 'Ingresa tu nuevo nombre de usuario',
+                            title: 'Cambiar Nombre',
+                            message: 'Ingresa tu nuevo nombre',
                             buttons: [
-                                'Cancel',
+                                'Cancelar',
                                 {
                                     text: 'Ok',
                                     handler: function (data) {
-                                        _this.username = data.username;
+                                        console.log("Perfil - cambio de nombre a " + data.first_name);
+                                        _this.updateFirstName(data.first_name);
                                     }
                                 }
                             ],
                             inputs: [
                                 {
                                     type: 'text',
-                                    name: 'username',
-                                    value: this.username,
-                                    placeholder: 'username'
+                                    name: 'first_name',
+                                    value: this.userData.first_name,
+                                    placeholder: 'first_name'
                                 }
                             ]
                         })];
@@ -636,30 +651,31 @@ var PerfilPage = (function () {
             });
         });
     };
-    PerfilPage.prototype.changeName = function () {
+    PerfilPage.prototype.changeLastName = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             var alert;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.alertCtrl.create({
-                            title: 'Cambiar Nombre',
-                            message: 'Ingresa tu nuevo nombre',
+                            title: 'Cambiar Apellido',
+                            message: 'Ingresa tu nuevo apellido',
                             buttons: [
-                                'Cancel',
+                                'Cancelar',
                                 {
                                     text: 'Ok',
                                     handler: function (data) {
-                                        _this.nombre = data.nombre;
+                                        console.log("Perfil - cambio de apellido a " + data.last_name);
+                                        _this.updateLastName(data.last_name);
                                     }
                                 }
                             ],
                             inputs: [
                                 {
                                     type: 'text',
-                                    name: 'nombre',
-                                    value: this.nombre,
-                                    placeholder: 'nombre'
+                                    name: 'last_name',
+                                    value: this.userData.last_name,
+                                    placeholder: 'last_name'
                                 }
                             ]
                         })];
@@ -674,18 +690,55 @@ var PerfilPage = (function () {
         });
     };
     PerfilPage.prototype.changePassword = function () {
-        console.log('Clicked to change password');
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var alert;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertCtrl.create({
+                            title: 'Cambiar Contraseña',
+                            message: 'Ingresa tu nueva contraseña',
+                            buttons: [
+                                'Cancelar',
+                                {
+                                    text: 'Ok',
+                                    handler: function (data) {
+                                        console.log("Perfil - cambio de contraseña a " + data.password);
+                                        _this.updatePassword(data.password);
+                                    }
+                                }
+                            ],
+                            inputs: [
+                                {
+                                    type: 'password',
+                                    name: 'password',
+                                    value: '',
+                                    placeholder: 'contraseña'
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     PerfilPage.prototype.updatePicture = function () {
         console.log('Clicked to update picture');
     };
     PerfilPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-perfil',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mi Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n  <div padding-top text-center *ngIf="username">\n    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">\n    <h2>{{nombre}}</h2>\n    <h5>@{{username}}</h5>\n\n    <ion-list inset>\n      <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>\n      <button ion-item (click)="changeUsername()">Cambiar Nombre de Usuario</button>\n      <button ion-item (click)="changeName()">Cambiar Nombre</button>\n      <button ion-item (click)="changePassword()">Cambiar Contraseña</button>\n      <button ion-item disabled (click)="support()">Soporte</button>\n      <button ion-item disabled (click)="logout()">Cerrar Sesión</button>\n    </ion-list>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/,
+            selector: 'page-perfil',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mi Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n  <div padding-top text-center *ngIf="userData">\n    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">\n    <h2>{{userData.first_name}} {{userData.last_name}}</h2>\n    <h5>{{userData.email}}</h5>\n\n    <ion-list inset>\n      <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>\n      <button ion-item (click)="changeFirstName()">Cambiar Nombre</button>\n      <button ion-item (click)="changeLastName()">Cambiar Apellido</button>\n      <button ion-item (click)="changePassword()">Cambiar Contraseña</button>\n      <button ion-item disabled (click)="support()">Soporte</button>\n      <button ion-item disabled (click)="logout()">Cerrar Sesión</button>\n    </ion-list>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]])
     ], PerfilPage);
     return PerfilPage;
 }());
@@ -858,8 +911,8 @@ var CursosPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experience_list_experience_list__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experience_list_experience_list__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -902,7 +955,7 @@ var LoginPage = (function () {
     LoginPage.prototype.mostrarError = function (text) {
         this.loading.dismiss();
         var alert = this.alertCtrl.create({
-            title: 'Fail',
+            title: 'Error',
             subTitle: text,
             buttons: ['OK']
         });
@@ -913,23 +966,27 @@ var LoginPage = (function () {
         console.log("Boton presionado!");
         this.mostrarCargando();
         this.umvralApiProvider.login(this.data).then(function (result) {
-            console.log("SUCCESS");
-            console.log(JSON.stringify(result));
+            var resultData = JSON.parse(JSON.stringify(result));
+            console.log("SUCCESS: " + resultData.status + " " + resultData.statusText);
+            _this.loading.dismiss();
             _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__experience_list_experience_list__["a" /* ExperienceListPage */]);
         }, function (err) {
+            var errorData = JSON.parse(JSON.stringify(err));
             console.log("FAIL");
-            console.log(JSON.stringify(err));
-            _this.mostrarError("Error al acceder.");
+            _this.mostrarError("Error al acceder: " + errorData.status + " " + errorData.statusText);
         });
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="login-content" padding>\n  <ion-row class="logo-row">\n    <ion-col></ion-col>\n    <ion-col width-67>\n      <img src="assets/img/logotipo.png"/>\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n\n  <div class="login-box">\n      <form (ngSubmit)="iniciarSesion()" #registerForm="ngForm">\n        <ion-row>\n          <ion-col>\n            <ion-list inset>\n              \n              <ion-item>\n                <ion-input type="text" placeholder="Usuario" name="email" [(ngModel)]="data.username" required></ion-input>\n              </ion-item>\n              \n              <ion-item>\n                <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="data.password" required></ion-input>\n              </ion-item>\n              \n            </ion-list>\n          </ion-col>\n        </ion-row>\n        \n        <ion-row>\n          <ion-col class="signup-col">\n            <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Iniciar Sesión</button>\n            <!--<button ion-button class="register-btn" block clear (click)="createAccount()">Registrar</button>-->\n          </ion-col>\n        </ion-row>\n      </form>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/login/login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n</ion-header>\n\n\n<ion-content class="login-content" padding>\n  <ion-row class="logo-row">\n    <ion-col></ion-col>\n    <ion-col width-67>\n      <img src="assets/img/logo-texto.png"/>\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n\n  <div class="login-box">\n      <form (ngSubmit)="iniciarSesion()" #registerForm="ngForm">\n        <ion-row>\n          <ion-col>\n            <ion-list inset>\n              \n              <ion-item>\n                <ion-input type="text" placeholder="Usuario" name="email" [(ngModel)]="data.username" required></ion-input>\n              </ion-item>\n              \n              <ion-item>\n                <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="data.password" required></ion-input>\n              </ion-item>\n              \n            </ion-list>\n          </ion-col>\n        </ion-row>\n        \n        <ion-row>\n          <ion-col class="signup-col">\n            <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Iniciar Sesión</button>\n            <!--<button ion-button class="register-btn" block clear (click)="createAccount()">Registrar</button>-->\n          </ion-col>\n        </ion-row>\n      </form>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/login/login.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]])
     ], LoginPage);
     return LoginPage;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=login.js.map
@@ -956,19 +1013,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(235);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_in_app_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_screen_orientation__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_httpd__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_screen_orientation__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_httpd__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_component__ = __webpack_require__(290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_experience_list_experience_list__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_experiencia_1_experiencia_1__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_experiencia_2_experiencia_2__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_experiencia_3_experiencia_3__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_experience_list_experience_list__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_experiencia_1_experiencia_1__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_experiencia_2_experiencia_2__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_experiencia_3_experiencia_3__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_experiencia_1_materia_materia__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_experiencia_2_materia_materia__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_experiencia_3_materia_materia__ = __webpack_require__(207);
@@ -976,7 +1033,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_perfil_perfil__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_notas_notas__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_cursos_cursos__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_login_login__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1077,14 +1134,14 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_experience_list_experience_list__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_experience_list_experience_list__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_perfil_perfil__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_notas_notas__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_cursos_cursos__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_experiencia_1_experiencia_1__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_experiencia_2_experiencia_2__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_experiencia_3_experiencia_3__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_experiencia_1_experiencia_1__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_experiencia_2_experiencia_2__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_experiencia_3_experiencia_3__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1176,7 +1233,7 @@ var ConferenceApp = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_in_app_browser__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__ = __webpack_require__(203);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1224,6 +1281,140 @@ var ExpPage = (function () {
 }());
 
 //# sourceMappingURL=experiencia.js.map
+
+/***/ }),
+
+/***/ 53:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UmvralApiProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/*
+  Generated class for the UmvralApiProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var UmvralApiProvider = (function () {
+    function UmvralApiProvider(http) {
+        this.http = http;
+        this.apiUrl = 'http://vps.csaldias.cl:8000/api';
+        this.isLoggedIn = false;
+        console.log('Hello UmvralApiProvider Provider');
+    }
+    UmvralApiProvider.prototype.isUserLoggedIn = function () {
+        return this.isLoggedIn;
+    };
+    UmvralApiProvider.prototype.login = function (data) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        console.log("username=" + data.username + "&password=" + data.password);
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.username + "&password=" + data.password, options)
+                .subscribe(function (res) {
+                _this.isLoggedIn = true;
+                _this.userid = 1; //Fijo SOLO POR AHORA!!!!!
+                resolve(res);
+            }, function (err) {
+                _this.isLoggedIn = false;
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.getUserData = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        console.log("getUserData");
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.apiUrl + '/user/' + _this.userid, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.updateFirstName = function (firstName) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid + "&nombre=" + firstName;
+        console.log("updateFirstName");
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.updateLastName = function (lastName) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid + "&apellido=" + lastName;
+        console.log("updateLastName");
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.updatePassword = function (password) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid + "&clave=" + password;
+        console.log("updatePassword");
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]])
+    ], UmvralApiProvider);
+    return UmvralApiProvider;
+}());
+
+//# sourceMappingURL=umvral-api.js.map
 
 /***/ })
 

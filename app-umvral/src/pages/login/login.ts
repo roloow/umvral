@@ -43,7 +43,7 @@ export class LoginPage {
     this.loading.dismiss();
  
     let alert = this.alertCtrl.create({
-      title: 'Fail',
+      title: 'Error',
       subTitle: text,
       buttons: ['OK']
     });
@@ -54,13 +54,14 @@ export class LoginPage {
     console.log("Boton presionado!");
     this.mostrarCargando();
     this.umvralApiProvider.login(this.data).then((result) => {
-      console.log("SUCCESS");
-      console.log(JSON.stringify(result));
+      let resultData = JSON.parse(JSON.stringify(result));
+      console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
+      this.loading.dismiss();
       this.navCtrl.setRoot(ExperienceListPage);
     }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
       console.log("FAIL");
-      console.log(JSON.stringify(err));
-      this.mostrarError("Error al acceder.")
+      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
     });
   }
 
