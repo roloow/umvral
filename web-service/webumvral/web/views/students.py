@@ -17,8 +17,8 @@ def course_students(request, course):
 
 class StudentListJson(BaseDatatableView):
     model = StudentModel
-    columns = ['pk', 'profile__auth_user__email']
-    order_columns = ['pk','profile']
+    columns = ['pk', 'profile.full_name', 'profile.email', 'profile.pk']
+    order_columns = ['pk', 'profile.full_name', 'profile.email', 'profile.pk']
     max_display_length = 500
 
     def get_initial_queryset(self):

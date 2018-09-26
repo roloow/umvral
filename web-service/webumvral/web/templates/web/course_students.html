@@ -9,13 +9,22 @@ Cursos Disponibles
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>Lista de cursos</span>
+  <a href="{% url 'web:course_read' course.pk %}"><span> {{course.pk}} </span></a>
+  <i class="fa fa-angle-right"></i>
 </li>
+<li>
+  <a href="{% url 'web:course_students' course.pk %}"><span> Mis Alumnos </span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span> Lista de alumnos </span>
+</li>
+
 {% endblock %}
 {% block page_actions %}
 <a href="{% url 'web:course_create' %}" class="btn btn-fit-height default" role="button">
   <i class="icon-plus"></i>
-  Nuevo Curso
+  Nuevo Alumno
 </a>
 
 {% endblock %}
@@ -42,9 +51,10 @@ var render_checkbox = function(course_id) {
             <span></span>
           </label>`;
 };
-var render_options = function(course_id){
-	var url1 = "{% url 'web:course_edit' 0 %}".replace('0', course_id);
-  var url2 = "{% url 'web:course_delete' 0 %}".replace('0', course_id);
+var render_options = function(student_id, sprofile_id){
+	var url1 = "{% url 'web:course_edit' 0 %}".replace('0', student_id);
+  var url2 = "{% url 'web:course_delete' 0 %}".replace('0', student_id);
+  var url3 = "{% url 'web:course_delete' 0 %}".replace('0', student_id);
   return `<div class="btn-group">
             <button class="btn btn-xs orange dropdown-toggle" type="button"
                     data-toggle="dropdown" aria-expanded="false">
@@ -52,10 +62,14 @@ var render_options = function(course_id){
               <i class="fa fa-angle-down"></i>
             </button>
             <ul class="dropdown-menu pull-right" role="menu">
-              <li>
-                <a href="${url1}">
-                <i class="icon-note"></i> Editar curso </a>
-              </li>
+            <li>
+              <a href="${url1}">
+              <i class="icon-user"></i> Ver perfil </a>
+            </li>
+            <li>
+              <a href="${url1}">
+              <i class="fa fa-envelope-o"></i> Mensaje directo </a>
+            </li>
               <li class="divider" role="separator"></li>
               <li>
                 <a href="${url2}">
@@ -89,30 +103,29 @@ $(document).ready(function() {
 						}
 				},
         {
-	          name: 'name',
+	          name: 'Nombre Completo',
 	          orderable: true,
 	          searchable: true,
 	          targets: 1,
-						render: function(data, type, row){
-							return render_name(row[1], row[0]);
-						}
-        },
-        {
-            name: 'description',
-            orderable: true,
-            searchable: true,
-            targets: 2,
 						render: function(data, type, row){
 							return row[1]
 						}
         },
         {
-            //name: 'delete',
+            name: 'Correo',
+            orderable: true,
+            searchable: true,
+            targets: 2,
+						render: function(data, type, row){
+							return row[2]
+						}
+        },
+        {
             orderable: false,
             searchable: false,
             targets: 3,
 						render: function(data, type, row){
-							return render_options(row[1]);
+							return render_options(row[0], row[3]);
 						}
 				},
       ],
