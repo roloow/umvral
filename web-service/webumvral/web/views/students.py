@@ -4,7 +4,7 @@ from ..models import CourseModel, StudentModel, ClientModel
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.utils.html import escape
 from django.http import HttpResponse
-
+from django.core.mail import send_mail
 
 def course_students(request, course):
     context = get_base_context(request)
@@ -54,15 +54,23 @@ def course_invite(request, course):
         for i in invited_students:
             try:
                 u = ClientModel.objects.get(pk=int(i))
-                invited_students_objects.append(u)
+                new_stu = StudentModel()
+                new_stu.profile = u
+                new_stu.course = courseobj
+                new_stu.save()
+                try:
+                    text = 'Hola '+u.first_name+'!, bienvenido a umVRal. En unos momentos, podras utilizar la Realidad Virtual para poder complementar tus estudios, y mejorar tu comprensión. Ingresa el siguiente código en tu telefono, para poder activar el curso en que te inscribiste'
+                    send_mail(
+                        '¡Bienvenido a umVRal!',
+                        text,
+                        'appumvral@gmail.com',
+                        [u.email],
+                        fail_silently=False,
+                    )
+                except:
+                    pass
             except:
                 print("Usuario con identificador", i, "no encontrado.")
-
-        # TODO: CREAR FUNCION PARA ENVIAR Correo
-        # LA LISTA INVITED_STUDENTS_OBJECTS TIENE CLIENTMODEL objects
-        # PARA ACCEDER A SUS CORREOS:
-        # FOR I IN INVITED_STUDENTS_OBJECTS:
-        #     I.EMAIL
         context["Ok"] = True
     return render(request, 'web/course_invite.html', context)
 
