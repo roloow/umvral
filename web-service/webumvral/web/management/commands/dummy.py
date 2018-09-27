@@ -135,7 +135,6 @@ class Command(BaseCommand):
                 courses = u.courses.all()
                 if (not courses):
                     continue
-                course = courses[0]
                 av1 = AvailabilityModel()
                 av1.professor = u
                 av1.experience = e1
@@ -160,24 +159,25 @@ class Command(BaseCommand):
                 av4.video = "Video 4"
                 av4.position = 3
                 av4.save()
-
-                ex1 = ExpCourseModel()
-                ex1.available = av1
-                ex1.course = course
-                ex1.visible = True
-                ex1.save()
-                ex2 = ExpCourseModel()
-                ex2.available = av1
-                ex2.course = course
-                ex2.visible = True
-                ex2.save()
-                ex3 = ExpCourseModel()
-                ex3.available = av1
-                ex3.course = course
-                ex3.visible = False
-                ex3.save()
-                ex4 = ExpCourseModel()
-                ex4.available = av1
-                ex4.course = course
-                ex4.visible = False
-                ex4.save()
+                for j in courses:
+                    course = j
+                    ex1 = ExpCourseModel()
+                    ex1.available = av1
+                    ex1.course = course
+                    ex1.visible = True
+                    ex1.save()
+                    ex2 = ExpCourseModel()
+                    ex2.available = av2
+                    ex2.course = course
+                    ex2.visible = True
+                    ex2.save()
+                    ex3 = ExpCourseModel()
+                    ex3.available = av3
+                    ex3.course = course
+                    ex3.visible = False
+                    ex3.save()
+                    ex4 = ExpCourseModel()
+                    ex4.available = av4
+                    ex4.course = course
+                    ex4.visible = False
+                    ex4.save()
