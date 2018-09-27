@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -22,6 +23,8 @@ import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { NotasPage } from '../pages/notas/notas';
 import { CursosPage } from '../pages/cursos/cursos';
+import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
@@ -36,11 +39,13 @@ import { CursosPage } from '../pages/cursos/cursos';
     ExpPage,
     PerfilPage,
     NotasPage,
-    CursosPage
+    CursosPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(ConferenceApp)
   ],
   bootstrap: [IonicApp],
@@ -56,14 +61,16 @@ import { CursosPage } from '../pages/cursos/cursos';
     ExpPage,
     PerfilPage,
     NotasPage,
-    CursosPage
+    CursosPage,
+    LoginPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     InAppBrowser,
     SplashScreen,
     ScreenOrientation,
-    Httpd
+    Httpd,
+    UmvralApiProvider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
