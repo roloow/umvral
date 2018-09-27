@@ -95,12 +95,12 @@
                 <div class="col-md-6">
                   <div class="portlet light">
                       <div class="card-icon">
-                          <a href="{% url 'web:404' %}"> <i class="icon-book-open font-gray-sunglo theme-font"></i></a>
+                          <a href="{% url 'web:course_experience' course.pk %}"> <i class="icon-book-open font-gray-sunglo theme-font"></i></a>
                       </div>
                       <div class="card-title">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
-                                <a href="javascript:;"> MIS EXPERIENCIAS </a>
+                                <a href="{% url 'web:course_experience' course.pk %}"> MIS EXPERIENCIAS </a>
                             </li>
                         </ul>
                       </div>

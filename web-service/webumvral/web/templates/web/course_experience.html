@@ -1,126 +1,269 @@
-{% extends "web/base_list.html" %}
+{% extends "web/base_page.html" %}
+
 {% load static %}
+
 {% block title %}
-Cursos Disponibles
+{{course.name}}
 {% endblock %}
+
+{% block subtitle %}
+{{course.description}}
+{% endblock %}
+
 {% block breadcrumb %}
 <li>
   <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>Lista de cursos</span>
+  {{course.pk}}
 </li>
 {% endblock %}
-{% block page_actions %}
-<a href="{% url 'web:course_create' %}" class="btn btn-fit-height default" role="button">
-  <i class="icon-plus"></i>
-  Nuevo Curso
-</a>
 
+{% block content %}
+<div class="row ui-sortable" id="sortable_portlets">
+  <div class="col-md-4 column sortable">
+
+      <div class="portlet portlet-sortable light bg-inverse">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption">
+                  <i class="icon-paper-plane font-green-haze"></i>
+                  <span class="caption-subject bold font-green-haze uppercase"> Input </span>
+                  <span class="caption-helper"></span>
+              </div>
+              <div class="actions">
+                  <div class="portlet-input input-inline input-small">
+                      <div class="input-icon right">
+                          <i class="icon-magnifier"></i>
+                          <input type="text" class="form-control input-circle" placeholder="search..."> </div>
+                  </div>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <h4>Heading text goes here...</h4>
+              <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+                  eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis. </p>
+          </div>
+      </div>
+
+      <!-- empty sortable porlet required for each columns! -->
+      <div class="portlet portlet-sortable light bg-inverse" style="display: block;">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption font-red-sunglo">
+                  <i class="icon-share font-red-sunglo"></i>
+                  <span class="caption-subject bold uppercase"> Portlet</span>
+                  <span class="caption-helper"></span>
+              </div>
+              <div class="actions">
+                  <div class="btn-group btn-group-devided" data-toggle="buttons">
+                      <label class="btn btn-circle btn-transparent grey-salsa btn-sm active">
+                          <input type="radio" name="options" class="toggle" id="option2">Week</label>
+                      <label class="btn btn-circle btn-transparent grey-salsa btn-sm">
+                          <input type="radio" name="options" class="toggle" id="option2">Month</label>
+                  </div>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><div class="scroller" style="height: 200px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible="1" data-rail-color="red" data-handle-color="green" data-initialized="1">
+                  <h4>Heading Text</h4>
+                  <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+                      eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
+                      purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum.
+                      Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. </p>
+                  <p> nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                      Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
+                      purus sit amet fermentum. </p>
+              </div><div class="slimScrollBar" style="background: green; width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 73.6648px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: red; opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+          </div>
+      </div><div class="portlet portlet-sortable-empty"> </div>
+  </div>
+  <div class="col-md-4 column sortable">
+      <div class="portlet portlet-sortable box green-haze" style="display: block;">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption">
+                  <i class="fa fa-gift"></i>Portlet </div>
+              <div class="actions">
+                  <a href="javascript:;" class="btn btn-default btn-sm">
+                      <i class="fa fa-pencil"></i> Edit </a>
+                  <a href="javascript:;" class="btn btn-default btn-sm">
+                      <i class="fa fa-plus"></i> Add </a>
+                  <a class="btn btn-sm btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""></a>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <h4>Heading Text</h4>
+              <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+                  eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur </p>
+          </div>
+      </div><div class="portlet portlet-sortable light bordered" style="display: block;">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption font-green-sharp">
+                  <i class="icon-speech font-green-sharp"></i>
+                  <span class="caption-subject bold uppercase"> Portlet</span>
+                  <span class="caption-helper">details...</span>
+              </div>
+              <div class="actions">
+                  <a href="javascript:;" class="btn btn-circle btn-default btn-sm">
+                      <i class="fa fa-plus"></i> Add </a>
+                  <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""></a>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><div class="scroller" style="height: 200px; overflow: hidden; width: auto;" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd" data-initialized="1">
+                  <h4>Heading Text</h4>
+                  <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+                      eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
+                      purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum.
+                      Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. </p>
+                  <p> nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                      Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
+                      purus sit amet fermentum. </p>
+              </div><div class="slimScrollBar" style="background: rgb(161, 178, 189); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 71.048px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; border-radius: 7px; background: yellow; opacity: 0.2; z-index: 90; right: 1px; display: none;"></div></div>
+          </div>
+      </div>
+      <div class="portlet portlet-sortable box red-sunglo">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption">
+                  <i class="fa fa-gift"></i>Portlet </div>
+              <div class="actions">
+                  <a href="javascript:;" class="btn btn-default btn-sm">
+                      <i class="fa fa-pencil"></i> Edit </a>
+                  <a href="javascript:;" class="btn btn-default btn-sm">
+                      <i class="fa fa-plus"></i> Add </a>
+                  <a class="btn btn-sm btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""></a>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis. </p>
+              <p> Nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus. </p>
+          </div>
+      </div>
+      <div class="portlet portlet-sortable light bordered">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption font-yellow-crusta">
+                  <i class="icon-share font-yellow-crusta"></i>
+                  <span class="caption-subject bold uppercase"> Portlet</span>
+                  <span class="caption-helper">stats...</span>
+              </div>
+              <div class="actions">
+                  <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                      <i class="icon-cloud-upload"></i>
+                  </a>
+                  <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                      <i class="icon-wrench"></i>
+                  </a>
+                  <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                      <i class="icon-trash"></i>
+                  </a>
+                  <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""></a>
+              </div>
+          </div>
+          <div class="portlet-body"> Nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis
+              consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
+              fermentum. </div>
+      </div>
+      <!-- empty sortable porlet required for each columns! -->
+      <div class="portlet portlet-sortable-empty"> </div>
+  </div>
+  <div class="col-md-4 column sortable">
+      <div class="portlet portlet-sortable light bordered">
+          <div class="portlet-title tabbable-line ui-sortable-handle">
+              <div class="caption">
+                  <i class="icon-pin font-yellow-lemon"></i>
+                  <span class="caption-subject bold font-yellow-lemon uppercase"> Tabs </span>
+              </div>
+              <ul class="nav nav-tabs">
+                  <li>
+                      <a href="#portlet_tab2" data-toggle="tab"> Tab 2 </a>
+                  </li>
+                  <li class="active">
+                      <a href="#portlet_tab1" data-toggle="tab"> Tab 1 </a>
+                  </li>
+              </ul>
+          </div>
+          <div class="portlet-body">
+              <div class="tab-content">
+                  <div class="tab-pane active" id="portlet_tab1">
+                      <h4>Tab 1 Content</h4>
+                      <p> Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
+                          luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+                          volutpat.ut laoreet dolore magna ut laoreet dolore magna. ut laoreet dolore magna. ut laoreet dolore magna. </p>
+                  </div>
+                  <div class="tab-pane" id="portlet_tab2">
+                      <h4>Tab 2 Content</h4>
+                      <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
+                          ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                          et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="portlet portlet-sortable box blue-hoki">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption">
+                  <i class="fa fa-gift"></i>Portlet </div>
+              <div class="actions">
+                  <a href="javascript:;" class="btn btn-default btn-sm">
+                      <i class="fa fa-pencil"></i> Edit </a>
+                  <div class="btn-group">
+                      <a class="btn btn-sm btn-default" href="javascript:;" data-toggle="dropdown">
+                          <i class="fa fa-user"></i> User
+                          <i class="fa fa-angle-down"></i>
+                      </a>
+                      <ul class="dropdown-menu pull-right">
+                          <li>
+                              <a href="javascript:;">
+                                  <i class="fa fa-pencil"></i> Edit </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;">
+                                  <i class="fa fa-trash-o"></i> Delete </a>
+                          </li>
+                          <li>
+                              <a href="javascript:;">
+                                  <i class="fa fa-ban"></i> Ban </a>
+                          </li>
+                          <li class="divider"> </li>
+                          <li>
+                              <a href="javascript:;"> Make admin </a>
+                          </li>
+                      </ul>
+                  </div>
+                  <a class="btn btn-sm btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""></a>
+              </div>
+          </div>
+          <div class="portlet-body"> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis. eget lacinia odio sem nec elit. Cras mattis consectetur
+              purus sit amet fermentum. Duis mollis. </div>
+      </div>
+      <div class="portlet portlet-sortable light bg-inverse">
+          <div class="portlet-title ui-sortable-handle">
+              <div class="caption">
+                  <i class="icon-puzzle font-red-flamingo"></i>
+                  <span class="caption-subject bold font-red-flamingo uppercase"> Tools </span>
+                  <span class="caption-helper">actions...</span>
+              </div>
+              <div class="tools">
+                  <a href="" class="collapse" data-original-title="" title=""> </a>
+                  <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                  <a href="" class="reload" data-original-title="" title=""> </a>
+                  <a href="" class="fullscreen" data-original-title="" title=""> </a>
+                  <a href="" class="remove" data-original-title="" title=""> </a>
+              </div>
+          </div>
+          <div class="portlet-body">
+              <h4>Heading text goes here...</h4>
+              <p> Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+                  eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur. </p>
+          </div>
+      </div>
+      <!-- empty sortable porlet required for each columns! -->
+      <div class="portlet portlet-sortable-empty"> </div>
+  </div>
+</div>
 {% endblock %}
-{% block columns %}
-<th>
-  <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-      <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-      <span></span>
-  </label>
-</th>
-<th>Nombre</th>
-<th>Descripción</th>
-<th>Acciones</th>
+
+{% block plugin_js %}
 {% endblock %}
 
-{% block javascript %}
-<script>
-moment.locale("es");
-
-var render_checkbox = function(course_id) {
-  return `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-            <input type="checkbox" class="checkboxes" name="selected_user"
-                   value="${course_id}" />
-            <span></span>
-          </label>`;
-};
-var render_options = function(course_id){
-	var url1 = "{% url 'web:course_edit' 0 %}".replace('0', course_id);
-  var url2 = "{% url 'web:course_delete' 0 %}".replace('0', course_id);
-  return `<div class="btn-group">
-            <button class="btn btn-xs orange dropdown-toggle" type="button"
-                    data-toggle="dropdown" aria-expanded="false">
-              ADMINISTRAR
-              <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-              <li>
-                <a href="${url1}">
-                <i class="icon-note"></i> Editar curso </a>
-              </li>
-              <li class="divider" role="separator"></li>
-              <li>
-                <a href="${url2}">
-                <i class="icon-ban"></i> Eliminar curso </a>
-              </li>
-            </ul>
-          </div>`
-};
-var render_name = function(course_id, name){
-	var url = "{% url 'web:course_read' 0 %}".replace('0', course_id);
-	return `<a href="${url}"> ${name} </a>`
-}
-$(document).ready(function() {
-		var delete_url = "{% url 'web:course_delete' %}"
-    var dt_table = $('#table').DataTable({
-			processing: true,
-			serverSide: true,
-			language: {
-				zeroRecords: "No hay entradas que mostrar",
-				lengthMenu: "Mostrar _MENU_ entradas por página",
-				search: "Buscar:"
-			},
-      order: [[ 0, "asc" ]],
-      columnDefs: [
-				{
-						targets: 0,
-						orderable: false,
-						render: function (data, type, row){
-							checkbox = render_checkbox(row[2]);
-							return checkbox;
-						}
-				},
-        {
-	          name: 'name',
-	          orderable: true,
-	          searchable: true,
-	          targets: 1,
-						render: function(data, type, row){
-							return render_name(row[2], row[0]);
-						}
-        },
-        {
-            name: 'description',
-            orderable: true,
-            searchable: true,
-            targets: 2,
-						render: function(data, type, row){
-							return row[1]
-						}
-        },
-        {
-            //name: 'delete',
-            orderable: false,
-            searchable: false,
-            targets: 3,
-						render: function(data, type, row){
-							return render_options(row[2]);
-						}
-				},
-      ],
-      searching: true,
-      stateSave: true,
-			ajax: '{% url "web:course_list_json" %}'
-    });
-
-});
-</script>
+{% block plugin_css %}
 {% endblock %}
