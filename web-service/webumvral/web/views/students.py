@@ -57,6 +57,11 @@ def course_invite(request, course):
                     )
                 except:
                     pass
+        for i in invited_students_objects:
+            new_stu = StudentModel()
+            new_stu.profile = i
+            new_stu.course = courseobj
+            new_stu.save()
 
 
         # TODO: CREAR FUNCION PARA ENVIAR Correo
