@@ -11,4 +11,5 @@ def course_experience(request, course):
         context['experiences'] = experiences
     except:
         return redirect('web:404')
+    context['products'] = ClientModel.objects.filter(isProfessor=True)
     return render(request, 'web/course_experience.html', context)
