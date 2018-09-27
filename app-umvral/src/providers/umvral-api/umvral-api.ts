@@ -22,6 +22,11 @@ export class UmvralApiProvider {
     return this.isLoggedIn;
   }
 
+  logout() {
+    this.isLoggedIn = false;
+    this.userid = 0;
+  }
+
   login(data) {
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
@@ -32,7 +37,8 @@ export class UmvralApiProvider {
       this.http.post(this.apiUrl+'/user/login/', "username="+data.username+"&password="+data.password, options)
         .subscribe(res => {
           this.isLoggedIn = true;
-          this.userid = 1; //Fijo SOLO POR AHORA!!!!!
+          let userData = JSON.parse(res["_body"]);
+          this.userid = userData.user_id;
           resolve(res);
         }, (err) => {
           this.isLoggedIn = false;

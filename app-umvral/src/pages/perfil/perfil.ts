@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-perfil',
@@ -54,6 +55,11 @@ export class PerfilPage {
     });
   }
 
+  cerrarSesion() {
+    this.umvralApiProvider.logout();
+    this.navCtrl.setRoot(LoginPage);
+  }
+
   updateFirstName(name) {
     this.mostrarCargando();
     this.umvralApiProvider.updateFirstName(name)
@@ -61,14 +67,15 @@ export class PerfilPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("Cambio de nombre satisfactorio: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
+      this.getUserData();
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("Error al cambiar el nombre: "+errorData.status+" "+errorData.statusText);
       console.log(errorData);
-      this.mostrarError("Error al actualizar nombre: "+errorData.statusText);
+      this.loading.dismiss();
+      //this.mostrarError("Error al actualizar nombre: "+errorData.statusText);
+      this.getUserData();
     });
-
-    this.getUserData();
   }
 
   updateLastName(name) {
@@ -78,14 +85,15 @@ export class PerfilPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("Cambio de apellido satisfactorio: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
+      this.getUserData();
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("Error al cambiar el apellido: "+errorData.status+" "+errorData.statusText);
       console.log(errorData);
-      this.mostrarError("Error al actualizar apellido: "+errorData.statusText);
+      this.loading.dismiss();
+      //this.mostrarError("Error al actualizar apellido: "+errorData.statusText);
+      this.getUserData();
     });
-
-    this.getUserData();
   }
 
   updatePassword(password) {
@@ -99,10 +107,9 @@ export class PerfilPage {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("Error al cambiar la contraseña: "+errorData.status+" "+errorData.statusText);
       console.log(errorData);
-      this.mostrarError("Error al actualizar contraseña: "+errorData.statusText);
+      this.loading.dismiss();
+      //this.mostrarError("Error al actualizar contraseña: "+errorData.statusText);
     });
-
-    this.getUserData();
   }
 
   async changeFirstName() {

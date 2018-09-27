@@ -480,6 +480,7 @@ var HelpMateria3Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -527,6 +528,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var PerfilPage = (function () {
     function PerfilPage(navCtrl, navParams, alertCtrl, umvralApiProvider, loadingCtrl) {
         this.navCtrl = navCtrl;
@@ -565,6 +567,10 @@ var PerfilPage = (function () {
             console.log(JSON.stringify(_this.userData));
         });
     };
+    PerfilPage.prototype.cerrarSesion = function () {
+        this.umvralApiProvider.logout();
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
+    };
     PerfilPage.prototype.updateFirstName = function (name) {
         var _this = this;
         this.mostrarCargando();
@@ -573,13 +579,15 @@ var PerfilPage = (function () {
             var resultData = JSON.parse(JSON.stringify(result));
             console.log("Cambio de nombre satisfactorio: " + resultData.status + " " + resultData.statusText);
             _this.loading.dismiss();
+            _this.getUserData();
         }, function (err) {
             var errorData = JSON.parse(JSON.stringify(err));
             console.log("Error al cambiar el nombre: " + errorData.status + " " + errorData.statusText);
             console.log(errorData);
-            _this.mostrarError("Error al actualizar nombre: " + errorData.statusText);
+            _this.loading.dismiss();
+            //this.mostrarError("Error al actualizar nombre: "+errorData.statusText);
+            _this.getUserData();
         });
-        this.getUserData();
     };
     PerfilPage.prototype.updateLastName = function (name) {
         var _this = this;
@@ -589,13 +597,15 @@ var PerfilPage = (function () {
             var resultData = JSON.parse(JSON.stringify(result));
             console.log("Cambio de apellido satisfactorio: " + resultData.status + " " + resultData.statusText);
             _this.loading.dismiss();
+            _this.getUserData();
         }, function (err) {
             var errorData = JSON.parse(JSON.stringify(err));
             console.log("Error al cambiar el apellido: " + errorData.status + " " + errorData.statusText);
             console.log(errorData);
-            _this.mostrarError("Error al actualizar apellido: " + errorData.statusText);
+            _this.loading.dismiss();
+            //this.mostrarError("Error al actualizar apellido: "+errorData.statusText);
+            _this.getUserData();
         });
-        this.getUserData();
     };
     PerfilPage.prototype.updatePassword = function (password) {
         var _this = this;
@@ -609,9 +619,9 @@ var PerfilPage = (function () {
             var errorData = JSON.parse(JSON.stringify(err));
             console.log("Error al cambiar la contraseña: " + errorData.status + " " + errorData.statusText);
             console.log(errorData);
-            _this.mostrarError("Error al actualizar contraseña: " + errorData.statusText);
+            _this.loading.dismiss();
+            //this.mostrarError("Error al actualizar contraseña: "+errorData.statusText);
         });
-        this.getUserData();
     };
     PerfilPage.prototype.changeFirstName = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -732,15 +742,12 @@ var PerfilPage = (function () {
     };
     PerfilPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-perfil',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mi Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n  <div padding-top text-center *ngIf="userData">\n    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">\n    <h2>{{userData.first_name}} {{userData.last_name}}</h2>\n    <h5>{{userData.email}}</h5>\n\n    <ion-list inset>\n      <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>\n      <button ion-item (click)="changeFirstName()">Cambiar Nombre</button>\n      <button ion-item (click)="changeLastName()">Cambiar Apellido</button>\n      <button ion-item (click)="changePassword()">Cambiar Contraseña</button>\n      <button ion-item disabled (click)="support()">Soporte</button>\n      <button ion-item disabled (click)="logout()">Cerrar Sesión</button>\n    </ion-list>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/,
+            selector: 'page-perfil',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mi Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n  <div padding-top text-center *ngIf="userData">\n    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">\n    <h2>{{userData.first_name}} {{userData.last_name}}</h2>\n    <h5>{{userData.email}}</h5>\n\n    <ion-list inset>\n      <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>\n      <button ion-item (click)="changeFirstName()">Cambiar Nombre</button>\n      <button ion-item (click)="changeLastName()">Cambiar Apellido</button>\n      <button ion-item (click)="changePassword()">Cambiar Contraseña</button>\n      <button ion-item disabled (click)="support()">Soporte</button>\n      <button ion-item (click)="cerrarSesion()">Cerrar Sesión</button>\n    </ion-list>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _e || Object])
     ], PerfilPage);
     return PerfilPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=perfil.js.map
@@ -1318,6 +1325,10 @@ var UmvralApiProvider = (function () {
     UmvralApiProvider.prototype.isUserLoggedIn = function () {
         return this.isLoggedIn;
     };
+    UmvralApiProvider.prototype.logout = function () {
+        this.isLoggedIn = false;
+        this.userid = 0;
+    };
     UmvralApiProvider.prototype.login = function (data) {
         var _this = this;
         var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
@@ -1328,7 +1339,8 @@ var UmvralApiProvider = (function () {
             _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.username + "&password=" + data.password, options)
                 .subscribe(function (res) {
                 _this.isLoggedIn = true;
-                _this.userid = 1; //Fijo SOLO POR AHORA!!!!!
+                var userData = JSON.parse(res["_body"]);
+                _this.userid = userData.user_id;
                 resolve(res);
             }, function (err) {
                 _this.isLoggedIn = false;
@@ -1409,9 +1421,10 @@ var UmvralApiProvider = (function () {
     };
     UmvralApiProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]) === "function" && _a || Object])
     ], UmvralApiProvider);
     return UmvralApiProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=umvral-api.js.map
