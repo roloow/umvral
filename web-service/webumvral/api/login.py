@@ -25,7 +25,6 @@ class UserResource(ModelResource):
 
     def login(self, request, **kwargs):
         self.method_check(request, allowed=['post'])
-        print(request.POST)
 
         #data = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
         username = request.POST.get('username', '')
@@ -51,7 +50,11 @@ class UserResource(ModelResource):
             if user.is_active:
                 login(request, user)
                 return self.create_response(request, {
-                    'success': True
+                    'success': True,
+                    'user_id': user.pk,
+                    'user' : user,
+                    'first_name' : user.first_name,
+                    'last_name' : user.last_name
                 })
             else:
                 return self.create_response(request, {
