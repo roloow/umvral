@@ -39919,6 +39919,8 @@ page-materia-3 .scroll-content {
 }
 
 .col {
-  border: 1px solid grey;
-  background: #FDF4F4;
+  border: 1px solid white;
+  background: #ff4848;
+  border-radius: 10px;
+  color: white;
 }

@@ -692,7 +692,6 @@ var NotasPage = (function () {
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
         this.notas = [];
-        this.nombre = [];
         this.count = 0;
     }
     NotasPage.prototype.ionViewDidLoad = function () {
@@ -714,7 +713,6 @@ var NotasPage = (function () {
                                     handler: function (data) {
                                         _this.count += 1;
                                         _this.notas.push(data.nota);
-                                        _this.nombre.push("Nota " + _this.count.toString());
                                     }
                                 }
                             ],
@@ -739,12 +737,11 @@ var NotasPage = (function () {
     };
     NotasPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-notas',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Notas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n<!-- Si no existen notas  -->\n\n\n\n  <div padding style=\'height: 25%\' *ngIf="notas.length == 0">\n\n    <h3>No tienes notas ingresadas.</h3>\n\n  </div>\n\n  \n\n  <div style=\'height: 60%\' *ngIf="notas.length == 0">\n\n    <img class="displayed"  height= 50% src="assets/img/notas.png">    \n\n  </div>\n\n\n\n<!-- Si hay una o más notas  -->\n\n\n\n  <div padding style=\'height: 80%\' *ngIf="notas.length > 0">\n\n    <ion-grid>\n\n      <ion-row *ngFor="let nota of notas; let i = index">\n\n        <ion-col>\n\n          Nota {{i+1}}\n\n        </ion-col>\n\n        <ion-col col-2>\n\n            {{nota}}\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n    \n\n    </div>\n\n\n\n<!-- El botón siempre se ve  -->\n\n\n\n  <div class=\'final\'>\n\n    <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>\n\n  </div>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/,
+            selector: 'page-notas',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Notas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n<!-- Si no existen notas  -->\n\n\n\n  <div padding style=\'height: 25%\' *ngIf="notas.length == 0">\n\n    <h3>No tienes notas ingresadas.</h3>\n\n  </div>\n\n  \n\n  <div style=\'height: 60%\' *ngIf="notas.length == 0">\n\n    <img class="displayed"  height= 50% src="assets/img/notas.png">    \n\n  </div>\n\n\n\n<!-- Si hay una o más notas  -->\n\n\n\n  <div padding style=\'height: 80%\' *ngIf="notas.length > 0">\n\n    <ion-list *ngFor="let nota of notas; let i = index">\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col>\n\n            Nota {{i+1}}\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            {{nota}}\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    \n\n    \n\n    \n\n    \n\n    </div>\n\n\n\n<!-- El botón siempre se ve  -->\n\n\n\n  <div class=\'final\'>\n\n    <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>\n\n  </div>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], NotasPage);
     return NotasPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=notas.js.map
