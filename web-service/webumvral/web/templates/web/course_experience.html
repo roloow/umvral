@@ -3,11 +3,10 @@
 {% load static %}
 
 {% block title %}
-{{course.name}}
+Experiencias disponibles
 {% endblock %}
 
 {% block subtitle %}
-{{course.description}}
 {% endblock %}
 
 {% block breadcrumb %}
@@ -16,84 +15,105 @@
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  {{course.pk}}
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course_id}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Experiencias</span>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Lista de Experiencias</span>
 </li>
 {% endblock %}
 
 {% block content %}
-<div class="row ui-sortable" id="sortable_portlets">
-  <div class="col-md-2"></div>
-  <div class="col-md-8 column sortable">
-    {% for expcou in experiences %}
-      <div class="portlet portlet-sortable light bordered">
-          <div class="portlet-title tabbable-line ui-sortable-handle">
-              <div class="caption">
-                  <i class="fa fa-book font-blue"></i>
-                  <span class="caption-subject bold font-blue uppercase"> Tabs </span>
-              </div>
-              <ul class="nav nav-tabs">
-                  <li>
-                      <a href="#portlet_tab2" data-toggle="tab"> Datos </a>
-                  </li>
-                  <li class="active">
-                      <a href="#portlet_tab1" data-toggle="tab"> Configuraciónes </a>
-                  </li>
-              </ul>
-          </div>
-          <div class="portlet-body">
-              <div class="tab-content">
-                  <div class="tab-pane active" id="portlet_tab1">
-                      <h4>Tab 1 Content</h4>
-                      <p> Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                          luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                          volutpat.ut laoreet dolore magna ut laoreet dolore magna. ut laoreet dolore magna. ut laoreet dolore magna. </p>
-                  </div>
-                  <div class="tab-pane" id="portlet_tab2">
-                      <h4>Tab 2 Content</h4>
-                      <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                          ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                          et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
-                  </div>
-              </div>
+<div class="note note-info">
+  <h4 class="block">Cambios de orden</h4>
+  <p> Para poder realizar un cambio de orden en las posiciones de las experiencias, se debe arrastrar la fila deseada a la posición que se quiera dejar, y luego se deben guardar los cambios.
+  </p>
+  <br>
+</div>
+<div class="row">
+  <form  action="{% url 'web:course_experience' course_id %}" method="post">
+    {% csrf_token %}
+<div class="col-md-12">
+  <div class="portlet light portlet-fit bordered">
+      <div class="portlet-body">
+          <div class="table-scrollable table-scrollable-borderless">
+              <table class="table table-hover  sorted_table">
+                  <thead>
+                      <tr class="uppercase">
+                          <th> Posición</th>
+                          <th> Nombre </th>
+                          <th> Descripción </th>
+                          <th> Video </th>
+                          <th> Estado </th>
+                          <th> Prueba </th>
+                          <th> Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for exp in experiences  %}
+                      <tr>
+                        <input type="hidden" name="pos-{{ forloop.counter0 }}" value="{{exp.pk}}">
+                        <td> {{exp.available.position}}</td>
+                        <td > {{exp.available.experience.name}} </td>
+                        <td> {{exp.available.experience.description|truncatechars:50}} </td>
+                          <td>{% if exp.available.video %}
+                          <span class="label label-sm label-success "> Asignado </span>
+                          {% else %}
+                          <span class="label label-sm label-danger "> No asignado </span>
+                          {% endif %}</td>
+                        <td>
+                          {% if exp.visible %}
+                            <span class="label label-sm label-warning "> Visible </span>
+                          {% else %}
+                          <span class="label label-sm label-default "> No visible </span>
+                          {% endif %}
+                       </td>
+                       <td>
+                         {% if exp.test %}
+                           <span class="label label-sm label-success "> Creada </span>
+                         {% else %}
+                         <span class="label label-sm label-default "> Sin crear </span>
+                         {% endif %}
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <button class="btn btn-xs orange dropdown-toggle" type="button"
+                                  data-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRAR
+                            <i class="fa fa-angle-down"></i>
+                          </button>
+                          <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                              <a href="">
+                              <i class="icon-note"></i> Crear prueba </a>
+                            </li>
+                            <li>
+                              <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">
+                              <i class="fa fa-eye"></i> Cambiar visibilidad </a>
+                            </li>
+                            <li class="divider" role="separator"></li>
+                            <li>
+                              <a href="">
+                              <i class="icon-ban"></i> Eliminar experiencia del curso </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    {% endfor %}
+                  </tbody>
+              </table>
           </div>
       </div>
-    {% empty %}
-    <div class="col-md-12">
-      <div class="portlet light portlet-fit bordered">
-          <div class="portlet-body">
-              <div class="table-scrollable table-scrollable-borderless">
-                  <table class="table table-hover  sorted_table">
-                      <thead>
-                          <tr class="uppercase">
-                              <th> Nombre </th>
-                              <th> Descripción </th>
-                              <th> Video </th>
-                              <th> Estado </th>
-                              <th> Test </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        {% for product in products  %}
-                          <tr>
-                            <td class="index"> {{product.pk}} </td>
-                            <td> {{product.full_name}} </td>
-                            <td> {{product.email}} </td>
-                            <td class="switch">
-                              <div class="col-md-3">
-                                  <input type="checkbox" checked class="make-switch" name="actives" data-size="small" value="{{product.pk}}">
-                              </div>
-                           </td>
-                        {% endfor %}
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-    </div>
-    {% endfor %}
-      <div class="portlet portlet-sortable-empty"> </div>
   </div>
-  <div class="col-md-2"></div>
+  <button type="submit" class="btn btn-success" >Guardar cambios</button>
+</div>
+
+</form>
+
 </div>
 {% endblock %}
 

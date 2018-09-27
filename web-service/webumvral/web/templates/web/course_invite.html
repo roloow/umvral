@@ -17,6 +17,10 @@ Creación de curso
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
+  <a href="{% url 'web:course_students' course.pk %}"><span> Mis Alumnos </span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
   <span>Invitar estudiantes</span>
 </li>
 {% endblock %}
