@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis Notas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+<!-- Si no existen notas  -->
+
+  <div padding style='height: 25%' *ngIf="notas.length == 0">
+    <h3>No tienes notas ingresadas.</h3>
+  </div>
+  
+  <div style='height: 60%' *ngIf="notas.length == 0">
+    <img class="displayed"  height= 50% src="assets/img/notas.png">    
+  </div>
+
+<!-- Si hay una o más notas  -->
+
+  <div padding style='height: 80%' *ngIf="notas.length > 0">
+    <ion-list *ngFor="let nota of notas; let i = index">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            Nota {{i+1}}
+          </ion-col>
+          <ion-col col-3>
+            {{nota}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    
+    
+    
+    
+    </div>
+
+<!-- El botón siempre se ve  -->
+
+  <div class='final'>
+    <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>
+  </div>
+
+
+</ion-content>

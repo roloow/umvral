@@ -1,9 +1,8 @@
-<!-- logged out menu -->
-  <ion-menu id="loggedOutMenu" [content]="content">
+  <ion-menu id="navMenu" [content]="content">
 
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu</ion-title>
+        <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -11,25 +10,38 @@
 
       <ion-list>
         <ion-list-header>
-          Navigate
+          Experiencias
         </ion-list-header>
-        <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-          <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
-          {{p.title}}
+        <button ion-item menuClose (click)="openExperiencia1Page()">
+          Caída Libre
+        </button>
+        <button ion-item menuClose (click)="openExperiencia2Page()">
+          Lanzamiento de Proyectil
+        </button>
+        <button ion-item disabled (click)="openExperiencia3Page()">
+          Temperatura y Dilatación
         </button>
       </ion-list>
 
       <ion-list>
         <ion-list-header>
-          Tutorial
+          Perfil
         </ion-list-header>
-        <button ion-item menuClose (click)="openTutorial()">
-          <ion-icon item-start name="hammer"></ion-icon>
-          Show Tutorial
+        <button ion-item menuClose (click)="openPerfilPage()">
+          <ion-icon item-start name="contact"></ion-icon>
+          Mi Perfil
+        </button>
+        <button ion-item menuClose (click)="openNotasPage()">
+          <ion-icon item-start name="book"></ion-icon>
+          Mis Notas
+        </button>
+        <button ion-item menuClose (click)="openCursosPage()">
+          <ion-icon item-start name="school"></ion-icon>
+          Mis Cursos
         </button>
       </ion-list>
     </ion-content>
 
   </ion-menu>
 <!-- main navigation -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false" main name="app"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true" main name="app"></ion-nav>

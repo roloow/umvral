@@ -52,3 +52,32 @@ app-umvral/\.sourcemaps/
 app-umvral/platforms/
 
 experiencia-umvral/node_modules/
+
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+/[Ss]cripts
+/[Ee]nv
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+storage
+.env
+tcl
+
+app-umvral/plugins/

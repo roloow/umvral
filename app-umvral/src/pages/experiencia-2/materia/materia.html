@@ -1,0 +1,158 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Lanzamiento de Proyectil
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>    
+    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
+    <h3>Video: {{ video?.title }}</h3>
+
+    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>
+        <div>
+
+            <h3>Descripción de Lanzamiento de Proyectil</h3>
+            <p>
+            Se considera como Lanzamiento de Proyectil como un movimiento acelerado con una trayectoria 
+             parabólica lo que significa que posee un movimiento característico tanto en el eje <i>x</i> 
+             como en el eje <i>y</i>.
+            </p>
+
+            <p>
+            Para que exista un movimiento parabólico, es necesario lanzar un objeto de forma diagonal al eje 
+             de referencia, lo cual genera un ángulo entre la dirección de lanzamiento y el eje, este ángulo
+             lo llamaremos <i>b</i>.
+            </p>
+            <p>
+            Debido al ángulo <i>b</i>, la velocidad inicial <i>v</i><sub>0</sub> se puede descomponer de la 
+            siguiente forma:
+            </p>
+            <h5>v<sub>0x</sub> = v<sub>0</sub>* cos(b)</h5>
+            <h5>v<sub>0y</sub> = v<sub>0</sub>* sen(b)</h5>
+            <p>
+            El movimiento en cada eje es independiente del otro, es decir, el movimiento en el eje x no
+             perturba ni es perturbado por el eje y, esto quiere decir que para las ecuaciones de
+             la posición, la velocidad y la aceleración sólo se presentan constantes y variables de un solo eje. 
+            </p>
+            
+            <p>
+            Debido a que el movimiento se presenta en ambos ejes, la posición, la velocidad y la aceleración
+             se encuentran definidos por vectores.
+            </p>
+
+            <h3>Vectores</h3>
+            <p>
+            Los vectores de posición, velocidad y aceleración son definidos de la siguiente forma:
+            </p>
+            <h5>posición   : x(t) * i + y(t) * j  </h5>
+            <h5>Velocidad  : v<sub>x</sub>(t) * i + v<sub>y</sub>(t) * j  </h5>
+            <h5>Aceleración: a<sub>x</sub> * i + a<sub>y</sub> * j  </h5>
+            
+            <h3>Movimiento en eje x</h3>
+            <p>
+            Si no se considera el roce del aire, el movimiento en el eje x sólo está definido por la velocidad
+             inicial aplicada en el cuerpo, puesto que no existe ninguna fuerza en el sistema (la gravedad sólo
+             afecta al eje y).
+            </p>
+            
+            <h4>Aceleración.</h4>
+            
+            <p>
+            Al no existir fuerzas, la aceleración en el eje x es cero.
+            </p>
+            
+            <h5>a<sub>x</sub>(t) = a<sub>0x</sub>,</h5>
+            <h5>a<sub>x</sub>=0</h5>
+            
+            <h4>Velocidad.</h4>
+            
+            <p>
+            Debido a que no existe aceleración, la velocidad en el eje x sólo depende de la velocidad inicial.
+            </p>
+            
+            <h5>v<sub>x</sub>(t) = v<sub>0x</sub> + a<sub>x</sub> * t,</h5>
+            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * cos(b)</h5>
+
+            <h3>Posición</h3>
+            <p>
+            La posición en el eje x depende sólo de la velocidad en este eje y la posición inicial.
+            </p>
+            <h5>x(t) = x<sub>0</sub> + v<sub>0x</sub>*t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>
+            <h5>x(t) = x<sub>0</sub> + v<sub>0</sub> * t * cos(b) </h5>
+
+            <h3>Movimiento en eje y</h3>
+            <p>
+            Si no se considera el roce del aire, el movimiento en el eje y está definido tanto por la velocidad
+             inicial aplicada en el lanzamiento y la aceleración gravitacional.
+            </p>
+            
+            <h4>Aceleración.</h4>
+            
+            <p>
+            Al ser la gravedad la única fuerza en el sistema, la aceleración en <i>y</i>se define como:
+            </p>
+            
+            <h5>a<sub>y</sub>(t) = a<sub>0y</sub>,</h5>
+            <h5>a<sub>y</sub> = g</h5>
+            
+            <h4>Velocidad.</h4>
+            
+            <p>
+            La velocidad en el eje <i>y</i> está definida por la velocidad inicial y la gravedad:
+            </p>
+            
+            <h5>v<sub>y</sub>(t) = v<sub>0y</sub> + a<sub>y</sub> * t,</h5>
+            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t</h5>
+
+            <p>
+            Es rescatable decir que debido a que la gravedad apunta en dirección contraria al eje, la velocidad
+             en respecto al tiempo decaerá de forma constante, finalizando siempre con valores negativos.
+            </p>
+            <h3>Posición</h3>
+            <p>
+            La posición en el eje y depende tanto de la posición inicial, la velocidad y la aceleración gravitatoria:
+            </p>
+            <h5>y(t) = y<sub>0</sub> + v<sub>0y</sub> * t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>
+            <h5>y(t) = y<sub>0</sub> + v<sub>0</sub> * t * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>
+
+            <h3>Observaciones varias.</h3>
+            <p>
+            Un problema recurrente es definir en que posición caerá un proyectil lanzado. Par solucionar este problema
+             se debe primero evaluar el movimiento sólo en el eje <i>y</i>, puesto que es aquí donde se define la 
+             duración del movimiento. 
+            </p>
+            <p>
+            Se dice que la duración del movimiento se define en el eje <i>y</i> puesto que el objeto se detendrá cuando
+             este finalmente toque el suelo. Debido a esto, el tiempo completo se descompone en 2, el tiempo de subida
+             y el tiempo de bajada del proyectil.
+            </p>
+
+            <p>
+            Primero se define cuanto tiempo sube el objeto lanzado, es decir, cuanto tiempo transcurre desde
+             que se lanza el objeto, hasta que la velocidad de subida toma un valor 0.
+            </p>
+            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t = 0</h5>
+            <h5> v<sub>0</sub> * sen(b) =  - g * t </h5>
+            <h5> v<sub>0</sub> * sen(b) = g * t<sub>subida</sub> </h5>
+            <p>
+            Luego de obtener el tiempo de subida, se puede obtener la altura a la que llegó el objeto.
+            </p>
+            <h5>h = y<sub>0</sub> + v<sub>0</sub> * t<sub>subida</sub> * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>
+            <p>
+            Luego, a través de la misma formula, se puede obtener el tiempo de bajada, despejando t y poniendo y(t)=0:
+            </p>
+            <h5>0 = h + v<sub>0</sub> * t<sub>bajada</sub> * sen(b) + ½ * g<sub>x</sub> * t<sub>bajada</sub><sup>2</sup></h5>
+            <p>
+            Finalmente, se tiene t<sub>subida</sub> y t<sub>bajada</sub>, que sumados dan t<sub>total</sub>, con la
+             cual se puede obtener la distancia x recorrida en todo el movimiento.
+            </p>
+            <h5>x(t<sub>total</sub>) = x<sub>0</sub> + v<sub>0</sub> * t<sub>total</sub> * cos(b) </h5>
+
+        </div>
+    </ion-scroll>
+    
+</ion-content>
+
+
