@@ -1,0 +1,15 @@
+--- platforms/android/app/build.gradle	2018-09-09 17:53:10.000000000 -0300
++++ platforms/android/app/build.gradle	2018-09-09 17:53:25.000000000 -0300
+@@ -33,6 +33,12 @@
+     }
+ }
+ 
++configurations.all {
++    resolutionStrategy {
++        force 'com.android.support:support-v4:27.1.0'
++    }
++}
++
+ // Allow plugins to declare Maven dependencies via build-extras.gradle.
+ allprojects {
+     repositories {
