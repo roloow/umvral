@@ -6,8 +6,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
   templateUrl: 'notas.html',
 })
 export class NotasPage {
-  notas: number[];
-  nombre: string[];
+  notas: any;
   count: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
@@ -19,6 +18,15 @@ export class NotasPage {
     console.log('ionViewDidLoad NotasPage');
   }
 
+  mostrarError(text) { 
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   async addNota() {
     const alert = await this.alertCtrl.create({
       title: 'Agregar nota',
@@ -28,17 +36,29 @@ export class NotasPage {
         {
           text: 'Ok',
           handler: (data: any) => {
-            this.count += 1;
-            this.notas.push(data.nota);
+            if (data.nota && data.nombre) {
+              this.count += 1;
+              this.notas.push({nota: data.nota, nombre: data.nombre});
+            } else {
+              if (data.nota === "" && data.nombre === "") this.mostrarError("Nombre y Nota inválidos.");
+              else if (data.nombre === "") this.mostrarError("Nombre inválido.");
+              else this.mostrarError("Nota inválida.");
+            }
           }
         }
       ],
       inputs: [
         {
           type: 'text',
+          name: 'nombre',
+          value: '',
+          placeholder: 'Evaluacion'
+        },
+        {
+          type: 'text',
           name: 'nota',
-          value: '4.0',
-          placeholder: 'nota'
+          value: '',
+          placeholder: 'Nota'
         }
       ]
     });

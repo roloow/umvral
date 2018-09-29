@@ -21,6 +21,7 @@ export class PerfilPage {
   ) {
     this.navCtrl = navCtrl;
     console.log('constructor PerfilPage');
+    this.mostrarCargando();
     this.getUserData();
   }
 
@@ -44,7 +45,7 @@ export class PerfilPage {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
 
   getUserData() {
@@ -52,6 +53,7 @@ export class PerfilPage {
     .then(data => {
       this.userData = data;
       console.log(JSON.stringify(this.userData));
+      this.loading.dismiss();
     });
   }
 
@@ -66,13 +68,13 @@ export class PerfilPage {
     .then((result) => {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("Cambio de nombre satisfactorio: "+resultData.status+" "+resultData.statusText);
-      this.loading.dismiss();
+      //this.loading.dismiss();
       this.getUserData();
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("Error al cambiar el nombre: "+errorData.status+" "+errorData.statusText);
       console.log(errorData);
-      this.loading.dismiss();
+      //this.loading.dismiss();
       //this.mostrarError("Error al actualizar nombre: "+errorData.statusText);
       this.getUserData();
     });
@@ -84,13 +86,13 @@ export class PerfilPage {
     .then((result) => {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("Cambio de apellido satisfactorio: "+resultData.status+" "+resultData.statusText);
-      this.loading.dismiss();
+      //this.loading.dismiss();
       this.getUserData();
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("Error al cambiar el apellido: "+errorData.status+" "+errorData.statusText);
       console.log(errorData);
-      this.loading.dismiss();
+      //this.loading.dismiss();
       //this.mostrarError("Error al actualizar apellido: "+errorData.statusText);
       this.getUserData();
     });

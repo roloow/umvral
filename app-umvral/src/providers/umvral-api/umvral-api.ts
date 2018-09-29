@@ -79,7 +79,7 @@ export class UmvralApiProvider {
         let userData = JSON.parse(data["_body"]);
         resolve(userData);
       }, err => {
-        console.log("FAIL")
+        //console.log("FAIL")
         reject(err);
       });
     });
@@ -99,7 +99,7 @@ export class UmvralApiProvider {
         let userData = JSON.parse(data["_body"]);
         resolve(userData);
       }, err => {
-        console.log("FAIL")
+        //console.log("FAIL")
         reject(err);
       });
     });
@@ -119,7 +119,7 @@ export class UmvralApiProvider {
         let userData = JSON.parse(data["_body"]);
         resolve(userData);
       }, err => {
-        console.log("FAIL")
+        //console.log("FAIL")
         reject(err);
       });
     });
