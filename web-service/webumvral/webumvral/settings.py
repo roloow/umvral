@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'api',
     'web',
-    'tastypie'
+    'tastypie',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

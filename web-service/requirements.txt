@@ -1,6 +1,7 @@
 Django==2.0.6
 django-datatables-view==1.17.0
 django-tastypie==0.14.1
+django-widget-tweaks==1.4.3
 python-dateutil==2.7.3
 python-mimeparse==1.6.0
 pytz==2018.4
