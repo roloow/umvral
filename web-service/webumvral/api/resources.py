@@ -30,7 +30,47 @@ class MessageResource(ModelResource):
         resource_name = 'message'
         authentication = Authentication()
         authorization = Authorization()
-        #allowed_methods = ['get']
+        allowed_methods = ['get','post']
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/recibidos%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('recibidos'), name="api_recibidos"),
+            url(r"^(?P<resource_name>%s)/enviados%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('enviados'), name="api_enviados"),
+
+        ]
+
+    def enviados(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        mensajesrecibidos = MessageModel.objects.filter(sender__pk = user_id)
+        arrayMensajes =[]
+        for msg in mensajesrecibidos:
+            arrayMensajes.append([{'id':msg.pk , 'topic':msg.topic, 'name':msg.receiver.full_name,'content':msg.content ,'id_receiver':msg.receiver.pk}])
+        return self.create_response(request, {
+            'usuario': user_id,
+            'mensajes': arrayMensajes,
+            } )
+
+
+    def recibidos(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        mensajesrecibidos = MessageModel.objects.filter(receiver__pk = user_id)
+        arrayMensajes =[]
+        for msg in mensajesrecibidos:
+            arrayMensajes.append([{'id':msg.pk , 'topic':msg.topic, 'name':msg.sender.full_name,'content':msg.content ,'id_sender':msg.sender.pk}])
+        return self.create_response(request, {
+            'usuario': user_id,
+            'mensajes': arrayMensajes,
+            } )
+
+
+
+
 
 #Experiencias disponibles
 class ExpdispResource(ModelResource):
@@ -78,7 +118,7 @@ class ClientResource(ModelResource):
                 'apellido':apellido,
                 'clave':clave,
                 'user_id':user_id,
-                }, HttpForbidden )
+                } )
 
         return self.create_response(request, {
             'success': False,
@@ -86,7 +126,7 @@ class ClientResource(ModelResource):
             'apellido':apellido,
             'clave':clave,
             'user_id':user_id,
-            }, HttpForbidden )
+            } )
 
 
 

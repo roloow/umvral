@@ -6,6 +6,7 @@ from django.conf.urls import url
 from tastypie.utils import trailing_slash
 from web.models import *
 
+
 class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
@@ -63,7 +64,7 @@ class UserResource(ModelResource):
                     'user' : username,
                     'userpost':request.POST['username'],
                     'password':password,
-                    }, HttpForbidden )
+                    } )
         else:
             return self.create_response(request, {
                 'success': False,
@@ -71,7 +72,7 @@ class UserResource(ModelResource):
                 'user' : username,
                 'userpost':request.POST['username'],
                 'password':password,
-                }, HttpUnauthorized )
+                } )
 
 
 
