@@ -58,3 +58,9 @@ Para inicialmente tener alguna información, se creó un comando que genera 900 
 ```
 (CARPET) :CarpetaDestino\webumvral> python manage.py dummy --create
 ```
+
+Para luego agregar experiencias dummy, se genera 5 experiencias, y se agrega a por cada profesor un AvailableModel de forma tal que 4 de 5 experiencias tengan video, luego para todos los cursos del profesor, se crea un ExpCourseModel por cada AvailableModel, dejando a todos los cursos con 4 experiencias, 2 visibles y 2 no visibles.
+
+```
+(CARPET) :CarpetaDestino\webumvral> python manage.py dummy --extra
+```

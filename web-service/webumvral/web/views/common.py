@@ -237,3 +237,37 @@ def message_view(request, client_id, inbox_type):
         context['header'] = 'Bandeja de entrada > Redactar'
         return render(request, 'web/inbox.html', context)
     return redirect('web:404')
+
+def msg_actions(request, client_id, msg_id, action):
+    LECTURA = 0
+    IMPORTANTE = 1
+    ELIMINAR = 2
+    action = int(action)
+    msg = MessageModel.objects.get(pk=msg_id)
+    if (action == LECTURA):
+        msg.read = not msg.read
+    if (action == IMPORTANTE):
+        msg.important = not msg.important
+    if (action == ELIMINAR):
+        msg.deleted = True
+    msg.save()
+    return redirect('web:msg_view', client_id=client_id, inbox_type=0)
+
+def msg_direct(request, client_id):
+    context = get_base_context(request)
+    if (request.method == "POST"):
+        to = request.POST['to']
+        topic = request.POST['topic']
+        if (topic == None or topic == ""):
+            topic = "Mensaje directo desde perfil"
+        else:
+            topic = "RE: " + topic
+        client = ClientModel.objects.get(pk=client_id)
+        context["users"] = ClientModel.objects.all()
+        context["to"] = int(to)
+        context["subject"] = topic
+        context["compose"] = True
+        context["client"] = client
+        return render(request, 'web/inbox.html', context)
+    if (request.method == "GET"):
+        return redirect("web:404")

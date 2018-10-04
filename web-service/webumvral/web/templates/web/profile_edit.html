@@ -24,7 +24,12 @@
                   {% if my_profile %}
                     <a href="{% url 'web:msg_view' client.pk 0 %}" type="button" class="btn btn-circle blue btn-sm">Bandeja de mensaje</a>
                   {% else %}
-                    <a href="{% url 'web:profile' 0 %}" type="button" class="btn btn-circle red btn-sm">Enviar un mensajes</a>
+                  <form class="" action="{% url 'web:msg_direct' request.user.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="topic" value="">
+                    <input type="hidden" name="to" value="{{client.pk}}">
+                    <a href="javascript:;" onclick="parentNode.submit();" type="button" class="btn btn-circle red btn-sm">Enviar un mensajes</a>
+                  </form>
                   {% endif %}
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
