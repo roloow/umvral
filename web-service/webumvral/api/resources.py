@@ -147,7 +147,32 @@ class CourseResource(ModelResource):
         resource_name = 'course'
         authentication = Authentication()
         authorization = Authorization()
-        #allowed_methods = ['get']
+        allowed_methods = ['get','post']
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/misCursos%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('misCursos'), name="api_misCursos"),
+
+        ]
+
+    def misCursos(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        students = StudentModel.objects.filter(profile__pk=user_id)
+        cursos=[]
+        for st in students:
+            cursos.append(st.course)
+
+
+        return self.create_response(request, {
+            'user_id': user_id,
+            'cursos':cursos,
+            'students':students
+            } )
+
+
 
 #Experiencia - Curso
 class ExpcourseResource(ModelResource):
