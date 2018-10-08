@@ -37,6 +37,21 @@ export class LoginPage {
     console.log("Boton presionado para registrar!");
     this.navCtrl.push(RegisterUserPage);
   }
+
+  iniciarSesion() {
+    console.log("Boton presionado!");
+    this.mostrarCargando();
+    this.umvralApiProvider.login(this.data).then((result) => {
+      let resultData = JSON.parse(JSON.stringify(result));
+      console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
+      this.loading.dismiss();
+      this.navCtrl.setRoot(ExperienceListPage);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log("FAIL");
+      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
+    });
+  }
   
   mostrarCargando() {
       this.loading = this.loadingCtrl.create({
@@ -55,21 +70,6 @@ export class LoginPage {
       buttons: ['OK']
     });
     alert.present(prompt);
-  }
-  
-  iniciarSesion() {
-    console.log("Boton presionado!");
-    this.mostrarCargando();
-    this.umvralApiProvider.login(this.data).then((result) => {
-      let resultData = JSON.parse(JSON.stringify(result));
-      console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
-      this.loading.dismiss();
-      this.navCtrl.setRoot(ExperienceListPage);
-    }, (err) => {
-      let errorData = JSON.parse(JSON.stringify(err));
-      console.log("FAIL");
-      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
-    });
   }
 
 }
