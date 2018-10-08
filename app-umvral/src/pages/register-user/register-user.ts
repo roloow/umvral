@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the RegisterUserPage page.
@@ -13,12 +13,35 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'register-user.html',
 })
 export class RegisterUserPage {
+  createSuccess = false;
+  registerCredentials = { email: '', password: '' };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterUserPage');
+  }
+
+  showPopup(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            if (this.createSuccess) {
+              this.navCtrl.popToRoot();
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { ExperienceListPage } from '../experience-list/experience-list';
+import { RegisterUserPage } from '../register-user/register-user';
 
 /**
  * Generated class for the LoginPage page.
@@ -48,6 +49,11 @@ export class LoginPage {
       buttons: ['OK']
     });
     alert.present(prompt);
+  }
+
+  registrarUsuario() {
+    console.log("Boton presionado para registrar!");
+    this.navCtrl.push(RegisterUserPage);
   }
 
   iniciarSesion() {
