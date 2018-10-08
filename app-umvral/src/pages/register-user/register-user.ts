@@ -14,7 +14,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 })
 export class RegisterUserPage {
   createSuccess = false;
-  registerCredentials = { email: '', password: '' };
+  registerCredentials = { email: '', password: '', firstName: '', lastName: '' };
 
   constructor(
     public navCtrl: NavController,

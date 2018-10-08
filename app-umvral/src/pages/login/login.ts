@@ -15,6 +15,7 @@ import { RegisterUserPage } from '../register-user/register-user';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
+
 export class LoginPage {
   data = {username: "", password: ""};
   loading: Loading;
@@ -32,6 +33,11 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  registrarUsuario() {
+    console.log("Boton presionado para registrar!");
+    this.navCtrl.push(RegisterUserPage);
+  }
+  
   mostrarCargando() {
       this.loading = this.loadingCtrl.create({
         content: 'Cargando...',
@@ -50,12 +56,7 @@ export class LoginPage {
     });
     alert.present(prompt);
   }
-
-  registrarUsuario() {
-    console.log("Boton presionado para registrar!");
-    this.navCtrl.push(RegisterUserPage);
-  }
-
+  
   iniciarSesion() {
     console.log("Boton presionado!");
     this.mostrarCargando();

@@ -53,9 +53,9 @@ export class UmvralApiProvider {
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
     let options = new RequestOptions({ headers: hdrs});
 
-    console.log("username="+data.username+"&password="+data.password+"&register=1&email="+data.correo+"&firstname="+data.firstName+"&lastname="+data.lastName);
+    console.log("username="+data.email+"&password="+data.password+"&register=1&email="+data.email+"&firstname="+data.firstName+"&lastname="+data.lastName);
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl+'/user/login/', "username="+data.username+"&password="+data.password+"&register=1&email="+data.correo+"&firstname="+data.firstName+"&lastname="+data.lastName, options)
+      this.http.post(this.apiUrl+'/user/login/', "username="+data.email+"&password="+data.password+"&register=1&email="+data.email+"&firstname="+data.firstName+"&lastname="+data.lastName, options)
         .subscribe(res => {
           this.isLoggedIn = true;
           let userData = JSON.parse(res["_body"]);
