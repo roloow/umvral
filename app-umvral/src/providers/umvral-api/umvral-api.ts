@@ -39,6 +39,28 @@ export class UmvralApiProvider {
           this.isLoggedIn = true;
           let userData = JSON.parse(res["_body"]);
           this.userid = userData.user_id;
+          console.log("Login successful with ID "+this.userid);
+          resolve(res);
+        }, (err) => {
+          this.isLoggedIn = false;
+          reject(err);
+        });
+    });
+  }
+
+  register(data) {
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
+
+    console.log("username="+data.username+"&password="+data.password+"&register=1&email="+data.correo+"&firstname="+data.firstName+"&lastname="+data.lastName);
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/user/login/', "username="+data.username+"&password="+data.password+"&register=1&email="+data.correo+"&firstname="+data.firstName+"&lastname="+data.lastName, options)
+        .subscribe(res => {
+          this.isLoggedIn = true;
+          let userData = JSON.parse(res["_body"]);
+          this.userid = userData.user_id;
+          console.log("Register successful with ID "+this.userid);
           resolve(res);
         }, (err) => {
           this.isLoggedIn = false;
