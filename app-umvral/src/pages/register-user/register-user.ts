@@ -37,10 +37,12 @@ export class RegisterUserPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
+      this.createSuccess = true;
       this.showPopup("Exito", "Cuenta creada con éxito.");
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("FAIL");
+      this.loading.dismiss();
       this.showPopup("Error", "Error al crear cuenta: "+errorData.status+" "+errorData.statusText);
     });
   }
