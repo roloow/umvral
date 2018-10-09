@@ -38,10 +38,10 @@ before_cache:
 - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/Library/Caches/Yarn/v1/
-  - $HOME/.cache/yarn/v1/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/Library/Caches/Yarn/v1/"
+  - "$HOME/.cache/yarn/v1/"
 before_install:
 - export LANG=en_US.UTF-8
 - cd app-umvral
@@ -52,18 +52,23 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/addkeys.sh ; fi
 script:
 - yarn install
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/build-ios.sh && ./travis/package-ios.sh ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./travis/build-android.sh && ./travis/package-android.sh ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./travis/build-ios.sh && ./travis/package-ios.sh
+  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./travis/build-android.sh && ./travis/package-android.sh
+  ; fi
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "csaldias"
+  - git config --local user.email "camilo.saldias@gmail.com"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
   provider: releases
   api_key:
-    secure: 1WU0Csb0tb7rKRbRE6oV6wBdHozMTE+uWkBMD0RSc9ZVzrl4aravifrUZNq5QPjt13eB8ZuMQTi+6882cyEtr68Uhy8LE/85I86AkyOsxQdnPgoB4fLFuow7fc80+lCH+QLc8HU9XH5Jwx/a9f2HxSv5ZGkluaHkMglGLTTIqE0pKDWfowmyrBCajSHIXNlPPYaEhKHKOmJkFUgn3kwYwPbV3CgYAQXoLOctK6TxvKlKL0FTmNPX3+MVUlY0jzAn9DEV9eXQ8bvomRJC4KQxTSh9xJKCba/C0wgUkO/3EECCPIArrdYHKzFjpXP18SIbvuBQvPoGHUcfClFIKP8G0gXYSCyiMAZ4b3a6CpydMb+PW0zGsEqEHL1EZlhn5cbYZzUfXKIYutO5A8h9dDcrCqOhUIzo2ZOy69sN9oSPPJRrvZOUOo+yzZHSutLI6r5ncVislRIQFw1QDN8HCJAfsDqDz2NcL3bJt8vRgHiI/98lKFIqkErrWwggGASIs0npmBVnlaraTUUW+B08MpkTXLdwcj98X8mMbSDThlNFJUymY7+HJ+YwKtdZ/pjfn7zAXaaPLn2v8Vu5M+uwV+KcVxRqLIRU41jB7DxkBA0Tu3sI6FHbaJwt6BB+xlJXw3d2MLeaJqN1+tc2rb6BiTIlRoRS2k1kqdLQlsvuCmSS+5s=
+    secure: AxCYBeq0cV7sj3trbnxVhf2liKNDQG3+ixQ2CsYyRWW9IyFeVSczWl6WsByQcwLtJAaC9tzpzpvIIjEYaFyk17OCJR4VdEEBugzz38R1jlGQbbcg3FKB6bSM4cwHSrV5gqQYAYZUsKx57CiGNuB0ASZBhyJwZxvQTzwg32athQYev4QX/OX6Abd3lB4PmTuinp+Lqswi4TrgwjmueivsnnwCywVFqoU4KapRRIl0bKNFqqyuFqW7aHyxwfAxoDbwbz0pScTfnLV8//KjtEzCVwGAUXSss5v/5MH8XyUe2eo7y7z11uZiORkacS6tg0yN8Aj4SvF35laDOnf5cs1Hr/J5PIyvigXP7h664L9BDCefvIPtSNpxXS0n/2n8Akj0B02Ldenwy9k0M3bPgymlxKQ4xNkRtQaWP4st+oUNy2EMtkdrGrApAMZYYM3kOb2shCA0ondfFgYZF4tsIkQMuViZjDQOKJTe2XHjXZ6eHBTSNCa+l9AJ2xwsaNzvsuNUvYLD2BFH1B26OueQk5vmE06nsGDyP4hQhzVzvCqREYH+uZamnJLPiFz1zRsRLKxMyWL2idqErQd5kfN0WFfJX6XoufvCSxz+sz3PsmPdfXsapZ9sKs6YP3EqwgWT8293oiRMTYU+apCUXhKxjqfVqTI0ziYPJ4KGi0kmbHibmf4=
   file_glob: true
   file: output/*
   skip_cleanup: true
   overwrite: true
-  on:
-    branch: master
