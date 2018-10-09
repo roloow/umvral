@@ -63,7 +63,10 @@ before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "csaldias"
   - git config --local user.email "camilo.saldias@gmail.com"
-  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+  - if [[ "$TRAVIS_BRANCH" == "develop" ]]; then git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)-develop"
+    ; fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+      ; fi
 deploy:
   provider: releases
   api_key:
@@ -72,3 +75,5 @@ deploy:
   file: output/*
   skip_cleanup: true
   overwrite: true
+  on:
+    all_branches: true
