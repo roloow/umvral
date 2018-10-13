@@ -38,6 +38,25 @@ def course_exp_visibility(request, course, experience):
         return redirect('web:404')
     return redirect('web:course_experience', course=course)
 
+def experience_test(request, course, experience):
+    context = get_base_context(request)
+    context['course_id'] = course
+    print("Course "+course)
+    print("Experience "+experience)
+
+    try:
+        exp = ExpCourseModel.objects.filter(course__pk=course, available__experience__pk=experience)[0]
+        print("Encontrada experiencia con pk =",exp.available.experience.pk)
+        #La experiencia tiene una prueba asociada?
+        if exp.test:
+            print("Encontrado test con pk =",exp.test)
+            return redirect('web:course_experience', course=course)
+        print("La experiencia no tiene test asociado, continuando...")
+    except:
+        return('web:404')
+
+    return redirect('web:course_experience', course=course)
+
 def change_position(lista):
     for i in range(len(lista)):
         expcou= lista[i].available

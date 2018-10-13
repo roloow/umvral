@@ -81,3 +81,5 @@ storage
 tcl
 
 app-umvral/plugins/
+
+app-umvral/www/build/
