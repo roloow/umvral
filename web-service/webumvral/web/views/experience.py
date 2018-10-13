@@ -52,6 +52,9 @@ def experience_test(request, course, experience):
             print("Encontrado test con pk =",exp.test)
             return redirect('web:course_experience', course=course)
         print("La experiencia no tiene test asociado, continuando...")
+        #Buscamos todas las preguntas disponibles para esta experiencia
+        available_questions = QuestionModel.objects.filter(experience__pk=experience)
+        print("Encontradas",len(available_questions),"preguntas")
     except:
         return('web:404')
 
