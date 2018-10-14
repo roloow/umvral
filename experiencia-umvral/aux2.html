@@ -9,6 +9,7 @@
 		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
     <script src="assets/javascripts/aframe-material.min.js"></script>
     <script src="assets/javascripts/aframe-extras.min.js"></script>
+    <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
 
@@ -46,12 +47,48 @@
 
       <!-- ESCENA -->
 
-        <!-- Pizarra -->
-          
+      <!-- rack -->
+      <a-assets>
+        <a-asset-item id="tree-obj" src="/objetos/rack.obj"></a-asset-item>
+        <a-asset-item id="tree-mtl" src="/objetos/rack.mtl"></a-asset-item>
+      </a-assets>
+      <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" scale="0.01 0.01 0.01" rotation="-90 -40 0"></a-entity>
+      <!-- /rack -->
+      <!-- Pizarra -->
+      <a-assets>
+        <a-asset-item id="piz-obj" src="/objetos/pizarra.obj"></a-asset-item>
+        <a-asset-item id="piz-mtl" src="/objetos/pizarra.mtl"></a-asset-item>
+      </a-assets>
+      <a-entity obj-model="obj: #piz-obj; mtl: #piz-mtl" scale="0.01 0.01 0.01" rotation="-90 -40 0"></a-entity>
+      <!-- /Pizarra -->
 
+        <!-- Cañon -->
+        <a-cylinder static-body class="cannon" position="3.5 1 0" radius="0.4" height="2" rotation="-45 -20 0" color="gray"></a-cylinder>
+        <a-box position="3 0.3 0.6" height="0.8" width="4" rotation="0 -20 0" color="brown"></a-cylinder>
+
+          <a-button id="v1" position="1 0.3 1" rotation="0 -20 0" name="velocidad1"  value="1"></a-button>
+          <a-button id="v2" position="2 0.3 1" rotation="0 -20 0" name="velocidad2"  value="2"></a-button>
+          <a-button id="v3" position="3 0.3 1" rotation="0 -20 0" name="velocidad3"  value="3"></a-button>
+        <!-- /Cañon -->
+
+        <!-- Bola de cañon -->
+        <a-entity id="orange"
+  								dynamic-body
+  								geometry="primitive: sphere; radius: 0.2"
+  								material="color: orange; shader: flat"
+  								raycaster="showLine: false; objects: .blanco; useWorldCoordinates: false; origin: 0, 0, 0; direction: 1, 0, -1"
+  								cursor=""
+  								position="2 5 -5">
+  			</a-entity>
+        <!-- /Bola de cañon -->
+
+      <!-- /ESCENA -->
     </a-scene>
     <script type="text/javascript">
-
+      $('.cannon').addEventListener('click', function(){
+        document.querySelector("#orange").body.position.set(4, 1.5, -0.5);
+        document.querySelector("#orange").body.velocity.set(4, 6, -20);
+      });
     </script>
   </body>
 </html>
