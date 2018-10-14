@@ -30,11 +30,13 @@
         },
         tick: function() {
           var el = this.el;
+
           if (!this.ready) {
             return;
           }
           if(clockrun){
             var timer = moment.duration(moment().diff(currentTimestamp));
+            tiempo = timer.asSeconds();
             el.setAttribute('value', timer.asSeconds());
           }else{
               ultimoTiempo = el;
@@ -287,6 +289,7 @@
       var clockrun = false
       var ultimoTiempo = 0;
       var tiemposHistoricos = [];
+      var tiempo;
       // let weight = 0.5; No usado por el momento
     </script>
 
@@ -381,6 +384,7 @@
         console.log($('#chron'));
         console.log($('clock-text'));
         console.log (ultimoTiempo);
+        
         var nuevoRegistro = ["luna",1.4,5,15,ultimoTiempo];
 
         tiemposHistoricos.push(nuevoRegistro);
