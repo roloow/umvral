@@ -9,7 +9,6 @@
 		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
     <script src="assets/javascripts/aframe-material.min.js"></script>
     <script src="assets/javascripts/aframe-extras.min.js"></script>
-    <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
     <script type="text/javascript">
@@ -28,7 +27,7 @@
         <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
       </a-assets>
       <!-- Inicio de Controles -->
-      <a-entity id="camWrapper" position="0 1 3">
+      <a-entity id="camWrapper" position="0 1 3" rotation="0 +20 0">
         <a-entity id="cam" camera look-controls wasd-controls>
           <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
               position="0 0 -1"
@@ -58,18 +57,35 @@
       <!-- /Bola de cañon -->
 
       <!-- Cañon -->
-      <a-cylinder static-body id="cannon" class="cannon" position="3 0 -3" radius="0.4" height="5" rotation="-45 -20 0" color="gray"></a-cylinder>
+      <a-cylinder id="cannon" class="cannon" position="0 0 -6" radius="0.4" height="5" rotation="-45 0 0" color="gray"></a-cylinder>
       <a-box position="3 0.3 -3" height="0.8" width="4" rotation="0 -20 0" color="brown"></a-box>
 
-        <a-button id="v1" position="1 0.3 1" rotation="0 -20 0" name="velocidad1"  value="1"></a-button>
-        <a-button id="v2" position="2 0.3 1" rotation="0 -20 0" name="velocidad2"  value="2"></a-button>
-        <a-button id="v3" position="3 0.3 1" rotation="0 -20 0" name="velocidad3"  value="3"></a-button>
+        <a-button id="v1" position="1 0.3 -3" rotation="0 -20 0" name="velocidad1"  value="1"></a-button>
+        <a-button id="v2" position="2 0.3 -2.5" rotation="0 -20 0" name="velocidad2"  value="2"></a-button>
+        <a-button id="v3" position="3 0.3 -2" rotation="0 -20 0" name="velocidad3"  value="3"></a-button>
       <!-- /Cañon -->
 
+      <!-- rack -->
+      <a-assets>
+        <a-asset-item id="rack-obj" src="/objetos/rack.obj"></a-asset-item>
+        <a-asset-item id="rack-mtl" src="/objetos/rack.mtl"></a-asset-item>
+      </a-assets>
+      <a-entity obj-model="obj: #rack-obj; mtl: #rack-mtl" scale="0.01 0.01 0.01" rotation="-90 -45 0" position="7 0 6"></a-entity>
+      <!-- /rack -->
+
       <!-- Cañones a seleccionar -->
-      <a-cylinder static-body id="cannon1" position="10 5 8" radius="0.4" height="2" rotation="90 -20 0" color="blue"></a-cylinder>
-      <a-cylinder static-body id="cannon2" position="10 3 8" radius="0.4" height="2" rotation="90 -20 0" color="yellow"></a-cylinder>
-      <a-cylinder static-body id="cannon3" position="10 1 8" radius="0.4" height="2" rotation="90 -20 0" color="red"></a-cylinder>
+      <a-assets>
+        <a-asset-item id="cannon1-obj" src="/objetos/canongris.obj"></a-asset-item>
+        <a-asset-item id="cannon1-mtl" src="/objetos/canongris.mtl"></a-asset-item>
+        <a-asset-item id="cannon2-obj" src="/objetos/canonmadera.obj"></a-asset-item>
+        <a-asset-item id="cannon2-mtl" src="/objetos/canonmadera.mtl"></a-asset-item>
+        <a-asset-item id="cannon3-obj" src="/objetos/canonjade.obj"></a-asset-item>
+        <a-asset-item id="cannon3-mtl" src="/objetos/canonjade.mtl"></a-asset-item>
+      </a-assets>
+      <a-entity obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.01 0.01 0.01" rotation="-90 -45 0" position="7 0 6"></a-entity>
+      <a-entity obj-model="obj: #cannon2-obj; mtl: #cannon2-mtl" scale="0.01 0.01 0.01" rotation="-90 -45 0" position="7 0 6"></a-entity>
+      <a-entity obj-model="obj: #cannon1-obj; mtl: #cannon1-mtl" scale="0.01 0.01 0.01" rotation="-90 -45 0" position="7 0 6"></a-entity>
+
       <!-- /Cañones a seleccionar -->
 
       <!-- Plano   -->
@@ -81,57 +97,69 @@
 				></a-cylinder>
       <!-- /Blanco -->
 
-      <!-- Pizarra -->
-      <a-plane id="pizarra" width="4" height= "3" rotation="0 90 0" position="-5 3 3" color= "white" ></a-plane>
+      <!-- Pizarra OBJ-->
+      <a-assets>
+        <a-asset-item id="piz-obj" src="/objetos/pizarra.obj"></a-asset-item>
+        <a-asset-item id="piz-mtl" src="/objetos/pizarra.mtl"></a-asset-item>
+      </a-assets>
+      <a-entity obj-model="obj: #piz-obj; mtl: #piz-mtl" scale="0.015 0.015 0.015" position="-5.05 0 3" rotation="-90 90 0"></a-entity>
+      <!-- /Pizarra OBJ-->
+
+      <!-- Pizarra >
+      <a-plane id="pizarra" width="4" height= "3" rotation="0 90 0" position="-5 3 3" color= "white" ></a-plane-->
       <a-text id="textoPizarraEnBlanco"
               value=" x(t)= vt + x0 \n "
               width="4"
               height = "3"
-              position="-5 4.4 4.95"
+              position="-5 3.5 4.95"
               rotation="0 90 0"
-              color="black"
+              color="white"
               text="anchor: align; align: left; baseline: top"
               >
       </a-text>
+
       <a-text id="textoPizarra30grados"
             value=" x(t)= vt(set(30)) + x0 \n y(t)= -g(t^2)/2 + vt(cos(30)) + y0 \n sen(30)= \n cos(30)= "
             height = "3"
             width="4"
-            position="-5 4.4 4.95"
+            position="-5 3.5 4.95"
             rotation="0 90 0"
-            color="black"
+            color="white"
             visible='false'
             text="anchor: align; align: left; baseline: top"
             >
       </a-text>
+
       <a-text id="textoPizarra45grados"
             value=" x(t)= vt(set(45)) + x0 \n y(t)= -g(t^2)/2 + vt(cos(45)) + y0 \n sen(45)= \n cos(45)= "
             height = "3"
             width="4"
-            position="-5 4.4 4.95"
+            position="-5 3.5 4.95"
             rotation="0 90 0"
-            color="black"
+            color="white"
             visible='false'
             text="anchor: align; align: left; baseline: top"
             >
       </a-text>
+
       <a-text id="textoPizarra60grados"
             value=" x(t)= vt(set(60)) + x0 \n y(t)= -g(t^2)/2 + vt(cos(60)) + y0 \n sen(60)= \n cos(60)= "
             height = "3"
             width="4"
-            position="-5 4.4 4.95"
+            position="-5 3.5 4.95"
             rotation="0 90 0"
-            color="black"
+            color="white"
             visible='false'
             text="anchor: align; align: left; baseline: top"
             >
       </a-text>
 
 
-      <a-button id="alfa1" position="-5 1.8 4.5" rotation="0 90 0" name="30grados"  value="30º"></a-button>
-      <a-button id="alfa3" position="-5 1.8 2.5" rotation="0 90 0" name="60grados"  value="60º"></a-button>
-      <a-button id="alfa2" position="-5 1.8 3.5" rotation="0 90 0" name="45grados"  value="45º"></a-button>
+      <a-button id="alfa1" position="-5 1.1 4.5" rotation="0 90 0" button="name: 30grados; value: 30º; color: #f8faff; buttonColor: #858787"></a-button>
+      <a-button id="alfa3" position="-5 1.1 2.5" rotation="0 90 0" button="name: 60grados; value: 60º; color: #f8faff; buttonColor: #858787"></a-button>
+      <a-button id="alfa2" position="-5 1.1 3.5" rotation="0 90 0" button="name: 45grados; value: 45º; color: #f8faff; buttonColor: #858787"></a-button>
       <!-- /Pizarra -->
+
 
 
     </a-scene>
@@ -196,22 +224,13 @@
     cannon_.addEventListener('click', function(){
       console.log('gama : '+ gama);
       document.querySelector("#orange").body.position.set(0, 1.5, -0.5);
-      velocity = getVelocity(v_o , theta, -1)
+      velocity = getVelocity(v_o , theta, 0)
       document.querySelector("#orange").body.velocity.set(velocity[2], velocity[1], -velocity[0]);
     });
 
 		target = 0
 		target1 = document.querySelector('#target1');
 		document.querySelector('#orange').addEventListener('raycaster-intersection', function (e) {
-      /*
-			if (target % 3 == 0){
-				target1.object3D.position.set(0, 3, -10);}
-			else if (target % 3 == 1){
-				target1.object3D.position.set(0, 3, -20);}
-			else if (target % 3 == 2){
-				target1.object3D.position.set(0, 3, -5);}
-			target++;
-      */
       position = getTargetPosition(v_o, theta)
 			console.log('Target logrado!');
       console.log(position)
@@ -225,14 +244,14 @@
       theta = (theta * Math.PI / 180)
       v_x = v_o * Math.cos(theta)
       v_z = 0
-      angulo_x_z = (20 * Math.PI / 180)
+      angulo_x_z = (70 * Math.PI / 180)
       if (angulo === +1){
         v_x = v_x * Math.sin(angulo_x_z)
         v_z = v_x * Math.cos(angulo_x_z)
       }
       else if (angulo === -1){
         v_x = v_x * Math.sin(angulo_x_z)
-        v_z = v_x * Math.cos(angulo_x_z)
+        v_z = - v_x * Math.cos(angulo_x_z)
       }
       v_y = v_o * Math.sin(theta)
       return [v_x, v_y, v_z]
@@ -255,11 +274,57 @@
       p_x = v_x * time;
       return [p_x, p_y+1];
     }
+		angle_1 = document.querySelector('#v1');
+		angle0 = document.querySelector('#v2');
+		angle1 = document.querySelector('#v3');
 
+    angle_1.addEventListener('click', function(){
+        changeCanonPosition(-1);
+    });
+    angle0.addEventListener('click', function(){
+        changeCanonPosition(0);
+    });
+    angle1.addEventListener('click', function(){
+        changeCanonPosition(1);
+    });
+
+    //Funcion que hacer girar al cañon sin parar
 		cannon_obj = document.querySelector('#cannon');
-    window.setInterval(function(){
-  /// call your function here
-      cannon_obj.object3D.rotation.y += 0.1;
-    }, 100);
+    grad20 = (20 * Math.PI / 180)
+    function changeCanonPosition(angle) {
+        if (angle === -1){
+          cannon_obj.object3D.rotation.y = grad20;
+        }
+        else if (angle === 1){
+          cannon_obj.object3D.rotation.y = -grad20;
+        }
+        else{
+          cannon_obj.object3D.rotation.y = 0;
+        }
+
+      /*
+      clearInterval();
+      window.setInterval(function(){
+        cannon_obj.object3D.rotation.y += 0.1;
+        console.log(cannon_obj.object3D.rotation.y);
+
+        if (angle === -1){
+          position = (cannon_obj.object3D.rotation.y <= -20);
+        }
+        else if (angle === 1){
+          position = (cannon_obj.object3D.rotation.y >= 20);
+        }
+        else{
+          position = (cannon_obj.object3D.rotation.y > -0.2 || cannon_obj.object3D.rotation.y < 0.2);
+        }
+
+        if(position){
+          clearInterval();
+        }
+      }, 100);
+      clearInterval();
+      */
+    }
+
   </script>
 </html>
