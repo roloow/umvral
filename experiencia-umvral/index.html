@@ -36,6 +36,8 @@
           if(clockrun){
             var timer = moment.duration(moment().diff(currentTimestamp));
             el.setAttribute('value', timer.asSeconds());
+          }else{
+              ultimoTiempo = el;
           }
         }
       });
@@ -245,8 +247,13 @@
         <a-cylinder id="regla" color="black" position="2 50 -15" scale="0.05 100 0.1" static-body></a-cylinder>
         <a-box id="plane" visible="false" static-body color="blue" height="50" width="50" depth="50" position="0 -25 0"></a-box>
         <a-text position="-14 2.2 -13" scale="4 4 4" rotation ="-45 40 0" color ="black" value="Tiempo de caida (s): "></a-text>
+
         <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="0"></a-text>
         <a-entity id="chronbox" geometry="primitive: box" material = "color :  #6c6c6c " position = "-10 -1 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
+        <a-entity id="Resultados" geometry="primitive: box" material= "color :  #6c6c6c " position =" -16 5 4" rotation= "0 90 0" scale = "10 10 1"></a-entity>
+        <a-text id="ResultadosText" position="-15.4 9.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Resultados"></a-text>
+        <a-text id="ResultadosIndice" position="-15.4 8.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Lugar | Gravedad(a) | Masa(m) | Atura(h) | Tiempo(t) "></a-text>
+        <a-text id="ResultadosValores" position="-15.4 8.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Tierra | 9.81m/s^2 | 5kg | 15m | 2.45s "></a-text>
 
         <a-text value="Space Station" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
         <a-circle id="portal4" src='#spacestation' radius="0.85" rotation='0 -90 0' position='8 2 3'></a-circle>
@@ -278,6 +285,8 @@
       let radius = 0.25
       var currentTimestamp = moment();
       var clockrun = false
+      var ultimoTiempo = 0;
+      var tiemposHistoricos = [];
       // let weight = 0.5; No usado por el momento
     </script>
 
@@ -293,6 +302,7 @@
           $('#selector').setAttribute('material','color: yellow; shader: flat');
           $('a-scene').systems.physics.driver.world.gravity.y = -1.62;
           $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+
         }
         if (world == 'tierra') {
           env.querySelectorAll("a-entity").forEach(e => e.parentNode.removeChild(e));
@@ -348,6 +358,10 @@
         setScene(place)
       }
 
+      function registrarCaida(){
+
+      }
+
       function removeScene(father, child) {
         father.removeChild(child);
       }
@@ -361,16 +375,28 @@
       }
 
       function resetChron(){
+
         currentTimestamp = moment();
+        var nuevaMedicion = 0;
+        console.log($('#chron'));
+        console.log($('clock-text'));
+        console.log (ultimoTiempo);
+        var nuevoRegistro = ["luna",1.4,5,15,ultimoTiempo];
+
+        tiemposHistoricos.push(nuevoRegistro);
+        console.log(tiemposHistoricos);
+
       }
 
       function stopChron () {
         clockrun = false;
+
       }
 
       function startChron() {
         clockrun = true;
       }
+
 
       function setHeight(height) {
         objeto.body.position.set(0, height, -15);
@@ -516,7 +542,6 @@
       })
       on(objeto, 'collide', (e) => {
         stopChron();
-
 
         // En el eventual caso que siga cayendo la pelota, aqui colocar la posición especifica
       });
