@@ -2,6 +2,8 @@ branches:
   only:
   - master
   - develop
+notifications:
+  slack: umvral:OTwWvzun8ZHrHJsNDsAZrJHh
 matrix:
   include:
   - os: linux
@@ -59,8 +61,6 @@ script:
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
-notifications:
-  slack: umvral:OTwWvzun8ZHrHJsNDsAZrJHh
 before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "csaldias"
