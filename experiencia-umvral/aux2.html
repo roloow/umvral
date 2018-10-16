@@ -61,11 +61,12 @@
         <a-asset-item id="boton-obj" src="/objetos/botonrojo.obj"></a-asset-item>
         <a-asset-item id="boton-mtl" src="/objetos/botonrojo.mtl"></a-asset-item>
       </a-assets>
-      <a-entity obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -15 0" position="7 3.4 6"></a-entity>
+      <a-entity id="cn3" class="cannon" obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -15 0" position="7 3.4 6"></a-entity>
 
       <a-entity class="cannon" obj-model="obj: #boton-obj; mtl: #boton-mtl" scale="0.00005 0.00005 0.00005" rotation="0 -20 0" position="1.7 1 1.07"></a-entity>
       <a-entity class="cannon" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.01 0.01 0.01" rotation="-90 -20 0" position="1.5 0 1"></a-entity>
 
+      <a-entity id="cannonQ" obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" visible="false" scale="0.0008 0.0008 0.0008" rotation="100 0 0" position="0.35 0.8 0.5"></a-entity>
       <a-entity id="cannon" obj-model="obj: #cannon2-obj; mtl: #cannon2-mtl" scale="0.0008 0.0008 0.0008" rotation="100 0 0" position="0.35 0.8 0.5"></a-entity>
       <a-entity id="repo" obj-model="obj: #repo-obj; mtl: #repo-mtl" scale="0.00001 0.00001 0.00001" rotation="-90 180 0" position="0 0 0"></a-entity>
 
@@ -89,6 +90,11 @@
       <!-- /ESCENA -->
     </a-scene>
     <script type="text/javascript">
+
+      $('#cn3').addEventListener('click', function(){
+        $('#cannonQ').setAttribute('visible','true');
+        $('#cannon').setAttribute('visible','false');
+      });
       $('.cannon').addEventListener('click', function(){
         document.querySelector("#orange").body.position.set(4, 1.5, -0.5);
         document.querySelector("#orange").body.velocity.set(4, 6, -20);
