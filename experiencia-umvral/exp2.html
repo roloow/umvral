@@ -72,6 +72,9 @@
       <a-button id="playTV" position="-0.15 2.67 7.37" rotation="0 180 0" name="play"  value="Tutorial"></a-button>
       <!-- /Video-->
 
+
+
+
       <!-- Cañon -->
       <a-cylinder id="cannon" class="cannon" position="0 0 -4" radius="0.4" height="5" rotation="-45 0 0" color="gray"></a-cylinder>
       <a-box position="3 0.3 -3" height="0.8" width="4" rotation="0 -20 0" color="brown"></a-box>
@@ -111,7 +114,11 @@
       <!-- Blanco -->
 				<a-cylinder id="target1" class="blanco" src="assets/exp2/targettexture.jpg" position="0 3 -24" radius="0.8" height="0.1" rotation="90 0 0"
 				></a-cylinder>
+        <a-text id="targetPosition" position="0 5 -24" ></a-text>
       <!-- /Blanco -->
+
+
+
 
       <!-- Pizarra OBJ-->
       <a-assets>
@@ -209,6 +216,11 @@
       textoPizarra60grados.setAttribute('visible','false');
       textoPizarra30grados.setAttribute('visible','true');
       gama=30;
+      // cambio en angulo del cañon
+
+      // cambio de angulo bala
+
+
     });
     alfa2.addEventListener('click', function(){
       textoPizarraEnBlanco.setAttribute('visible','false');
@@ -216,6 +228,10 @@
       textoPizarra60grados.setAttribute('visible','false');
       textoPizarra30grados.setAttribute('visible','false');
       gama=45;
+      // cambio en angulo del cañon
+
+      // cambio de angulo bala
+
     });
     alfa3.addEventListener('click', function(){
       textoPizarraEnBlanco.setAttribute('visible','false');
@@ -223,6 +239,10 @@
       textoPizarra60grados.setAttribute('visible','true');
       textoPizarra30grados.setAttribute('visible','false');
       gama=60;
+      // cambio en angulo del cañon
+
+      // cambio de angulo bala
+
     });
 
 
