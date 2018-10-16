@@ -48,8 +48,8 @@
 								dynamic-body
 								geometry="primitive: sphere; radius: 0.2"
 								material="color: orange; shader: flat"
-								raycaster="showLine: true; objects: .blanco; useWorldCoordinates: false; origin: 0, 0, 0; direction: 1, 0, -1"
-								position="0 0 -4">
+								raycaster="showLine: true; objects: .blanco; useWorldCoordinates: false; origin: 0, 0, 0; direction: 0, 1, +1"
+								position="0 -4 -4">
 			</a-entity>
       <!-- /Bola de cañon -->
 
@@ -108,7 +108,7 @@
       <!-- /Cañones a seleccionar -->
 
       <!-- Plano   -->
-      <a-plane static-body position="0 -0.01 -4" rotation="-90 0 0" width="100" height="100" color="#7BC8A4" shadow></a-plane>
+      <a-plane id="plano" class="blanco" static-body position="0 -0.01 -4" rotation="-90 0 0" width="100" height="100" color="#7BC8A4" shadow></a-plane>
       <!-- /Plano -->
 
       <!-- Blanco -->
@@ -116,8 +116,6 @@
 				></a-cylinder>
         <a-text id="targetPosition" position="0 5 -24" ></a-text>
       <!-- /Blanco -->
-
-
 
 
       <!-- Pizarra OBJ-->
@@ -194,6 +192,7 @@
     var theta = 25; // angulo horizontal
     var gama = 30; // angulo vertical
     var gravity = 9.8;
+    var launching_ball = false;
 
     var video = document.querySelector("#tutorial");
     var playTV = document.querySelector("#playTV");
@@ -206,6 +205,10 @@
     var textoPizarra45grados = document.querySelector("#textoPizarra45grados");
     var textoPizarra60grados = document.querySelector("#textoPizarra60grados");
 
+    offset_x = 4
+    offset_y = 0
+		target1 = document.querySelector('#target1');
+    orange = document.querySelector('#orange')
     /***********************/
     /* FUNCIONES DE EVENTOS */
     /***********************/
@@ -249,11 +252,18 @@
     /* Lanzamiento de Bala */
     var cannon_ = document.querySelector(".cannon");
     cannon_.addEventListener('click', function(){
-      console.log('gama : '+ gama);
+      //console.log('gama : '+ gama);
       //document.querySelector("#orange").body.position.set(0, 1.5, -0.5);
-      document.querySelector("#orange").body.position.set(0, 1.5, -4.5);
-      velocity = getVelocity(v_o , theta, 0)
-      document.querySelector("#orange").body.velocity.set(velocity[2], velocity[1], -velocity[0]);
+      //orange.body.wakeUp();
+      if (launching_ball === false) {
+        launching_ball = true;
+        orange.body.angularVelocity.set(0,0,0);
+        orange.body.quaternion.set(0,0,0,1);
+        orange.body.position.set(0, 1.5, -4.5);
+      console.log(orange.body.quaternion)
+        velocity = getVelocity(v_o , theta, 0)
+        orange.body.velocity.set(velocity[2], velocity[1], -velocity[0]);
+      }
     });
 
 
@@ -270,21 +280,23 @@
 
 
     /* Funcion que se lanza, cuando la bala tiene una colision con un
-      target, para poder reiniciar el disparo
+      target o el suelo, para poder reiniciar el disparo
+      * Variables Offset: sirven cuando el cañon tinee que moverse de posicion, ya
+      que se asume que el cañon debiese estar en 0.0
       */
-    offset_x = 4
-    offset_y = 0
-		target1 = document.querySelector('#target1');
-    orange = document.querySelector('#orange')
 		orange.addEventListener('raycaster-intersection', function (e) {
-      position = getTargetPosition(v_o, theta)
-			console.log('Target logrado!');
-      console.log(position)
-      orange.setAttribute('visible','true');
+      position = getTargetPosition(v_o, theta) //Obtener posicion random para el target
+      launching_ball = false;
+      //|console.log(position)
+      console.log(e.detail.els[0].getAttribute('id'));
+      //orange.setAttribute('visible','true');
+      //orange.body.sleep();
+      if (e.detail.els[0].getAttribute('id') === 'plano'){
+        //Si objeto toca el plano
+      }
       target1.object3D.position.set(0,position[1]+offset_y,-(position[0]+offset_x));
-      //document.querySelector("#orange").body.position.set(0, 1.5, -4.5);
       document.querySelector("#orange").body.velocity.set(0, 0, 0);
-      document.querySelector("#orange").body.position.set(0, 0, -4.5);
+      document.querySelector("#orange").body.position.set(0, -4, -4.5);
 		});
 
 
@@ -309,19 +321,20 @@
       return [v_x, v_y, v_z]
     }
 
-    /* Obtiene posicion del target
+    /* getTargetPosition
+    Obtiene posicion random de un target
     input:
     v_o: Veloicdad inicial correcta
-    theta: Angulo correcto de respuesta*/
+    theta: Angulo correcto de respuesta
+    */
     function getTargetPosition(v_o, theta) {
       theta = (theta * Math.PI / 180)
       v_y = v_o * Math.sin(theta);
       v_x = v_o * Math.cos(theta);
       time_max = (2 * v_y)/gravity;
-      time = (Math.random() * time_max);
-      console.log(time)
-      console.log("max time")
-      console.log(time_max)
+      //Se añade un tiempo pequeño, para que target no aparesca en el mismo lugar
+      //que el cañon
+      time = (Math.random() * (time_max-0.5))+0.5;
       p_y = (v_y * time) - 0.5*gravity*Math.pow(time, 2);
       p_x = v_x * time;
       return [p_x, p_y+1];
