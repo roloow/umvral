@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>umVRal - Caida Libre</title>
+    <title>umVRal - Lanzamiento de proyectil</title>
     <meta name="description" content="Experiencia VR de caida libre">
     <script src="assets/javascripts/aframe.min.js"></script>
     <script src="assets/javascripts/aframe-mouse-cursor-component.min.js"></script>
@@ -41,11 +41,8 @@
       <!-- Fin de Controles -->
       <!-- Environment -->
       <a-entity id="env" environment="active: true; preset: egypt; skyType: atmosphere; ground: hills; playArea: 1.2; dressingAmount: 3; fog: 0.5;"></a-entity>
-      <!-- Cilindro, para poder probar posiciones en el telefono, de posiciones de objetos -->
-      <!--a-cylinder static-body position="0 0 1" radius="6" height="0.2"  color="blue"></a-cylinder-->
       <!-- /Environment -->
 
-      <!-- ESCENA -->
       <!-- Bola de cañon -->
 			<a-entity id="orange"
 								dynamic-body
@@ -56,22 +53,25 @@
 			</a-entity>
       <!-- /Bola de cañon -->
 
-
       <!-- Tele OBJ-->
       <a-assets>
         <a-asset-item id="tele-obj" src="/objetos/tele.obj"></a-asset-item>
         <a-asset-item id="tele-mtl" src="/objetos/tele.mtl"></a-asset-item>
+        <a-asset-item id="mesa-obj" src="/objetos/mesa.obj"></a-asset-item>
+        <a-asset-item id="mesa-mtl" src="/objetos/mesa.mtl"></a-asset-item>
       </a-assets>
-      <a-entity obj-model="obj: #tele-obj; mtl: #tele-mtl" scale="0.030 0.03 0.03" position="-0.7 0 7.5" rotation="270 0 180"></a-entity>
+      <a-entity obj-model="obj: #tele-obj; mtl: #tele-mtl" scale="0.030 0.03 0.03" position="-0.7 1.5 7.5" rotation="270 0 180"></a-entity>
+      <a-entity obj-model="obj: #mesa-obj; mtl: #mesa-mtl" scale="0.030 0.03 0.03" position="-0.7 0 7.5" rotation="270 0 180"></a-entity>
       <!-- /Tele OBJ-->
 
+      <!-- Video -->
       <a-assets>
           <video id="tutorial" src="video/prueba.mp4"></video>
       </a-assets>
-      <a-video src="#tutorial" width="1.6" height="0.9" position="-0.7 1.2 7.4" material="" geometry="" rotation="0 180 0" scale="1.6 1.55 1.56"></a-video>
-        <!-- boton play -->
-      <a-button id="playTV" position="-0.3 1.14 7.37" rotation="0 180 0" name="play"  value="Play"></a-button>
-        <!-- /boton play-->
+      <a-video src="#tutorial" width="1.6" height="0.9" position="-0.7 2.7 7.4" material="" geometry="" rotation="0 180 0" scale="1.6 1.55 1.56"></a-video>
+      <a-button id="playTV" position="-0.15 2.67 7.37" rotation="0 180 0" name="play"  value="Tutorial"></a-button>
+      <!-- /Video-->
+
       <!-- Cañon -->
       <a-cylinder id="cannon" class="cannon" position="0 0 -4" radius="0.4" height="5" rotation="-45 0 0" color="gray"></a-cylinder>
       <a-box position="3 0.3 -3" height="0.8" width="4" rotation="0 -20 0" color="brown"></a-box>
@@ -91,16 +91,16 @@
 
       <!-- Cañones a seleccionar -->
       <a-assets>
-        <!--a-asset-item id="cannon1-obj" src="/objetos/canongris.obj"></a-asset-item>
-        <a-asset-item id="cannon1-mtl" src="/objetos/canongris.mtl"></a-asset-item-->
+        <a-asset-item id="cannon1-obj" src="/objetos/canonobsidiana.obj"></a-asset-item>
+        <a-asset-item id="cannon1-mtl" src="/objetos/canonobsidiana.mtl"></a-asset-item>
         <a-asset-item id="cannon2-obj" src="/objetos/canonmadera.obj"></a-asset-item>
         <a-asset-item id="cannon2-mtl" src="/objetos/canonmadera.mtl"></a-asset-item>
         <a-asset-item id="cannon3-obj" src="/objetos/canonjade.obj"></a-asset-item>
         <a-asset-item id="cannon3-mtl" src="/objetos/canonjade.mtl"></a-asset-item>
       </a-assets>
-      <a-entity obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -15 0" position="7 3.4 6"></a-entity>
-      <a-entity obj-model="obj: #cannon2-obj; mtl: #cannon2-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -15 0" position="7 2 6"></a-entity>
-      <!--a-entity obj-model="obj: #cannon1-obj; mtl: #cannon1-mtl" scale="0.008 0.008 0.008" rotation="90 -35 0" position="7 4 6"></a-entity>
+      <a-entity id="cannon3" obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -5 0" position="7 1.2 6"></a-entity>
+      <a-entity id="cannon2" obj-model="obj: #cannon2-obj; mtl: #cannon2-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -5 0" position="7.25 1.9 6"></a-entity>
+      <a-entity id="cannon1" obj-model="obj: #cannon1-obj; mtl: #cannon1-mtl" scale="0.0008 0.0008 0.0008" rotation="90 -5 0" position="7.5 2.6 6"></a-entity>
 
       <!-- /Cañones a seleccionar -->
 
@@ -172,9 +172,9 @@
       </a-text>
 
 
-      <a-button id="alfa1" position="-5 1.1 4.5" rotation="0 90 0" button="name: 30grados; value: 30º; color: #f8faff; buttonColor: #858787"></a-button>
-      <a-button id="alfa3" position="-5 1.1 2.5" rotation="0 90 0" button="name: 60grados; value: 60º; color: #f8faff; buttonColor: #858787"></a-button>
-      <a-button id="alfa2" position="-5 1.1 3.5" rotation="0 90 0" button="name: 45grados; value: 45º; color: #f8faff; buttonColor: #858787"></a-button>
+      <a-button id="alfa1" position="-5 1.1 4.5" rotation="0 90 0" button="name: 30grados; value: 30°; color: #f8faff; buttonColor: #858787"></a-button>
+      <a-button id="alfa3" position="-5 1.1 2.5" rotation="0 90 0" button="name: 60grados; value: 60°; color: #f8faff; buttonColor: #858787"></a-button>
+      <a-button id="alfa2" position="-5 1.1 3.5" rotation="0 90 0" button="name: 45grados; value: 45°; color: #f8faff; buttonColor: #858787"></a-button>
       <!-- /Pizarra -->
 
 
@@ -182,22 +182,6 @@
     </a-scene>
 	</body>
   <script>
-   /*
-    window.addEventListener('click', function () {
-      // METHOD1 - ADD A NEW ORANGE TO SCENE - not working
-      // const orange =
-      // `<a-entity class="orange" dynamic-body velocity="0 0 -10" geometry="primitive: sphere; radius: 0.1" position="0 2 -2" material="src: #orangesrc; roughness: 0.48; color: #edaa45;" shadow="cast:true;receive:true"></a-entity>`
-      // var el = document.createElement('a-entity');
-      // AFRAME.scenes[0].appendChild(el);
-      // el.innerHTML = orange;
-      // el.setAttribute('dynamic-body');
-
-      // METHOD2 - MOVE THE EXISTING ORANGE
-      document.querySelector("#orange").body.position.set(0, 1.5, -0.5);
-      document.querySelector("#orange").body.velocity.set(0, 6, -20);
-      //document.querySelector("#gun").components.sound.playSound();
-    }); */
-
     // para click en cannon
     var v_o = 18;
     var theta = 25; // angulo horizontal
