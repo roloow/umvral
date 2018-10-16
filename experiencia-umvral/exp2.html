@@ -48,7 +48,7 @@
 								dynamic-body
 								geometry="primitive: sphere; radius: 0.2"
 								material="color: orange; shader: flat"
-								raycaster="showLine: true; objects: .blanco; useWorldCoordinates: false; origin: 0, 0, 0; direction: 0, 1, +1"
+								raycaster="showLine: false; objects: .blanco; useWorldCoordinates: false; origin: 0, 0, 0; direction: 0, 1, +1"
 								position="0 -4 -4">
 			</a-entity>
       <!-- /Bola de cañon -->
@@ -76,7 +76,7 @@
 
 
       <!-- Cañon -->
-      <a-cylinder id="cannon" class="cannon" position="0 0 -4" radius="0.4" height="5" rotation="-45 0 0" color="gray"></a-cylinder>
+      <a-cylinder id="cannon" class="cannon" position="0 0 -3.2" radius="0.4" height="5" rotation="-60 0 0" angle="30" color="gray"></a-cylinder>
       <a-box position="3 0.3 -3" height="0.8" width="4" rotation="0 -20 0" color="brown"></a-box>
 
         <a-button id="v1" position="1 0.3 -3" rotation="0 -20 0" name="velocidad1"  value="1"></a-button>
@@ -191,6 +191,7 @@
     var v_o = 18;
     var theta = 25; // angulo horizontal
     var gama = 30; // angulo vertical
+
     var gravity = 9.8;
     var launching_ball = false;
 
@@ -220,7 +221,8 @@
       textoPizarra30grados.setAttribute('visible','true');
       gama=30;
       // cambio en angulo del cañon
-
+      cannon_obj.object3D.rotation.x = -degToRad(90-gama);
+      cannon_obj.object3D.position.set = (0,0,-3.2);
       // cambio de angulo bala
 
 
@@ -232,7 +234,8 @@
       textoPizarra30grados.setAttribute('visible','false');
       gama=45;
       // cambio en angulo del cañon
-
+      cannon_obj.object3D.rotation.x = -degToRad(90-gama);
+      cannon_obj.object3D.position.set = (0,0,-3.2);
       // cambio de angulo bala
 
     });
@@ -243,7 +246,8 @@
       textoPizarra30grados.setAttribute('visible','false');
       gama=60;
       // cambio en angulo del cañon
-
+      cannon_obj.object3D.rotation.x = -degToRad(90-gama);
+      cannon_obj.object3D.position.set = (0,0,-3.2);
       // cambio de angulo bala
 
     });
@@ -260,8 +264,7 @@
         orange.body.angularVelocity.set(0,0,0);
         orange.body.quaternion.set(0,0,0,1);
         orange.body.position.set(0, 1.5, -4.5);
-      console.log(orange.body.quaternion)
-        velocity = getVelocity(v_o , theta, 0)
+        velocity = getVelocity(v_o , gama, 0)
         orange.body.velocity.set(velocity[2], velocity[1], -velocity[0]);
       }
     });
@@ -285,7 +288,7 @@
       que se asume que el cañon debiese estar en 0.0
       */
 		orange.addEventListener('raycaster-intersection', function (e) {
-      position = getTargetPosition(v_o, theta) //Obtener posicion random para el target
+      position = getTargetPosition(v_o, gama) //Obtener posicion random para el target
       launching_ball = false;
       //|console.log(position)
       console.log(e.detail.els[0].getAttribute('id'));
@@ -293,10 +296,23 @@
       //orange.body.sleep();
       if (e.detail.els[0].getAttribute('id') === 'plano'){
         //Si objeto toca el plano
+        target1.object3D.position.set(0,position[1]+offset_y,-(position[0]+offset_x));
+        target1.setAttribute("angle",gama);
+        document.querySelector("#orange").body.velocity.set(0, 0, 0);
+        document.querySelector("#orange").body.position.set(0, -4, -4.5);
       }
-      target1.object3D.position.set(0,position[1]+offset_y,-(position[0]+offset_x));
-      document.querySelector("#orange").body.velocity.set(0, 0, 0);
-      document.querySelector("#orange").body.position.set(0, -4, -4.5);
+      console.log("angulo de target correcto");
+      console.log(parseInt(e.detail.els[0].getAttribute('angle')));
+
+      if (parseInt(e.detail.els[0].getAttribute('angle')) == gama){
+        //Si objeto logra apuntar a un target
+        target1.object3D.position.set(0,position[1]+offset_y,-(position[0]+offset_x));
+        target1.setAttribute("angle",gama);
+        document.querySelector("#orange").body.velocity.set(0, 0, 0);
+        document.querySelector("#orange").body.position.set(0, -4, -4.5);
+
+      }
+
 		});
 
 
@@ -339,6 +355,12 @@
       p_x = v_x * time;
       return [p_x, p_y+1];
     }
+
+
+    function degToRad(deg){
+      return deg * Math.PI / 180;
+    }
+
 		angle_1 = document.querySelector('#v1');
 		angle0 = document.querySelector('#v2');
 		angle1 = document.querySelector('#v3');
