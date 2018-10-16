@@ -45,7 +45,7 @@
       });
     </script>
     <script type="text/javascript">
-      AFRAME.ASSETS_PATH = "./assets";
+      //AFRAME.ASSETS_PATH = "./assets";
     </script>
   </head>
   <body>
@@ -68,7 +68,7 @@
         <a-asset-item id="luna-mtl" src="/objetos/luna.mtl"></a-asset-item>
       </a-assets>
       <!-- Inicio de Controles -->
-      <a-entity id="camWrapper" position="0 0 4">
+      <a-entity id="camWrapper" position="0 0 4" rotation="0 0 0">
         <a-entity id="cam" camera look-controls wasd-controls>
           <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
               position="0 0 -1"
@@ -265,12 +265,12 @@
 
         <a-text id="chron" clock-text position="-14 1 -13" scale="10 10 10" rotation ="-45 40 0" color ="black" value="0"></a-text>
         <a-entity id="chronbox" geometry="primitive: box" material = "color :  #6c6c6c " position = "-10 -1 -15" rotation="-45 40 0" scale = " 10 10 1"></a-entity>
-        <a-entity id="Resultados" geometry="primitive: box" material= "color :  #6c6c6c " position =" -16 5 4" rotation= "0 90 0" scale = "10 10 1"></a-entity>
+        <!--a-entity id="Resultados" geometry="primitive: box" material= "color :  #6c6c6c " position =" -16 5 4" rotation= "0 90 0" scale = "10 10 1"></a-entity>
         <a-text id="ResultadosText" position="-15.4 9.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Resultados"></a-text>
         <a-text id="ResultadosIndice" position="-15.4 8.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Lugar | Gravedad(a) | Masa(m) | Atura(h) | Tiempo(t) "></a-text>
-        <a-text id="ResultadosValores" position="-15.4 8.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Tierra | 9.81m/s^2 | 5kg | 15m | 2.45s "></a-text>
+        <a-text id="ResultadosValores" position="-15.4 8.5 9" scale="2 2 2" rotation="0 90 0" color="black" value =" Tierra | 9.81m/s^2 | 5kg | 15m | 2.45s "></a-text-->
 
-        <a-text value="Estacion espacial" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
+        <a-text value="Vuelve a la estacion espacial" color="#FFFFFF" position="8 3 2.3" rotation="0 -90 0"></a-text>
         <a-entity id="portal4" obj-model="obj: #puerta-obj; mtl: #puerta-mtl" rotation="-90 -90 0" scale="0.001 0.001 0.001" position='8 0 3'></a-entity>
 
       </a-entity>
@@ -372,7 +372,7 @@
         var father = sn1.parentNode;
         removeScene(father,sn1);
         createScene(father,sn2);
-        setScene(place)
+        setScene(place);
       }
 
       function registrarCaida(){
@@ -533,22 +533,48 @@
 
       portal1.addEventListener("click", function () {
         place = 'tierra';
+
+        //correccion de angulo de observador
+        var x = $('#cam').getAttribute('rotation').x;
+        var y = ($('#cam').getAttribute('rotation').y)*(-1);
+        var z = $('#cam').getAttribute('rotation').z;
+        $('#camWrapper').setAttribute('rotation','0 '+y+' 0');
+
         changeScene(scene1, scene2);
         initChron();
       });
       portal2.addEventListener("click", function () {
         place = 'luna';
+
+        var x = $('#cam').getAttribute('rotation').x;
+        var y = ($('#cam').getAttribute('rotation').y)*(-1);
+        var z = $('#cam').getAttribute('rotation').z;
+        $('#camWrapper').setAttribute('rotation','0 '+y+' 0');
+
         changeScene(scene1, scene2);
         initChron();
       });
       portal3.addEventListener("click", function () {
         place = 'marte';
+
+        var x = $('#cam').getAttribute('rotation').x;
+        var y = ($('#cam').getAttribute('rotation').y)*(-1);
+        var z = $('#cam').getAttribute('rotation').z;
+        $('#camWrapper').setAttribute('rotation', '0 '+y+' 0');
+
         changeScene(scene1, scene2);
         initChron();
       });
       portal4.addEventListener("click", function () {
         place = 'space'; //Default
+
+        var x = $('#cam').getAttribute('rotation').x;
+        var y = ($('#cam').getAttribute('rotation').y)*(-1);
+        var z = $('#cam').getAttribute('rotation').z;
+        $('#camWrapper').setAttribute('rotation', '0 '+y+' 0');
+
         changeScene(scene2, scene1);
+
       })
       $('#chronbox').addEventListener("click",function(){
         stopChron();
