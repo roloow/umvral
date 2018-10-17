@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>mensajes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div padding style='height: 80%' *ngIf="mensajes">
+    <ion-list *ngFor="let mensaje of mensajes['mensajes']">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{mensaje.content}}
+          </ion-col>
+          <ion-col>
+            {{mensaje.topic}}
+          </ion-col>
+          <ion-col>
+            {{mensaje.name}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    
+    
+    
+    
+    </div>
+</ion-content>

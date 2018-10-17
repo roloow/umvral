@@ -12,6 +12,7 @@ import { Experiencia2Page } from '../pages/experiencia-2/experiencia-2';
 import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
 import { LoginPage } from '../pages/login/login';
+import { MensajesPage } from '../pages/mensajes/mensajes';
 
 @Component({
   templateUrl: 'app.template.html'
@@ -73,5 +74,9 @@ export class ConferenceApp {
   }
   openCursosPage() {
     this.nav.push(CursosPage);
+  }
+
+  openMensajesPage() {
+    this.nav.push(MensajesPage);
   }
 }
