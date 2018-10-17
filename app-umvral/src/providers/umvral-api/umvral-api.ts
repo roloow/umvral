@@ -1,5 +1,6 @@
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
 
 /*
   Generated class for the UmvralApiProvider provider.
@@ -147,4 +148,43 @@ export class UmvralApiProvider {
     });
   }
 
+  getReceivedMessages() {
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
+
+    let dataStr = "user_id="+this.userid;
+    
+    console.log("user_id="+this.userid);
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/message/recibidos/', dataStr, options)
+        .subscribe(res => {
+          let messages = JSON.parse(res["_body"]);
+          console.log("Obtenidos mensajes recibidos para ID "+this.userid);
+          resolve(messages);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getSentMessages() {
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
+
+    let dataStr = "user_id="+this.userid;
+    
+    console.log("user_id="+this.userid);
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/message/enviados/', dataStr, options)
+        .subscribe(res => {
+          let messages = JSON.parse(res["_body"]);
+          console.log("Obtenidos mensajes enviados para ID "+this.userid);
+          resolve(messages);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }
