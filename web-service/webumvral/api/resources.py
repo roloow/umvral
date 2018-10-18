@@ -183,14 +183,12 @@ class CourseResource(ModelResource):
         students = StudentModel.objects.filter(profile__pk=user_id)
         cursos=[]
         for st in students:
-            cursos.append(st.course)
-
+            cursos.append([{'nombre_curso': st.course.name ,'curso_id':st.course.pk ,'profesor':st.course.professor ,'descripcion':st.course.description}])
 
         return self.create_response(request, {
             'user_id': user_id,
-            'cursos':cursos,
-            'students':students
-            } )
+            'cursos':cursos
+            })
 
 
 
