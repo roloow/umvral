@@ -11,24 +11,24 @@ import { Experiencia3Page } from '../experiencia-3/experiencia-3';
 export class ExperienceListPage {
   experiencias: any = [
     {
-      n : 'experiencia 1',
+      n : 'Caida Libre',
       d : 'descripcion',
       p : '1',
       t : 'Caida Libre'
     },
     {
-      n : 'experiencia 2',
+      n : 'Lanzamiento de Proyectil',
       d : 'descripcion',
       p : '3',
       t : 'Lanzamiento de Proyectil'
     },
     {
-      n : 'experiencia 3',
+      n : 'Dilatacion y calor',
       d : 'descripcion',
       p : '2',
       t : 'Dilatacion y calor'
     }
-];
+  ];
   constructor(public nav: NavController) {
     this.nav = nav;
   }

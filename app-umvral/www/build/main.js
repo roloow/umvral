@@ -29,19 +29,19 @@ var ExperienceListPage = (function () {
         this.nav = nav;
         this.experiencias = [
             {
-                n: 'experiencia 1',
+                n: 'Caida Libre',
                 d: 'descripcion',
                 p: '1',
                 t: 'Caida Libre'
             },
             {
-                n: 'experiencia 2',
+                n: 'Lanzamiento de Proyectil',
                 d: 'descripcion',
                 p: '3',
                 t: 'Lanzamiento de Proyectil'
             },
             {
-                n: 'experiencia 3',
+                n: 'Dilatacion y calor',
                 d: 'descripcion',
                 p: '2',
                 t: 'Dilatacion y calor'
@@ -72,11 +72,12 @@ var ExperienceListPage = (function () {
     };
     ExperienceListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la experiencia a realizar:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n    \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
+            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona una experiencia:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n    \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object])
     ], ExperienceListPage);
     return ExperienceListPage;
+    var _a;
 }());
 
 //# sourceMappingURL=experience-list.js.map
@@ -450,6 +451,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var CursosPage = (function () {
     function CursosPage(nav) {
         this.nav = nav;
+        this.cursos = [
+            {
+                stu_id: 111,
+                cur_id: 111,
+                cur_no: 'Curso Interesante 1',
+                pro_no: 'Gervacio Rodriguez 1'
+            },
+            {
+                stu_id: 112,
+                cur_id: 112,
+                cur_no: 'Curso Interesante 2',
+                pro_no: 'Gervacio Rodriguez 2'
+            },
+            {
+                stu_id: 113,
+                cur_id: 113,
+                cur_no: 'Curso Interesante 3',
+                pro_no: 'Gervacio Rodriguez 3'
+            }
+        ];
         this.nav = nav;
     }
     CursosPage.prototype.openListaPage = function () {
@@ -457,7 +478,7 @@ var CursosPage = (function () {
     };
     CursosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona</h3>\n\n  <p>\n\n      <button ion-button color="primary" (click)="openListaPage()" block>Curso 1 <br>  Profesor</button>\n\n  </p>\n\n  <p>\n\n      <button ion-button color="primary" (click)="openListaPage()" block>\n\n          <ion-grid>\n\n              <ion-row>\n\n                <ion-col col-4 text-right>\n\n                  Curso:\n\n                </ion-col>\n\n                <ion-col text-left>\n\n                  Nombre\n\n                </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                  <ion-col col-4 text-right>\n\n                    Profesor:\n\n                  </ion-col>\n\n                  <ion-col text-left>\n\n                    Nombre\n\n                  </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n      </button>\n\n  </p>\n\n  <p>\n\n      <button ion-button color="primary" (click)="openListaPage()" block> boton 3</button>\n\n  </p>\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
+            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona un Curso:</h3>\n\n\n\n  <div padding *ngIf="cursos?.length > 0">\n\n    <ion-list *ngFor="let curso of cursos; let i = index">\n\n      <button ion-button color="primary" (click)="openListaPage()" block>{{curso.cur_no}}<br>{{curso.pro_no}}</button>\n\n    </ion-list>  \n\n  </div>\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
     ], CursosPage);

@@ -8,35 +8,18 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Selecciona</h3>
-  <p>
-      <button ion-button color="primary" (click)="openListaPage()" block>Curso 1 <br>  Profesor</button>
-  </p>
-  <p>
-      <button ion-button color="primary" (click)="openListaPage()" block>
-          <ion-grid>
-              <ion-row>
-                <ion-col col-4 text-right>
-                  Curso:
-                </ion-col>
-                <ion-col text-left>
-                  Nombre
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col col-4 text-right>
-                    Profesor:
-                  </ion-col>
-                  <ion-col text-left>
-                    Nombre
-                  </ion-col>
-                </ion-row>
-            </ion-grid>
-      </button>
-  </p>
-  <p>
-      <button ion-button color="primary" (click)="openListaPage()" block> boton 3</button>
-  </p>
+  <h3>Selecciona un Curso:</h3>
+
+  <div padding *ngIf="cursos?.length > 0">
+    <ion-list *ngFor="let curso of cursos; let i = index">
+      <button ion-button color="primary" (click)="openListaPage()" block>{{curso.cur_no}}<br>{{curso.pro_no}}</button>
+    </ion-list>  
+  </div>
+
+
+
+
+  
 
 
 
