@@ -9,21 +9,55 @@ import { Experiencia3Page } from '../experiencia-3/experiencia-3';
   templateUrl: 'experience-list.html'
 })
 export class ExperienceListPage {
-  
+  experiencias: any = [
+    {
+      n : 'experiencia 1',
+      d : 'descripcion',
+      p : '1',
+      t : 'Caida Libre'
+    },
+    {
+      n : 'experiencia 2',
+      d : 'descripcion',
+      p : '3',
+      t : 'Lanzamiento de Proyectil'
+    },
+    {
+      n : 'experiencia 3',
+      d : 'descripcion',
+      p : '2',
+      t : 'Dilatacion y calor'
+    }
+];
   constructor(public nav: NavController) {
     this.nav = nav;
   }
 
-  openExperiencia1Page() {
-    this.nav.push(Experiencia1Page);
+  openExperienciaPage(valor) {
+    switch (valor) {
+      case 'Caida Libre':
+          this.nav.push(Experiencia1Page); //Caida Libre  
+      break;
+
+      case 'Lanzamiento de Proyectil':
+        this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
+      break;
+
+      case 'Dilatacion y calor':
+        this.nav.push(Experiencia3Page); //Dilatacion y calor
+      break;
+
+      default:
+        break;
+    }
   }
 
   openExperiencia2Page() {
-    this.nav.push(Experiencia2Page);
+    this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
   }
   
   openExperiencia3Page() {
-    this.nav.push(Experiencia3Page);
+    this.nav.push(Experiencia3Page); //Dilatacion y calor
   }
 
 }

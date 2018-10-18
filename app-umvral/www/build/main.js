@@ -27,20 +27,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ExperienceListPage = (function () {
     function ExperienceListPage(nav) {
         this.nav = nav;
+        this.experiencias = [
+            {
+                n: 'experiencia 1',
+                d: 'descripcion',
+                p: '1',
+                t: 'Caida Libre'
+            },
+            {
+                n: 'experiencia 2',
+                d: 'descripcion',
+                p: '3',
+                t: 'Lanzamiento de Proyectil'
+            },
+            {
+                n: 'experiencia 3',
+                d: 'descripcion',
+                p: '2',
+                t: 'Dilatacion y calor'
+            }
+        ];
         this.nav = nav;
     }
-    ExperienceListPage.prototype.openExperiencia1Page = function () {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__["a" /* Experiencia1Page */]);
+    ExperienceListPage.prototype.openExperienciaPage = function (valor) {
+        switch (valor) {
+            case 'Caida Libre':
+                this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__["a" /* Experiencia1Page */]); //Caida Libre  
+                break;
+            case 'Lanzamiento de Proyectil':
+                this.nav.push(__WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__["a" /* Experiencia2Page */]); //Lanzamiento de Proyectil
+                break;
+            case 'Dilatacion y calor':
+                this.nav.push(__WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__["a" /* Experiencia3Page */]); //Dilatacion y calor
+                break;
+            default:
+                break;
+        }
     };
     ExperienceListPage.prototype.openExperiencia2Page = function () {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__["a" /* Experiencia2Page */]);
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__["a" /* Experiencia2Page */]); //Lanzamiento de Proyectil
     };
     ExperienceListPage.prototype.openExperiencia3Page = function () {
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__["a" /* Experiencia3Page */]);
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__["a" /* Experiencia3Page */]); //Dilatacion y calor
     };
     ExperienceListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experience-list',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experience-list/experience-list.html"*/'<ion-header>\n    <ion-navbar no-border-bottom color="primary">\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Experiencias</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la experiencia a realizar:</h3>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia1Page()" block>Caída Libre</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia2Page()"block>Lanzamiento de Proyectil</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExperiencia3Page()"block>Temperatura y Dilatación</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experience-list/experience-list.html"*/
+            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la experiencia a realizar:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n    \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
     ], ExperienceListPage);
@@ -58,8 +90,8 @@ var ExperienceListPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Experiencia1Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_materia_materia__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_materia_materia__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(42);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -131,7 +163,7 @@ var Experiencia1Page = (function () {
     };
     Experiencia1Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-1',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia-1.html"*/'<ion-header>\n    <ion-navbar no-border-bottom color="primary">\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Caída Libre</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la acción:</h3>\n    <p>\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n    </p>\n    <p>\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia-1.html"*/
+            selector: 'page-experiencia-1',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Caída Libre</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la acción:</h3>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n    </p>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n    </p>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */],
@@ -153,7 +185,7 @@ var Experiencia1Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Experiencia2Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_2_materia_materia__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_2_materia_materia__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(42);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -209,7 +241,7 @@ var Experiencia2Page = (function () {
     };
     Experiencia2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-2',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-2/experiencia-2.html"*/'<ion-header>\n    <ion-navbar no-border-bottom>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Lanzamiento de Proyectil</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la acción:</h3>\n    <p>\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n    </p>\n    <p>\n        <button ion-button color="light" block>Iniciar Experiencia</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-2/experiencia-2.html"*/
+            selector: 'page-experiencia-2',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Lanzamiento de Proyectil</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la acción:</h3>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n    </p>\n\n    <p>\n\n        <button ion-button color="light" block>Iniciar Experiencia</button>\n\n    </p>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
@@ -230,7 +262,7 @@ var Experiencia2Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Experiencia3Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_3_materia_materia__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_3_materia_materia__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(42);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -286,7 +318,7 @@ var Experiencia3Page = (function () {
     };
     Experiencia3Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-3',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-3/experiencia-3.html"*/'<ion-header>\n    <ion-navbar no-border-bottom>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Temperatura y Dilatación</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n    <h3>Selecciona la acción:</h3>\n    <p>\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n    </p>\n    <p>\n        <button ion-button color="light" block>Iniciar Experiencia</button>\n    </p>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-3/experiencia-3.html"*/
+            selector: 'page-experiencia-3',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Temperatura y Dilatación</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la acción:</h3>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n    </p>\n\n    <p>\n\n        <button ion-button color="light" block>Iniciar Experiencia</button>\n\n    </p>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
@@ -308,8 +340,8 @@ var Experiencia3Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experience_list_experience_list__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_user_register_user__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cursos_cursos__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_user_register_user__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -355,7 +387,7 @@ var LoginPage = (function () {
             var resultData = JSON.parse(JSON.stringify(result));
             console.log("SUCCESS: " + resultData.status + " " + resultData.statusText);
             _this.loading.dismiss();
-            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__experience_list_experience_list__["a" /* ExperienceListPage */]);
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__cursos_cursos__["a" /* CursosPage */]);
         }, function (err) {
             var errorData = JSON.parse(JSON.stringify(err));
             console.log("FAIL");
@@ -380,7 +412,7 @@ var LoginPage = (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n</ion-header>\n\n\n<ion-content class="login-content" padding>\n  <ion-row class="logo-row">\n    <ion-col></ion-col>\n    <ion-col width-67>\n      <img src="assets/img/logo-texto.png"/>\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n\n  <div class="login-box">\n      <form (ngSubmit)="iniciarSesion()" #registerForm="ngForm">\n        <ion-row>\n          <ion-col>\n            <ion-list inset>\n              \n              <ion-item>\n                <ion-input type="text" placeholder="Usuario" name="email" [(ngModel)]="data.username" required></ion-input>\n              </ion-item>\n              \n              <ion-item>\n                <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="data.password" required></ion-input>\n              </ion-item>\n              \n            </ion-list>\n          </ion-col>\n        </ion-row>\n        \n        <ion-row>\n          <ion-col class="signup-col">\n            <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Iniciar Sesión</button>\n            <button ion-button class="register-btn" block clear type="button" (click)="registrarUsuario()">¿No tienes una cuenta? Regístrate</button>\n          </ion-col>\n        </ion-row>\n      \n      </form>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/login/login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\login\login.html"*/'<!--\n\n  Generated template for the LoginPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="login-content" padding>\n\n  <ion-row class="logo-row">\n\n    <ion-col></ion-col>\n\n    <ion-col width-67>\n\n      <img src="assets/img/logo-texto.png"/>\n\n    </ion-col>\n\n    <ion-col></ion-col>\n\n  </ion-row>\n\n\n\n  <div class="login-box">\n\n      <form (ngSubmit)="iniciarSesion()" #registerForm="ngForm">\n\n        <ion-row>\n\n          <ion-col>\n\n            <ion-list inset>\n\n              \n\n              <ion-item>\n\n                <ion-input type="text" placeholder="Usuario" name="email" [(ngModel)]="data.username" required></ion-input>\n\n              </ion-item>\n\n              \n\n              <ion-item>\n\n                <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="data.password" required></ion-input>\n\n              </ion-item>\n\n              \n\n            </ion-list>\n\n          </ion-col>\n\n        </ion-row>\n\n        \n\n        <ion-row>\n\n          <ion-col class="signup-col">\n\n            <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Iniciar Sesión</button>\n\n            <button ion-button class="register-btn" block clear type="button" (click)="registrarUsuario()">¿No tienes una cuenta? Regístrate</button>\n\n          </ion-col>\n\n        </ion-row>\n\n      \n\n      </form>\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\login\login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
@@ -395,7 +427,48 @@ var LoginPage = (function () {
 
 /***/ }),
 
-/***/ 120:
+/***/ 108:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CursosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__ = __webpack_require__(103);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CursosPage = (function () {
+    function CursosPage(nav) {
+        this.nav = nav;
+        this.nav = nav;
+    }
+    CursosPage.prototype.openListaPage = function () {
+        this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__["a" /* ExperienceListPage */]);
+    };
+    CursosPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona</h3>\n\n  <p>\n\n      <button ion-button color="primary" (click)="openListaPage()" block>Curso 1 <br>  Profesor</button>\n\n  </p>\n\n  <p>\n\n      <button ion-button color="primary" (click)="openListaPage()" block>\n\n          <ion-grid>\n\n              <ion-row>\n\n                <ion-col col-4 text-right>\n\n                  Curso:\n\n                </ion-col>\n\n                <ion-col text-left>\n\n                  Nombre\n\n                </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                  <ion-col col-4 text-right>\n\n                    Profesor:\n\n                  </ion-col>\n\n                  <ion-col text-left>\n\n                    Nombre\n\n                  </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n      </button>\n\n  </p>\n\n  <p>\n\n      <button ion-button color="primary" (click)="openListaPage()" block> boton 3</button>\n\n  </p>\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+    ], CursosPage);
+    return CursosPage;
+}());
+
+//# sourceMappingURL=cursos.js.map
+
+/***/ }),
+
+/***/ 121:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -408,11 +481,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 120;
+webpackEmptyAsyncContext.id = 121;
 
 /***/ }),
 
-/***/ 163:
+/***/ 164:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -425,11 +498,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 163;
+webpackEmptyAsyncContext.id = 164;
 
 /***/ }),
 
-/***/ 206:
+/***/ 207:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -463,7 +536,7 @@ var HelpMateria1Page = (function () {
     };
     HelpMateria1Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-materia',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/materia/materia.html"*/'<ion-header>\n    <ion-navbar color="primary">\n        <ion-title>\n            Caida Libre\n        </ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>    \n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n    <h3>Video: {{ video?.title }}</h3>\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n        <div>\n            <h3>Descripción de Caida Libre</h3>\n            <p>\n                Cuando un objeto es soltado (liberado sin aplicar alguna fuerza) desde una altura por sobre\n                 el nivel de medición definido (Nivel del suelo, por ejemplo) se dice que el cuerpo cae \n                 libremente.\n            </p>\n            <p>\n                Cuando un cuerpo está en caída libre, la única fuerza que aporta al movimiento es la ejercida\n                 por la aceleración de gravedad en donde se está evaluando el fenómeno.\n            </p>\n            \n            <h6> F<sub>Total</sub> = m*a, </h6>\n            \n            <h6> F<sub>gravedad</sub> = m*g, </h6>\n\n            <h6> F<sub>T</sub> = F<sub>g</sub>. </h6>\n            \n            <p>\n                Finalmente se tiene que a = g. Es necesario recalcar que para efectos de álgebra, las constantes \n                 son positivas, pero la dirección de la fuerza es contrario a la dirección del eje, por lo\n                 que el valor que tomará la gravedad es negativo, por ejemplo, en la tierra se tienen \n                 valores cercanos de la gravedad a = - 9,8 [m/s<sup>2</sup>].\n            </p>\n\n            <h3>Velocidad en Caida Libre</h3>\n\n            <p>En respecto a la velocidad en el tiempo, se sabe que esta depende de la fuerza aplicada,\n                 lo que significa que depende finalmente de la aceleración de gravedad en el sistema:\n            </p>\n\n            <h6> v(t) = v<sub>0</sub> + a*t </h6>\n            \n            <p>\n                Teniendo que v<sub>0</sub> es la velocidad inicial <b>DESDE QUE CAE</b> el cuerpo,\n                 esta es igual a 0, por lo que finalmente se tiene que: \n            </p>\n            \n            <h6>v(t) = a*t</h6>\n            \n            <p>\n                Se observa que la velocidad será negativa, esto es debido a que el cuerpo se va acercando al punto\n                 y = 0, lo que significa que la distancia entre el objeto y el origen disminuye, dando finalmente\n                 una velocidad negativa (y<sub>f</sub> - y<sub>i</sub> < 0).\n            </p>\n\n            <h3>Posición en Caida Libre</h3>\n\n            <p>\n                Para la posición del objeto a través del tiempo, se tiene que sabe que depende tanto de\n                 la velocidad que presenta el cuerpo, como de la aceleración, por lo que se tiene:  \n            </p>\n            \n            <h6>y(t) = y<sub>0</sub> + v<sub>0</sub>*t + ½ a*t<sup>2</sup></h6>\n            \n            <p>\n                En la ecuación anterior se tiene y<sub>0</sub>, que significa la posición inicial del objeto antes\n                 de comenzar la caída, es decir, la altura h desde la que se suelta, por lo que finalmente se tiene:\n            </p>\n\n            <h6>y(t) = h + ½a*t<sup>2</sup></h6>\n            \n            <p>\n                En esta ecuación se observa de nuevo que y(t) va disminuyendo en el transcurso del tiempo, lo que es\n                 esperable al ser caida libre.\n            </p>\n\n            <h3>Energía en Caida Libre</h3>\n\n            <p>\n                En relación a la energía que posee el cuerpo, se sabe que en cualquier momento es posible evaluar la\n                 energía cinética (K) y la potencial (U), las cuales están dadas por las siguientes ecuaciones:\n            </p>\n            \n            <h6> K = ½ * m * v<sup>2</sup> </h6>\n            \n            <h6> U = m * g * h </h6>\n            \n\n        </div>\n    </ion-scroll>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/materia/materia.html"*/
+            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Caida Libre\n\n        </ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n\n        <div>\n\n            <h3>Descripción de Caida Libre</h3>\n\n            <p>\n\n                Cuando un objeto es soltado (liberado sin aplicar alguna fuerza) desde una altura por sobre\n\n                 el nivel de medición definido (Nivel del suelo, por ejemplo) se dice que el cuerpo cae \n\n                 libremente.\n\n            </p>\n\n            <p>\n\n                Cuando un cuerpo está en caída libre, la única fuerza que aporta al movimiento es la ejercida\n\n                 por la aceleración de gravedad en donde se está evaluando el fenómeno.\n\n            </p>\n\n            \n\n            <h6> F<sub>Total</sub> = m*a, </h6>\n\n            \n\n            <h6> F<sub>gravedad</sub> = m*g, </h6>\n\n\n\n            <h6> F<sub>T</sub> = F<sub>g</sub>. </h6>\n\n            \n\n            <p>\n\n                Finalmente se tiene que a = g. Es necesario recalcar que para efectos de álgebra, las constantes \n\n                 son positivas, pero la dirección de la fuerza es contrario a la dirección del eje, por lo\n\n                 que el valor que tomará la gravedad es negativo, por ejemplo, en la tierra se tienen \n\n                 valores cercanos de la gravedad a = - 9,8 [m/s<sup>2</sup>].\n\n            </p>\n\n\n\n            <h3>Velocidad en Caida Libre</h3>\n\n\n\n            <p>En respecto a la velocidad en el tiempo, se sabe que esta depende de la fuerza aplicada,\n\n                 lo que significa que depende finalmente de la aceleración de gravedad en el sistema:\n\n            </p>\n\n\n\n            <h6> v(t) = v<sub>0</sub> + a*t </h6>\n\n            \n\n            <p>\n\n                Teniendo que v<sub>0</sub> es la velocidad inicial <b>DESDE QUE CAE</b> el cuerpo,\n\n                 esta es igual a 0, por lo que finalmente se tiene que: \n\n            </p>\n\n            \n\n            <h6>v(t) = a*t</h6>\n\n            \n\n            <p>\n\n                Se observa que la velocidad será negativa, esto es debido a que el cuerpo se va acercando al punto\n\n                 y = 0, lo que significa que la distancia entre el objeto y el origen disminuye, dando finalmente\n\n                 una velocidad negativa (y<sub>f</sub> - y<sub>i</sub> < 0).\n\n            </p>\n\n\n\n            <h3>Posición en Caida Libre</h3>\n\n\n\n            <p>\n\n                Para la posición del objeto a través del tiempo, se tiene que sabe que depende tanto de\n\n                 la velocidad que presenta el cuerpo, como de la aceleración, por lo que se tiene:  \n\n            </p>\n\n            \n\n            <h6>y(t) = y<sub>0</sub> + v<sub>0</sub>*t + ½ a*t<sup>2</sup></h6>\n\n            \n\n            <p>\n\n                En la ecuación anterior se tiene y<sub>0</sub>, que significa la posición inicial del objeto antes\n\n                 de comenzar la caída, es decir, la altura h desde la que se suelta, por lo que finalmente se tiene:\n\n            </p>\n\n\n\n            <h6>y(t) = h + ½a*t<sup>2</sup></h6>\n\n            \n\n            <p>\n\n                En esta ecuación se observa de nuevo que y(t) va disminuyendo en el transcurso del tiempo, lo que es\n\n                 esperable al ser caida libre.\n\n            </p>\n\n\n\n            <h3>Energía en Caida Libre</h3>\n\n\n\n            <p>\n\n                En relación a la energía que posee el cuerpo, se sabe que en cualquier momento es posible evaluar la\n\n                 energía cinética (K) y la potencial (U), las cuales están dadas por las siguientes ecuaciones:\n\n            </p>\n\n            \n\n            <h6> K = ½ * m * v<sup>2</sup> </h6>\n\n            \n\n            <h6> U = m * g * h </h6>\n\n            \n\n\n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\materia\materia.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]])
@@ -475,7 +548,7 @@ var HelpMateria1Page = (function () {
 
 /***/ }),
 
-/***/ 207:
+/***/ 208:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -509,7 +582,7 @@ var HelpMateria2Page = (function () {
     };
     HelpMateria2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-materia',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-2/materia/materia.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            Lanzamiento de Proyectil\n        </ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>    \n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n    <h3>Video: {{ video?.title }}</h3>\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n        <div>\n\n            <h3>Descripción de Lanzamiento de Proyectil</h3>\n            <p>\n            Se considera como Lanzamiento de Proyectil como un movimiento acelerado con una trayectoria \n             parabólica lo que significa que posee un movimiento característico tanto en el eje <i>x</i> \n             como en el eje <i>y</i>.\n            </p>\n\n            <p>\n            Para que exista un movimiento parabólico, es necesario lanzar un objeto de forma diagonal al eje \n             de referencia, lo cual genera un ángulo entre la dirección de lanzamiento y el eje, este ángulo\n             lo llamaremos <i>b</i>.\n            </p>\n            <p>\n            Debido al ángulo <i>b</i>, la velocidad inicial <i>v</i><sub>0</sub> se puede descomponer de la \n            siguiente forma:\n            </p>\n            <h5>v<sub>0x</sub> = v<sub>0</sub>* cos(b)</h5>\n            <h5>v<sub>0y</sub> = v<sub>0</sub>* sen(b)</h5>\n            <p>\n            El movimiento en cada eje es independiente del otro, es decir, el movimiento en el eje x no\n             perturba ni es perturbado por el eje y, esto quiere decir que para las ecuaciones de\n             la posición, la velocidad y la aceleración sólo se presentan constantes y variables de un solo eje. \n            </p>\n            \n            <p>\n            Debido a que el movimiento se presenta en ambos ejes, la posición, la velocidad y la aceleración\n             se encuentran definidos por vectores.\n            </p>\n\n            <h3>Vectores</h3>\n            <p>\n            Los vectores de posición, velocidad y aceleración son definidos de la siguiente forma:\n            </p>\n            <h5>posición   : x(t) * i + y(t) * j  </h5>\n            <h5>Velocidad  : v<sub>x</sub>(t) * i + v<sub>y</sub>(t) * j  </h5>\n            <h5>Aceleración: a<sub>x</sub> * i + a<sub>y</sub> * j  </h5>\n            \n            <h3>Movimiento en eje x</h3>\n            <p>\n            Si no se considera el roce del aire, el movimiento en el eje x sólo está definido por la velocidad\n             inicial aplicada en el cuerpo, puesto que no existe ninguna fuerza en el sistema (la gravedad sólo\n             afecta al eje y).\n            </p>\n            \n            <h4>Aceleración.</h4>\n            \n            <p>\n            Al no existir fuerzas, la aceleración en el eje x es cero.\n            </p>\n            \n            <h5>a<sub>x</sub>(t) = a<sub>0x</sub>,</h5>\n            <h5>a<sub>x</sub>=0</h5>\n            \n            <h4>Velocidad.</h4>\n            \n            <p>\n            Debido a que no existe aceleración, la velocidad en el eje x sólo depende de la velocidad inicial.\n            </p>\n            \n            <h5>v<sub>x</sub>(t) = v<sub>0x</sub> + a<sub>x</sub> * t,</h5>\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * cos(b)</h5>\n\n            <h3>Posición</h3>\n            <p>\n            La posición en el eje x depende sólo de la velocidad en este eje y la posición inicial.\n            </p>\n            <h5>x(t) = x<sub>0</sub> + v<sub>0x</sub>*t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n            <h5>x(t) = x<sub>0</sub> + v<sub>0</sub> * t * cos(b) </h5>\n\n            <h3>Movimiento en eje y</h3>\n            <p>\n            Si no se considera el roce del aire, el movimiento en el eje y está definido tanto por la velocidad\n             inicial aplicada en el lanzamiento y la aceleración gravitacional.\n            </p>\n            \n            <h4>Aceleración.</h4>\n            \n            <p>\n            Al ser la gravedad la única fuerza en el sistema, la aceleración en <i>y</i>se define como:\n            </p>\n            \n            <h5>a<sub>y</sub>(t) = a<sub>0y</sub>,</h5>\n            <h5>a<sub>y</sub> = g</h5>\n            \n            <h4>Velocidad.</h4>\n            \n            <p>\n            La velocidad en el eje <i>y</i> está definida por la velocidad inicial y la gravedad:\n            </p>\n            \n            <h5>v<sub>y</sub>(t) = v<sub>0y</sub> + a<sub>y</sub> * t,</h5>\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t</h5>\n\n            <p>\n            Es rescatable decir que debido a que la gravedad apunta en dirección contraria al eje, la velocidad\n             en respecto al tiempo decaerá de forma constante, finalizando siempre con valores negativos.\n            </p>\n            <h3>Posición</h3>\n            <p>\n            La posición en el eje y depende tanto de la posición inicial, la velocidad y la aceleración gravitatoria:\n            </p>\n            <h5>y(t) = y<sub>0</sub> + v<sub>0y</sub> * t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n            <h5>y(t) = y<sub>0</sub> + v<sub>0</sub> * t * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h3>Observaciones varias.</h3>\n            <p>\n            Un problema recurrente es definir en que posición caerá un proyectil lanzado. Par solucionar este problema\n             se debe primero evaluar el movimiento sólo en el eje <i>y</i>, puesto que es aquí donde se define la \n             duración del movimiento. \n            </p>\n            <p>\n            Se dice que la duración del movimiento se define en el eje <i>y</i> puesto que el objeto se detendrá cuando\n             este finalmente toque el suelo. Debido a esto, el tiempo completo se descompone en 2, el tiempo de subida\n             y el tiempo de bajada del proyectil.\n            </p>\n\n            <p>\n            Primero se define cuanto tiempo sube el objeto lanzado, es decir, cuanto tiempo transcurre desde\n             que se lanza el objeto, hasta que la velocidad de subida toma un valor 0.\n            </p>\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t = 0</h5>\n            <h5> v<sub>0</sub> * sen(b) =  - g * t </h5>\n            <h5> v<sub>0</sub> * sen(b) = g * t<sub>subida</sub> </h5>\n            <p>\n            Luego de obtener el tiempo de subida, se puede obtener la altura a la que llegó el objeto.\n            </p>\n            <h5>h = y<sub>0</sub> + v<sub>0</sub> * t<sub>subida</sub> * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n            <p>\n            Luego, a través de la misma formula, se puede obtener el tiempo de bajada, despejando t y poniendo y(t)=0:\n            </p>\n            <h5>0 = h + v<sub>0</sub> * t<sub>bajada</sub> * sen(b) + ½ * g<sub>x</sub> * t<sub>bajada</sub><sup>2</sup></h5>\n            <p>\n            Finalmente, se tiene t<sub>subida</sub> y t<sub>bajada</sub>, que sumados dan t<sub>total</sub>, con la\n             cual se puede obtener la distancia x recorrida en todo el movimiento.\n            </p>\n            <h5>x(t<sub>total</sub>) = x<sub>0</sub> + v<sub>0</sub> * t<sub>total</sub> * cos(b) </h5>\n\n        </div>\n    </ion-scroll>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-2/materia/materia.html"*/
+            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            Lanzamiento de Proyectil\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n\n        <div>\n\n\n\n            <h3>Descripción de Lanzamiento de Proyectil</h3>\n\n            <p>\n\n            Se considera como Lanzamiento de Proyectil como un movimiento acelerado con una trayectoria \n\n             parabólica lo que significa que posee un movimiento característico tanto en el eje <i>x</i> \n\n             como en el eje <i>y</i>.\n\n            </p>\n\n\n\n            <p>\n\n            Para que exista un movimiento parabólico, es necesario lanzar un objeto de forma diagonal al eje \n\n             de referencia, lo cual genera un ángulo entre la dirección de lanzamiento y el eje, este ángulo\n\n             lo llamaremos <i>b</i>.\n\n            </p>\n\n            <p>\n\n            Debido al ángulo <i>b</i>, la velocidad inicial <i>v</i><sub>0</sub> se puede descomponer de la \n\n            siguiente forma:\n\n            </p>\n\n            <h5>v<sub>0x</sub> = v<sub>0</sub>* cos(b)</h5>\n\n            <h5>v<sub>0y</sub> = v<sub>0</sub>* sen(b)</h5>\n\n            <p>\n\n            El movimiento en cada eje es independiente del otro, es decir, el movimiento en el eje x no\n\n             perturba ni es perturbado por el eje y, esto quiere decir que para las ecuaciones de\n\n             la posición, la velocidad y la aceleración sólo se presentan constantes y variables de un solo eje. \n\n            </p>\n\n            \n\n            <p>\n\n            Debido a que el movimiento se presenta en ambos ejes, la posición, la velocidad y la aceleración\n\n             se encuentran definidos por vectores.\n\n            </p>\n\n\n\n            <h3>Vectores</h3>\n\n            <p>\n\n            Los vectores de posición, velocidad y aceleración son definidos de la siguiente forma:\n\n            </p>\n\n            <h5>posición   : x(t) * i + y(t) * j  </h5>\n\n            <h5>Velocidad  : v<sub>x</sub>(t) * i + v<sub>y</sub>(t) * j  </h5>\n\n            <h5>Aceleración: a<sub>x</sub> * i + a<sub>y</sub> * j  </h5>\n\n            \n\n            <h3>Movimiento en eje x</h3>\n\n            <p>\n\n            Si no se considera el roce del aire, el movimiento en el eje x sólo está definido por la velocidad\n\n             inicial aplicada en el cuerpo, puesto que no existe ninguna fuerza en el sistema (la gravedad sólo\n\n             afecta al eje y).\n\n            </p>\n\n            \n\n            <h4>Aceleración.</h4>\n\n            \n\n            <p>\n\n            Al no existir fuerzas, la aceleración en el eje x es cero.\n\n            </p>\n\n            \n\n            <h5>a<sub>x</sub>(t) = a<sub>0x</sub>,</h5>\n\n            <h5>a<sub>x</sub>=0</h5>\n\n            \n\n            <h4>Velocidad.</h4>\n\n            \n\n            <p>\n\n            Debido a que no existe aceleración, la velocidad en el eje x sólo depende de la velocidad inicial.\n\n            </p>\n\n            \n\n            <h5>v<sub>x</sub>(t) = v<sub>0x</sub> + a<sub>x</sub> * t,</h5>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * cos(b)</h5>\n\n\n\n            <h3>Posición</h3>\n\n            <p>\n\n            La posición en el eje x depende sólo de la velocidad en este eje y la posición inicial.\n\n            </p>\n\n            <h5>x(t) = x<sub>0</sub> + v<sub>0x</sub>*t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h5>x(t) = x<sub>0</sub> + v<sub>0</sub> * t * cos(b) </h5>\n\n\n\n            <h3>Movimiento en eje y</h3>\n\n            <p>\n\n            Si no se considera el roce del aire, el movimiento en el eje y está definido tanto por la velocidad\n\n             inicial aplicada en el lanzamiento y la aceleración gravitacional.\n\n            </p>\n\n            \n\n            <h4>Aceleración.</h4>\n\n            \n\n            <p>\n\n            Al ser la gravedad la única fuerza en el sistema, la aceleración en <i>y</i>se define como:\n\n            </p>\n\n            \n\n            <h5>a<sub>y</sub>(t) = a<sub>0y</sub>,</h5>\n\n            <h5>a<sub>y</sub> = g</h5>\n\n            \n\n            <h4>Velocidad.</h4>\n\n            \n\n            <p>\n\n            La velocidad en el eje <i>y</i> está definida por la velocidad inicial y la gravedad:\n\n            </p>\n\n            \n\n            <h5>v<sub>y</sub>(t) = v<sub>0y</sub> + a<sub>y</sub> * t,</h5>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t</h5>\n\n\n\n            <p>\n\n            Es rescatable decir que debido a que la gravedad apunta en dirección contraria al eje, la velocidad\n\n             en respecto al tiempo decaerá de forma constante, finalizando siempre con valores negativos.\n\n            </p>\n\n            <h3>Posición</h3>\n\n            <p>\n\n            La posición en el eje y depende tanto de la posición inicial, la velocidad y la aceleración gravitatoria:\n\n            </p>\n\n            <h5>y(t) = y<sub>0</sub> + v<sub>0y</sub> * t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h5>y(t) = y<sub>0</sub> + v<sub>0</sub> * t * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n\n\n            <h3>Observaciones varias.</h3>\n\n            <p>\n\n            Un problema recurrente es definir en que posición caerá un proyectil lanzado. Par solucionar este problema\n\n             se debe primero evaluar el movimiento sólo en el eje <i>y</i>, puesto que es aquí donde se define la \n\n             duración del movimiento. \n\n            </p>\n\n            <p>\n\n            Se dice que la duración del movimiento se define en el eje <i>y</i> puesto que el objeto se detendrá cuando\n\n             este finalmente toque el suelo. Debido a esto, el tiempo completo se descompone en 2, el tiempo de subida\n\n             y el tiempo de bajada del proyectil.\n\n            </p>\n\n\n\n            <p>\n\n            Primero se define cuanto tiempo sube el objeto lanzado, es decir, cuanto tiempo transcurre desde\n\n             que se lanza el objeto, hasta que la velocidad de subida toma un valor 0.\n\n            </p>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t = 0</h5>\n\n            <h5> v<sub>0</sub> * sen(b) =  - g * t </h5>\n\n            <h5> v<sub>0</sub> * sen(b) = g * t<sub>subida</sub> </h5>\n\n            <p>\n\n            Luego de obtener el tiempo de subida, se puede obtener la altura a la que llegó el objeto.\n\n            </p>\n\n            <h5>h = y<sub>0</sub> + v<sub>0</sub> * t<sub>subida</sub> * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n            <p>\n\n            Luego, a través de la misma formula, se puede obtener el tiempo de bajada, despejando t y poniendo y(t)=0:\n\n            </p>\n\n            <h5>0 = h + v<sub>0</sub> * t<sub>bajada</sub> * sen(b) + ½ * g<sub>x</sub> * t<sub>bajada</sub><sup>2</sup></h5>\n\n            <p>\n\n            Finalmente, se tiene t<sub>subida</sub> y t<sub>bajada</sub>, que sumados dan t<sub>total</sub>, con la\n\n             cual se puede obtener la distancia x recorrida en todo el movimiento.\n\n            </p>\n\n            <h5>x(t<sub>total</sub>) = x<sub>0</sub> + v<sub>0</sub> * t<sub>total</sub> * cos(b) </h5>\n\n\n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\materia\materia.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]])
@@ -521,7 +594,7 @@ var HelpMateria2Page = (function () {
 
 /***/ }),
 
-/***/ 208:
+/***/ 209:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -555,7 +628,7 @@ var HelpMateria3Page = (function () {
     };
     HelpMateria3Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-materia',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-3/materia/materia.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>\n            Materia\n        </ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>    \n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n    <h3>Video: {{ video?.title }}</h3>\n\n    <ion-scroll scrollY="true" style="width: 95%; height: 50%;" text-justify>\n        <div>\n            <h3>Descripción de Temperatura y dilatación</h3>\n            \n        </div>\n    </ion-scroll>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-3/materia/materia.html"*/
+            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            Materia\n\n        </ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 95%; height: 50%;" text-justify>\n\n        <div>\n\n            <h3>Descripción de Temperatura y dilatación</h3>\n\n            \n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\materia\materia.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]])
@@ -567,7 +640,7 @@ var HelpMateria3Page = (function () {
 
 /***/ }),
 
-/***/ 209:
+/***/ 210:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -837,7 +910,7 @@ var PerfilPage = (function () {
     };
     PerfilPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-perfil',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mi Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="outer-content">\n  <div padding-top text-center *ngIf="userData">\n    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">\n    <h2>{{userData.first_name}} {{userData.last_name}}</h2>\n    <h5>{{userData.email}}</h5>\n\n    <ion-list inset>\n      <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>\n      <button ion-item (click)="changeFirstName()">Cambiar Nombre</button>\n      <button ion-item (click)="changeLastName()">Cambiar Apellido</button>\n      <button ion-item (click)="changePassword()">Cambiar Contraseña</button>\n      <button ion-item disabled (click)="support()">Soporte</button>\n      <button ion-item (click)="cerrarSesion()">Cerrar Sesión</button>\n    </ion-list>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/perfil/perfil.html"*/,
+            selector: 'page-perfil',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\perfil\perfil.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mi Perfil</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="outer-content">\n\n  <div padding-top text-center *ngIf="userData">\n\n    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">\n\n    <h2>{{userData.first_name}} {{userData.last_name}}</h2>\n\n    <h5>{{userData.email}}</h5>\n\n\n\n    <ion-list inset>\n\n      <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>\n\n      <button ion-item (click)="changeFirstName()">Cambiar Nombre</button>\n\n      <button ion-item (click)="changeLastName()">Cambiar Apellido</button>\n\n      <button ion-item (click)="changePassword()">Cambiar Contraseña</button>\n\n      <button ion-item disabled (click)="support()">Soporte</button>\n\n      <button ion-item (click)="cerrarSesion()">Cerrar Sesión</button>\n\n    </ion-list>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\perfil\perfil.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
@@ -852,7 +925,7 @@ var PerfilPage = (function () {
 
 /***/ }),
 
-/***/ 210:
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -935,19 +1008,22 @@ var RegisterUserPage = (function () {
     };
     RegisterUserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-register-user',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/register-user/register-user.html"*/'<!--\n  Generated template for the RegisterUserPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Registro de Usuario</ion-title>\n  </ion-navbar>\n</ion-header>\n \n<ion-content class="login-content" padding>\n  <div class="login-box">\n    \n    <form (ngSubmit)="registrarUsuario()" #registerForm="ngForm">\n      <ion-row>\n        <ion-col>\n          <ion-list inset>\n            \n            <ion-item>\n              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>\n            </ion-item>\n            \n            <ion-item>\n              <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>\n            </ion-item>\n\n            <ion-item>\n              <ion-input type="text" placeholder="Nombre" name="firstName" [(ngModel)]="registerCredentials.firstName" required></ion-input>\n            </ion-item>\n\n            <ion-item>\n              <ion-input type="text" placeholder="Apellido" name="lastName" [(ngModel)]="registerCredentials.lastName" required></ion-input>\n            </ion-item>\n            \n          </ion-list>\n        </ion-col>\n      </ion-row>\n      \n      <ion-row>\n        <ion-col class="signup-col">\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Registrar</button>\n        </ion-col>\n      </ion-row>\n      \n    </form>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/register-user/register-user.html"*/,
+            selector: 'page-register-user',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\register-user\register-user.html"*/'<!--\n\n  Generated template for the RegisterUserPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Registro de Usuario</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n \n\n<ion-content class="login-content" padding>\n\n  <div class="login-box">\n\n    \n\n    <form (ngSubmit)="registrarUsuario()" #registerForm="ngForm">\n\n      <ion-row>\n\n        <ion-col>\n\n          <ion-list inset>\n\n            \n\n            <ion-item>\n\n              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>\n\n            </ion-item>\n\n            \n\n            <ion-item>\n\n              <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n              <ion-input type="text" placeholder="Nombre" name="firstName" [(ngModel)]="registerCredentials.firstName" required></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n              <ion-input type="text" placeholder="Apellido" name="lastName" [(ngModel)]="registerCredentials.lastName" required></ion-input>\n\n            </ion-item>\n\n            \n\n          </ion-list>\n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n      <ion-row>\n\n        <ion-col class="signup-col">\n\n          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Registrar</button>\n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n    </form>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\register-user\register-user.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], RegisterUserPage);
     return RegisterUserPage;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=register-user.js.map
 
 /***/ }),
 
-/***/ 211:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1051,7 +1127,7 @@ var NotasPage = (function () {
     };
     NotasPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-notas',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/notas/notas.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mis Notas</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n<!-- Si no existen notas  -->\n\n  <div padding style=\'height: 25%\' *ngIf="notas.length == 0">\n    <h3>No tienes notas ingresadas.</h3>\n  </div>\n  \n  <div style=\'height: 60%\' *ngIf="notas.length == 0">\n    <img class="displayed"  height= 50% src="assets/img/notas.png">    \n  </div>\n\n<!-- Si hay una o más notas  -->\n\n  <div padding style=\'height: 80%\' *ngIf="notas.length > 0">\n    <ion-list *ngFor="let nota of notas; let i = index">\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            Nota {{i+1}}\n          </ion-col>\n          <ion-col col-3>\n            {{nota}}\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </ion-list>\n    \n    \n    \n    \n    </div>\n\n<!-- El botón siempre se ve  -->\n\n  <div class=\'final\'>\n    <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/notas/notas.html"*/,
+            selector: 'page-notas',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Notas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n<!-- Si no existen notas  -->\n\n\n\n  <div padding style=\'height: 25%\' *ngIf="notas.length == 0">\n\n    <h3>No tienes notas ingresadas.</h3>\n\n  </div>\n\n  \n\n  <div style=\'height: 60%\' *ngIf="notas.length == 0">\n\n    <img class="displayed"  height= 50% src="assets/img/notas.png">    \n\n  </div>\n\n\n\n<!-- Si hay una o más notas  -->\n\n\n\n  <div padding style=\'height: 80%\' *ngIf="notas.length > 0">\n\n    <ion-list *ngFor="let nota of notas; let i = index">\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col>\n\n            Nota {{i+1}}\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            {{nota}}\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>  \n\n  </div>\n\n\n\n<!-- El botón siempre se ve  -->\n\n\n\n  <div class=\'final\'>\n\n    <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>\n\n  </div>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], NotasPage);
@@ -1059,48 +1135,6 @@ var NotasPage = (function () {
 }());
 
 //# sourceMappingURL=notas.js.map
-
-/***/ }),
-
-/***/ 212:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CursosPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var CursosPage = (function () {
-    function CursosPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    CursosPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad CursosPage');
-    };
-    CursosPage.prototype.addCurso = function () {
-        console.log('addCurso has been pressed');
-    };
-    CursosPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-cursos',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/cursos/cursos.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Mis Cursos</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div padding-top>\n    <h3>No participas en ningún curso.</h3>\n  </div>\n  <p>\n      <button ion-button color="primary" (click)="addCurso()" block>Añadir Curso</button>\n  </p>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/cursos/cursos.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
-    ], CursosPage);
-    return CursosPage;
-}());
-
-//# sourceMappingURL=cursos.js.map
 
 /***/ }),
 
@@ -1124,29 +1158,29 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_in_app_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_screen_orientation__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_httpd__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_screen_orientation__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_httpd__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_component__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_experience_list_experience_list__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_experiencia_1_experiencia_1__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_experiencia_2_experiencia_2__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_experiencia_3_experiencia_3__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_experiencia_1_materia_materia__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_experiencia_2_materia_materia__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_experiencia_3_materia_materia__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_experiencia_1_materia_materia__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_experiencia_2_materia_materia__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_experiencia_3_materia_materia__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_experiencia_1_experiencia_experiencia__ = __webpack_require__(292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_perfil_perfil__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_notas_notas__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_cursos_cursos__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_perfil_perfil__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_notas_notas__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_cursos_cursos__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_login_login__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_register_user_register_user__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_register_user_register_user__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1250,9 +1284,9 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_experience_list_experience_list__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_perfil_perfil__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_notas_notas__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_cursos_cursos__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_perfil_perfil__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_notas_notas__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_cursos_cursos__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_experiencia_1_experiencia_1__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_experiencia_2_experiencia_2__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_experiencia_3_experiencia_3__ = __webpack_require__(106);
@@ -1326,7 +1360,7 @@ var ConferenceApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */])
     ], ConferenceApp.prototype, "nav", void 0);
     ConferenceApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/app/app.template.html"*/'  <ion-menu id="navMenu" [content]="content">\n\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>Menú</ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content class="outer-content">\n\n      <ion-list>\n        <ion-list-header>\n          Experiencias\n        </ion-list-header>\n        <button ion-item menuClose (click)="openExperiencia1Page()">\n          Caída Libre\n        </button>\n        <button ion-item menuClose (click)="openExperiencia2Page()">\n          Lanzamiento de Proyectil\n        </button>\n        <button ion-item disabled (click)="openExperiencia3Page()">\n          Temperatura y Dilatación\n        </button>\n      </ion-list>\n\n      <ion-list>\n        <ion-list-header>\n          Perfil\n        </ion-list-header>\n        <button ion-item menuClose (click)="openPerfilPage()">\n          <ion-icon item-start name="contact"></ion-icon>\n          Mi Perfil\n        </button>\n        <button ion-item menuClose (click)="openNotasPage()">\n          <ion-icon item-start name="book"></ion-icon>\n          Mis Notas\n        </button>\n        <button ion-item menuClose (click)="openCursosPage()">\n          <ion-icon item-start name="school"></ion-icon>\n          Mis Cursos\n        </button>\n      </ion-list>\n    </ion-content>\n\n  </ion-menu>\n<!-- main navigation -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="true" main name="app"></ion-nav>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/app/app.template.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\app\app.template.html"*/'  <ion-menu id="navMenu" [content]="content">\n\n\n\n    <ion-header>\n\n      <ion-toolbar>\n\n        <ion-title>Menú</ion-title>\n\n      </ion-toolbar>\n\n    </ion-header>\n\n\n\n    <ion-content class="outer-content">\n\n\n\n      <ion-list>\n\n        <ion-list-header>\n\n          Experiencias\n\n        </ion-list-header>\n\n        <button ion-item menuClose (click)="openExperiencia1Page()">\n\n          Caída Libre\n\n        </button>\n\n        <button ion-item menuClose (click)="openExperiencia2Page()">\n\n          Lanzamiento de Proyectil\n\n        </button>\n\n        <button ion-item disabled (click)="openExperiencia3Page()">\n\n          Temperatura y Dilatación\n\n        </button>\n\n      </ion-list>\n\n\n\n      <ion-list>\n\n        <ion-list-header>\n\n          Perfil\n\n        </ion-list-header>\n\n        <button ion-item menuClose (click)="openPerfilPage()">\n\n          <ion-icon item-start name="contact"></ion-icon>\n\n          Mi Perfil\n\n        </button>\n\n        <button ion-item menuClose (click)="openNotasPage()">\n\n          <ion-icon item-start name="book"></ion-icon>\n\n          Mis Notas\n\n        </button>\n\n        <button ion-item menuClose (click)="openCursosPage()">\n\n          <ion-icon item-start name="school"></ion-icon>\n\n          Mis Cursos\n\n        </button>\n\n      </ion-list>\n\n    </ion-content>\n\n\n\n  </ion-menu>\n\n<!-- main navigation -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="true" main name="app"></ion-nav>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\app\app.template.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* MenuController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */],
@@ -1348,7 +1382,7 @@ var ConferenceApp = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_in_app_browser__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_screen_orientation__ = __webpack_require__(205);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1386,7 +1420,7 @@ var ExpPage = (function () {
     };
     ExpPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-exp',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia/experiencia.html"*/'<ion-header>\n    <ion-navbar no-border-bottom *ngIf = "hideNavBar">\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>Experiencia</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n  <button ion-button color="primary" (click)="openLink()">Abrir link</button>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/experiencia-1/experiencia/experiencia.html"*/
+            selector: 'page-exp',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia\experiencia.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom *ngIf = "hideNavBar">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Experiencia</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <button ion-button color="primary" (click)="openLink()">Abrir link</button>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia\experiencia.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_native_in_app_browser__["a" /* InAppBrowser */],
@@ -1404,7 +1438,7 @@ var ExpPage = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UmvralApiProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

@@ -12,6 +12,7 @@ export class UmvralApiProvider {
   apiUrl = 'http://vps.csaldias.cl:8000/api';
   isLoggedIn: boolean;
   userid: number;
+  Usuario: any;
 
   constructor(public http: Http) {
     this.isLoggedIn = false;
