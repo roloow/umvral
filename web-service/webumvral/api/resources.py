@@ -28,20 +28,81 @@ class ExperienceResource(ModelResource):
             url(r"^(?P<resource_name>%s)/curso%s$" %
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('curso'), name="api_expcurso"),
+            url(r"^(?P<resource_name>%s)/detalle%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('detalle'), name="api_exp_detalle"),
+            url(r"^(?P<resource_name>%s)/video%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('video'), name="api_exp_video"),
 
         ]
 
     def curso(self,request, **kwargs):
         self.method_check(request, allowed=['post'])
-        curso_id=request.POST.get('curso_id','')
-        expCourse = ExpCourseModel.objects.filter( course__pk= curso_id , visible = True )
+        student_id=request.POST.get('student_id','')
+        try:
+            st = StudentModel.objects.get(pk=student_id)
+        except:
+            return self.create_response(request, {
+                'error': 'sin cursos',
+                'student_id': student_id
+                })
+        expCourse = ExpCourseModel.objects.filter( course__pk= st.course.pk , visible = True )
         experiencias = []
         for exp in expCourse:
-            experiencias.append([{'nombre_experiencia':exp.available.experience.name,'description_experiencia':exp.available.experience.description, 'url_experiencia':exp.available.experience.url , 'video':exp.available.video , 'posision':exp.available.position  }])
+            experiencias.append([{'exp_name':exp.available.experience.name,'exp_course_id':exp.pk,'position':exp.available.position  }])
         return self.create_response(request, {
-            'curso': curso_id,
+            'student_id': student_id,
             'experiencias': experiencias,
             } )
+
+    def detalle(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        exp_course_id=request.POST.get('exp_course_id')
+        test_id = 'Null'
+        try:
+            expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
+
+            if expCourse.test.pk.visible != False :
+                test_id = expCourse.test.pk
+
+        except:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'exp_course_id': exp_course_id,
+                'test_id': 'Null'
+                })
+
+
+        return self.create_response(request, {
+            'student_id': student_id,
+            'exp_course_id': exp_course_id,
+            'test_id': test_id
+            })
+
+    def video(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        exp_course_id=request.POST.get('exp_course_id')
+        video_url = 'Null'
+        try:
+            expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
+            student= StudentModel.objects.get(pk=student_id)
+            expCourse.available.video
+        except:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'exp_course_id': exp_course_id,
+                'video_url': 'Null'
+                })
+
+
+        return self.create_response(request, {
+            'student_id': student_id,
+            'exp_course_id': exp_course_id,
+            'video_url': expCourse.available.video
+            })
 
 #Mensajes
 class MessageResource(ModelResource):
@@ -132,6 +193,7 @@ class ClientResource(ModelResource):
         if( user_id ):
             user = User.objects.get(pk=user_id)
             user.profile.modify(nombre,apellido,clave)
+
             return self.create_response(request, {
                 'success': True,
                 'nombre':nombre,
@@ -183,7 +245,7 @@ class CourseResource(ModelResource):
         students = StudentModel.objects.filter(profile__pk=user_id)
         cursos=[]
         for st in students:
-            cursos.append([{'nombre_curso': st.course.name ,'curso_id':st.course.pk ,'profesor':st.course.professor ,'descripcion':st.course.description}])
+            cursos.append([{'nombre_curso': st.course.name ,'curso_id':st.course.pk ,'profesor':st.course.professor ,'descripcion':st.course.description, 'student_id': st.pk}])
 
         return self.create_response(request, {
             'user_id': user_id,

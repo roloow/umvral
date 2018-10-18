@@ -37,6 +37,7 @@ def course_invite(request, course):
     students = ClientModel.objects.filter(isProfessor=False)
     context['students'] = students
     if (request.method == "POST"):
+        print (request.POST)
         if (request.POST['to'] == '' or request.POST['to'] == 'No hay selección'):
             context['error'] = True
             return render(request, 'web/course_invite.html', context)
