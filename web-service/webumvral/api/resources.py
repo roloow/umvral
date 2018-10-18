@@ -5,6 +5,7 @@ from web.models import AvailabilityModel
 from web.models import ClientModel
 from web.models import StudentModel
 from web.models import CourseModel
+from web.models import CalificationModel
 from web.models import ExpCourseModel
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
@@ -176,6 +177,9 @@ class ClientResource(ModelResource):
             url(r"^(?P<resource_name>%s)/update%s$" %
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('update'), name="api_update"),
+            url(r"^(?P<resource_name>%s)/notas%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('notas'), name="api_notas"),
 
         ]
 
@@ -183,7 +187,6 @@ class ClientResource(ModelResource):
     def update(self, request, **kwargs):
 
         self.method_check(request, allowed=['post'])
-
         #data = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
         nombre = request.POST.get('nombre', '')
         clave = request.POST.get('clave','')
@@ -193,7 +196,6 @@ class ClientResource(ModelResource):
         if( user_id ):
             user = User.objects.get(pk=user_id)
             user.profile.modify(nombre,apellido,clave)
-
             return self.create_response(request, {
                 'success': True,
                 'nombre':nombre,
@@ -210,6 +212,17 @@ class ClientResource(ModelResource):
             'user_id':user_id,
             } )
 
+
+    def notas(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        notas=[]
+        califications = CalificationModel.objects.filter(owner__pk=user_id)
+        
+        return self.create_response(request, {
+            'user_id': user_id,
+            'notas': notas
+            })
 
 
 #Estudiantes
