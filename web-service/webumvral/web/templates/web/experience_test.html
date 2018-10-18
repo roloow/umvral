@@ -1,0 +1,96 @@
+{% extends "web/base_page.html" %}
+
+{% load static %}
+
+{% block title %}
+Crear prueba
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block breadcrumb %}
+<li>
+  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course_id}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Experiencias</span>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>{{experience_id}}</span>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Prueba</span>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="note note-info">
+  <h4 class="block">Cambios de orden</h4>
+  <p>
+    Reordena las preguntas en el orden en el que deseas que aparezcan en la aplicación.
+  </p>
+  <br>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-body form">
+                <form action="" class="form-horizontal form-row-seperated">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                                <select multiple="multiple" class="multi-select" id="preguntas_select" name="preguntas_select[]">
+                                    {% for question in questions %}
+                                    <option value="{{question.pk}}">{{question.statement}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">
+                                    <i class="fa fa-check"></i> Guardar</button>
+                                <button type="button" class="btn grey-salsa btn-outline">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+{% endblock %}
+
+{% block plugin_js %}
+<script type="text/javascript" src="{% static "web/global/plugins/jquery-multi-select/js/jquery.multi-select.js" %}"></script>
+<!--<script type="text/javascript" src="{% static "web/pages/scripts/components-multi-select.min.js" %}"></script>
+<script type="text/javascript" src="{% static "web/global/plugins/bootstrap-select/js/bootstrap-select.min.js" %}"></script>
+<script type="text/javascript" src="{% static "web/global/plugins/select2/js/select2.full.min.js" %}"></script> -->
+<script>
+$('#preguntas_select').multiSelect({
+  selectableHeader: "<div class='custom-header'>Preguntas disponibles</div>",
+  selectionHeader: "<div class='custom-header'>Preguntas en prueba</div>",
+  cssClass: "width: 800px;"
+});
+</script>
+{% endblock %}
+
+{% block plugin_css %}
+<link rel="stylesheet" type="text/css" media="screen" href="{% static "web/global/plugins/jquery-multi-select/css/multi-select.css" %}" />
+<!-- <link rel="stylesheet" type="text/css" href="{% static "web/global/plugins/bootstrap-select/css/bootstrap-select.min.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "web/global/plugins/select2/css/select2.min.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "web/global/plugins/select2/css/select2-bootstrap.min.css" %}" /> -->
+{% endblock %}

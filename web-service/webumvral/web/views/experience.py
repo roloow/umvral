@@ -41,6 +41,7 @@ def course_exp_visibility(request, course, experience):
 def experience_test(request, course, experience):
     context = get_base_context(request)
     context['course_id'] = course
+    context['experience_id'] = experience
     print("Course "+course)
     print("Experience "+experience)
 
@@ -53,12 +54,21 @@ def experience_test(request, course, experience):
             return redirect('web:course_experience', course=course)
         print("La experiencia no tiene test asociado, continuando...")
         #Buscamos todas las preguntas disponibles para esta experiencia
-        available_questions = QuestionModel.objects.filter(experience__pk=experience)
+        available_questions = QuestionModel.objects.filter(experience__pk=experience).all()
         print("Encontradas",len(available_questions),"preguntas")
+        context['questions'] = available_questions
     except:
         return('web:404')
 
-    return redirect('web:course_experience', course=course)
+    if (request.method == "POST"):
+        orden = list()
+        for k,v in request.POST.items():
+            if ('pos' in k):
+                orden.append(QuestionModel.objects.get(pk=int(v)))
+        #lista = change_position(orden)
+        context['questions'] = orden
+
+    return render(request, 'web/experience_test.html', context)
 
 def change_position(lista):
     for i in range(len(lista)):
