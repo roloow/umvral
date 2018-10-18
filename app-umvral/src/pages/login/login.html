@@ -39,9 +39,10 @@
         <ion-row>
           <ion-col class="signup-col">
             <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Iniciar Sesión</button>
-            <!--<button ion-button class="register-btn" block clear (click)="createAccount()">Registrar</button>-->
+            <button ion-button class="register-btn" block clear type="button" (click)="registrarUsuario()">¿No tienes una cuenta? Regístrate</button>
           </ion-col>
         </ion-row>
+      
       </form>
     </div>
 </ion-content>
