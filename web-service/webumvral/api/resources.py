@@ -21,7 +21,27 @@ class ExperienceResource(ModelResource):
         resource_name = 'experience'
         authentication = Authentication()
         authorization = Authorization()
-        #allowed_methods = ['get']
+        allowed_methods = ['get','post']
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/curso%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('curso'), name="api_expcurso"),
+
+        ]
+
+    def curso(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        curso_id=request.POST.get('curso_id','')
+        expCourse = ExpCourseModel.objects.filter( course__pk= curso_id , visible = True )
+        experiencias = []
+        for exp in expCourse:
+            experiencias.append([{'nombre_experiencia':exp.available.experience.name,'description_experiencia':exp.available.experience.description, 'url_experiencia':exp.available.experience.url , 'video':exp.available.video , 'posision':exp.available.position  }])
+        return self.create_response(request, {
+            'curso': curso_id,
+            'experiencias': experiencias,
+            } )
 
 #Mensajes
 class MessageResource(ModelResource):
