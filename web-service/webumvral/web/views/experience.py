@@ -45,6 +45,29 @@ def experience_test(request, course, experience):
     print("Course "+course)
     print("Experience "+experience)
 
+    if (request.method == "POST"):
+        #Obtenemos las preguntas seleccionadas para la Prueba
+        id_preguntas = list(request.POST.getlist('preguntas_select'))
+
+        #Creamos la prueba (TestModel)
+        prueba = TestModel()
+        prueba.total_questions = len(id_preguntas)
+        prueba.visible = False #Por defecto, la prueba no es visible
+        prueba.save()
+
+        #Agregamos cada pregunta, en orden, a la prueba
+        position = 0
+        for id_pregunta in id_preguntas:
+            pregunta = ConfigurationModel()
+            pregunta.test = prueba
+            pregunta.question = QuestionModel.objects.get(pk=int(id_pregunta))
+            pregunta.position = position
+            pregunta.save()
+            position += 1
+
+        #Agregamos la prueba recién creada a ExpCourseModel
+
+
     try:
         exp = ExpCourseModel.objects.filter(course__pk=course, available__experience__pk=experience)[0]
         print("Encontrada experiencia con pk =",exp.available.experience.pk)
@@ -59,14 +82,6 @@ def experience_test(request, course, experience):
         context['questions'] = available_questions
     except:
         return('web:404')
-
-    if (request.method == "POST"):
-        orden = list()
-        for k,v in request.POST.items():
-            if ('pos' in k):
-                orden.append(QuestionModel.objects.get(pk=int(v)))
-        #lista = change_position(orden)
-        context['questions'] = orden
 
     return render(request, 'web/experience_test.html', context)
 

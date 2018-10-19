@@ -33,9 +33,12 @@ Crear prueba
 
 {% block content %}
 <div class="note note-info">
-  <h4 class="block">Cambios de orden</h4>
+  <h4 class="block">Instrucciones</h4>
   <p>
-    Reordena las preguntas en el orden en el que deseas que aparezcan en la aplicación.
+    Haz clic en las preguntas de la columna "Preguntas disponibles" que deseas ver en la prueba de esta experiencia (columna "Preguntas en prueba"). El orden en el que las preguntas figuran en la columna "Preguntas en prueba" será el orden en el que aparecerán en la aplicación.
+  </p>
+  <p>
+    Se permite un máximo de <b>10</b> preguntas por prueba.
   </p>
   <br>
 </div>
@@ -44,11 +47,12 @@ Crear prueba
     <div class="col-md-12">
         <div class="portlet light form-fit bordered">
             <div class="portlet-body form">
-                <form action="" class="form-horizontal form-row-seperated">
+                <form action="{% url 'web:experience_test' course_id experience_id %}" method="post" class="form-horizontal form-row-seperated">
+                    {% csrf_token %}
                     <div class="form-body">
                         <div class="form-group">
                             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-                                <select multiple="multiple" class="multi-select" id="preguntas_select" name="preguntas_select[]">
+                                <select multiple="multiple" class="multi-select" id="preguntas_select" name="preguntas_select">
                                     {% for question in questions %}
                                     <option value="{{question.pk}}">{{question.statement}}</option>
                                     {% endfor %}
@@ -76,21 +80,56 @@ Crear prueba
 
 {% block plugin_js %}
 <script type="text/javascript" src="{% static "web/global/plugins/jquery-multi-select/js/jquery.multi-select.js" %}"></script>
-<!--<script type="text/javascript" src="{% static "web/pages/scripts/components-multi-select.min.js" %}"></script>
-<script type="text/javascript" src="{% static "web/global/plugins/bootstrap-select/js/bootstrap-select.min.js" %}"></script>
-<script type="text/javascript" src="{% static "web/global/plugins/select2/js/select2.full.min.js" %}"></script> -->
 <script>
+var _multiSelect, selectables, options;
+var selectedOrder = [];
+var limit = 10;
+
 $('#preguntas_select').multiSelect({
   selectableHeader: "<div class='custom-header'>Preguntas disponibles</div>",
   selectionHeader: "<div class='custom-header'>Preguntas en prueba</div>",
-  cssClass: "width: 800px;"
+  afterInit: function () {
+			_multiSelect = this;
+			if (this.$element.val() != null) {
+				if (this.$element.val().length >= limit) {
+					// disable all selectable elements
+					selectables = this.$container.find(".ms-elem-selectable");
+					selectables.addClass(_multiSelect.options.disabledClass);
+
+					// disable all <option>
+					options = _multiSelect.$element.find("option");
+					options.prop("disabled", true);
+				}
+			}
+		},
+		afterSelect: function (value) {
+			selectedOrder.push(value[0]);
+			if (this.$element.val().length >= limit) {
+				// disable all selectable elements
+				selectables = this.$container.find(".ms-elem-selectable");
+				selectables.addClass(_multiSelect.options.disabledClass);
+
+				// disable all <option>
+				options = _multiSelect.$element.find("option");
+				options.prop("disabled", true);
+			}
+		},
+		afterDeselect: function (value) {
+			selectedOrder.splice(selectedOrder.indexOf(value[0]), 1);
+			if (this.$element.val() && this.$element.val().length <= limit) {
+				// enable all selectable elements
+				selectables = this.$container.find(".ms-elem-selectable");
+				selectables.removeClass(_multiSelect.options.disabledClass);
+
+				// enable all <option>
+				options = _multiSelect.$element.find("option");
+				options.prop("disabled", false);
+			}
+		}
 });
 </script>
 {% endblock %}
 
 {% block plugin_css %}
 <link rel="stylesheet" type="text/css" media="screen" href="{% static "web/global/plugins/jquery-multi-select/css/multi-select.css" %}" />
-<!-- <link rel="stylesheet" type="text/css" href="{% static "web/global/plugins/bootstrap-select/css/bootstrap-select.min.css" %}" />
-<link rel="stylesheet" type="text/css" href="{% static "web/global/plugins/select2/css/select2.min.css" %}" />
-<link rel="stylesheet" type="text/css" href="{% static "web/global/plugins/select2/css/select2-bootstrap.min.css" %}" /> -->
 {% endblock %}
