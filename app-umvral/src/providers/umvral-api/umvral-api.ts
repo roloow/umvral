@@ -12,6 +12,7 @@ export class UmvralApiProvider {
   apiUrl = 'http://vps.csaldias.cl:8000/api';
   isLoggedIn: boolean;
   userid: number;
+  Usuario: any;
 
   constructor(public http: Http) {
     this.isLoggedIn = false;
@@ -47,7 +48,21 @@ export class UmvralApiProvider {
         });
     });
   }
+/*
+  metodo(valores) {
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
 
+    return new Promise((resolve, reject) =>{
+      //this.http.post(link,valores,options).subscribe(res => { hacer cosas res , resolve}, err => {hacer cosas error ,reject})
+      //this.http.get(link,options).subscribe(res => { hacer cosas res }, err => {hacer cosas error})
+    }
+  
+  
+  )
+  }
+*/
   register(data) {
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
