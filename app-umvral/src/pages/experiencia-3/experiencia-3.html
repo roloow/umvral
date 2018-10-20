@@ -3,7 +3,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>Temperatura y Dilatación</ion-title>
+      <ion-title>Bonus: Sistema Solar</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -11,9 +11,9 @@
 <ion-content padding>
     <h3>Selecciona la acción:</h3>
     <p>
-        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>
+        <button ion-button color="primary" disabled block>Materia</button>
     </p>
     <p>
-        <button ion-button color="light" block>Iniciar Experiencia</button>
+        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>
     </p>
 </ion-content>

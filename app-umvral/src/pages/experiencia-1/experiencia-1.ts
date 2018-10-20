@@ -44,7 +44,7 @@ export class Experiencia1Page {
   loadExp() {
   console.log("Loading experience...");
   const serverOptions: HttpdOptions = {
-      www_root: 'umvral-exp1', // relative path to app's www directory
+      www_root: 'assets/experiencias', // relative path to app's www directory
       port: 8080,
       localhost_only: true
   };
@@ -55,7 +55,7 @@ export class Experiencia1Page {
   };
   const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
     console.log('Server is live');
-    const browser = this.iab.create(url, "_blank", options);
+    const browser = this.iab.create(url+"/index.html", "_blank", options);
     browser.on('exit').subscribe(() => {
       httpServer.unsubscribe();
       browser.close();

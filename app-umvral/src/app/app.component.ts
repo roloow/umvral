@@ -11,7 +11,6 @@ import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
 import { Experiencia2Page } from '../pages/experiencia-2/experiencia-2';
 import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
-import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.template.html'
@@ -34,16 +33,15 @@ export class ConferenceApp {
     public umvralApiProvider: UmvralApiProvider
   ) {
     // Check if the user has already seen the tutorial
-    this.isLoggedIn = false;
-    if (this.getLoggedInStatus) {
-      console.log("usuario no ha iniciado sesión.");
-      this.rootPage = LoginPage;
-    } else {
-      console.log("Usuario ha iniciado sesión");
-      this.rootPage = ExperienceListPage;
-    }
-    
-
+    this.isLoggedIn = true;
+    //if (this.getLoggedInStatus) {
+    //  console.log("usuario no ha iniciado sesión.");
+    //  this.rootPage = LoginPage;
+    //} else {
+    //  console.log("Usuario ha iniciado sesión");
+    //  this.rootPage = ExperienceListPage;
+    //}
+    this.rootPage = ExperienceListPage;
     this.platform.ready().then(() => {
       this.splashScreen.hide();
     });

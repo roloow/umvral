@@ -14,7 +14,8 @@ export class UmvralApiProvider {
   userid: number;
 
   constructor(public http: Http) {
-    this.isLoggedIn = false;
+    this.isLoggedIn = true;
+    this.userid = 1;
     console.log('Hello UmvralApiProvider Provider');
   }
 
