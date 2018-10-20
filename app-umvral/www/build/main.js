@@ -388,12 +388,20 @@ var LoginPage = (function () {
         this.mostrarCargando();
         this.umvralApiProvider.login(this.data).then(function (result) {
             var resultData = JSON.parse(JSON.stringify(result));
-            console.log("SUCCESS: " + resultData.status + " " + resultData.statusText);
-            _this.loading.dismiss();
-            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__cursos_cursos__["a" /* CursosPage */]);
+            var resultBody = JSON.parse(result["_body"]);
+            console.log(resultBody.success);
+            if (resultBody.success == true) {
+                console.log("SUCCESS: " + resultData.status + " " + resultData.statusText);
+                _this.loading.dismiss();
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__cursos_cursos__["a" /* CursosPage */]);
+            }
+            else {
+                console.log("FAIL PASSWD");
+                _this.mostrarError("Error al acceder: usuario/contraseña incorretos.");
+            }
         }, function (err) {
             var errorData = JSON.parse(JSON.stringify(err));
-            console.log("FAIL");
+            console.log("FAIL HTML RESPONSE");
             _this.mostrarError("Error al acceder: " + errorData.status + " " + errorData.statusText);
         });
     };
@@ -1185,30 +1193,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MensajesPage = (function () {
-    function MensajesPage(navCtrl, navParams, umvralApiProvider) {
+    function MensajesPage(navCtrl, navParams, umvralApiProvider, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.umvralApiProvider = umvralApiProvider;
+        this.loadingCtrl = loadingCtrl;
         this.getMensajes();
     }
     MensajesPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad MensajesPage');
     };
+    MensajesPage.prototype.mostrarCargando = function () {
+        this.loading = this.loadingCtrl.create({
+            content: 'Cargando...',
+            dismissOnPageChange: true
+        });
+        this.loading.present();
+    };
     MensajesPage.prototype.getMensajes = function () {
         var _this = this;
+        this.mostrarCargando();
         this.umvralApiProvider.getReceivedMessages()
             .then(function (data) {
             _this.mensajes = data;
-            console.log(JSON.stringify(_this.mensajes));
+            //console.log(JSON.stringify(this.mensajes));
+            _this.loading.dismiss();
         });
     };
     MensajesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-mensajes',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/mensajes/mensajes.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>mensajes</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <div padding style=\'height: 80%\' *ngIf="mensajes">\n    <ion-list *ngFor="let mensaje of mensajes.mensajes">\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            {{mensaje[0].content}}\n          </ion-col>\n          <ion-col>\n            {{mensaje[0].topic}}\n          </ion-col>\n          <ion-col>\n            {{mensaje[0].name}}\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </ion-list>\n    \n    \n    \n    \n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/mensajes/mensajes.html"*/,
+            selector: 'page-mensajes',template:/*ion-inline-start:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/mensajes/mensajes.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Mis Mensajes</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <div padding style=\'height: 80%\' *ngIf="mensajes">\n    <ion-list *ngFor="let mensaje of mensajes.mensajes">\n      <ion-card>\n        <ion-item>\n          <ion-avatar item-start>\n            <img src="https://www.gravatar.com/avatar?d=mm&s=140">\n          </ion-avatar>\n          <h2>{{mensaje[0].topic}}</h2>\n          <p>{{mensaje[0].name}}</p>\n        </ion-item>\n        <!-- <img src="img/advance-card-bttf.png"> -->\n        <ion-card-content>\n          <p>{{mensaje[0].content}}</p>\n        </ion-card-content>\n      </ion-card>\n    </ion-list>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/camilo/GitHub/umvral/app-umvral/src/pages/mensajes/mensajes.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
+            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]])
     ], MensajesPage);
     return MensajesPage;
 }());
@@ -1570,6 +1589,7 @@ var UmvralApiProvider = (function () {
                 .subscribe(function (res) {
                 _this.isLoggedIn = true;
                 var userData = JSON.parse(res["_body"]);
+                console.log(res["_body"]);
                 _this.userid = userData.user_id;
                 console.log("Login successful with ID " + _this.userid);
                 resolve(res);
