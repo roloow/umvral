@@ -39,6 +39,7 @@ export class UmvralApiProvider {
         .subscribe(res => {
           this.isLoggedIn = true;
           let userData = JSON.parse(res["_body"]);
+          console.log(res["_body"]);
           this.userid = userData.user_id;
           console.log("Login successful with ID "+this.userid);
           resolve(res);
