@@ -29,18 +29,4 @@ export class MensajesPage {
       console.log(JSON.stringify(this.mensajes));
     });
   }
-
-  /*
-  La estructura de los mensajes es:
-  mensajes es un diccionario con 2 llaves:
-  - "mensajes" es un arreglo de mensajes, con contenido de:
-      - "content": contenido del mensaje
-      - "id": id del mensaje
-      - "id_sender": id del usuario que envió el mensaje
-      - "name": nombre del usuario que envió el mensaje
-      - "topic": asunto del mensaje
-  - "usuario" es el id del usuario actual
-  */
-    
-
 }

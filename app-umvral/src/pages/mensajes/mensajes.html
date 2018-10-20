@@ -9,17 +9,17 @@
 
 <ion-content padding>
   <div padding style='height: 80%' *ngIf="mensajes">
-    <ion-list *ngFor="let mensaje of mensajes['mensajes']">
+    <ion-list *ngFor="let mensaje of mensajes.mensajes">
       <ion-grid>
         <ion-row>
           <ion-col>
-            {{mensaje.content}}
+            {{mensaje[0].content}}
           </ion-col>
           <ion-col>
-            {{mensaje.topic}}
+            {{mensaje[0].topic}}
           </ion-col>
           <ion-col>
-            {{mensaje.name}}
+            {{mensaje[0].name}}
           </ion-col>
         </ion-row>
       </ion-grid>
