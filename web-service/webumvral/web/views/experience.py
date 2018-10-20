@@ -45,9 +45,11 @@ def experience_test(request, course, experience):
     print("Course "+course)
     print("Experience "+experience)
 
+    #Vamos a recibir POST cuando hayamos creado la prueba y la estemos guardando
     if (request.method == "POST"):
         #Obtenemos las preguntas seleccionadas para la Prueba
         id_preguntas = list(request.POST.getlist('preguntas_select'))
+        print(id_preguntas)
 
         #Creamos la prueba (TestModel)
         prueba = TestModel()
@@ -66,10 +68,16 @@ def experience_test(request, course, experience):
             position += 1
 
         #Agregamos la prueba recién creada a ExpCourseModel
+        exp = ExpCourseModel.objects.filter(course__pk = course, available__experience__pk = experience)[0]
+        exp.test = prueba
+        exp.save()
 
+        #Y listo!
+        return redirect('web:course_experience', course=course)
 
+    #De otra forma, en GET mostraremos las preguntas disponibles para crear la prueba.
     try:
-        exp = ExpCourseModel.objects.filter(course__pk=course, available__experience__pk=experience)[0]
+        exp = ExpCourseModel.objects.filter(course__pk = course, available__experience__pk = experience)[0]
         print("Encontrada experiencia con pk =",exp.available.experience.pk)
         #La experiencia tiene una prueba asociada?
         if exp.test:

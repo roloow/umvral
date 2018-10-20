@@ -88,8 +88,14 @@ Experiencias disponibles
                           </button>
                           <ul class="dropdown-menu pull-right" role="menu">
                             <li>
+                              {% if exp.test %}
+                              <a href="">
+                              <i class="icon-note"></i> Editar prueba </a>
+                              {% else %}
                               <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
                               <i class="icon-note"></i> Crear prueba </a>
+                              {% endif %}
+
                             </li>
                             <li>
                               <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">

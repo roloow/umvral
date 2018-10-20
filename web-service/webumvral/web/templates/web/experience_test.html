@@ -64,8 +64,10 @@ Crear prueba
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
                                 <button type="submit" class="btn green">
-                                    <i class="fa fa-check"></i> Guardar</button>
-                                <button type="button" class="btn grey-salsa btn-outline">Cancelar</button>
+                                    <i class="fa fa-check"></i>
+                                    Guardar
+                                </button>
+                                <a href="{% url 'web:course_experience' course_id %}" class="btn grey-salsa btn-outline" role="button">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -88,6 +90,7 @@ var limit = 10;
 $('#preguntas_select').multiSelect({
   selectableHeader: "<div class='custom-header'>Preguntas disponibles</div>",
   selectionHeader: "<div class='custom-header'>Preguntas en prueba</div>",
+  keepOrder: true,
   afterInit: function () {
 			_multiSelect = this;
 			if (this.$element.val() != null) {
@@ -97,21 +100,23 @@ $('#preguntas_select').multiSelect({
 					selectables.addClass(_multiSelect.options.disabledClass);
 
 					// disable all <option>
-					options = _multiSelect.$element.find("option");
-					options.prop("disabled", true);
+					//options = _multiSelect.$element.find("option");
+					//options.prop("disabled", true);
 				}
 			}
 		},
 		afterSelect: function (value) {
 			selectedOrder.push(value[0]);
+      $('#preguntas_select option[value="'+value+'"]').remove();
+      $('#preguntas_select').append($("<option></option>").attr("value",value).attr('selected', 'selected'));
 			if (this.$element.val().length >= limit) {
 				// disable all selectable elements
 				selectables = this.$container.find(".ms-elem-selectable");
 				selectables.addClass(_multiSelect.options.disabledClass);
 
 				// disable all <option>
-				options = _multiSelect.$element.find("option");
-				options.prop("disabled", true);
+				//options = _multiSelect.$element.find("option");
+				//options.prop("disabled", true);
 			}
 		},
 		afterDeselect: function (value) {
@@ -122,8 +127,8 @@ $('#preguntas_select').multiSelect({
 				selectables.removeClass(_multiSelect.options.disabledClass);
 
 				// enable all <option>
-				options = _multiSelect.$element.find("option");
-				options.prop("disabled", false);
+				//options = _multiSelect.$element.find("option");
+				//options.prop("disabled", false);
 			}
 		}
 });
