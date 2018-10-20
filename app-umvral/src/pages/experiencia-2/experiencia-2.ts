@@ -12,6 +12,7 @@ import { AlertController } from 'ionic-angular';
 })
 
 export class Experiencia2Page {
+  prueba: any = 0;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
