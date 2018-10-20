@@ -72,12 +72,11 @@ var ExperienceListPage = (function () {
     };
     ExperienceListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona una experiencia:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n    \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
+            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona una experiencia:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n    \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
     ], ExperienceListPage);
     return ExperienceListPage;
-    var _a;
 }());
 
 //# sourceMappingURL=experience-list.js.map
@@ -119,6 +118,7 @@ var Experiencia1Page = (function () {
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
         this.httpd = httpd;
+        this.prueba = 0;
         this.nav = nav;
     }
     Experiencia1Page.prototype.openMateriaPage = function () {
@@ -164,15 +164,12 @@ var Experiencia1Page = (function () {
     };
     Experiencia1Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-1',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Caída Libre</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la acción:</h3>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n    </p>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n    </p>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/
+            selector: 'page-experiencia-1',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Caída Libre</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n        <div *ngIf="prueba==1">\n\n            <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>\n\n        </div>\n\n        <div *ngIf="prueba==0">\n\n            <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>\n\n        </div>\n\n    </ion-list>\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__["a" /* Httpd */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__["a" /* Httpd */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__["a" /* Httpd */]) === "function" && _e || Object])
     ], Experiencia1Page);
     return Experiencia1Page;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=experiencia-1.js.map
@@ -211,6 +208,7 @@ var Experiencia2Page = (function () {
         this.iab = iab;
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
+        this.prueba = 0;
         this.nav = nav;
     }
     Experiencia2Page.prototype.openMateriaPage = function () {
@@ -242,14 +240,12 @@ var Experiencia2Page = (function () {
     };
     Experiencia2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-2',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Lanzamiento de Proyectil</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la acción:</h3>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n    </p>\n\n    <p>\n\n        <button ion-button color="light" block>Iniciar Experiencia</button>\n\n    </p>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/
+            selector: 'page-experiencia-2',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Lanzamiento de Proyectil</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n        <ion-list>\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n            <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n            <div *ngIf="prueba==1">\n\n                <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n            <div *ngIf="prueba==0">\n\n                <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n        </ion-list>\n\n    </ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
     ], Experiencia2Page);
     return Experiencia2Page;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=experiencia-2.js.map
@@ -288,6 +284,7 @@ var Experiencia3Page = (function () {
         this.iab = iab;
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
+        this.prueba = 0;
         this.nav = nav;
     }
     Experiencia3Page.prototype.openMateriaPage = function () {
@@ -319,14 +316,12 @@ var Experiencia3Page = (function () {
     };
     Experiencia3Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-3',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Temperatura y Dilatación</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona la acción:</h3>\n\n    <p>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n    </p>\n\n    <p>\n\n        <button ion-button color="light" block>Iniciar Experiencia</button>\n\n    </p>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/
+            selector: 'page-experiencia-3',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Temperatura y Dilatación</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n        <ion-list>\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n            <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n            <div *ngIf="prueba==1">\n\n                <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n            <div *ngIf="prueba==0">\n\n                <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n        </ion-list>\n\n    </ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
     ], Experiencia3Page);
     return Experiencia3Page;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=experiencia-3.js.map
@@ -478,7 +473,7 @@ var CursosPage = (function () {
     };
     CursosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona un Curso:</h3>\n\n\n\n  <div padding *ngIf="cursos?.length > 0">\n\n    <ion-list *ngFor="let curso of cursos; let i = index">\n\n      <button ion-button color="primary" (click)="openListaPage()" block>{{curso.cur_no}}<br>{{curso.pro_no}}</button>\n\n    </ion-list>  \n\n  </div>\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
+            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona un Curso:</h3>\n\n\n\n  <div padding *ngIf="cursos?.length > 0">\n\n    <ion-list *ngFor="let curso of cursos; let i = index">\n\n      <button ion-button color="primary" (click)="openListaPage(curso.stu_id)" block>{{curso.cur_no}}<br>{{curso.pro_no}}</button>\n\n    </ion-list>  \n\n  </div>\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
     ], CursosPage);
@@ -1512,6 +1507,21 @@ var UmvralApiProvider = (function () {
             });
         });
     };
+    /*
+      metodo(valores) {
+        let hdrs = new Headers();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        let options = new RequestOptions({ headers: hdrs});
+    
+        return new Promise((resolve, reject) =>{
+          //this.http.post(link,valores,options).subscribe(res => { hacer cosas res , resolve}, err => {hacer cosas error ,reject})
+          //this.http.get(link,options).subscribe(res => { hacer cosas res }, err => {hacer cosas error})
+        }
+      
+      
+      )
+      }
+    */
     UmvralApiProvider.prototype.register = function (data) {
         var _this = this;
         var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();

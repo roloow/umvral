@@ -12,7 +12,6 @@
     <h3>Selecciona una experiencia:</h3>
     <div padding *ngIf="experiencias?.length > 0">
         <ion-list *ngFor="let exp of experiencias; let i = index">
-
             <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>
         </ion-list>  
     </div>
