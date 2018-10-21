@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
-import { ExperienceListPage } from '../experience-list/experience-list';
+import { CursosPage } from '../cursos/cursos';
+import { RegisterUserPage } from '../register-user/register-user';
 
 /**
  * Generated class for the LoginPage page.
@@ -14,6 +15,7 @@ import { ExperienceListPage } from '../experience-list/experience-list';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
+
 export class LoginPage {
   data = {username: "", password: ""};
   loading: Loading;
@@ -31,6 +33,26 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  registrarUsuario() {
+    console.log("Boton presionado para registrar!");
+    this.navCtrl.push(RegisterUserPage);
+  }
+
+  iniciarSesion() {
+    console.log("Boton presionado!");
+    this.mostrarCargando();
+    this.umvralApiProvider.login(this.data).then((result) => {
+      let resultData = JSON.parse(JSON.stringify(result));
+      console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
+      this.loading.dismiss();
+      this.navCtrl.setRoot(CursosPage);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log("FAIL");
+      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
+    });
+  }
+  
   mostrarCargando() {
       this.loading = this.loadingCtrl.create({
         content: 'Cargando...',
@@ -48,21 +70,6 @@ export class LoginPage {
       buttons: ['OK']
     });
     alert.present(prompt);
-  }
-
-  iniciarSesion() {
-    console.log("Boton presionado!");
-    this.mostrarCargando();
-    this.umvralApiProvider.login(this.data).then((result) => {
-      let resultData = JSON.parse(JSON.stringify(result));
-      console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
-      this.loading.dismiss();
-      this.navCtrl.setRoot(ExperienceListPage);
-    }, (err) => {
-      let errorData = JSON.parse(JSON.stringify(err));
-      console.log("FAIL");
-      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
-    });
   }
 
 }
