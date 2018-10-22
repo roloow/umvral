@@ -86,10 +86,12 @@
       <a-entity  obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.01 0.01 0.01" rotation="-90 -20 0" position="1.5 0 1"></a-entity>
 
       <!-- Cañon -->
-      <a-entity id="cannonL1" class="cannon" obj-model="obj: #cannon1-obj; mtl: #cannon1-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
-      <a-entity id="cannonL2" class="cannon" visible="false" obj-model="obj: #cannon2-obj; mtl: #cannon2-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
-      <a-entity id="cannonL3" class="cannon" visible="false" obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
-      <a-entity id="repo" obj-model="obj: #repo-obj; mtl: #repo-mtl" scale="0.00001 0.00001 0.00001" rotation="-90 180 0" position="0 0 -3"></a-entity>
+			<a-entity id="cannons">
+				<a-entity id="cannonL1" class="cannon" obj-model="obj: #cannon1-obj; mtl: #cannon1-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
+				<a-entity id="cannonL2" class="cannon" visible="false" obj-model="obj: #cannon2-obj; mtl: #cannon2-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
+				<a-entity id="cannonL3" class="cannon" visible="false" obj-model="obj: #cannon3-obj; mtl: #cannon3-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
+				<a-entity id="repo" obj-model="obj: #repo-obj; mtl: #repo-mtl" scale="0.00001 0.00001 0.00001" rotation="-90 180 0" position="0 0 -3"></a-entity>
+			</a-entity>
 
       <a-button id="start" scale="0.2 0.3 0.3" button-color="red" position="1.36 1.4 1.02" rotation="0 -20 0" name="velocidad1"  value="EMPEZAR"></a-button>
       <a-button id="v1" scale="0.2 0.3 0.3" position="1.18 1.2 0.94" rotation="0 -20 0" name="velocidad1"  value="\"></a-button>
@@ -232,6 +234,7 @@
     var cannon1 = document.querySelector("#cannon1");
     var cannon2 = document.querySelector("#cannon2");
     var cannon3 = document.querySelector("#cannon3");
+    var cannons = document.querySelector("#cannons");
     var start = document.querySelector('#start');
 
 		//Botones para posicion horizontal de cañon
@@ -283,7 +286,6 @@
       cannonL3.object3D.rotation.x = degToRad(90+gamma);
       // cambio de angulo bala
 
-
     });
     alfa2.addEventListener('click', function(){
       textoPizarraEnBlanco.setAttribute('visible','false');
@@ -324,7 +326,8 @@
 
 
     /* Lanzamiento de Bala */
-    shoot.addEventListener('click', function(){
+    //shoot.addEventListener('click', function(){
+    cannons.addEventListener('click', function(){
 			if (launching_ball === false || orange.body.position < -1 || orange.body.position.y < 0.8) {
         launching_ball = true;
 				//Reset de velocidades de la Bala
