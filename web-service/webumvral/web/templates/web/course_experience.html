@@ -87,19 +87,28 @@ Experiencias disponibles
                             <i class="fa fa-angle-down"></i>
                           </button>
                           <ul class="dropdown-menu pull-right" role="menu">
+                            {% if exp.test %}
                             <li>
-                              {% if exp.test %}
-                              <a href="">
+                              <a href="{% url 'web:experience_test_edit' course_id exp.available.experience.pk %}">
                               <i class="icon-note"></i> Editar prueba </a>
-                              {% else %}
-                              <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
-                              <i class="icon-note"></i> Crear prueba </a>
-                              {% endif %}
-
                             </li>
                             <li>
+                              <a href="">
+                              <i class="icon-note"></i> Cambiar visibilidad prueba </a>
+                            </li>
+                            <li>
+                              <a href="">
+                              <i class="icon-note"></i> Eliminar prueba </a>
+                            </li>
+                            {% else %}
+                            <li>
+                              <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
+                              <i class="icon-note"></i> Crear prueba </a>
+                            </li>
+                            {% endif %}
+                            <li>
                               <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">
-                              <i class="fa fa-eye"></i> Cambiar visibilidad </a>
+                              <i class="fa fa-eye"></i> Cambiar visibilidad curso</a>
                             </li>
                             <li class="divider" role="separator"></li>
                             <li>

@@ -93,6 +93,74 @@ def experience_test(request, course, experience):
 
     return render(request, 'web/experience_test.html', context)
 
+def experience_test_edit(request, course, experience):
+    context = get_base_context(request)
+    context['course_id'] = course
+    context['experience_id'] = experience
+    print("Course "+course)
+    print("Experience "+experience)
+
+    #Vamos a recibir POST cuando hayamos editado la prueba y la estemos guardando
+    if (request.method == "POST"):
+        #Obtenemos las preguntas seleccionadas para la Prueba
+        id_preguntas = list(request.POST.getlist('preguntas_select'))
+        print(id_preguntas)
+
+        #Buscamos la prueba (TestModel) para cambiar el total de preguntas
+        test_pk = ExpCourseModel.objects.filter(course__pk = course, available__experience__pk = experience)[0].test.pk
+        prueba = TestModel.objects.get(pk = test_pk)
+        prueba.total_questions = len(id_preguntas)
+        prueba.save()
+
+        #Debemos reconstruir los ConfigurationModel con las nuevas preguntas de esta prueba
+        #Para ello, eliminamos los ConfigurationModel existentes y creamos nuevos con las nuevas preguntas de la prueba
+        ConfigurationModel.objects.filter(test__pk = test_pk).delete()
+
+        position = 0
+        for id_pregunta in id_preguntas:
+            pregunta = ConfigurationModel()
+            pregunta.test = prueba
+            pregunta.question = QuestionModel.objects.get(pk=int(id_pregunta))
+            pregunta.position = position
+            pregunta.save()
+            position += 1
+
+        #Y listo!
+        return redirect('web:course_experience', course=course)
+
+    #De otra forma, en GET mostraremos las preguntas disponibles para editar la prueba, además de las ya existentes
+    try:
+        exp = ExpCourseModel.objects.filter(course__pk = course, available__experience__pk = experience)[0]
+        print("Encontrada experiencia con pk =",exp.available.experience.pk)
+
+        #La experiencia no tiene una prueba asociada?
+        if not exp.test:
+            print("La experiencia no tiene test asociado, abortando...")
+            return redirect('web:course_experience', course=course)
+        print("Encontrado test con pk =",exp.test.pk)
+
+        #Buscamos las preguntas que están ya incluidas en este test
+        selected_questions = ConfigurationModel.objects.filter(test__pk=exp.test.pk).order_by("position").all()
+        print("Encontradas",len(selected_questions),"preguntas en prueba")
+        ids = [q.question.pk for q in selected_questions]
+
+        #for q in selected_questions:
+        #    print(q.position, q.question.pk, q.question.statement)
+
+        #Buscamos todas las preguntas disponibles para esta experiencia, que NO HAYAN sido ya seleccionadas
+        available_questions = QuestionModel.objects.filter(experience__pk=experience).exclude(pk__in = ids).all()
+        print("Encontradas",len(available_questions),"preguntas disponibles")
+
+        #for q in available_questions:
+        #    print(q.pk, q.statement)
+
+        context['available_questions'] = available_questions
+        context['selected_questions'] = selected_questions
+    except:
+        return('web:404')
+
+    return render(request, 'web/experience_test_edit.html', context)
+
 def change_position(lista):
     for i in range(len(lista)):
         expcou= lista[i].available
