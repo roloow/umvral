@@ -26,6 +26,7 @@ import { CursosPage } from '../pages/cursos/cursos';
 import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
 import { LoginPage } from '../pages/login/login';
 import { RegisterUserPage } from '../pages/register-user/register-user';
+import { MensajesPage } from '../pages/mensajes/mensajes';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RegisterUserPage } from '../pages/register-user/register-user';
     NotasPage,
     CursosPage,
     LoginPage,
-    RegisterUserPage
+    RegisterUserPage,
+    MensajesPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { RegisterUserPage } from '../pages/register-user/register-user';
     NotasPage,
     CursosPage,
     LoginPage,
-    RegisterUserPage
+    RegisterUserPage,
+    MensajesPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

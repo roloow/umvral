@@ -43,12 +43,19 @@ export class LoginPage {
     this.mostrarCargando();
     this.umvralApiProvider.login(this.data).then((result) => {
       let resultData = JSON.parse(JSON.stringify(result));
-      console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
-      this.loading.dismiss();
-      this.navCtrl.setRoot(CursosPage);
+      let resultBody = JSON.parse(result["_body"]);
+      console.log(resultBody.success);
+      if (resultBody.success == true) {
+        console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
+        this.loading.dismiss();
+        this.navCtrl.setRoot(CursosPage);
+      } else {
+        console.log("FAIL PASSWD");
+        this.mostrarError("Error al acceder: usuario/contraseña incorretos.");
+      }
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
-      console.log("FAIL");
+      console.log("FAIL HTML RESPONSE");
       this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
     });
   }
