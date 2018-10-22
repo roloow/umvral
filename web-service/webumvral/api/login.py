@@ -5,6 +5,7 @@ from tastypie.http import HttpUnauthorized, HttpForbidden
 from django.conf.urls import url
 from tastypie.utils import trailing_slash
 from web.models import *
+from web.models import StudentModel
 
 
 class UserResource(ModelResource):
@@ -41,37 +42,35 @@ class UserResource(ModelResource):
             client.auth_user = user
             client.isProfessor = False
             client.save()
+
         #username = data.get('username', '')
         #password = data.get('password', '')
 
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         print(user)
+        students = StudentModel.objects.filter(profile__pk= user.pk)
+        cursos=[]
+        for st in students:
+            cursos.append([{'course_name': st.course.name ,'course_id':st.course.pk ,'profesor_name':st.course.professor.full_name ,'student_id': st.pk}])
+
         if user:
 
             if user.is_active:
                 login(request, user)
                 return self.create_response(request, {
-                    'success': True,
                     'user_id': user.pk,
-                    'user' : user,
-                    'first_name' : user.first_name,
-                    'last_name' : user.last_name
+                    'user_name': username,
+                    'cursos' : cursos
                 })
             else:
                 return self.create_response(request, {
                     'success': False,
-                    'reason': 'disabled',
-                    'user' : username,
-                    'userpost':request.POST['username'],
-                    'password':password,
+                    'reason': 'disabled, cuenta bloqueada o inavilitada',
                     } )
         else:
             return self.create_response(request, {
                 'success': False,
-                'reason': 'incorrect',
-                'user' : username,
-                'userpost':request.POST['username'],
-                'password':password,
+                'reason': 'incorrect'
                 } )
 
 
