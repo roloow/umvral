@@ -7,6 +7,7 @@ from django.http import HttpResponse
 def course_experience(request, course):
     context = get_base_context(request)
     context['course_id'] = course
+    context['course_name'] = CourseModel.objects.get(pk=course).name
     try:
         experiences = ExpCourseModel.objects.filter(course__pk=course).order_by("available__position")
         context['experiences'] = experiences
@@ -41,7 +42,10 @@ def course_exp_visibility(request, course, experience):
 def experience_test(request, course, experience):
     context = get_base_context(request)
     context['course_id'] = course
+    context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
+    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
+
     print("Course "+course)
     print("Experience "+experience)
 
@@ -96,7 +100,9 @@ def experience_test(request, course, experience):
 def experience_test_edit(request, course, experience):
     context = get_base_context(request)
     context['course_id'] = course
+    context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
+    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
     print("Course "+course)
     print("Experience "+experience)
 
@@ -164,7 +170,9 @@ def experience_test_edit(request, course, experience):
 def experience_test_visibility(request, course, experience):
     context = get_base_context(request)
     context['course_id'] = course
+    context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
+    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
     print("Course "+course)
     print("Experience "+experience)
 
@@ -175,6 +183,31 @@ def experience_test_visibility(request, course, experience):
         #Cambiamos el estado de activacion
         test.visible = not test.visible
         test.save()
+    except:
+        return redirect('web:404')
+    return redirect('web:course_experience', course=course)
+
+def experience_test_delete(request, course, experience):
+    context = get_base_context(request)
+    context['course_id'] = course
+    context['course_name'] = CourseModel.objects.get(pk=course).name
+    context['experience_id'] = experience
+    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
+    print("Course "+course)
+    print("Experience "+experience)
+
+    try:
+        #Buscamos la prueba (TestModel) para cambiar su estado de existencia (osea, su bool de borrada)
+        #Además de hacer el cambio en TestModel, cambiaremos el atibuto test de ExpCourseModel a NULL para romper la relación.
+        #De esta forma, estamos "borrando" la prueba de los ojos del profesor sin tener que borrar la prueba de la BD.
+        exp_course = ExpCourseModel.objects.filter(course__pk = course, available__experience__pk = experience)[0]
+        test = TestModel.objects.get(pk = exp_course.test.pk)
+        #Cambiamos el estado de existencia
+        test.erase = True
+        test.save()
+        #Y borramos la relación
+        exp_course.test = None
+        exp_course.save()
     except:
         return redirect('web:404')
     return redirect('web:course_experience', course=course)

@@ -15,19 +15,19 @@ Crear prueba
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <a href="{% url 'web:course_read' course_id %}"><span>{{course_id}}</span></a>
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course_name}}</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>Experiencias</span>
+  <a href="{% url 'web:course_experience' course_id %}"><span>Experiencias</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>{{experience_id}}</span>
+  <a href="{% url 'web:course_experience' course_id %}"><span>{{experience_name}}</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>Prueba</span>
+  <span>Crear Prueba</span>
 </li>
 {% endblock %}
 
