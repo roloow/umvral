@@ -12,8 +12,16 @@
 
   <div padding *ngIf="cursos?.length > 0">
     <ion-list *ngFor="let curso of cursos; let i = index">
-      <button ion-button color="primary" (click)="openListaPage(curso.stu_id)" block>{{curso.cur_no}}<br>{{curso.pro_no}}</button>
+      <button ion-button color="primary" (click)="openListaPage(curso.student_id)" block>
+        {{curso.course_name}}<br>{{curso.profesor_name}}
+      </button>
     </ion-list>  
+  </div>
+  <div padding *ngIf="cursos?.length == 0">
+    <h3>
+      Usted no tiene cursos.
+    </h3>
+
   </div>
 
 
