@@ -13,8 +13,6 @@ export class UmvralApiProvider {
   isLoggedIn: boolean;
   userid: number;
   Usuario: any;
-  stuid : number;
-  stucurs: any;
 
   constructor(public http: Http) {
     this.isLoggedIn = false;
@@ -43,8 +41,6 @@ export class UmvralApiProvider {
           let userData = JSON.parse(res["_body"]);
           console.log(res["_body"]);
           this.userid = userData.user_id;
-          this.stucurs = userData.cursos;
-          this.stucurs.sort(this.compare);
           console.log("Login successful with ID "+this.userid);
           resolve(res);
         }, (err) => {
@@ -53,15 +49,6 @@ export class UmvralApiProvider {
         });
     });
   }
-
-  compare(a,b) {
-    if (a.position < b.position)
-      return -1;
-    if (a.position > b.position)
-      return 1;
-    return 0;
-  }
-    
 /*
   metodo(valores) {
     let hdrs = new Headers();
@@ -77,13 +64,6 @@ export class UmvralApiProvider {
   )
   }
 */
-
-  getStuCurs(){
-    return (this.stucurs);
-  }
-
-
-
   register(data) {
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      

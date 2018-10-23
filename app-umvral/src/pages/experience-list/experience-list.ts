@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { Experiencia1Page } from '../experiencia-1/experiencia-1';
 import { Experiencia2Page } from '../experiencia-2/experiencia-2';
 import { Experiencia3Page } from '../experiencia-3/experiencia-3';
-import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 
 @Component({
   selector: 'page-experience-list',
@@ -30,7 +29,7 @@ export class ExperienceListPage {
       t : 'Dilatacion y calor'
     }
   ];
-  constructor(public nav: NavController, public umvralApiProvider: UmvralApiProvider) {
+  constructor(public nav: NavController) {
     this.nav = nav;
   }
 
@@ -52,4 +51,13 @@ export class ExperienceListPage {
         break;
     }
   }
+
+  openExperiencia2Page() {
+    this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
+  }
+  
+  openExperiencia3Page() {
+    this.nav.push(Experiencia3Page); //Dilatacion y calor
+  }
+
 }
