@@ -53,14 +53,7 @@ El servidor, una vez realizadas las configuraciones anteriores debe ser corrido 
 
 ### comandos
 
-Para inicialmente tener alguna información, se creó un comando que genera 900 alumnos, 100 profesores, 2 cursos por profesor (1 normal y 1 eliminado), mensajes entre usuarios, cada alumno pertenece a almenos 1 curso no eliminado.
-
+Para inicialmente tener alguna información, se creó un comando que genera 900 alumnos, 100 profesores, 2 cursos por profesor (1 normal y 1 eliminado), mensajes entre usuarios, cada alumno pertenece a almenos 1 curso no eliminado. Luego agregar experiencias dummy, se genera 5 experiencias, y se agrega a por cada profesor un AvailableModel de forma tal que 4 de 5 experiencias tengan video, luego para todos los cursos del profesor, se crea un ExpCourseModel por cada AvailableModel, dejando a todos los cursos con 4 experiencias, 2 visibles y 2 no visibles.
 ```
 (CARPET) :CarpetaDestino\webumvral> python manage.py dummy --create
-```
-
-Para luego agregar experiencias dummy, se genera 5 experiencias, y se agrega a por cada profesor un AvailableModel de forma tal que 4 de 5 experiencias tengan video, luego para todos los cursos del profesor, se crea un ExpCourseModel por cada AvailableModel, dejando a todos los cursos con 4 experiencias, 2 visibles y 2 no visibles.
-
-```
-(CARPET) :CarpetaDestino\webumvral> python manage.py dummy --extra
 ```

@@ -109,18 +109,23 @@ class Command(BaseCommand):
                 c3.professor = p
                 c3.save()
                 courses.append(c2)
+                courses.append(c3)
 
+            aux2 = []
             for s in students:
                 aux = []
+                if s in aux2:
+                    continue
                 for iteration in range(3):
                     sm = StudentModel()
                     sm.profile = s
                     cou = choice(courses)
-                    while cou in aux:
+                    while (cou in aux):
                         cou = choice(courses)
                     aux.append(cou)
                     sm.course = cou
                     sm.save()
+                aux2.append(s)
 
             e1 = ExperienceModel()
             e1.name = "Caida Libre"
@@ -193,3 +198,19 @@ class Command(BaseCommand):
                     ex4.course = course
                     ex4.visible = False
                     ex4.save()
+
+            ExpCourses =  ExpCourseModel.objects.filter(visible=True)
+            for expc in ExpCourses:
+                test = TestModel()
+                test.total_questions = 5
+                test.visible = True
+                test.erase = False
+                test.save()
+                expc.test = test
+
+                alumnos = expc.course.students.all()
+                for alumno in alumnos:
+                    answer = AnswerModel()
+                    answer.student = alumno
+                    answer.test = test
+                    answer.save()
