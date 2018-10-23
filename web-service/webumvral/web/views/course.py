@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .common import get_base_context
 from ..models import CourseModel
 from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
 from django.http import HttpResponse
+from web.models import *
 
 
 def courses_list(request):
@@ -58,6 +60,27 @@ def course_read(request, course):
     #TODO: cortocircuitos de totales
     #context['tot_stu'] = courseobj.students.count()
     return render(request, 'web/course_read.html', context)
+
+@login_required
+def studentCourseProfile(request, student_id, course):
+    context = get_base_context(request)
+    course = CourseModel.objects.get(pk=course)
+    student = StudentModel.objects.get(profile_id=student_id, course=course)
+    if (request.user.profile.pk == course.professor.pk and 
+    student.course == course):
+        try:
+            client = ClientModel.objects.get(pk=student_id)
+        except:
+            return redirect('web:404')
+    else:
+        return redirect('web:404')
+
+    student_courses = StudentModel.objects.filter(profile=client).values('course_id')
+    courses = CourseModel.objects.filter(professor_id=request.user.pk).filter(id__in=student_courses)
+
+    context['client'] = client
+    context['courses'] = courses
+    return render(request, 'web/profile_studentcourse.html', context)
 
 class CourseListJson(BaseDatatableView):
     model = CourseModel

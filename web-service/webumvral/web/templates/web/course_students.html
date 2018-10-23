@@ -81,9 +81,10 @@ var render_name = function(sprofile_id, name){
 	return `<a href="${url}"> ${name} </a>`
 }
 $(document).ready(function() {
-		var course_id = {{course.pk}};
+		var course_id = "{{course.pk}}";
+		console.log(course_id);
     var course_name = "{{course.name}}";
-    var user_id = {{request.user.profile.pk}};
+    var user_id = "{{request.user.profile.pk}}";
     var dt_table = $('#table').DataTable({
 			processing: true,
 			serverSide: true,
@@ -131,7 +132,7 @@ $(document).ready(function() {
       ],
       searching: true,
       stateSave: true,
-			ajax: '{% url "web:course_student_list_json" %}',
+			ajax: '{% url "web:course_student_list_json" %}'+'?course_id='+course_id,
       data: {'course_id': course_id}
     });
 });

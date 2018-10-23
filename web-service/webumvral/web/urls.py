@@ -22,6 +22,7 @@ urlpatterns = [
     re_path(r'course/read/(?P<course>\w+)/students/$', views.course_students, name='course_students'),
     re_path(r'course/read/(?P<course>\w+)/students/invite$', views.course_invite, name='course_invite'),
     re_path(r'course/read/(?P<course>\w+)/students/(?P<student_id>\w+)/ban$', views.course_ban, name='course_ban'),
+    re_path(r'course/read/(?P<course>\w+)/students/(?P<student_id>\w+)$', views.studentCourseProfile, name='student_courseprofile'),
     url(r'^my/datatable/data/stud$', login_required(StudentListJson.as_view()), name='course_student_list_json'),
     re_path(r'course/read/(?P<course>\w+)/experiences/$', views.course_experience, name='course_experience'),
     re_path(r'course/read/(?P<course>\w+)/experiences/(?P<experience>\w+)$', views.course_exp_visibility, name='course_exp_visibility'),
