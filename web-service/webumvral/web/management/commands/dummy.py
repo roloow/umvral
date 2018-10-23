@@ -71,45 +71,57 @@ class Command(BaseCommand):
                         m.important = True
                         IMPORTANT -= 1
                         m.topic = "Asunto N. " + str(i)
-                        m.content = "Contenido del mensaje"
+                        m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                         m.save()
                         continue
                     if (READ != 0):
                         m.read = True
                         m.topic = "Asunto N. " + str(i)
-                        m.content = "Contenido del mensaje"
+                        m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                         m.save()
                         continue
                     if (DELETED != 0):
                         m.deleted = True
                         m.topic = "Asunto N. " + str(i)
-                        m.content = "Contenido del mensaje"
+                        m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                         m.save()
                         continue
                     m.topic = "Asunto N. " + str(i)
-                    m.content = "Contenido del mensaje"
+                    m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                     m.save()
 
             courses = []
             for p in professors:
                 c1 = CourseModel()
-                c1.name = "Curso numero 1"
-                c1.description = "Curso dummy 1"
+                c1.name = "Fisica II medio"
+                c1.description = "Curso para estudiar fisica de II medio"
                 c1.erase = True
                 c1.professor = p
                 c1.save()
                 c2 = CourseModel()
-                c2.name = "Curso numero 2"
-                c2.description = "Curso dummy 2"
+                c2.name = "Fisica III medio"
+                c2.description = "Curso para estudiar fisica de III medio"
                 c2.professor = p
                 c2.save()
+                c3 = CourseModel()
+                c3.name = "Fisica IV medio"
+                c3.description = "Curso para estudiar fisica de IV medio"
+                c3.professor = p
+                c3.save()
                 courses.append(c2)
-            reals = []
+
             for s in students:
-                sm = StudentModel()
-                sm.profile = s
-                sm.course = choice(courses)
-        if (options['extra']):
+                aux = []
+                for iteration in range(3):
+                    sm = StudentModel()
+                    sm.profile = s
+                    cou = choice(courses)
+                    while cou in aux:
+                        cou = choice(courses)
+                    aux.append(cou)
+                    sm.course = cou
+                    sm.save()
+
             e1 = ExperienceModel()
             e1.name = "Caida Libre"
             e1.description = "Fenomeno fisico, donde se puede apreciar un pelota caer en distintos escenarios y bajo distintas variables involucradas."
@@ -130,8 +142,8 @@ class Command(BaseCommand):
             e5.name = "Conservación de energía"
             e5.description = "Fenomeno fisico, donde se puede apreciar como en distintos ambientes la energía se transforma más nunca se crea ni destruye."
             e5.save()
-            usuarios = ClientModel.objects.filter(isProfessor=True)
-            for u in usuarios:
+
+            for u in professors:
                 courses = u.courses.all()
                 if (not courses):
                     continue
