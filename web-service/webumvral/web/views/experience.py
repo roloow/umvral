@@ -161,6 +161,24 @@ def experience_test_edit(request, course, experience):
 
     return render(request, 'web/experience_test_edit.html', context)
 
+def experience_test_visibility(request, course, experience):
+    context = get_base_context(request)
+    context['course_id'] = course
+    context['experience_id'] = experience
+    print("Course "+course)
+    print("Experience "+experience)
+
+    try:
+        #Buscamos la prueba (TestModel) para cambiar su estado de activación
+        test_pk = ExpCourseModel.objects.filter(course__pk = course, available__experience__pk = experience)[0].test.pk
+        test = TestModel.objects.get(pk = test_pk)
+        #Cambiamos el estado de activacion
+        test.visible = not test.visible
+        test.save()
+    except:
+        return redirect('web:404')
+    return redirect('web:course_experience', course=course)
+
 def change_position(lista):
     for i in range(len(lista)):
         expcou= lista[i].available

@@ -67,14 +67,18 @@ Experiencias disponibles
                           {% endif %}</td>
                         <td>
                           {% if exp.visible %}
-                            <span class="label label-sm label-warning "> Visible </span>
+                          <span class="label label-sm label-warning "> Visible </span>
                           {% else %}
                           <span class="label label-sm label-default "> No visible </span>
                           {% endif %}
                        </td>
                        <td>
                          {% if exp.test %}
+                         {% if exp.test.visible %}
+                           <span class="label label-sm label-warning "> Activa </span>
+                         {% else %}
                            <span class="label label-sm label-success "> Creada </span>
+                         {% endif %}
                          {% else %}
                          <span class="label label-sm label-default "> Sin crear </span>
                          {% endif %}
@@ -88,18 +92,22 @@ Experiencias disponibles
                           </button>
                           <ul class="dropdown-menu pull-right" role="menu">
                             {% if exp.test %}
+                            {% if not exp.test.visible %}
                             <li>
                               <a href="{% url 'web:experience_test_edit' course_id exp.available.experience.pk %}">
                               <i class="icon-note"></i> Editar prueba </a>
                             </li>
+                            {% endif %}
+                            <li>
+                              <a href="{% url 'web:experience_test_visibility' course_id exp.available.experience.pk %}">
+                              <i class="fa fa-eye"></i> Cambiar visibilidad prueba </a>
+                            </li>
+                            {% if not exp.test.visible %}
                             <li>
                               <a href="">
-                              <i class="icon-note"></i> Cambiar visibilidad prueba </a>
+                              <i class="icon-ban"></i> Eliminar prueba </a>
                             </li>
-                            <li>
-                              <a href="">
-                              <i class="icon-note"></i> Eliminar prueba </a>
-                            </li>
+                            {% endif %}
                             {% else %}
                             <li>
                               <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
