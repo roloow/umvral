@@ -1,0 +1,159 @@
+{% extends "web/base_page.html" %}
+
+{% load static %}
+
+{% block title %}
+Experiencias disponibles
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block breadcrumb %}
+<li>
+  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course_name}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Experiencias</span>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Lista de Experiencias</span>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="note note-info">
+  <h4 class="block">Cambios de orden</h4>
+  <p> Para poder realizar un cambio de orden en las posiciones de las experiencias, se debe arrastrar la fila deseada a la posición que se quiera dejar, y luego se deben guardar los cambios.
+  </p>
+  <br>
+</div>
+<div class="row">
+  <form  action="{% url 'web:course_experience' course_id %}" method="post">
+    {% csrf_token %}
+<div class="col-md-12">
+  <div class="portlet light portlet-fit bordered">
+      <div class="portlet-body">
+          <div class="table-scrollable table-scrollable-borderless">
+              <table class="table table-hover  sorted_table">
+                  <thead>
+                      <tr class="uppercase">
+                          <th> Posición</th>
+                          <th> Nombre </th>
+                          <th> Descripción </th>
+                          <th> Video </th>
+                          <th> Estado </th>
+                          <th> Prueba </th>
+                          <th> Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for exp in experiences  %}
+                      <tr>
+                        <input type="hidden" name="pos-{{ forloop.counter0 }}" value="{{exp.pk}}">
+                        <td> {{exp.available.position}}</td>
+                        <td > {{exp.available.experience.name}} </td>
+                        <td> {{exp.available.experience.description|truncatechars:50}} </td>
+                          <td>{% if exp.available.video %}
+                          <span class="label label-sm label-success "> Asignado </span>
+                          {% else %}
+                          <span class="label label-sm label-danger "> No asignado </span>
+                          {% endif %}</td>
+                        <td>
+                          {% if exp.visible %}
+                          <span class="label label-sm label-warning "> Visible </span>
+                          {% else %}
+                          <span class="label label-sm label-default "> No visible </span>
+                          {% endif %}
+                       </td>
+                       <td>
+                         {% if exp.test %}
+                         {% if exp.test.visible %}
+                           <span class="label label-sm label-warning "> Activa </span>
+                         {% else %}
+                           <span class="label label-sm label-success "> Creada </span>
+                         {% endif %}
+                         {% else %}
+                         <span class="label label-sm label-default "> Sin crear </span>
+                         {% endif %}
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <button class="btn btn-xs orange dropdown-toggle" type="button"
+                                  data-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRAR
+                            <i class="fa fa-angle-down"></i>
+                          </button>
+                          <ul class="dropdown-menu pull-right" role="menu">
+                            {% if exp.test %}
+                            {% if not exp.test.visible %}
+                            <li>
+                              <a href="{% url 'web:experience_test_edit' course_id exp.available.experience.pk %}">
+                              <i class="icon-note"></i> Editar prueba </a>
+                            </li>
+                            {% endif %}
+                            <li>
+                              <a href="{% url 'web:experience_test_visibility' course_id exp.available.experience.pk %}">
+                              <i class="fa fa-eye"></i> Cambiar visibilidad prueba </a>
+                            </li>
+                            {% if not exp.test.visible %}
+                            <li>
+                              <a href="{% url 'web:experience_test_delete' course_id exp.available.experience.pk %}">
+                              <i class="icon-ban"></i> Eliminar prueba </a>
+                            </li>
+                            {% endif %}
+                            {% else %}
+                            <li>
+                              <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
+                              <i class="icon-note"></i> Crear prueba </a>
+                            </li>
+                            {% endif %}
+                            <li>
+                              <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">
+                              <i class="fa fa-eye"></i> Cambiar visibilidad curso</a>
+                            </li>
+                            <li class="divider" role="separator"></li>
+                            <li>
+                              <a href="">
+                              <i class="icon-ban"></i> Eliminar experiencia del curso </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  <button type="submit" class="btn btn-success" >Guardar cambios</button>
+</div>
+
+</form>
+
+</div>
+{% endblock %}
+
+{% block plugin_js %}
+<script type="text/javascript" src="{% static "web/global/plugins/jquery-sortable/jquery-sortable.js" %}"></script>
+<script>
+$(document).ready(function(){
+  $('.sorted_table').sortable({
+  containerSelector: 'table',
+  itemPath: '> tbody',
+  itemSelector: 'tr',
+  placeholder: '<tr><td><td><br></td> </td><td> </td><td> </td></tr>',
+  });
+})
+</script>
+{% endblock %}
+
+{% block plugin_css %}
+<link rel="stylesheet" href="{% static "web/global/css/jquery-sortable/jquery-sortable.css" %}">
+{% endblock %}

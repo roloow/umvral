@@ -9,14 +9,14 @@
 </ion-header>
 
 <ion-content padding>
-    <h3>Selecciona la experiencia a realizar:</h3>
-    <p>
-        <button ion-button color="primary" (click)="openExperiencia1Page()" block>Caída Libre</button>
-    </p>
-    <p>
-        <button ion-button color="primary" (click)="openExperiencia2Page()"block>Lanzamiento de Proyectil</button>
-    </p>
-    <p>
-        <button ion-button color="primary" (click)="openExperiencia3Page()"block>Temperatura y Dilatación</button>
-    </p>
+    <h3>Selecciona una experiencia:</h3>
+    <div padding *ngIf="experiencias?.length > 0">
+        <ion-list *ngFor="let exp of experiencias; let i = index">
+            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>
+        </ion-list>  
+    </div>
+
+    
+
+
 </ion-content>

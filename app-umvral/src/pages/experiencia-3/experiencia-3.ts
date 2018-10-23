@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HelpVideo3Page } from '../experiencia-3/video/video';
+import { HelpMateria3Page } from '../experiencia-3/materia/materia';
 //import { ExpPage } from '../experiencia-3/experiencia/experiencia';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,6 +12,7 @@ import { AlertController } from 'ionic-angular';
 })
 
 export class Experiencia3Page {
+  prueba: any = 0;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
@@ -21,8 +22,8 @@ export class Experiencia3Page {
     this.nav = nav;
   }
 
-  openVideoPage() {
-    this.nav.push(HelpVideo3Page);
+  openMateriaPage() {
+    this.nav.push(HelpMateria3Page);
   }
 
   openExpPage() {

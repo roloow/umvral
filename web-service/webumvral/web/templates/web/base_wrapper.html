@@ -43,7 +43,7 @@
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
                         <a href="{% url 'web:home' %}" class="center">
-                            </a>
+                            <img src="{% static 'web/pages/img/logo_word.png' %}" alt="" height="15px"> </a>
                         <div class="menu-toggler sidebar-toggler">
                             <span></span>
                         </div>
@@ -137,6 +137,12 @@
                                           <span class="title">Mi Perfil</span>
                                       </a>
                                   </li>
+                                  <li class="nav-item">
+																		<a href="{% url 'web:course_list' %}" class="nav-link">
+                                          <i class="icon-users"></i>
+                                          <span class="title">Mis Cursos</span>
+                                      </a>
+                                  </li>
                                   {% else %}
                                   <li class="nav-item">
                                       <a href="" class="nav-link">
@@ -153,6 +159,7 @@
                                   {% endif %}
                                 </ul>
                             </li>
+
                         </ul>
                         <!-- END SIDEBAR MENU -->
                         <!-- END SIDEBAR MENU -->

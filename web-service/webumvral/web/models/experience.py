@@ -7,3 +7,6 @@ class ExperienceModel(models.Model):
     name = models.CharField(max_length=20, null=True, blank=True)
     description = models.CharField(max_length=100, null=True, blank=True)
     url = models.CharField(max_length=100, null=True, blank=True)
+
+
+    

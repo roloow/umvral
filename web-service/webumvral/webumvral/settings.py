@@ -25,8 +25,7 @@ SECRET_KEY = '-t8-jq4ss!g=!-$%k0^abukze*tlh56n*1cjkb5pk6gp=5qu(2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','10.6.43.242']
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'api',
     'web',
-    'tastypie'
+    'tastypie',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'webumvral.urls'
 
 TEMPLATES = [
@@ -118,6 +120,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+#EMAIL
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'umvralapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'AppUmVRal2018'
+EMAIL_PORT = 587
 
 
 # Static files (CSS, JavaScript, Images)

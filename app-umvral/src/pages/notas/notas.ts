@@ -6,7 +6,8 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
   templateUrl: 'notas.html',
 })
 export class NotasPage {
-  notas: string[];
+  notas: number[];
+  nombre: string[];
   count: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
@@ -28,7 +29,7 @@ export class NotasPage {
           text: 'Ok',
           handler: (data: any) => {
             this.count += 1;
-            this.notas.push("Nota " + this.count.toString() + ": " + data.nota);
+            this.notas.push(data.nota);
           }
         }
       ],
