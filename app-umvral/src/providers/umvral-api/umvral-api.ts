@@ -28,6 +28,7 @@ export class UmvralApiProvider {
   logout() {
     this.isLoggedIn = false;
     this.userid = 0;
+    this.stucurs = '';
   }
 
   login(data) {
@@ -43,7 +44,7 @@ export class UmvralApiProvider {
           let userData = JSON.parse(res["_body"]);
           this.userid = userData.user_id;
           this.stucurs = userData.cursos;
-          this.stucurs.sort(this.compare);
+          //this.stucurs.sort(this.compare);
           console.log("Login successful with ID "+this.userid);
           resolve(res);
         }, (err) => {

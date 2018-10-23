@@ -10,10 +10,11 @@
 <ion-content padding>
   <h3>Selecciona un Curso:</h3>
 
+
   <div padding *ngIf="cursos?.length > 0">
     <ion-list *ngFor="let curso of cursos; let i = index">
-      <button ion-button color="primary" (click)="openListaPage(curso.student_id)" block>
-        {{curso.course_name}}<br>{{curso.profesor_name}}
+      <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>
+        {{curso[0].course_name}}<br>{{curso[0].profesor_name}}
       </button>
     </ion-list>  
   </div>
