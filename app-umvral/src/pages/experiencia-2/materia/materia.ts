@@ -10,17 +10,17 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 export class HelpMateria2Page {
     video: any = {
-        url: 'https://www.youtube.com/embed/YfJzRX78UlM',
+        video_id: 'YfJzRX78UlM',
         title: 'Video Explicativo'
     };
-
+    url:string = 'https://www.youtube.com/embed/' + this.video.video_id
     trustedVideoUrl: SafeResourceUrl;
 
     constructor(public navCtrl: NavController,
                 private domSanitizer: DomSanitizer) {}
                 
     ionViewWillEnter(): void {
-        this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.video.url);
+        this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
     }            
 }
 

@@ -5,6 +5,7 @@ from web.models import AvailabilityModel
 from web.models import ClientModel
 from web.models import StudentModel
 from web.models import CourseModel
+from web.models import CalificationModel
 from web.models import ExpCourseModel
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
@@ -21,7 +22,88 @@ class ExperienceResource(ModelResource):
         resource_name = 'experience'
         authentication = Authentication()
         authorization = Authorization()
-        #allowed_methods = ['get']
+        allowed_methods = ['get','post']
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/curso%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('curso'), name="api_expcurso"),
+            url(r"^(?P<resource_name>%s)/detalle%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('detalle'), name="api_exp_detalle"),
+            url(r"^(?P<resource_name>%s)/video%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('video'), name="api_exp_video"),
+
+        ]
+
+    def curso(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        try:
+            st = StudentModel.objects.get(pk=student_id)
+        except:
+            return self.create_response(request, {
+                'error': 'sin cursos',
+                'student_id': student_id
+                })
+        expCourse = ExpCourseModel.objects.filter( course__pk= st.course.pk , visible = True )
+        experiencias = []
+        for exp in expCourse:
+            experiencias.append([{'exp_name':exp.available.experience.name,'exp_course_id':exp.pk,'position':exp.available.position  }])
+        return self.create_response(request, {
+            'student_id': student_id,
+            'experiencias': experiencias,
+            } )
+
+    def detalle(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        exp_course_id=request.POST.get('exp_course_id')
+        test_id = 'Null'
+        try:
+            expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
+
+            if expCourse.test.pk.visible != False :
+                test_id = expCourse.test.pk
+
+        except:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'exp_course_id': exp_course_id,
+                'test_id': 'Null'
+                })
+
+
+        return self.create_response(request, {
+            'student_id': student_id,
+            'exp_course_id': exp_course_id,
+            'test_id': test_id
+            })
+
+    def video(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        exp_course_id=request.POST.get('exp_course_id')
+        video_url = 'Null'
+        try:
+            expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
+            student= StudentModel.objects.get(pk=student_id)
+            expCourse.available.video
+        except:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'exp_course_id': exp_course_id,
+                'video_url': 'Null'
+                })
+
+
+        return self.create_response(request, {
+            'student_id': student_id,
+            'exp_course_id': exp_course_id,
+            'video_url': expCourse.available.video
+            })
 
 #Mensajes
 class MessageResource(ModelResource):
@@ -95,6 +177,9 @@ class ClientResource(ModelResource):
             url(r"^(?P<resource_name>%s)/update%s$" %
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('update'), name="api_update"),
+            url(r"^(?P<resource_name>%s)/notas%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('notas'), name="api_notas"),
 
         ]
 
@@ -102,7 +187,6 @@ class ClientResource(ModelResource):
     def update(self, request, **kwargs):
 
         self.method_check(request, allowed=['post'])
-
         #data = self.deserialize(request, request.body, format=request.META.get('CONTENT_TYPE', 'application/json'))
         nombre = request.POST.get('nombre', '')
         clave = request.POST.get('clave','')
@@ -128,6 +212,17 @@ class ClientResource(ModelResource):
             'user_id':user_id,
             } )
 
+
+    def notas(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        notas=[]
+        califications = CalificationModel.objects.filter(owner__pk=user_id)
+        
+        return self.create_response(request, {
+            'user_id': user_id,
+            'notas': notas
+            })
 
 
 #Estudiantes
@@ -163,14 +258,12 @@ class CourseResource(ModelResource):
         students = StudentModel.objects.filter(profile__pk=user_id)
         cursos=[]
         for st in students:
-            cursos.append(st.course)
-
+            cursos.append([{'nombre_curso': st.course.name ,'curso_id':st.course.pk ,'profesor':st.course.professor ,'descripcion':st.course.description, 'student_id': st.pk}])
 
         return self.create_response(request, {
             'user_id': user_id,
-            'cursos':cursos,
-            'students':students
-            } )
+            'cursos':cursos
+            })
 
 
 
