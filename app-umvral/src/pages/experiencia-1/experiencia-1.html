@@ -9,11 +9,14 @@
 </ion-header>
 
 <ion-content padding>
-    <h3>Selecciona la acción:</h3>
-    <p>
+    <ion-list>
         <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>
-    </p>
-    <p>
         <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>
-    </p>
+        <div *ngIf="prueba==1">
+            <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>
+        </div>
+        <div *ngIf="prueba==0">
+            <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>
+        </div>
+    </ion-list>
 </ion-content>

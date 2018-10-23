@@ -180,7 +180,12 @@ class ClientResource(ModelResource):
             url(r"^(?P<resource_name>%s)/notas%s$" %
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('notas'), name="api_notas"),
-
+            url(r"^(?P<resource_name>%s)/notas/create%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('crearNota'), name="api_nota_inserct"),
+            url(r"^(?P<resource_name>%s)/notas/delete%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('deleteNota'), name="api_nota_delete"),
         ]
 
 
@@ -213,12 +218,58 @@ class ClientResource(ModelResource):
             } )
 
 
+
+
     def notas(self, request, **kwargs):
         self.method_check(request, allowed=['post'])
         user_id = request.POST.get('user_id','')
         notas=[]
         califications = CalificationModel.objects.filter(owner__pk=user_id)
-        
+        for calification in califications :
+            notas.append({"nombre":calification.name,"valor":calification.value, "id":calification.pk})
+        return self.create_response(request, {
+            'user_id': user_id,
+            'notas': notas
+            })
+
+    def crearNota(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        nameNota = request.POST.get('nombre_nota','')
+        nota = request.POST.get('nota','')
+        try:
+            client = ClientModel.objects.get(pk=user_id)
+        except:
+            return self.create_response(request, {
+                'user_id': user_id,
+                'error':'incorrecto'
+                })
+        nuevaCalificacion= CalificationModel(name=nameNota,value=nota,owner=client)
+        nuevaCalificacion.save()
+        notas=[]
+        califications = CalificationModel.objects.filter(owner__pk=user_id)
+        for calification in califications :
+            notas.append({"nombre":calification.name, "valor":calification.value, "id":calification.pk})
+        return self.create_response(request, {
+            'user_id': user_id,
+            'notas': notas
+            })
+
+    def deleteNota(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        user_id = request.POST.get('user_id','')
+        nota_id = request.POST.get('nota_id','')
+        try:
+            CalificationModel.objects.get(pk=nota_id).delete()
+        except:
+            return self.create_response(request, {
+                'nota_id': nota_id,
+                'error':'incorrecto'
+                })
+        notas=[]
+        califications = CalificationModel.objects.filter(owner__pk=user_id)
+        for calification in califications :
+            notas.append({"nombre":calification.name, "valor":calification.value, "id":calification.pk})
         return self.create_response(request, {
             'user_id': user_id,
             'notas': notas

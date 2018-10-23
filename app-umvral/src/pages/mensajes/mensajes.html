@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Mis Mensajes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div padding style='height: 80%' *ngIf="mensajes">
+    <ion-list *ngFor="let mensaje of mensajes.mensajes">
+      <ion-card>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="https://www.gravatar.com/avatar?d=mm&s=140">
+          </ion-avatar>
+          <h2>{{mensaje[0].topic}}</h2>
+          <p>{{mensaje[0].name}}</p>
+        </ion-item>
+        <!-- <img src="img/advance-card-bttf.png"> -->
+        <ion-card-content>
+          <p>{{mensaje[0].content}}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    </div>
+</ion-content>
