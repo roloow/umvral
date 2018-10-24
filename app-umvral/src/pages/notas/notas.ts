@@ -10,6 +10,9 @@ export class NotasPage {
   notas: any;
   nombre: string[];
   count: number;
+  promedio: number;
+  suma: number;
+  contar: number;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams, 
@@ -20,6 +23,7 @@ export class NotasPage {
     this.umvralApiProvider.getNotas().then((result) => {
       this.notas = result;
       console.log(this.notas);
+      this.calcpromedio();
       }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log(errorData);
@@ -28,6 +32,18 @@ export class NotasPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotasPage');
+  }
+
+  calcpromedio(){
+    this.suma = 0;
+    this.contar = 0;
+    for (let nota of this.notas){
+      this.suma += nota.valor;
+      console.log(nota.valor);
+      this.contar +=1;
+    }
+    this.promedio = this.suma/this.contar;
+    console.log(this.promedio);
   }
 
   async addNota() {
@@ -42,6 +58,7 @@ export class NotasPage {
             this.umvralApiProvider.addNotas(data.nombre, data.nota).then((result) => {
               this.notas = result;
               console.log(this.notas);
+              this.calcpromedio();
               }, (err) => {
               console.log(err);
             });
@@ -72,6 +89,7 @@ export class NotasPage {
   delNota(notaid){
     this.umvralApiProvider.delNotas(notaid).then((result) => {
       this.notas = result;
+      this.calcpromedio();
       console.log(this.notas);
       }, (err) => {
       console.log(err);

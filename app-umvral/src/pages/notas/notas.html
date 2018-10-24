@@ -22,6 +22,7 @@
 <!-- Si hay una o más notas  -->
 
   <div padding style='height: 80%' *ngIf="notas?.length > 0">
+    Promedio: {{promedio}}
     <ion-list *ngFor="let nota of notas; let i = index">
       <ion-grid>
         <ion-row>
