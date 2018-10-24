@@ -10,7 +10,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -85,7 +85,7 @@ var ExperienceListPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -186,7 +186,7 @@ var Experiencia1Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_2_materia_materia__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -211,7 +211,7 @@ var Experiencia2Page = (function () {
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
         this.umvralApiProvider = umvralApiProvider;
-        this.prueba = 'Null';
+        this.prueba = 1;
         this.nav = nav;
         this.prueba = this.umvralApiProvider.pruebaid;
     }
@@ -269,7 +269,7 @@ var Experiencia2Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_3_materia_materia__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -329,10 +329,13 @@ var Experiencia3Page = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-experiencia-3',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Temperatura y Dilatación</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list> \n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n        <div *ngIf="prueba!=\'Null\'">\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block> {{prueba}} </button>\n\n        </div>\n\n        <div *ngIf="prueba==\'Null\'">\n\n            <button ion-button color="light" block>{{prueba}}</button>\n\n        </div>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], Experiencia3Page);
     return Experiencia3Page;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=experiencia-3.js.map
@@ -346,7 +349,7 @@ var Experiencia3Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cursos_cursos__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_user_register_user__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -442,7 +445,7 @@ var LoginPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -505,7 +508,7 @@ webpackEmptyAsyncContext.id = 121;
 
 /***/ }),
 
-/***/ 16:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -789,12 +792,28 @@ var UmvralApiProvider = (function () {
             });
         });
     };
+    UmvralApiProvider.prototype.getVideo = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "student_id=" + this.stuid + "&exp_course_id=" + this.expcursid;
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/experience/video/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var mensajes = JSON.parse(data["_body"]);
+                resolve(mensajes.video_url);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
     UmvralApiProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]])
     ], UmvralApiProvider);
     return UmvralApiProvider;
-    var _a;
 }());
 
 //# sourceMappingURL=umvral-api.js.map
@@ -826,6 +845,7 @@ webpackEmptyAsyncContext.id = 164;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -838,27 +858,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HelpMateria1Page = (function () {
-    function HelpMateria1Page(navCtrl, domSanitizer) {
+    function HelpMateria1Page(navCtrl, domSanitizer, umvralApiProvider) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.domSanitizer = domSanitizer;
+        this.umvralApiProvider = umvralApiProvider;
         this.video = {
             video_id: 'HZ86lhZ2a6M',
             title: 'Video Explicativo'
         };
-        this.url = 'https://www.youtube.com/embed/' + this.video.video_id;
+        this.umvralApiProvider.getVideo().then(function (result) {
+            _this.video.video_id = result;
+            _this.url = 'https://www.youtube.com/embed/' + _this.video.video_id;
+            console.log(_this.video.video_id);
+        }, function (err) {
+            console.log(err);
+        });
     }
     HelpMateria1Page.prototype.ionViewWillEnter = function () {
         this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
     };
     HelpMateria1Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Caida Libre\n\n        </ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n\n        <div>\n\n            <h3>Descripción de Caida Libre</h3>\n\n            <p>\n\n                Cuando un objeto es soltado (liberado sin aplicar alguna fuerza) desde una altura por sobre\n\n                 el nivel de medición definido (Nivel del suelo, por ejemplo) se dice que el cuerpo cae \n\n                 libremente.\n\n            </p>\n\n            <p>\n\n                Cuando un cuerpo está en caída libre, la única fuerza que aporta al movimiento es la ejercida\n\n                 por la aceleración de gravedad en donde se está evaluando el fenómeno.\n\n            </p>\n\n            \n\n            <h6> F<sub>Total</sub> = m*a, </h6>\n\n            \n\n            <h6> F<sub>gravedad</sub> = m*g, </h6>\n\n\n\n            <h6> F<sub>T</sub> = F<sub>g</sub>. </h6>\n\n            \n\n            <p>\n\n                Finalmente se tiene que a = g. Es necesario recalcar que para efectos de álgebra, las constantes \n\n                 son positivas, pero la dirección de la fuerza es contrario a la dirección del eje, por lo\n\n                 que el valor que tomará la gravedad es negativo, por ejemplo, en la tierra se tienen \n\n                 valores cercanos de la gravedad a = - 9,8 [m/s<sup>2</sup>].\n\n            </p>\n\n\n\n            <h3>Velocidad en Caida Libre</h3>\n\n\n\n            <p>En respecto a la velocidad en el tiempo, se sabe que esta depende de la fuerza aplicada,\n\n                 lo que significa que depende finalmente de la aceleración de gravedad en el sistema:\n\n            </p>\n\n\n\n            <h6> v(t) = v<sub>0</sub> + a*t </h6>\n\n            \n\n            <p>\n\n                Teniendo que v<sub>0</sub> es la velocidad inicial <b>DESDE QUE CAE</b> el cuerpo,\n\n                 esta es igual a 0, por lo que finalmente se tiene que: \n\n            </p>\n\n            \n\n            <h6>v(t) = a*t</h6>\n\n            \n\n            <p>\n\n                Se observa que la velocidad será negativa, esto es debido a que el cuerpo se va acercando al punto\n\n                 y = 0, lo que significa que la distancia entre el objeto y el origen disminuye, dando finalmente\n\n                 una velocidad negativa (y<sub>f</sub> - y<sub>i</sub> < 0).\n\n            </p>\n\n\n\n            <h3>Posición en Caida Libre</h3>\n\n\n\n            <p>\n\n                Para la posición del objeto a través del tiempo, se tiene que sabe que depende tanto de\n\n                 la velocidad que presenta el cuerpo, como de la aceleración, por lo que se tiene:  \n\n            </p>\n\n            \n\n            <h6>y(t) = y<sub>0</sub> + v<sub>0</sub>*t + ½ a*t<sup>2</sup></h6>\n\n            \n\n            <p>\n\n                En la ecuación anterior se tiene y<sub>0</sub>, que significa la posición inicial del objeto antes\n\n                 de comenzar la caída, es decir, la altura h desde la que se suelta, por lo que finalmente se tiene:\n\n            </p>\n\n\n\n            <h6>y(t) = h + ½a*t<sup>2</sup></h6>\n\n            \n\n            <p>\n\n                En esta ecuación se observa de nuevo que y(t) va disminuyendo en el transcurso del tiempo, lo que es\n\n                 esperable al ser caida libre.\n\n            </p>\n\n\n\n            <h3>Energía en Caida Libre</h3>\n\n\n\n            <p>\n\n                En relación a la energía que posee el cuerpo, se sabe que en cualquier momento es posible evaluar la\n\n                 energía cinética (K) y la potencial (U), las cuales están dadas por las siguientes ecuaciones:\n\n            </p>\n\n            \n\n            <h6> K = ½ * m * v<sup>2</sup> </h6>\n\n            \n\n            <h6> U = m * g * h </h6>\n\n            \n\n\n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\materia\materia.html"*/
+            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Caida Libre\n\n        </ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <!--<iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>-->\n\n    <h3>{{url}}</h3> \n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n\n        <div>\n\n            <h3>Descripción de Caida Libre</h3>\n\n            <p>\n\n                Cuando un objeto es soltado (liberado sin aplicar alguna fuerza) desde una altura por sobre\n\n                 el nivel de medición definido (Nivel del suelo, por ejemplo) se dice que el cuerpo cae \n\n                 libremente.\n\n            </p>\n\n            <p>\n\n                Cuando un cuerpo está en caída libre, la única fuerza que aporta al movimiento es la ejercida\n\n                 por la aceleración de gravedad en donde se está evaluando el fenómeno.\n\n            </p>\n\n            \n\n            <h6> F<sub>Total</sub> = m*a, </h6>\n\n            \n\n            <h6> F<sub>gravedad</sub> = m*g, </h6>\n\n\n\n            <h6> F<sub>T</sub> = F<sub>g</sub>. </h6>\n\n            \n\n            <p>\n\n                Finalmente se tiene que a = g. Es necesario recalcar que para efectos de álgebra, las constantes \n\n                 son positivas, pero la dirección de la fuerza es contrario a la dirección del eje, por lo\n\n                 que el valor que tomará la gravedad es negativo, por ejemplo, en la tierra se tienen \n\n                 valores cercanos de la gravedad a = - 9,8 [m/s<sup>2</sup>].\n\n            </p>\n\n\n\n            <h3>Velocidad en Caida Libre</h3>\n\n\n\n            <p>En respecto a la velocidad en el tiempo, se sabe que esta depende de la fuerza aplicada,\n\n                 lo que significa que depende finalmente de la aceleración de gravedad en el sistema:\n\n            </p>\n\n\n\n            <h6> v(t) = v<sub>0</sub> + a*t </h6>\n\n            \n\n            <p>\n\n                Teniendo que v<sub>0</sub> es la velocidad inicial <b>DESDE QUE CAE</b> el cuerpo,\n\n                 esta es igual a 0, por lo que finalmente se tiene que: \n\n            </p>\n\n            \n\n            <h6>v(t) = a*t</h6>\n\n            \n\n            <p>\n\n                Se observa que la velocidad será negativa, esto es debido a que el cuerpo se va acercando al punto\n\n                 y = 0, lo que significa que la distancia entre el objeto y el origen disminuye, dando finalmente\n\n                 una velocidad negativa (y<sub>f</sub> - y<sub>i</sub> < 0).\n\n            </p>\n\n\n\n            <h3>Posición en Caida Libre</h3>\n\n\n\n            <p>\n\n                Para la posición del objeto a través del tiempo, se tiene que sabe que depende tanto de\n\n                 la velocidad que presenta el cuerpo, como de la aceleración, por lo que se tiene:  \n\n            </p>\n\n            \n\n            <h6>y(t) = y<sub>0</sub> + v<sub>0</sub>*t + ½ a*t<sup>2</sup></h6>\n\n            \n\n            <p>\n\n                En la ecuación anterior se tiene y<sub>0</sub>, que significa la posición inicial del objeto antes\n\n                 de comenzar la caída, es decir, la altura h desde la que se suelta, por lo que finalmente se tiene:\n\n            </p>\n\n\n\n            <h6>y(t) = h + ½a*t<sup>2</sup></h6>\n\n            \n\n            <p>\n\n                En esta ecuación se observa de nuevo que y(t) va disminuyendo en el transcurso del tiempo, lo que es\n\n                 esperable al ser caida libre.\n\n            </p>\n\n\n\n            <h3>Energía en Caida Libre</h3>\n\n\n\n            <p>\n\n                En relación a la energía que posee el cuerpo, se sabe que en cualquier momento es posible evaluar la\n\n                 energía cinética (K) y la potencial (U), las cuales están dadas por las siguientes ecuaciones:\n\n            </p>\n\n            \n\n            <h6> K = ½ * m * v<sup>2</sup> </h6>\n\n            \n\n            <h6> U = m * g * h </h6>\n\n            \n\n\n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\materia\materia.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _c || Object])
     ], HelpMateria1Page);
     return HelpMateria1Page;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=materia.js.map
@@ -873,6 +902,7 @@ var HelpMateria1Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -885,27 +915,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HelpMateria2Page = (function () {
-    function HelpMateria2Page(navCtrl, domSanitizer) {
+    function HelpMateria2Page(navCtrl, domSanitizer, umvralApiProvider) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.domSanitizer = domSanitizer;
+        this.umvralApiProvider = umvralApiProvider;
         this.video = {
-            video_id: 'YfJzRX78UlM',
+            video_id: 'HZ86lhZ2a6M',
             title: 'Video Explicativo'
         };
-        this.url = 'https://www.youtube.com/embed/' + this.video.video_id;
+        this.umvralApiProvider.getVideo().then(function (result) {
+            _this.video.video_id = result;
+            _this.url = 'https://www.youtube.com/embed/' + _this.video.video_id;
+            console.log(_this.video.video_id);
+        }, function (err) {
+            console.log(err);
+        });
     }
     HelpMateria2Page.prototype.ionViewWillEnter = function () {
         this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
     };
     HelpMateria2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            Lanzamiento de Proyectil\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n\n        <div>\n\n\n\n            <h3>Descripción de Lanzamiento de Proyectil</h3>\n\n            <p>\n\n            Se considera como Lanzamiento de Proyectil como un movimiento acelerado con una trayectoria \n\n             parabólica lo que significa que posee un movimiento característico tanto en el eje <i>x</i> \n\n             como en el eje <i>y</i>.\n\n            </p>\n\n\n\n            <p>\n\n            Para que exista un movimiento parabólico, es necesario lanzar un objeto de forma diagonal al eje \n\n             de referencia, lo cual genera un ángulo entre la dirección de lanzamiento y el eje, este ángulo\n\n             lo llamaremos <i>b</i>.\n\n            </p>\n\n            <p>\n\n            Debido al ángulo <i>b</i>, la velocidad inicial <i>v</i><sub>0</sub> se puede descomponer de la \n\n            siguiente forma:\n\n            </p>\n\n            <h5>v<sub>0x</sub> = v<sub>0</sub>* cos(b)</h5>\n\n            <h5>v<sub>0y</sub> = v<sub>0</sub>* sen(b)</h5>\n\n            <p>\n\n            El movimiento en cada eje es independiente del otro, es decir, el movimiento en el eje x no\n\n             perturba ni es perturbado por el eje y, esto quiere decir que para las ecuaciones de\n\n             la posición, la velocidad y la aceleración sólo se presentan constantes y variables de un solo eje. \n\n            </p>\n\n            \n\n            <p>\n\n            Debido a que el movimiento se presenta en ambos ejes, la posición, la velocidad y la aceleración\n\n             se encuentran definidos por vectores.\n\n            </p>\n\n\n\n            <h3>Vectores</h3>\n\n            <p>\n\n            Los vectores de posición, velocidad y aceleración son definidos de la siguiente forma:\n\n            </p>\n\n            <h5>posición   : x(t) * i + y(t) * j  </h5>\n\n            <h5>Velocidad  : v<sub>x</sub>(t) * i + v<sub>y</sub>(t) * j  </h5>\n\n            <h5>Aceleración: a<sub>x</sub> * i + a<sub>y</sub> * j  </h5>\n\n            \n\n            <h3>Movimiento en eje x</h3>\n\n            <p>\n\n            Si no se considera el roce del aire, el movimiento en el eje x sólo está definido por la velocidad\n\n             inicial aplicada en el cuerpo, puesto que no existe ninguna fuerza en el sistema (la gravedad sólo\n\n             afecta al eje y).\n\n            </p>\n\n            \n\n            <h4>Aceleración.</h4>\n\n            \n\n            <p>\n\n            Al no existir fuerzas, la aceleración en el eje x es cero.\n\n            </p>\n\n            \n\n            <h5>a<sub>x</sub>(t) = a<sub>0x</sub>,</h5>\n\n            <h5>a<sub>x</sub>=0</h5>\n\n            \n\n            <h4>Velocidad.</h4>\n\n            \n\n            <p>\n\n            Debido a que no existe aceleración, la velocidad en el eje x sólo depende de la velocidad inicial.\n\n            </p>\n\n            \n\n            <h5>v<sub>x</sub>(t) = v<sub>0x</sub> + a<sub>x</sub> * t,</h5>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * cos(b)</h5>\n\n\n\n            <h3>Posición</h3>\n\n            <p>\n\n            La posición en el eje x depende sólo de la velocidad en este eje y la posición inicial.\n\n            </p>\n\n            <h5>x(t) = x<sub>0</sub> + v<sub>0x</sub>*t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h5>x(t) = x<sub>0</sub> + v<sub>0</sub> * t * cos(b) </h5>\n\n\n\n            <h3>Movimiento en eje y</h3>\n\n            <p>\n\n            Si no se considera el roce del aire, el movimiento en el eje y está definido tanto por la velocidad\n\n             inicial aplicada en el lanzamiento y la aceleración gravitacional.\n\n            </p>\n\n            \n\n            <h4>Aceleración.</h4>\n\n            \n\n            <p>\n\n            Al ser la gravedad la única fuerza en el sistema, la aceleración en <i>y</i>se define como:\n\n            </p>\n\n            \n\n            <h5>a<sub>y</sub>(t) = a<sub>0y</sub>,</h5>\n\n            <h5>a<sub>y</sub> = g</h5>\n\n            \n\n            <h4>Velocidad.</h4>\n\n            \n\n            <p>\n\n            La velocidad en el eje <i>y</i> está definida por la velocidad inicial y la gravedad:\n\n            </p>\n\n            \n\n            <h5>v<sub>y</sub>(t) = v<sub>0y</sub> + a<sub>y</sub> * t,</h5>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t</h5>\n\n\n\n            <p>\n\n            Es rescatable decir que debido a que la gravedad apunta en dirección contraria al eje, la velocidad\n\n             en respecto al tiempo decaerá de forma constante, finalizando siempre con valores negativos.\n\n            </p>\n\n            <h3>Posición</h3>\n\n            <p>\n\n            La posición en el eje y depende tanto de la posición inicial, la velocidad y la aceleración gravitatoria:\n\n            </p>\n\n            <h5>y(t) = y<sub>0</sub> + v<sub>0y</sub> * t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h5>y(t) = y<sub>0</sub> + v<sub>0</sub> * t * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n\n\n            <h3>Observaciones varias.</h3>\n\n            <p>\n\n            Un problema recurrente es definir en que posición caerá un proyectil lanzado. Par solucionar este problema\n\n             se debe primero evaluar el movimiento sólo en el eje <i>y</i>, puesto que es aquí donde se define la \n\n             duración del movimiento. \n\n            </p>\n\n            <p>\n\n            Se dice que la duración del movimiento se define en el eje <i>y</i> puesto que el objeto se detendrá cuando\n\n             este finalmente toque el suelo. Debido a esto, el tiempo completo se descompone en 2, el tiempo de subida\n\n             y el tiempo de bajada del proyectil.\n\n            </p>\n\n\n\n            <p>\n\n            Primero se define cuanto tiempo sube el objeto lanzado, es decir, cuanto tiempo transcurre desde\n\n             que se lanza el objeto, hasta que la velocidad de subida toma un valor 0.\n\n            </p>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t = 0</h5>\n\n            <h5> v<sub>0</sub> * sen(b) =  - g * t </h5>\n\n            <h5> v<sub>0</sub> * sen(b) = g * t<sub>subida</sub> </h5>\n\n            <p>\n\n            Luego de obtener el tiempo de subida, se puede obtener la altura a la que llegó el objeto.\n\n            </p>\n\n            <h5>h = y<sub>0</sub> + v<sub>0</sub> * t<sub>subida</sub> * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n            <p>\n\n            Luego, a través de la misma formula, se puede obtener el tiempo de bajada, despejando t y poniendo y(t)=0:\n\n            </p>\n\n            <h5>0 = h + v<sub>0</sub> * t<sub>bajada</sub> * sen(b) + ½ * g<sub>x</sub> * t<sub>bajada</sub><sup>2</sup></h5>\n\n            <p>\n\n            Finalmente, se tiene t<sub>subida</sub> y t<sub>bajada</sub>, que sumados dan t<sub>total</sub>, con la\n\n             cual se puede obtener la distancia x recorrida en todo el movimiento.\n\n            </p>\n\n            <h5>x(t<sub>total</sub>) = x<sub>0</sub> + v<sub>0</sub> * t<sub>total</sub> * cos(b) </h5>\n\n\n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\materia\materia.html"*/
+            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            Lanzamiento de Proyectil\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <!--<iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>-->\n\n    <h3>{{url}}</h3> \n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 100%; height: 50%;" text-justify>\n\n        <div>\n\n\n\n            <h3>Descripción de Lanzamiento de Proyectil</h3>\n\n            <p>\n\n            Se considera como Lanzamiento de Proyectil como un movimiento acelerado con una trayectoria \n\n             parabólica lo que significa que posee un movimiento característico tanto en el eje <i>x</i> \n\n             como en el eje <i>y</i>.\n\n            </p>\n\n\n\n            <p>\n\n            Para que exista un movimiento parabólico, es necesario lanzar un objeto de forma diagonal al eje \n\n             de referencia, lo cual genera un ángulo entre la dirección de lanzamiento y el eje, este ángulo\n\n             lo llamaremos <i>b</i>.\n\n            </p>\n\n            <p>\n\n            Debido al ángulo <i>b</i>, la velocidad inicial <i>v</i><sub>0</sub> se puede descomponer de la \n\n            siguiente forma:\n\n            </p>\n\n            <h5>v<sub>0x</sub> = v<sub>0</sub>* cos(b)</h5>\n\n            <h5>v<sub>0y</sub> = v<sub>0</sub>* sen(b)</h5>\n\n            <p>\n\n            El movimiento en cada eje es independiente del otro, es decir, el movimiento en el eje x no\n\n             perturba ni es perturbado por el eje y, esto quiere decir que para las ecuaciones de\n\n             la posición, la velocidad y la aceleración sólo se presentan constantes y variables de un solo eje. \n\n            </p>\n\n            \n\n            <p>\n\n            Debido a que el movimiento se presenta en ambos ejes, la posición, la velocidad y la aceleración\n\n             se encuentran definidos por vectores.\n\n            </p>\n\n\n\n            <h3>Vectores</h3>\n\n            <p>\n\n            Los vectores de posición, velocidad y aceleración son definidos de la siguiente forma:\n\n            </p>\n\n            <h5>posición   : x(t) * i + y(t) * j  </h5>\n\n            <h5>Velocidad  : v<sub>x</sub>(t) * i + v<sub>y</sub>(t) * j  </h5>\n\n            <h5>Aceleración: a<sub>x</sub> * i + a<sub>y</sub> * j  </h5>\n\n            \n\n            <h3>Movimiento en eje x</h3>\n\n            <p>\n\n            Si no se considera el roce del aire, el movimiento en el eje x sólo está definido por la velocidad\n\n             inicial aplicada en el cuerpo, puesto que no existe ninguna fuerza en el sistema (la gravedad sólo\n\n             afecta al eje y).\n\n            </p>\n\n            \n\n            <h4>Aceleración.</h4>\n\n            \n\n            <p>\n\n            Al no existir fuerzas, la aceleración en el eje x es cero.\n\n            </p>\n\n            \n\n            <h5>a<sub>x</sub>(t) = a<sub>0x</sub>,</h5>\n\n            <h5>a<sub>x</sub>=0</h5>\n\n            \n\n            <h4>Velocidad.</h4>\n\n            \n\n            <p>\n\n            Debido a que no existe aceleración, la velocidad en el eje x sólo depende de la velocidad inicial.\n\n            </p>\n\n            \n\n            <h5>v<sub>x</sub>(t) = v<sub>0x</sub> + a<sub>x</sub> * t,</h5>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * cos(b)</h5>\n\n\n\n            <h3>Posición</h3>\n\n            <p>\n\n            La posición en el eje x depende sólo de la velocidad en este eje y la posición inicial.\n\n            </p>\n\n            <h5>x(t) = x<sub>0</sub> + v<sub>0x</sub>*t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h5>x(t) = x<sub>0</sub> + v<sub>0</sub> * t * cos(b) </h5>\n\n\n\n            <h3>Movimiento en eje y</h3>\n\n            <p>\n\n            Si no se considera el roce del aire, el movimiento en el eje y está definido tanto por la velocidad\n\n             inicial aplicada en el lanzamiento y la aceleración gravitacional.\n\n            </p>\n\n            \n\n            <h4>Aceleración.</h4>\n\n            \n\n            <p>\n\n            Al ser la gravedad la única fuerza en el sistema, la aceleración en <i>y</i>se define como:\n\n            </p>\n\n            \n\n            <h5>a<sub>y</sub>(t) = a<sub>0y</sub>,</h5>\n\n            <h5>a<sub>y</sub> = g</h5>\n\n            \n\n            <h4>Velocidad.</h4>\n\n            \n\n            <p>\n\n            La velocidad en el eje <i>y</i> está definida por la velocidad inicial y la gravedad:\n\n            </p>\n\n            \n\n            <h5>v<sub>y</sub>(t) = v<sub>0y</sub> + a<sub>y</sub> * t,</h5>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t</h5>\n\n\n\n            <p>\n\n            Es rescatable decir que debido a que la gravedad apunta en dirección contraria al eje, la velocidad\n\n             en respecto al tiempo decaerá de forma constante, finalizando siempre con valores negativos.\n\n            </p>\n\n            <h3>Posición</h3>\n\n            <p>\n\n            La posición en el eje y depende tanto de la posición inicial, la velocidad y la aceleración gravitatoria:\n\n            </p>\n\n            <h5>y(t) = y<sub>0</sub> + v<sub>0y</sub> * t + ½ * a<sub>x</sub> * t<sup>2</sup></h5>\n\n            <h5>y(t) = y<sub>0</sub> + v<sub>0</sub> * t * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n\n\n            <h3>Observaciones varias.</h3>\n\n            <p>\n\n            Un problema recurrente es definir en que posición caerá un proyectil lanzado. Par solucionar este problema\n\n             se debe primero evaluar el movimiento sólo en el eje <i>y</i>, puesto que es aquí donde se define la \n\n             duración del movimiento. \n\n            </p>\n\n            <p>\n\n            Se dice que la duración del movimiento se define en el eje <i>y</i> puesto que el objeto se detendrá cuando\n\n             este finalmente toque el suelo. Debido a esto, el tiempo completo se descompone en 2, el tiempo de subida\n\n             y el tiempo de bajada del proyectil.\n\n            </p>\n\n\n\n            <p>\n\n            Primero se define cuanto tiempo sube el objeto lanzado, es decir, cuanto tiempo transcurre desde\n\n             que se lanza el objeto, hasta que la velocidad de subida toma un valor 0.\n\n            </p>\n\n            <h5>v<sub>x</sub>(t) = v<sub>0</sub> * sen(b) + g * t = 0</h5>\n\n            <h5> v<sub>0</sub> * sen(b) =  - g * t </h5>\n\n            <h5> v<sub>0</sub> * sen(b) = g * t<sub>subida</sub> </h5>\n\n            <p>\n\n            Luego de obtener el tiempo de subida, se puede obtener la altura a la que llegó el objeto.\n\n            </p>\n\n            <h5>h = y<sub>0</sub> + v<sub>0</sub> * t<sub>subida</sub> * sen(b) + ½ * g<sub>x</sub> * t<sup>2</sup></h5>\n\n            <p>\n\n            Luego, a través de la misma formula, se puede obtener el tiempo de bajada, despejando t y poniendo y(t)=0:\n\n            </p>\n\n            <h5>0 = h + v<sub>0</sub> * t<sub>bajada</sub> * sen(b) + ½ * g<sub>x</sub> * t<sub>bajada</sub><sup>2</sup></h5>\n\n            <p>\n\n            Finalmente, se tiene t<sub>subida</sub> y t<sub>bajada</sub>, que sumados dan t<sub>total</sub>, con la\n\n             cual se puede obtener la distancia x recorrida en todo el movimiento.\n\n            </p>\n\n            <h5>x(t<sub>total</sub>) = x<sub>0</sub> + v<sub>0</sub> * t<sub>total</sub> * cos(b) </h5>\n\n\n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\materia\materia.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _c || Object])
     ], HelpMateria2Page);
     return HelpMateria2Page;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=materia.js.map
@@ -947,7 +986,7 @@ var HelpMateria3Page = (function () {
     };
     HelpMateria3Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            Materia\n\n        </ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>\n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 95%; height: 50%;" text-justify>\n\n        <div>\n\n            <h3>Descripción de Temperatura y dilatación</h3>\n\n            \n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\materia\materia.html"*/
+            selector: 'page-materia',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\materia\materia.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>\n\n            Materia\n\n        </ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n    <!--<iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>-->\n\n    <h3>{{url}}</h3> \n\n    <h3>Video: {{ video?.title }}</h3>\n\n\n\n    <ion-scroll scrollY="true" style="width: 95%; height: 50%;" text-justify>\n\n        <div>\n\n            <h3>Descripción de Temperatura y dilatación</h3>\n\n            \n\n        </div>\n\n    </ion-scroll>\n\n    \n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\materia\materia.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["c" /* DomSanitizer */]])
@@ -966,7 +1005,7 @@ var HelpMateria3Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1251,7 +1290,7 @@ var PerfilPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterUserPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1349,7 +1388,7 @@ var RegisterUserPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotasPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1480,10 +1519,12 @@ var NotasPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-notas',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Notas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n<!-- Si no existen notas  -->\n\n\n\n  <div padding style=\'height: 25%\' *ngIf="notas?.length == 0">\n\n    <h3>No tienes notas ingresadas.</h3>\n\n  </div>\n\n  \n\n  <div style=\'height: 60%\' *ngIf="notas?.length == 0">\n\n    <img class="displayed"  height= 50% src="assets/img/notas.png">    \n\n  </div>\n\n\n\n<!-- Si hay una o más notas  -->\n\n\n\n  <div padding style=\'height: 80%\' *ngIf="notas?.length > 0">\n\n    <ion-list *ngFor="let nota of notas; let i = index">\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col>\n\n            {{nota.nombre}}\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            {{nota.valor}}\n\n          </ion-col>\n\n          <!--<ion-col col-1>\n\n            <button ion-button color="primary" (click)="delNota(nota.id)" block>X</button>\n\n            <button ion-button round icon-only (click)="delNota(nota.id)" clear small>\n\n              <ion-icon name="close-circle"></ion-icon>\n\n            </button>\n\n          </ion-col>-->\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>  \n\n  </div>\n\n\n\n<!-- El botón siempre se ve  -->\n\n\n\n  <div class=\'final\'>\n\n    <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>\n\n  </div>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\notas\notas.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], NotasPage);
     return NotasPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=notas.js.map
@@ -1497,7 +1538,7 @@ var NotasPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MensajesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1594,7 +1635,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_perfil_perfil__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_notas_notas__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_cursos_cursos__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_register_user_register_user__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_mensajes_mensajes__ = __webpack_require__(213);
@@ -1710,7 +1751,7 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_experiencia_1_experiencia_1__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_experiencia_2_experiencia_2__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_experiencia_3_experiencia_3__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_mensajes_mensajes__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1782,15 +1823,17 @@ var ConferenceApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */])
     ], ConferenceApp.prototype, "nav", void 0);
     ConferenceApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\app\app.template.html"*/'  <ion-menu id="navMenu" [content]="content">\n\n\n\n    <ion-header>\n\n      <ion-toolbar>\n\n        <ion-title>Menú</ion-title>\n\n      </ion-toolbar>\n\n    </ion-header>\n\n\n\n    <ion-content class="outer-content">\n\n\n\n      <ion-list>\n\n        <ion-list-header>\n\n          Experiencias\n\n        </ion-list-header>\n\n        <button ion-item menuClose (click)="openExperiencia1Page()">\n\n          Caída Libre\n\n        </button>\n\n        <button ion-item menuClose (click)="openExperiencia2Page()">\n\n          Lanzamiento de Proyectil\n\n        </button>\n\n        <button ion-item disabled (click)="openExperiencia3Page()">\n\n          Temperatura y Dilatación\n\n        </button>\n\n      </ion-list>\n\n\n\n      <ion-list>\n\n        <ion-list-header>\n\n          Perfil\n\n        </ion-list-header>\n\n        <button ion-item menuClose (click)="openPerfilPage()">\n\n          <ion-icon item-start name="contact"></ion-icon>\n\n          Mi Perfil\n\n        </button>\n\n        <button ion-item menuClose (click)="openNotasPage()">\n\n          <ion-icon item-start name="book"></ion-icon>\n\n          Mis Notas\n\n        </button>\n\n        <button ion-item menuClose (click)="openCursosPage()">\n\n          <ion-icon item-start name="school"></ion-icon>\n\n          Mis Cursos\n\n        </button>\n\n        <button ion-item menuClose (click)="openMensajesPage()">\n\n          <ion-icon item-start name="paper-plane"></ion-icon>\n\n          Mis Mensajes\n\n        </button>\n\n      </ion-list>\n\n    </ion-content>\n\n\n\n  </ion-menu>\n\n<!-- main navigation -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="true" main name="app"></ion-nav>\n\n'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\app\app.template.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* MenuController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* MenuController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], ConferenceApp);
     return ConferenceApp;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=app.component.js.map

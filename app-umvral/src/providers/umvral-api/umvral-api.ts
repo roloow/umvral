@@ -303,7 +303,23 @@ delNotas(notaid) {
   });
 }
 
+getVideo() {
+  let hdrs = new Headers();
+  hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+  let options = new RequestOptions({ headers: hdrs});
 
+  let dataStr = "student_id="+this.stuid+"&exp_course_id="+this.expcursid;
+  return new Promise((resolve, reject) => {
+    this.http.post(this.apiUrl+'/experience/video/', dataStr, options).subscribe(data => {
+      console.log("SUCCESS")
+      let mensajes = JSON.parse(data["_body"]);
+      resolve(mensajes.video_url);
+    }, err => {
+      console.log("FAIL")
+      reject(err);
+    });
+  });
+}
 
 }
 
