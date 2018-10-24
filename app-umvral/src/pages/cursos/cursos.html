@@ -12,6 +12,7 @@
 
 
   <div padding *ngIf="cursos?.length > 0">
+    
     <ion-list *ngFor="let curso of cursos; let i = index">
       <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>
         {{curso[0].course_name}}<br>{{curso[0].profesor_name}}

@@ -10,7 +10,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__experiencia_3_experiencia_3__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -36,6 +36,14 @@ var ExperienceListPage = (function () {
     }
     ExperienceListPage.prototype.openExperienciaPage = function (cursoid, valor) {
         this.umvralApiProvider.cursid = cursoid;
+        //actualizar variables de api de detalles de una experiencia
+        this.umvralApiProvider.verExperiencia().then(function (result) {
+            console.log(result);
+        }, function (err) {
+            var errorData = JSON.parse(JSON.stringify(err));
+            console.log(errorData);
+        });
+        //seleccionar a que experiencia redirigir
         switch (valor) {
             case 'Caida Libre':
                 this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__["a" /* Experiencia1Page */]); //Caida Libre  
@@ -54,10 +62,9 @@ var ExperienceListPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona una experiencia:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp[0].exp_course_id,exp[0].exp_name)" block>\n\n                {{exp[0].exp_name}}\n\n            </button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], ExperienceListPage);
     return ExperienceListPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=experience-list.js.map
@@ -75,6 +82,7 @@ var ExperienceListPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -92,15 +100,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var Experiencia1Page = (function () {
-    function Experiencia1Page(nav, iab, splashScreen, alertCtrl, httpd) {
+    function Experiencia1Page(nav, iab, splashScreen, alertCtrl, httpd, umvralApiProvider) {
         this.nav = nav;
         this.iab = iab;
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
         this.httpd = httpd;
-        this.prueba = 0;
+        this.umvralApiProvider = umvralApiProvider;
+        this.prueba = 'Null';
         this.nav = nav;
+        this.prueba = this.umvralApiProvider.pruebaid;
     }
     Experiencia1Page.prototype.openMateriaPage = function () {
         this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_materia_materia__["a" /* HelpMateria1Page */]);
@@ -145,15 +156,12 @@ var Experiencia1Page = (function () {
     };
     Experiencia1Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-1',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Caída Libre</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n        <div *ngIf="prueba==1">\n\n            <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>\n\n        </div>\n\n        <div *ngIf="prueba==0">\n\n            <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>\n\n        </div>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/
+            selector: 'page-experiencia-1',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Caída Libre</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n        <div *ngIf="prueba!=\'Null\'">\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block> {{prueba}} </button>\n\n        </div>\n\n        <div *ngIf="prueba==\'Null\'">\n\n            <button ion-button color="light" block>{{prueba}}</button>\n\n        </div>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-1\experiencia-1.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__["a" /* Httpd */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__["a" /* Httpd */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_httpd__["a" /* Httpd */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _f || Object])
     ], Experiencia1Page);
     return Experiencia1Page;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=experiencia-1.js.map
@@ -170,6 +178,7 @@ var Experiencia1Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_2_materia_materia__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -186,14 +195,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var Experiencia2Page = (function () {
-    function Experiencia2Page(nav, iab, splashScreen, alertCtrl) {
+    function Experiencia2Page(nav, iab, splashScreen, alertCtrl, umvralApiProvider) {
         this.nav = nav;
         this.iab = iab;
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
-        this.prueba = 0;
+        this.umvralApiProvider = umvralApiProvider;
+        this.prueba = 'Null';
         this.nav = nav;
+        this.prueba = this.umvralApiProvider.pruebaid;
     }
     Experiencia2Page.prototype.openMateriaPage = function () {
         this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_2_materia_materia__["a" /* HelpMateria2Page */]);
@@ -224,12 +236,13 @@ var Experiencia2Page = (function () {
     };
     Experiencia2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-2',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Lanzamiento de Proyectil</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n        <ion-list>\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n            <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n            <div *ngIf="prueba==1">\n\n                <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n            <div *ngIf="prueba==0">\n\n                <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n        </ion-list>\n\n    </ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/
+            selector: 'page-experiencia-2',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Lanzamiento de Proyectil</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n        <div *ngIf="prueba!=\'Null\'">\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block>Prueba</button>\n\n        </div>\n\n        <div *ngIf="prueba==\'Null\'">\n\n            <button ion-button color="light" block>Prueba</button>\n\n        </div>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-2\experiencia-2.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], Experiencia2Page);
     return Experiencia2Page;
 }());
@@ -248,6 +261,7 @@ var Experiencia2Page = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experiencia_3_materia_materia__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -264,14 +278,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var Experiencia3Page = (function () {
-    function Experiencia3Page(nav, iab, splashScreen, alertCtrl) {
+    function Experiencia3Page(nav, iab, splashScreen, alertCtrl, umvralApiProvider) {
         this.nav = nav;
         this.iab = iab;
         this.splashScreen = splashScreen;
         this.alertCtrl = alertCtrl;
-        this.prueba = 0;
+        this.umvralApiProvider = umvralApiProvider;
+        this.prueba = 'Null';
         this.nav = nav;
+        this.prueba = this.umvralApiProvider.pruebaid;
     }
     Experiencia3Page.prototype.openMateriaPage = function () {
         this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_3_materia_materia__["a" /* HelpMateria3Page */]);
@@ -302,12 +319,13 @@ var Experiencia3Page = (function () {
     };
     Experiencia3Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experiencia-3',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Temperatura y Dilatación</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n        <ion-list>\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n            <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n            <div *ngIf="prueba==1">\n\n                <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n            <div *ngIf="prueba==0">\n\n                <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>\n\n            </div>\n\n        </ion-list>\n\n    </ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/
+            selector: 'page-experiencia-3',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Temperatura y Dilatación</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>\n\n        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>\n\n        <div *ngIf="prueba!=\'Null\'">\n\n            <button ion-button color="primary" (click)="openMateriaPage()" block>Prueba</button>\n\n        </div>\n\n        <div *ngIf="prueba==\'Null\'">\n\n            <button ion-button color="light" block>Prueba</button>\n\n        </div>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experiencia-3\experiencia-3.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_in_app_browser__["a" /* InAppBrowser */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], Experiencia3Page);
     return Experiencia3Page;
 }());
@@ -323,7 +341,7 @@ var Experiencia3Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cursos_cursos__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_user_register_user__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -419,7 +437,7 @@ var LoginPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -443,6 +461,7 @@ var CursosPage = (function () {
     CursosPage.prototype.openListaPage = function (stu_id) {
         var _this = this;
         this.umvralApiProvider.stuid = stu_id;
+        //Actualizar variable de api arreglo de experiencias
         this.umvralApiProvider.experiencias().then(function (result) {
             console.log(result);
             _this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__["a" /* ExperienceListPage */]);
@@ -453,7 +472,7 @@ var CursosPage = (function () {
     };
     CursosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona un Curso:</h3>\n\n\n\n\n\n  <div padding *ngIf="cursos?.length > 0">\n\n    <ion-list *ngFor="let curso of cursos; let i = index">\n\n      <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>\n\n        {{curso[0].course_name}}<br>{{curso[0].profesor_name}}\n\n      </button>\n\n    </ion-list>  \n\n  </div>\n\n  <div padding *ngIf="cursos?.length == 0">\n\n    <h3>\n\n      Usted no tiene cursos.\n\n    </h3>\n\n\n\n  </div>\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
+            selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona un Curso:</h3>\n\n\n\n\n\n  <div padding *ngIf="cursos?.length > 0">\n\n    \n\n    <ion-list *ngFor="let curso of cursos; let i = index">\n\n      <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>\n\n        {{curso[0].course_name}}<br>{{curso[0].profesor_name}}\n\n      </button>\n\n    </ion-list>  \n\n  </div>\n\n  <div padding *ngIf="cursos?.length == 0">\n\n    <h3>\n\n      Usted no tiene cursos.\n\n    </h3>\n\n\n\n  </div>\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], CursosPage);
@@ -481,6 +500,248 @@ webpackEmptyAsyncContext.id = 121;
 
 /***/ }),
 
+/***/ 16:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UmvralApiProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/*
+  Generated class for the UmvralApiProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var UmvralApiProvider = (function () {
+    function UmvralApiProvider(http) {
+        this.http = http;
+        this.apiUrl = 'http://vps.csaldias.cl:8000/api';
+        this.pruebaid = "Null";
+        this.isLoggedIn = false;
+        console.log('Hello UmvralApiProvider Provider');
+    }
+    UmvralApiProvider.prototype.isUserLoggedIn = function () {
+        return this.isLoggedIn;
+    };
+    UmvralApiProvider.prototype.logout = function () {
+        this.isLoggedIn = false;
+        this.userid = 0;
+        this.stucurs = '';
+    };
+    UmvralApiProvider.prototype.login = function (data) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        console.log("username=" + data.username + "&password=" + data.password);
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.username + "&password=" + data.password, options)
+                .subscribe(function (res) {
+                _this.isLoggedIn = true;
+                var userData = JSON.parse(res["_body"]);
+                _this.userid = userData.user_id;
+                _this.stucurs = userData.cursos;
+                //this.stucurs.sort(this.compare);
+                console.log("Login successful with ID " + _this.userid);
+                resolve(res);
+            }, function (err) {
+                _this.isLoggedIn = false;
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.compare = function (a, b) {
+        if (a.position < b.position)
+            return -1;
+        if (a.position > b.position)
+            return 1;
+        return 0;
+    };
+    UmvralApiProvider.prototype.experiencias = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/experience/curso/', "student_id=" + _this.stuid, options)
+                .subscribe(function (res) {
+                var cursoData = JSON.parse(res["_body"]);
+                _this.exps = cursoData.experiencias;
+                resolve(res);
+            }, function (err) {
+                _this.exps = "nope";
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.verExperiencia = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/experience/detalle/', "student_id=" + _this.stuid + "&exp_course_id" + _this.expcursid, options)
+                .subscribe(function (res) {
+                var cursoInfo = JSON.parse(res["_body"]);
+                _this.pruebaid = cursoInfo.test_id;
+                resolve(res);
+            }, function (err) {
+                _this.pruebaid = "Null";
+                reject(err);
+            });
+        });
+    };
+    /*
+      metodo(valores) {
+        let hdrs = new Headers();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        let options = new RequestOptions({ headers: hdrs});
+    
+        return new Promise((resolve, reject) =>{
+          //this.http.post(link,valores,options).subscribe(res => { hacer cosas res , resolve}, err => {hacer cosas error ,reject})
+          //this.http.get(link,options).subscribe(res => { hacer cosas res }, err => {hacer cosas error})
+        }
+      
+      
+      )
+      }
+    */
+    UmvralApiProvider.prototype.getStuCurs = function () {
+        return (this.stucurs);
+    };
+    UmvralApiProvider.prototype.register = function (data) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        console.log("username=" + data.email + "&password=" + data.password + "&register=1&email=" + data.email + "&firstname=" + data.firstName + "&lastname=" + data.lastName);
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.email + "&password=" + data.password + "&register=1&email=" + data.email + "&firstname=" + data.firstName + "&lastname=" + data.lastName, options)
+                .subscribe(function (res) {
+                _this.isLoggedIn = true;
+                var userData = JSON.parse(res["_body"]);
+                _this.userid = userData.user_id;
+                console.log("Register successful with ID " + _this.userid);
+                resolve(res);
+            }, function (err) {
+                _this.isLoggedIn = false;
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.getUserData = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        console.log("getUserData");
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.apiUrl + '/user/' + _this.userid, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.updateFirstName = function (firstName) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid + "&nombre=" + firstName;
+        console.log("updateFirstName");
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.updateLastName = function (lastName) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid + "&apellido=" + lastName;
+        console.log("updateLastName");
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.updatePassword = function (password) {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid + "&clave=" + password;
+        console.log("updatePassword");
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
+                console.log("SUCCESS");
+                var userData = JSON.parse(data["_body"]);
+                resolve(userData);
+            }, function (err) {
+                console.log("FAIL");
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider.prototype.getReceivedMessages = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        var dataStr = "user_id=" + this.userid;
+        console.log("user_id=" + this.userid);
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/message/recibidos/', dataStr, options)
+                .subscribe(function (res) {
+                var messages = JSON.parse(res["_body"]);
+                console.log("Obtenidos mensajes recibidos para ID " + _this.userid);
+                resolve(messages);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    UmvralApiProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    ], UmvralApiProvider);
+    return UmvralApiProvider;
+    var _a;
+}());
+
+//# sourceMappingURL=umvral-api.js.map
+
+/***/ }),
+
 /***/ 164:
 /***/ (function(module, exports) {
 
@@ -505,7 +766,7 @@ webpackEmptyAsyncContext.id = 164;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpMateria1Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(17);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -552,7 +813,7 @@ var HelpMateria1Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpMateria2Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(17);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -599,7 +860,7 @@ var HelpMateria2Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpMateria3Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(17);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -646,7 +907,7 @@ var HelpMateria3Page = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -931,7 +1192,7 @@ var PerfilPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterUserPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1144,7 +1405,7 @@ var NotasPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MensajesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1220,7 +1481,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(237);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
@@ -1241,7 +1502,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_perfil_perfil__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_notas_notas__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_cursos_cursos__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_register_user_register_user__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_mensajes_mensajes__ = __webpack_require__(213);
@@ -1342,231 +1603,6 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 28:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UmvralApiProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/*
-  Generated class for the UmvralApiProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var UmvralApiProvider = (function () {
-    function UmvralApiProvider(http) {
-        this.http = http;
-        this.apiUrl = 'http://vps.csaldias.cl:8000/api';
-        this.exps = 'antes';
-        this.isLoggedIn = false;
-        console.log('Hello UmvralApiProvider Provider');
-    }
-    UmvralApiProvider.prototype.isUserLoggedIn = function () {
-        return this.isLoggedIn;
-    };
-    UmvralApiProvider.prototype.logout = function () {
-        this.isLoggedIn = false;
-        this.userid = 0;
-        this.stucurs = '';
-    };
-    UmvralApiProvider.prototype.login = function (data) {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        console.log("username=" + data.username + "&password=" + data.password);
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.username + "&password=" + data.password, options)
-                .subscribe(function (res) {
-                _this.isLoggedIn = true;
-                var userData = JSON.parse(res["_body"]);
-                _this.userid = userData.user_id;
-                _this.stucurs = userData.cursos;
-                //this.stucurs.sort(this.compare);
-                console.log("Login successful with ID " + _this.userid);
-                resolve(res);
-            }, function (err) {
-                _this.isLoggedIn = false;
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider.prototype.compare = function (a, b) {
-        if (a.position < b.position)
-            return -1;
-        if (a.position > b.position)
-            return 1;
-        return 0;
-    };
-    UmvralApiProvider.prototype.experiencias = function () {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/experience/curso/', "student_id=" + _this.stuid, options)
-                .subscribe(function (res) {
-                var cursoData = JSON.parse(res["_body"]);
-                _this.exps = cursoData.experiencias;
-                resolve(res);
-            }, function (err) {
-                _this.exps = "nope";
-                reject(err);
-            });
-        });
-    };
-    /*
-      metodo(valores) {
-        let hdrs = new Headers();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        let options = new RequestOptions({ headers: hdrs});
-    
-        return new Promise((resolve, reject) =>{
-          //this.http.post(link,valores,options).subscribe(res => { hacer cosas res , resolve}, err => {hacer cosas error ,reject})
-          //this.http.get(link,options).subscribe(res => { hacer cosas res }, err => {hacer cosas error})
-        }
-      
-      
-      )
-      }
-    */
-    UmvralApiProvider.prototype.getStuCurs = function () {
-        return (this.stucurs);
-    };
-    UmvralApiProvider.prototype.register = function (data) {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        console.log("username=" + data.email + "&password=" + data.password + "&register=1&email=" + data.email + "&firstname=" + data.firstName + "&lastname=" + data.lastName);
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/user/login/', "username=" + data.email + "&password=" + data.password + "&register=1&email=" + data.email + "&firstname=" + data.firstName + "&lastname=" + data.lastName, options)
-                .subscribe(function (res) {
-                _this.isLoggedIn = true;
-                var userData = JSON.parse(res["_body"]);
-                _this.userid = userData.user_id;
-                console.log("Register successful with ID " + _this.userid);
-                resolve(res);
-            }, function (err) {
-                _this.isLoggedIn = false;
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider.prototype.getUserData = function () {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        console.log("getUserData");
-        return new Promise(function (resolve, reject) {
-            _this.http.get(_this.apiUrl + '/user/' + _this.userid, options).subscribe(function (data) {
-                console.log("SUCCESS");
-                var userData = JSON.parse(data["_body"]);
-                resolve(userData);
-            }, function (err) {
-                console.log("FAIL");
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider.prototype.updateFirstName = function (firstName) {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        var dataStr = "user_id=" + this.userid + "&nombre=" + firstName;
-        console.log("updateFirstName");
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
-                console.log("SUCCESS");
-                var userData = JSON.parse(data["_body"]);
-                resolve(userData);
-            }, function (err) {
-                console.log("FAIL");
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider.prototype.updateLastName = function (lastName) {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        var dataStr = "user_id=" + this.userid + "&apellido=" + lastName;
-        console.log("updateLastName");
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
-                console.log("SUCCESS");
-                var userData = JSON.parse(data["_body"]);
-                resolve(userData);
-            }, function (err) {
-                console.log("FAIL");
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider.prototype.updatePassword = function (password) {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        var dataStr = "user_id=" + this.userid + "&clave=" + password;
-        console.log("updatePassword");
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/client/update/', dataStr, options).subscribe(function (data) {
-                console.log("SUCCESS");
-                var userData = JSON.parse(data["_body"]);
-                resolve(userData);
-            }, function (err) {
-                console.log("FAIL");
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider.prototype.getReceivedMessages = function () {
-        var _this = this;
-        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
-        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
-        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
-        var dataStr = "user_id=" + this.userid;
-        console.log("user_id=" + this.userid);
-        return new Promise(function (resolve, reject) {
-            _this.http.post(_this.apiUrl + '/message/recibidos/', dataStr, options)
-                .subscribe(function (res) {
-                var messages = JSON.parse(res["_body"]);
-                console.log("Obtenidos mensajes recibidos para ID " + _this.userid);
-                resolve(messages);
-            }, function (err) {
-                reject(err);
-            });
-        });
-    };
-    UmvralApiProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */]) === "function" && _a || Object])
-    ], UmvralApiProvider);
-    return UmvralApiProvider;
-    var _a;
-}());
-
-//# sourceMappingURL=umvral-api.js.map
-
-/***/ }),
-
 /***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1582,7 +1618,7 @@ var UmvralApiProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_experiencia_1_experiencia_1__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_experiencia_2_experiencia_2__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_experiencia_3_experiencia_3__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_umvral_api_umvral_api__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_mensajes_mensajes__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

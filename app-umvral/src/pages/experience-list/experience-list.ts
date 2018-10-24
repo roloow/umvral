@@ -21,6 +21,18 @@ export class ExperienceListPage {
 
   openExperienciaPage(cursoid, valor) {
     this.umvralApiProvider.cursid = cursoid;
+
+    //actualizar variables de api de detalles de una experiencia
+    
+    this.umvralApiProvider.verExperiencia().then((result) => {
+      console.log(result);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
+
+    //seleccionar a que experiencia redirigir
+
     switch (valor) {
       case 'Caida Libre':
           this.nav.push(Experiencia1Page); //Caida Libre  

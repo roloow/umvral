@@ -6,22 +6,25 @@ import { Httpd, HttpdOptions } from '@ionic-native/httpd';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AlertController } from 'ionic-angular';
+import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 
 @Component({
   selector: 'page-experiencia-1',
   templateUrl: 'experiencia-1.html'
 })
 export class Experiencia1Page {
-  prueba: any = 0;
+  prueba: string = 'Null';
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
     public splashScreen: SplashScreen,
     private alertCtrl: AlertController,
-    private httpd: Httpd
-  ) {
-    this.nav = nav;
-  }
+    private httpd: Httpd, 
+    public umvralApiProvider: UmvralApiProvider)
+    {
+      this.nav = nav;
+      this.prueba = this.umvralApiProvider.pruebaid;
+    }
   openMateriaPage() {
     this.nav.push(HelpMateria1Page);
   }

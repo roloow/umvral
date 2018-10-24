@@ -12,11 +12,11 @@
     <ion-list>
         <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>
         <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>
-        <div *ngIf="prueba==1">
-            <button ion-button color="primary" (click)="openExpPage()" block>Prueba</button>
+        <div *ngIf="prueba!='Null'">
+            <button ion-button color="primary" (click)="openMateriaPage()" block> {{prueba}} </button>
         </div>
-        <div *ngIf="prueba==0">
-            <button ion-button color="light" (click)="openExpPage()" block>Prueba</button>
+        <div *ngIf="prueba=='Null'">
+            <button ion-button color="light" block>{{prueba}}</button>
         </div>
     </ion-list>
 </ion-content>

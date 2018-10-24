@@ -16,7 +16,9 @@ export class UmvralApiProvider {
   stuid : number;
   stucurs: any;
   cursid: number;
-  exps: any = 'antes';
+  exps: any;
+  expcursid: number;
+  pruebaid: string = "Null";
 
   constructor(public http: Http) {
     this.isLoggedIn = false;
@@ -77,6 +79,24 @@ export class UmvralApiProvider {
           resolve(res);
         }, (err) => {
           this.exps = "nope";
+          reject(err);
+        });
+    });
+  }
+
+  verExperiencia(){
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/experience/detalle/', "student_id="+this.stuid+"&exp_course_id"+this.expcursid, options)
+        .subscribe(res => {
+          let cursoInfo = JSON.parse(res["_body"]);
+          this.pruebaid = cursoInfo.test_id;
+          resolve(res);
+        }, (err) => {
+          this.pruebaid = "Null";
           reject(err);
         });
     });
