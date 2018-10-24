@@ -38,12 +38,17 @@ Experiencias disponibles
   <form  action="{% url 'web:course_experience' course_id %}" method="post">
     {% csrf_token %}
 <div class="col-md-12">
-  <button type="submit" class="btn btn-success" >Guardar cambios</button>
+  <div class="col-md-12">
+    <div class="col-md-3"><button type="submit" class="btn btn-success" >Guardar cambios</button></div>
+    <div class="col-md-7"></div>
+    <div class="col-md-2"><a id="movement" class="btn btn-danger">Desactivar movimiento</a></div>
+  </div>
+
   <br><br>
   <div class="portlet light portlet-fit bordered">
       <div class="portlet-body">
           <div class="table-scrollable table-scrollable-borderless">
-              <table class="table table-hover  sorted_table">
+              <table id="tablasorteable" class="table table-hover sorted_table">
                   <thead>
                       <tr class="uppercase">
                           <th> </th>
@@ -147,11 +152,34 @@ Experiencias disponibles
 <script type="text/javascript" src="{% static "web/global/plugins/jquery-sortable/jquery-sortable.js" %}"></script>
 <script>
 $(document).ready(function(){
+  var activar = 'Activar movimiento';
+  var desactivar = 'Desactivar movimiento';
+  var sorteable = "table table-hover sorted_table";
+  var unsorteable = "table table-hover";
+  var active_color = "btn btn-info";
+  var deactive_color = "btn btn-danger";
+
   $('.sorted_table').sortable({
   containerSelector: 'table',
   itemPath: '> tbody',
   itemSelector: 'tr',
   placeholder: '<tr><td><td><br></td></td> <td></td> <td> </td></tr>',
+  });
+
+  $('#movement').click(function(){
+    console.log("boton");
+    if ($('#movement')[0].innerText == activar){
+      console.log("activar");
+      $('.sorted_table').sortable('enable');
+      $('#movement')[0].innerText = desactivar;
+      $('#movement')[0].setAttribute('class', deactive_color);
+    }
+    else if ($('#movement')[0].innerText == desactivar){
+      console.log("desactivar");
+      $('.sorted_table').sortable('disable');
+      $('#movement')[0].innerText = activar;
+      $('#movement')[0].setAttribute('class', active_color);
+    }
   });
 })
 </script>
