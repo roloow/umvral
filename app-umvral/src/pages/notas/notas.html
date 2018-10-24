@@ -11,26 +11,33 @@
 
 <!-- Si no existen notas  -->
 
-  <div padding style='height: 25%' *ngIf="notas.length == 0">
+  <div padding style='height: 25%' *ngIf="notas?.length == 0">
     <h3>No tienes notas ingresadas.</h3>
   </div>
   
-  <div style='height: 60%' *ngIf="notas.length == 0">
+  <div style='height: 60%' *ngIf="notas?.length == 0">
     <img class="displayed"  height= 50% src="assets/img/notas.png">    
   </div>
 
 <!-- Si hay una o más notas  -->
 
-  <div padding style='height: 80%' *ngIf="notas.length > 0">
+  <div padding style='height: 80%' *ngIf="notas?.length > 0">
+    Promedio: {{promedio}}
     <ion-list *ngFor="let nota of notas; let i = index">
       <ion-grid>
         <ion-row>
           <ion-col>
-            Nota {{i+1}}
+            {{nota.nombre}}
           </ion-col>
           <ion-col col-3>
-            {{nota}}
+            {{nota.valor}}
           </ion-col>
+          <!--<ion-col col-1>
+            <button ion-button color="primary" (click)="delNota(nota.id)" block>X</button>
+            <button ion-button round icon-only (click)="delNota(nota.id)" clear small>
+              <ion-icon name="close-circle"></ion-icon>
+            </button>
+          </ion-col>-->
         </ion-row>
       </ion-grid>
     </ion-list>  

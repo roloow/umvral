@@ -1,38 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ExperienceListPage } from '../experience-list/experience-list';
-
+import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 
 @Component({
   selector: 'page-cursos',
   templateUrl: 'cursos.html'
 })
 export class CursosPage {
-  cursos: any = [
-    {
-      stu_id : 111,
-      cur_id : 111,
-      cur_no : 'Curso Interesante 1',
-      pro_no : 'Gervacio Rodriguez 1'
-    },
-    {
-      stu_id : 112,
-      cur_id : 112,
-      cur_no : 'Curso Interesante 2',
-      pro_no : 'Gervacio Rodriguez 2'
-    },
-    {
-      stu_id : 113,
-      cur_id : 113,
-      cur_no : 'Curso Interesante 3',
-      pro_no : 'Gervacio Rodriguez 3'
-    }
-  ];
-  constructor(public nav: NavController) {
+  cursos: any;
+
+  constructor(public nav: NavController, public umvralApiProvider: UmvralApiProvider) {
     this.nav = nav;
+    this.cursos = umvralApiProvider.getStuCurs();
+    
   }
 
-  openListaPage() {
-    this.nav.push(ExperienceListPage);
+  openListaPage(stu_id) {
+    this.umvralApiProvider.stuid = stu_id; 
+  //Actualizar variable de api arreglo de experiencias
+    this.umvralApiProvider.experiencias().then((result) => {
+      console.log(result);
+      this.nav.push(ExperienceListPage);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
   }
 }
