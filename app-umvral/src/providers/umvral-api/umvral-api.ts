@@ -18,7 +18,7 @@ export class UmvralApiProvider {
   cursid: number;
   exps: any;
   expcursid: number;
-  pruebaid: string = "Null";
+  pruebaid: any;
 
   constructor(public http: Http) {
     this.isLoggedIn = false;
@@ -89,11 +89,15 @@ export class UmvralApiProvider {
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
     let options = new RequestOptions({ headers: hdrs});
 
+    console.log("student_id="+this.stuid +"&exp_course_id="+this.expcursid);
+
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl+'/experience/detalle/', "student_id="+this.stuid+"&exp_course_id"+this.expcursid, options)
+      this.http.post(this.apiUrl+'/experience/detalle/', "student_id="+this.stuid+"&exp_course_id="+this.expcursid, options)
         .subscribe(res => {
           let cursoInfo = JSON.parse(res["_body"]);
+          console.log(res);
           this.pruebaid = cursoInfo.test_id;
+          console.log(this.pruebaid);
           resolve(res);
         }, (err) => {
           this.pruebaid = "Null";

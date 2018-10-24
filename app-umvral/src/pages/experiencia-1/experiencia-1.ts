@@ -13,7 +13,7 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
   templateUrl: 'experiencia-1.html'
 })
 export class Experiencia1Page {
-  prueba: string = 'Null';
+  prueba: any = 1;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
@@ -24,6 +24,7 @@ export class Experiencia1Page {
     {
       this.nav = nav;
       this.prueba = this.umvralApiProvider.pruebaid;
+      console.log(this.prueba);
     }
   openMateriaPage() {
     this.nav.push(HelpMateria1Page);

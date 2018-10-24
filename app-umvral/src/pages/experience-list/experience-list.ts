@@ -19,35 +19,36 @@ export class ExperienceListPage {
     this.stuid = umvralApiProvider.stuid;
   }
 
-  openExperienciaPage(cursoid, valor) {
-    this.umvralApiProvider.cursid = cursoid;
+  openExperienciaPage(expcurso, valor) {
+    this.umvralApiProvider.expcursid = expcurso;
 
     //actualizar variables de api de detalles de una experiencia
     
     this.umvralApiProvider.verExperiencia().then((result) => {
-      console.log(result);
+      let data = JSON.parse(JSON.stringify(result));
+      //this.umvralApiProvider.pruebaid = data.test_id;
+      console.log(data.test_id);
+      //seleccionar a que experiencia redirigir
+      switch (valor) {
+        case 'Caida Libre':
+            this.nav.push(Experiencia1Page); //Caida Libre  
+        break;
+
+        case 'Lanzamiento de proyectil':
+          this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
+        break;
+
+        case 'Dilatacion y calor':
+          this.nav.push(Experiencia3Page); //Dilatacion y calor
+        break;
+
+        default:
+          break;
+      }
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log(errorData);
     });
 
-    //seleccionar a que experiencia redirigir
-
-    switch (valor) {
-      case 'Caida Libre':
-          this.nav.push(Experiencia1Page); //Caida Libre  
-      break;
-
-      case 'Lanzamiento de proyectil':
-        this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
-      break;
-
-      case 'Dilatacion y calor':
-        this.nav.push(Experiencia3Page); //Dilatacion y calor
-      break;
-
-      default:
-        break;
-    }
   }
 }

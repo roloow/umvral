@@ -17,7 +17,7 @@ export class CursosPage {
   }
 
   openListaPage(stu_id) {
-    this.umvralApiProvider.stuid = stu_id;
+    this.umvralApiProvider.stuid = stu_id; 
   //Actualizar variable de api arreglo de experiencias
     this.umvralApiProvider.experiencias().then((result) => {
       console.log(result);
