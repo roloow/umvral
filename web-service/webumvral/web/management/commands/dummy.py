@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from web.models import *
 from django.contrib.auth.models import User
-from random import choice
+from random import choice, randint
 
 class Command(BaseCommand):
     help = 'Fill the database with dummy info'
@@ -109,18 +109,23 @@ class Command(BaseCommand):
                 c3.professor = p
                 c3.save()
                 courses.append(c2)
+                courses.append(c3)
 
+            aux2 = []
             for s in students:
                 aux = []
+                if s in aux2:
+                    continue
                 for iteration in range(3):
                     sm = StudentModel()
                     sm.profile = s
                     cou = choice(courses)
-                    while cou in aux:
+                    while (cou in aux):
                         cou = choice(courses)
                     aux.append(cou)
                     sm.course = cou
                     sm.save()
+                aux2.append(s)
 
             e1 = ExperienceModel()
             e1.name = "Caida Libre"
@@ -193,3 +198,42 @@ class Command(BaseCommand):
                     ex4.course = course
                     ex4.visible = False
                     ex4.save()
+
+            for j in [e1,e2,e3,e4,e5]:
+                for i in range(10):
+                    PG = QuestionModel()
+                    PG.experience = j
+                    PG.statement = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    PG.optionA = "Solucion tipo A"
+                    PG.optionA = "Solucion tipo B"
+                    PG.optionA = "Solucion tipo C"
+                    PG.optionA = "Solucion tipo D"
+                    PG.correct = choice(['A','B','C','D'])
+                    PG.save()
+
+            ExpCourses =  ExpCourseModel.objects.filter(visible=True)
+            for expc in ExpCourses:
+                test = TestModel()
+                test.total_questions = 5
+                test.visible = True
+                test.erase = False
+                test.save()
+                expc.test = test
+                expc.save()
+
+                alumnos = expc.course.students.all()
+                for alumno in alumnos:
+                    answer = AnswerModel()
+                    answer.student = alumno
+                    answer.test = test
+                    answer.score = randint(0,100)
+                    answer.save()
+
+                EXP = expc.available.experience
+                questions = QuestionModel.objects.filter(experience=EXP)
+                for i in range(5):
+                    conf = ConfigurationModel()
+                    conf.test = test
+                    conf.question = choice(questions)
+                    conf.position = i
+                    conf.save()

@@ -44,7 +44,7 @@ def experience_test(request, course, experience):
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
-    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
+    context['experience_name'] = ExperienceModel.objects.get(pk=experience).name
 
     print("Course "+course)
     print("Experience "+experience)
@@ -102,7 +102,7 @@ def experience_test_edit(request, course, experience):
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
-    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
+    context['experience_name'] = ExperienceModel.objects.get(pk=experience).name
     print("Course "+course)
     print("Experience "+experience)
 
@@ -172,7 +172,7 @@ def experience_test_visibility(request, course, experience):
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
-    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
+    context['experience_name'] = ExperienceModel.objects.get(pk=experience).name
     print("Course "+course)
     print("Experience "+experience)
 
@@ -192,7 +192,7 @@ def experience_test_delete(request, course, experience):
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
-    context['experience_name'] = ExperienceModel.objects.get(pk=course).name
+    context['experience_name'] = ExperienceModel.objects.get(pk=experience).name
     print("Course "+course)
     print("Experience "+experience)
 
