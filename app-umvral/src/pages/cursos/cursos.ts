@@ -18,6 +18,12 @@ export class CursosPage {
 
   openListaPage(stu_id) {
     this.umvralApiProvider.stuid = stu_id;
-    this.nav.push(ExperienceListPage);
+    this.umvralApiProvider.experiencias().then((result) => {
+      console.log(result);
+      this.nav.push(ExperienceListPage);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
   }
 }

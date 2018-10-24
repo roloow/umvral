@@ -10,37 +10,23 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
   templateUrl: 'experience-list.html'
 })
 export class ExperienceListPage {
-  experiencias: any = [
-    {
-      n : 'Caida Libre',
-      d : 'descripcion',
-      p : '1',
-      t : 'Caida Libre'
-    },
-    {
-      n : 'Lanzamiento de Proyectil',
-      d : 'descripcion',
-      p : '3',
-      t : 'Lanzamiento de Proyectil'
-    },
-    {
-      n : 'Dilatacion y calor',
-      d : 'descripcion',
-      p : '2',
-      t : 'Dilatacion y calor'
-    }
-  ];
+  experiencias: any;
+  stuid : any;
+
   constructor(public nav: NavController, public umvralApiProvider: UmvralApiProvider) {
     this.nav = nav;
+    this.experiencias = umvralApiProvider.exps;
+    this.stuid = umvralApiProvider.stuid;
   }
 
-  openExperienciaPage(valor) {
+  openExperienciaPage(cursoid, valor) {
+    this.umvralApiProvider.cursid = cursoid;
     switch (valor) {
       case 'Caida Libre':
           this.nav.push(Experiencia1Page); //Caida Libre  
       break;
 
-      case 'Lanzamiento de Proyectil':
+      case 'Lanzamiento de proyectil':
         this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
       break;
 

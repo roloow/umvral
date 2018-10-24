@@ -30,34 +30,17 @@ var ExperienceListPage = (function () {
     function ExperienceListPage(nav, umvralApiProvider) {
         this.nav = nav;
         this.umvralApiProvider = umvralApiProvider;
-        this.experiencias = [
-            {
-                n: 'Caida Libre',
-                d: 'descripcion',
-                p: '1',
-                t: 'Caida Libre'
-            },
-            {
-                n: 'Lanzamiento de Proyectil',
-                d: 'descripcion',
-                p: '3',
-                t: 'Lanzamiento de Proyectil'
-            },
-            {
-                n: 'Dilatacion y calor',
-                d: 'descripcion',
-                p: '2',
-                t: 'Dilatacion y calor'
-            }
-        ];
         this.nav = nav;
+        this.experiencias = umvralApiProvider.exps;
+        this.stuid = umvralApiProvider.stuid;
     }
-    ExperienceListPage.prototype.openExperienciaPage = function (valor) {
+    ExperienceListPage.prototype.openExperienciaPage = function (cursoid, valor) {
+        this.umvralApiProvider.cursid = cursoid;
         switch (valor) {
             case 'Caida Libre':
                 this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experiencia_1_experiencia_1__["a" /* Experiencia1Page */]); //Caida Libre  
                 break;
-            case 'Lanzamiento de Proyectil':
+            case 'Lanzamiento de proyectil':
                 this.nav.push(__WEBPACK_IMPORTED_MODULE_3__experiencia_2_experiencia_2__["a" /* Experiencia2Page */]); //Lanzamiento de Proyectil
                 break;
             case 'Dilatacion y calor':
@@ -69,11 +52,12 @@ var ExperienceListPage = (function () {
     };
     ExperienceListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona una experiencia:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp.t)" block>{{exp.n}}</button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n    \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
+            selector: 'page-experience-list',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/'<ion-header>\n\n    <ion-navbar no-border-bottom color="primary">\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Experiencias</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <h3>Selecciona una experiencia:</h3>\n\n    <div padding *ngIf="experiencias?.length > 0">\n\n        <ion-list *ngFor="let exp of experiencias; let i = index">\n\n            <button ion-button color="primary" (click)="openExperienciaPage(exp[0].exp_course_id,exp[0].exp_name)" block>\n\n                {{exp[0].exp_name}}\n\n            </button>\n\n        </ion-list>  \n\n    </div>\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\experience-list\experience-list.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _b || Object])
     ], ExperienceListPage);
     return ExperienceListPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=experience-list.js.map
@@ -457,17 +441,23 @@ var CursosPage = (function () {
         this.cursos = umvralApiProvider.getStuCurs();
     }
     CursosPage.prototype.openListaPage = function (stu_id) {
+        var _this = this;
         this.umvralApiProvider.stuid = stu_id;
-        this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__["a" /* ExperienceListPage */]);
+        this.umvralApiProvider.experiencias().then(function (result) {
+            console.log(result);
+            _this.nav.push(__WEBPACK_IMPORTED_MODULE_2__experience_list_experience_list__["a" /* ExperienceListPage */]);
+        }, function (err) {
+            var errorData = JSON.parse(JSON.stringify(err));
+            console.log(errorData);
+        });
     };
     CursosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-cursos',template:/*ion-inline-start:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button icon-only menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Mis Cursos</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h3>Selecciona un Curso:</h3>\n\n\n\n\n\n  <div padding *ngIf="cursos?.length > 0">\n\n    <ion-list *ngFor="let curso of cursos; let i = index">\n\n      <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>\n\n        {{curso[0].course_name}}<br>{{curso[0].profesor_name}}\n\n      </button>\n\n    </ion-list>  \n\n  </div>\n\n  <div padding *ngIf="cursos?.length == 0">\n\n    <h3>\n\n      Usted no tiene cursos.\n\n    </h3>\n\n\n\n  </div>\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"E:\Documentos\Feria\umvral\app-umvral\src\pages\cursos\cursos.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_umvral_api_umvral_api__["a" /* UmvralApiProvider */]])
     ], CursosPage);
     return CursosPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=cursos.js.map
@@ -1380,6 +1370,7 @@ var UmvralApiProvider = (function () {
     function UmvralApiProvider(http) {
         this.http = http;
         this.apiUrl = 'http://vps.csaldias.cl:8000/api';
+        this.exps = 'antes';
         this.isLoggedIn = false;
         console.log('Hello UmvralApiProvider Provider');
     }
@@ -1419,6 +1410,23 @@ var UmvralApiProvider = (function () {
         if (a.position > b.position)
             return 1;
         return 0;
+    };
+    UmvralApiProvider.prototype.experiencias = function () {
+        var _this = this;
+        var hdrs = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */]();
+        hdrs.append('Content-Type', "application/x-www-form-urlencoded");
+        var options = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]({ headers: hdrs });
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiUrl + '/experience/curso/', "student_id=" + _this.stuid, options)
+                .subscribe(function (res) {
+                var cursoData = JSON.parse(res["_body"]);
+                _this.exps = cursoData.experiencias;
+                resolve(res);
+            }, function (err) {
+                _this.exps = "nope";
+                reject(err);
+            });
+        });
     };
     /*
       metodo(valores) {
