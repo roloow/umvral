@@ -48,7 +48,9 @@ export class UmvralApiProvider {
           let userData = JSON.parse(res["_body"]);
           this.userid = userData.user_id;
           this.stucurs = userData.cursos;
-          //this.stucurs.sort(this.compare);
+          /*console.log(this.stucurs[0]);
+          this.stucurs.sort(this.compararstucurs);
+          console.log(this.stucurs[0]);*/
           console.log("Login successful with ID "+this.userid);
           resolve(res);
         }, (err) => {
@@ -58,10 +60,10 @@ export class UmvralApiProvider {
     });
   }
 
-  compare(a,b) {
-    if (a.position < b.position)
+  compararexps(a,b) {
+    if (a[0].position < b[0].position)
       return -1;
-    if (a.position > b.position)
+    if (a[0].position > b[0].position)
       return 1;
     return 0;
   }
@@ -76,6 +78,9 @@ export class UmvralApiProvider {
         .subscribe(res => {
           let cursoData = JSON.parse(res["_body"]);
           this.exps = cursoData.experiencias;
+          console.log(this.exps);
+          this.exps.sort(this.compararexps);
+          console.log(this.exps);
           resolve(res);
         }, (err) => {
           this.exps = "nope";
