@@ -8,7 +8,6 @@ from django.core.mail import send_mail
 
 def course_students(request, course):
     context = get_base_context(request)
-    print (course)
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context["course"] = courseobj
@@ -87,7 +86,8 @@ class StudentListJson(BaseDatatableView):
         # You should not filter data returned here by any filter values entered by user. This is because
         # we need some base queryset to count total number of records.
         #return CourseModel.objects.filter(something=self.kwargs['something'])
-        return StudentModel.objects.all()
+        course_id = self.request.GET.get('course_id', None)
+        return StudentModel.objects.filter(course__pk=course_id)
 
     #TODO: Crear filtros de busqueda
     def filter_queryset(self, qs):
@@ -98,7 +98,7 @@ class StudentListJson(BaseDatatableView):
         if search:
             qs = qs.filter(name__istartswith=search)
 
-        course_id = self.request.GET.get('course', None)
+        course_id = self.request.GET.get('course_id', None)
         if course_id:
             qs = qs.filter(course__pk= course_id)
 

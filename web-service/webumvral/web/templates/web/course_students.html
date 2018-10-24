@@ -131,8 +131,10 @@ $(document).ready(function() {
       ],
       searching: true,
       stateSave: true,
-			ajax: '{% url "web:course_student_list_json" %}',
-      data: {'course_id': course_id}
+			ajax: {
+          url: '{% url "web:course_student_list_json" %}',
+          data: {'course_id': course_id}
+        }
     });
 });
 </script>
