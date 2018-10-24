@@ -64,8 +64,7 @@ class ExperienceResource(ModelResource):
         test_id = 'Null'
         try:
             expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
-
-            if expCourse.test.pk.visible != False :
+            if expCourse.test.visible != False :
                 test_id = expCourse.test.pk
 
         except:
@@ -74,7 +73,6 @@ class ExperienceResource(ModelResource):
                 'exp_course_id': exp_course_id,
                 'test_id': 'Null'
                 })
-
 
         return self.create_response(request, {
             'student_id': student_id,
