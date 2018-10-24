@@ -4,8 +4,10 @@ from ..models import CourseModel
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
 from web.models import *
+import json
 
 
 def courses_list(request):
@@ -74,12 +76,12 @@ def studentCourseProfile(request, student_id, course):
             return redirect('web:404')
     else:
         return redirect('web:404')
-
     student_courses = StudentModel.objects.filter(profile=client).values('course_id')
     courses = CourseModel.objects.filter(professor_id=request.user.pk).filter(id__in=student_courses)
-
     context['client'] = client
     context['courses'] = courses
+    context['course'] = course
+    context['experiences'] = ExpCourseModel.objects.filter(course=course)
     return render(request, 'web/profile_studentcourse.html', context)
 
 class CourseListJson(BaseDatatableView):
@@ -119,3 +121,73 @@ class CourseListJson(BaseDatatableView):
             qs = qs.filter(qs_params)
         '''
         return qs
+
+def getStudentResultData(request, student_id, course, exp_id=None):
+    course = CourseModel.objects.get(pk=course)
+    student = StudentModel.objects.get(profile_id=student_id, course=course)
+    exp_id = int(exp_id)
+
+    #experiences = serializers.serialize('json',ExpCourseModel.objects.filter(course=course), fields=('name', 'id'))
+    if exp_id != None:
+        if exp_id == 1:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 1", "nota": '5.0'},
+                            {"name": "Prueba 2", "nota": '4.0'},
+                            {"name": "Prueba 3", "nota": '6.0'},
+                            {"name": "Prueba 4", "nota": '7.0'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '90% 100 tiros'},
+                            {'name': 'Tiempo', 'value': '01:05:18'},
+                        ]
+            }
+        elif exp_id == 2:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 1a", "nota": '4.0'},
+                            {"name": "Prueba 2a", "nota": '4.9'},
+                            {"name": "Prueba 2.5", "nota": '5.0'},
+                            {"name": "Prueba 3", "nota": '7.0'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '78% 160 tiros'},
+                            {'name': 'Tiempo', 'value': '01:38:10'},
+                        ]
+            }
+        elif exp_id == 3:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 1b", "nota": '6.0'},
+                            {"name": "Prueba 2b", "nota": '4.6'},
+                            {"name": "Prueba 3b", "nota": '5.0'},
+                            {"name": "Prueba 4b", "nota": '5.9'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '80% 24 tiros'},
+                            {'name': 'Tiempo', 'value': '00:38:16'},
+                        ]
+            }
+        elif exp_id == 4:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 5", "nota": '5.2'},
+                            {"name": "Prueba 6", "nota": '6.4'},
+                            {"name": "Prueba 7", "nota": '6.2'},
+                            {"name": "Prueba 8", "nota": '6.9'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '90% 5 tiros'},
+                            {'name': 'Tiempo', 'value': '00:23:06'},
+                        ]
+            }
+        #colocar que se hace al tener una experiencia
+    else:
+        experiences = ExpCourseModel.objects.filter(course=course).values('available')
+        available = AvailabilityModel.objects.filter(id__in=experiences).values('experience')
+        exp2 = ExperienceModel.objects.filter(id__in=available).values()
+        data = {
+                "experiences": list(exp2),
+                "available": list(available),
+        }
+    return JsonResponse(json.dumps(data), safe=False)
