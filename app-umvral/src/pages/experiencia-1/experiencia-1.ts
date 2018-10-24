@@ -28,7 +28,7 @@ export class Experiencia1Page {
     }
   openMateriaPage() {
     this.nav.push(HelpMateria1Page);
-  }
+  } 
   
   openExpPage() {
     let alert = this.alertCtrl.create({

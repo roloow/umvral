@@ -245,4 +245,66 @@ export class UmvralApiProvider {
         });
     });
   }
+//NOTAS
+
+getNotas() {
+  let hdrs = new Headers();
+  hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+  let options = new RequestOptions({ headers: hdrs});
+
+  let dataStr = "user_id="+this.userid;
+  return new Promise((resolve, reject) => {
+    this.http.post(this.apiUrl+'/client/notas/', dataStr, options).subscribe(data => {
+      console.log("SUCCESS")
+      let mensajes = JSON.parse(data["_body"]);
+      resolve(mensajes.notas);
+    }, err => {
+      console.log("FAIL")
+      reject(err);
+    });
+  });
 }
+
+addNotas(titulo, nota) {
+  let hdrs = new Headers();
+  hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+  let options = new RequestOptions({ headers: hdrs});
+
+  let dataStr = "user_id="+this.userid+"&nombre_nota="+titulo+"&nota="+nota;
+
+  return new Promise((resolve, reject) => {
+    this.http.post(this.apiUrl+'/client/notas/create/', dataStr, options).subscribe(data => {
+      console.log("SUCCESS")
+      let mensajes = JSON.parse(data["_body"]);
+      resolve(mensajes.notas);
+    }, err => {
+      console.log("FAIL")
+      reject(err);
+    });
+  });
+}
+
+delNotas(notaid) {
+  let hdrs = new Headers();
+  hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+  let options = new RequestOptions({ headers: hdrs});
+
+  let dataStr = "user_id="+this.userid+"&nota_id="+notaid;
+
+  return new Promise((resolve, reject) => {
+    this.http.post(this.apiUrl+'/client/notas/delete/', dataStr, options).subscribe(data => {
+      console.log("SUCCESS")
+      let mensajes = JSON.parse(data["_body"]);
+      resolve(mensajes.notas);
+    }, err => {
+      console.log("FAIL")
+      reject(err);
+    });
+  });
+}
+
+
+
+}
+
+
