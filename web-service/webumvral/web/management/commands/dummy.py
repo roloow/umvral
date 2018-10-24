@@ -199,6 +199,18 @@ class Command(BaseCommand):
                     ex4.visible = False
                     ex4.save()
 
+            for j in [e1,e2,e3,e4,e5]:
+                for i in range(10):
+                    PG = QuestionModel()
+                    PG.experience = j
+                    PG.statement = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    PG.optionA = "Solucion tipo A"
+                    PG.optionA = "Solucion tipo B"
+                    PG.optionA = "Solucion tipo C"
+                    PG.optionA = "Solucion tipo D"
+                    PG.correct = choice(['A','B','C','D'])
+                    PG.save()
+
             ExpCourses =  ExpCourseModel.objects.filter(visible=True)
             for expc in ExpCourses:
                 test = TestModel()
@@ -213,4 +225,14 @@ class Command(BaseCommand):
                     answer = AnswerModel()
                     answer.student = alumno
                     answer.test = test
+                    answer.score = randint(0,100)
                     answer.save()
+
+                EXP = expc.available.experience
+                questions = QuestionModel.objects.filter(experience=EXP)
+                for i in range(5):
+                    conf = ConfigurationModel()
+                    conf.test = test
+                    conf.question = choice(questions)
+                    conf.position = i
+                    conf.save()
