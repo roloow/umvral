@@ -38,13 +38,15 @@ Experiencias disponibles
   <form  action="{% url 'web:course_experience' course_id %}" method="post">
     {% csrf_token %}
 <div class="col-md-12">
+  <button type="submit" class="btn btn-success" >Guardar cambios</button>
+  <br><br>
   <div class="portlet light portlet-fit bordered">
       <div class="portlet-body">
           <div class="table-scrollable table-scrollable-borderless">
               <table class="table table-hover  sorted_table">
                   <thead>
                       <tr class="uppercase">
-                          <th> Posición</th>
+                          <th> </th>
                           <th> Nombre </th>
                           <th> Descripción </th>
                           <th> Video </th>
@@ -57,7 +59,8 @@ Experiencias disponibles
                     {% for exp in experiences  %}
                       <tr>
                         <input type="hidden" name="pos-{{ forloop.counter0 }}" value="{{exp.pk}}">
-                        <td> {{exp.available.position}}</td>
+                        <td> <i class="fa fa-arrows-alt"></i>
+                        </td>
                         <td > {{exp.available.experience.name}} </td>
                         <td> {{exp.available.experience.description|truncatechars:50}} </td>
                           <td>{% if exp.available.video %}
@@ -67,20 +70,20 @@ Experiencias disponibles
                           {% endif %}</td>
                         <td>
                           {% if exp.visible %}
-                          <span class="label label-sm label-warning "> Visible </span>
+                          <span class="label label-sm label-success "> Visible </span>
                           {% else %}
-                          <span class="label label-sm label-default "> No visible </span>
+                          <span class="label label-sm label-danger "> No visible </span>
                           {% endif %}
                        </td>
                        <td>
                          {% if exp.test %}
                          {% if exp.test.visible %}
-                           <span class="label label-sm label-warning "> Activa </span>
+                           <span class="label label-sm label-success "> Activa </span>
                          {% else %}
-                           <span class="label label-sm label-success "> Creada </span>
+                           <span class="label label-sm label-default "> Creada </span>
                          {% endif %}
                          {% else %}
-                         <span class="label label-sm label-default "> Sin crear </span>
+                         <span class="label label-sm label-danger "> Sin crear </span>
                          {% endif %}
                       </td>
                       <td>
@@ -129,10 +132,10 @@ Experiencias disponibles
                     {% endfor %}
                   </tbody>
               </table>
+              <br><br><br><br><br><br><br>
           </div>
       </div>
   </div>
-  <button type="submit" class="btn btn-success" >Guardar cambios</button>
 </div>
 
 </form>
@@ -148,7 +151,7 @@ $(document).ready(function(){
   containerSelector: 'table',
   itemPath: '> tbody',
   itemSelector: 'tr',
-  placeholder: '<tr><td><td><br></td> </td><td> </td><td> </td></tr>',
+  placeholder: '<tr><td><td><br></td></td> <td></td> <td> </td></tr>',
   });
 })
 </script>
