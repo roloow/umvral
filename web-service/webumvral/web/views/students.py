@@ -99,8 +99,7 @@ class StudentListJson(BaseDatatableView):
             qs = qs.filter(name__istartswith=search)
 
         course_id = self.request.GET.get('course_id', None)
-        if course_id:
-            qs = qs.filter(course__pk= course_id)
+        qs = qs.filter(course__pk=course_id)
 
         '''
         # more advanced example using extra parameters
