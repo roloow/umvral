@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'api',
     'web',
     'tastypie',
-    'corsheaders'
+    'corsheaders',
     'widget_tweaks',
 ]
 
