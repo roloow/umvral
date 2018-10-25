@@ -38,7 +38,7 @@
         <a-asset-item id="tele-mtl" src="/objetos/tele.mtl"></a-asset-item>
         <a-asset-item id="mesa-obj" src="/objetos/mesa.obj"></a-asset-item>
         <a-asset-item id="mesa-mtl" src="/objetos/mesa.mtl"></a-asset-item>
-        <video id="tutorial" src="video/prueba.mp4"></video>
+        <video id="tutorial" src="video/Tutorial.mp4"></video>
         <a-asset-item id="rack-obj" src="/objetos/rack.obj"></a-asset-item>
         <a-asset-item id="rack-mtl" src="/objetos/rack.mtl"></a-asset-item>
         <a-asset-item id="piz-obj" src="/objetos/pizarra.obj"></a-asset-item>
@@ -82,9 +82,10 @@
       <!-- /Video-->
 
 
-      <a-entity id="shoot" class="cannon" obj-model="obj: #boton-obj; mtl: #boton-mtl" scale="0.00005 0.00005 0.00005" rotation="0 -20 0" position="1.7 1 1.1"></a-entity>
-      <a-entity  obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.01 0.01 0.01" rotation="-90 -20 0" position="1.5 0 1"></a-entity>
-
+      <!--a-entity id="shoot" class="cannon" obj-model="obj: #boton-obj; mtl: #boton-mtl" scale="0.00005 0.00005 0.00005" rotation="0 -20 0" position="1.7 1 1.1"></a-entity-->
+      <a-entity id="shoot" class="cannon" obj-model="obj:/objetos/botonrojo.obj;mtl:/objetos/botonrojo.mtl" scale="0.00005 0.00005 0.00005" rotation="0 -20 0" position="0.985 1.0 1.054"></a-entity>
+      <!--a-entity  obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.01 0.01 0.01" rotation="-90 -20 0" position="1.5 0 1"></a-entity-->
+      <a-entity obj-model="obj:/objetos/panel.obj;mtl:/objetos/panel.mtl" scale="0.01 0.01 0.01" rotation="-90 -20 0" position="1 -0.2 1"></a-entity>
       <!-- Cañon -->
 			<a-entity id="cannons">
 				<a-entity id="cannonL1" class="cannon" obj-model="obj: #cannon1-obj; mtl: #cannon1-mtl" scale="0.0008 0.0008 0.0008" rotation="130 0 0" position="0.368 1.288 -3.966"></a-entity>
@@ -93,10 +94,17 @@
 				<a-entity id="repo" obj-model="obj: #repo-obj; mtl: #repo-mtl" scale="0.00001 0.00001 0.00001" rotation="-90 180 0" position="0 0 -3"></a-entity>
 			</a-entity>
 
-      <a-button id="start" scale="0.2 0.3 0.3" button-color="red" position="1.36 1.4 1.02" rotation="0 -20 0" name="velocidad1"  value="EMPEZAR"></a-button>
-      <a-button id="v1" scale="0.2 0.3 0.3" position="1.18 1.2 0.94" rotation="0 -20 0" name="velocidad1"  value="\"></a-button>
-      <a-button id="v2" scale="0.2 0.3 0.3" position="1.40 1.2 1.02" rotation="0 -20 0" name="velocidad2"  value="|"></a-button>
-      <a-button id="v3" scale="0.2 0.3 0.3" position="1.61 1.2 1.1" rotation="0 -20 0" name="velocidad3"  value="/"></a-button>
+      <a-button id="start" scale="0.5 0.6 0.6" button-color="red" position="-0.30 1.8 0.8" rotation="0 0 0" name="velocidad1" value="EMPEZAR" button=""><a-sound key="aframeButtonClickSound" sfx="true" src="#aframeButtonClick" sound="" position="0 2 5"></a-sound><a-sound key="aframeButtonClickDisabledSound" sfx="true" src="#aframeButtonClickDisabled" sound="" position="0 2 5"></a-sound><a-entity position="0 0 0.01"><a-image height="0.44999999999999996" geometry="" src="#aframeButtonShadow" material="" width="1.3820372670807453" position="0.5906142167011732 0 0"></a-image><a-rounded height="0.36" rounded="" radius="0.03" position="0 -0.18 0.01" color="red" width="1.1812284334023464"><a-entity text="align:center;wrapCount:10;width:1;value:EMPEZAR" position="0.5906142167011732 0.18 0.02"></a-entity></a-rounded></a-entity></a-button>
+      <a-button id="v1" scale="0.2 0.3 0.3" position="0.716 1.20 0.954" rotation="0 -20 0" name="velocidad1"  value="\"></a-button>
+      <a-button id="v2" scale="0.2 0.3 0.3" position="0.918 1.200 1.022" rotation="0 -20 0" name="velocidad2"  value="|"></a-button>
+      <a-button id="v3" scale="0.2 0.3 0.3" position="1.120 1.200 1.09" rotation="0 -20 0" name="velocidad3"  value="/"></a-button>
+
+      <a-button id="h1" scale="0.2 0.3 0.3" position="0.716 0.80 0.954" rotation="0 -20 0" name="velocidad1"  value="30"></a-button>
+      <a-button id="h2" scale="0.2 0.3 0.3" position="0.918 0.80 1.022" rotation="0 -20 0" name="velocidad2"  value="45"></a-button>
+      <a-button id="h3" scale="0.2 0.3 0.3" position="1.120 0.80 1.09" rotation="0 -20 0" name="velocidad3"  value="60"></a-button>
+
+
+
       <!-- /Cañon -->
 
       <!-- rack -->
@@ -132,7 +140,7 @@
       <!-- Pizarra >
       <a-plane id="pizarra" width="4" height= "3" rotation="0 90 0" position="-5 3 3" color= "white" ></a-plane-->
       <a-text id="textoPizarraEnBlanco"
-              value=" x(t)= vt + x0 \n "
+              value="Ecuaciones que describen el movimiento: \n x(t)= Vxt + x0 \n y(t)=-g(t^2)/2+Vyt \n Vx: velocidad en eje x \n Vy: velocidad en eje y"
               width="4"
               height = "3"
               position="-5 3.5 4.95"
@@ -143,7 +151,7 @@
       </a-text>
 
       <a-text id="textoPizarra30grados"
-            value=" x(t)= vt(set(30)) + x0 \n y(t)= -g(t^2)/2 + vt(cos(30)) + y0 \n sen(30)= \n cos(30)= "
+            value="Ecuaciones que describen el movimiento: \n x(t)= vt(set(30)) + x0 \n y(t)= -9.81(t^2)/2 + vt(cos(30)) + y0 \n sen(30)=0.5 \n cos(30)=0.866 "
             height = "3"
             width="4"
             position="-5 3.5 4.95"
@@ -154,8 +162,21 @@
             >
       </a-text>
 
+
+      <a-text id="coordenadastarget"
+            value="coordenadas target "
+            height = "3"
+            width="4"
+            position="-5 2.5 4.95"
+            rotation="0 90 0"
+            color="white"
+
+            text="anchor: align; align: left; baseline: top"
+            >
+      </a-text>
+
       <a-text id="textoPizarra45grados"
-            value=" x(t)= vt(set(45)) + x0 \n y(t)= -g(t^2)/2 + vt(cos(45)) + y0 \n sen(45)= \n cos(45)= "
+            value="Ecuaciones que describen el movimiento: \n x(t)= vt(set(45)) + x0 \n y(t)= -9.81(t^2)/2 + vt(cos(45)) + y0 \n sen(45)= 0.707 \n cos(45)= 0.707"
             height = "3"
             width="4"
             position="-5 3.5 4.95"
@@ -167,7 +188,7 @@
       </a-text>
 
       <a-text id="textoPizarra60grados"
-            value=" x(t)= vt(set(60)) + x0 \n y(t)= -g(t^2)/2 + vt(cos(60)) + y0 \n sen(60)= \n cos(60)= "
+            value="Ecuaciones que describen el movimiento: \n x(t)= vt(set(60)) + x0 \n y(t)= -9.81(t^2)/2 + vt(cos(60)) + y0 \n sen(60)=0.866 \n cos(60)=0.5 "
             height = "3"
             width="4"
             position="-5 3.5 4.95"
@@ -183,6 +204,7 @@
       <a-button id="alfa3" position="-5 1.1 2.5" rotation="0 90 0" button="name: 60grados; value: 60°; color: #f8faff; buttonColor: #858787"></a-button>
       <a-button id="alfa2" position="-5 1.1 3.5" rotation="0 90 0" button="name: 45grados; value: 45°; color: #f8faff; buttonColor: #858787"></a-button>
       <!-- /Pizarra -->
+
 
 
 
@@ -206,6 +228,9 @@
     var cannon_angle = 0; // angulo horizontal
     var gamma = 30; // angulo vertical
 
+    var distanciaTarget;
+    var yTarget=0;
+    var xTarget=0;
     var gravity = 9.8;
     var launching_ball = false; //true: bola es lanzada
 
@@ -242,6 +267,7 @@
 		var angle0 = document.querySelector('#v2');
 		var angle1 = document.querySelector('#v3');
 
+    var comenzo=false;
 		//Generar las respuestas de la experiencia
 		generateAnswers();
     nextTarget();
@@ -253,6 +279,7 @@
 
     start.addEventListener('click', function(){
       nextTarget();
+      comenzo = true;
       target0.setAttribute('visible', 'true');
       start.setAttribute('visible', 'false');
     });
@@ -287,6 +314,25 @@
       // cambio de angulo bala
 
     });
+
+    alfa1.addEventListener('click', function(){
+      textoPizarraEnBlanco.setAttribute('visible','false');
+      textoPizarra45grados.setAttribute('visible','false');
+      textoPizarra60grados.setAttribute('visible','false');
+      textoPizarra30grados.setAttribute('visible','true');
+      gamma=30;
+      // cambio en angulo del cañon
+      cannonL1.object3D.rotation.x = degToRad(90+gamma);
+      cannonL2.object3D.rotation.x = degToRad(90+gamma);
+      cannonL3.object3D.rotation.x = degToRad(90+gamma);
+      // cambio de angulo bala
+      if(comenzo){
+        document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
+      }
+
+    });
+
+
     alfa2.addEventListener('click', function(){
       textoPizarraEnBlanco.setAttribute('visible','false');
       textoPizarra45grados.setAttribute('visible','true');
@@ -297,7 +343,11 @@
       cannonL1.object3D.rotation.x = degToRad(90+gamma);
       cannonL2.object3D.rotation.x = degToRad(90+gamma);
       cannonL3.object3D.rotation.x = degToRad(90+gamma);
-      // cambio de angulo bala
+      //
+      if(comenzo){
+        document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
+      }
+
 
     });
     alfa3.addEventListener('click', function(){
@@ -311,8 +361,63 @@
       cannonL2.object3D.rotation.x = degToRad(90+gamma);
       cannonL3.object3D.rotation.x = degToRad(90+gamma);
       // cambio de angulo bala
+      if(comenzo){
+        document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
+      }
+    });
+
+    var alfa1panel= document.querySelector("#h1");
+    var alfa2panel= document.querySelector("#h2");
+    var alfa3panel= document.querySelector("#h3");
+    alfa1panel.addEventListener('click', function(){
+      textoPizarraEnBlanco.setAttribute('visible','false');
+      textoPizarra45grados.setAttribute('visible','false');
+      textoPizarra60grados.setAttribute('visible','false');
+      textoPizarra30grados.setAttribute('visible','true');
+      gamma=30;
+      // cambio en angulo del cañon
+      cannonL1.object3D.rotation.x = degToRad(90+gamma);
+      cannonL2.object3D.rotation.x = degToRad(90+gamma);
+      cannonL3.object3D.rotation.x = degToRad(90+gamma);
+      // cambio de angulo bala
+      if(comenzo){
+        document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
+      }
 
     });
+    alfa2panel.addEventListener('click', function(){
+      textoPizarraEnBlanco.setAttribute('visible','false');
+      textoPizarra45grados.setAttribute('visible','true');
+      textoPizarra60grados.setAttribute('visible','false');
+      textoPizarra30grados.setAttribute('visible','false');
+      gamma=45;
+      // cambio en angulo del cañon
+      cannonL1.object3D.rotation.x = degToRad(90+gamma);
+      cannonL2.object3D.rotation.x = degToRad(90+gamma);
+      cannonL3.object3D.rotation.x = degToRad(90+gamma);
+      // cambio de angulo bala
+      if(comenzo){
+        document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
+      }
+
+    });
+    alfa3panel.addEventListener('click', function(){
+      textoPizarraEnBlanco.setAttribute('visible','false');
+      textoPizarra45grados.setAttribute('visible','false');
+      textoPizarra60grados.setAttribute('visible','true');
+      textoPizarra30grados.setAttribute('visible','false');
+      gamma=60;
+      // cambio en angulo del cañon
+      cannonL1.object3D.rotation.x = degToRad(90+gamma);
+      cannonL2.object3D.rotation.x = degToRad(90+gamma);
+      cannonL3.object3D.rotation.x = degToRad(90+gamma);
+      // cambio de angulo bala
+      if(comenzo){
+        document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
+      }
+
+    });
+
 
     playTV.addEventListener('click',function(){
       video.play();
@@ -328,6 +433,19 @@
     /* Lanzamiento de Bala */
     //shoot.addEventListener('click', function(){
     cannons.addEventListener('click', function(){
+			if (launching_ball === false || orange.body.position < -1 || orange.body.position.y < 0.8) {
+        launching_ball = true;
+				//Reset de velocidades de la Bala
+        orange.body.angularVelocity.set(0,0,0);
+        orange.body.quaternion.set(0,0,0,1);
+        orange.body.position.set(0, 1.5, -4.5);
+        velocity = getVelocity(v_o , gamma, cannon_angle)
+        orange.body.velocity.set(velocity[0], velocity[1], -velocity[2]);
+      }
+    });
+
+    shoot.addEventListener('click', function(){
+
 			if (launching_ball === false || orange.body.position < -1 || orange.body.position.y < 0.8) {
         launching_ball = true;
 				//Reset de velocidades de la Bala
@@ -392,6 +510,7 @@
 				position = getTargetPosition(v_o, gamma, -1) //Obtener posicion random para el target
 				target0.object3D.position.set(position[0],position[1]+offset_y,-(position[2]+offset_z));
         target0.object3D.rotation.y = degToRad(20);
+
 			}
 			else if (angle === 1){
 				position = getTargetPosition(v_o, gamma, 1) //Obtener posicion random para el target
@@ -488,6 +607,8 @@
 				p_x = (p_z * Math.cos(70));
 				p_z = (p_z * Math.sin(70));
 			}
+      yTarget=Math.floor((p_y+1)*100)/100;
+      xTarget=Math.floor(Math.sqrt(p_x*p_x + p_z*p_z)*100)/100;
 			return [p_x, p_y+1, p_z];
     }
 
