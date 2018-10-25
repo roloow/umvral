@@ -106,7 +106,11 @@ def course_read(request, course):
     if (courseobj.professor != request.user.profile):
         return redirect('web:404')
     #TODO: cortocircuitos de totales
-    #context['tot_stu'] = courseobj.students.count()
+    context['tot_stu'] = courseobj.students.count()
+    context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
+    context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
+    #context['tot_eval'] = courseobj.students.count()
+    #context['tot_avg'] = courseobj.students.count()
     return render(request, 'web/course_read.html', context)
 
 @login_required

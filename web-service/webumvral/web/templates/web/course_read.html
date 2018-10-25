@@ -22,42 +22,80 @@
 
 {% block content %}
 <div class="row">
+
   <div class="col-md-3">
     <div class="mt-element-ribbon bg-red">
-      <a href="{% url 'web:404' %}">
+      <a href="#">
         <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
             <div class="ribbon-sub ribbon-clip"></div> ALUMNOS </div>
-        <p class="ribbon-content"></p>
       </a>
+		<a class="dashboard-stat dashboard-stat-v2 red" href="#">
+				<div class="visual">
+				</div>
+				<div class="details">
+						<div class="number">
+							<span data-counter="counterup" data-value="{{tot_stu}}">0</span>
+						</div>
+						<div class="desc"> Alumnos </div>
+				</div>
+		</a>
     </div>
   </div>
   <div class="col-md-3">
     <div class="mt-element-ribbon bg-green">
-      <a href="{% url 'web:404' %}">
+      <a href="#">
         <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
             <div class="ribbon-sub ribbon-clip"></div> EXPERIENCIAS </div>
-        <p class="ribbon-content"></p>
       </a>
+		<a class="dashboard-stat dashboard-stat-v2 green" href="#">
+				<div class="visual">
+				</div>
+				<div class="details">
+						<div class="number">
+							<span data-counter="counterup" data-value="{{tot_exp}}">0</span>
+						</div>
+						<div class="desc"> Experiencias </div>
+				</div>
+		</a>
     </div>
   </div>
-<div class="col-md-3">
+  <div class="col-md-3">
     <div class="mt-element-ribbon bg-blue">
-    <a href="{% url 'web:404' %}">
-      <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
-          <div class="ribbon-sub ribbon-clip"></div> EVALUACIONES </div>
-      <p class="ribbon-content"></p>
-    </a>
+      <a href="#">
+        <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
+            <div class="ribbon-sub ribbon-clip"></div> EVALUACIONES </div>
+      </a>
+		<a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+				<div class="visual">
+				</div>
+				<div class="details">
+						<div class="number">
+							<span data-counter="counterup" data-value="{{tot_eval}}">0</span>
+						</div>
+						<div class="desc"> Evaluaiones </div>
+				</div>
+		</a>
+    </div>
   </div>
-</div>
-<div class="col-md-3">
-  <div class="mt-element-ribbon bg-yellow">
-    <a href="{% url 'web:404' %}">
-      <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
-          <div class="ribbon-sub ribbon-clip"></div> PROMEDIO </div>
-      <p class="ribbon-content"></p>
-    </a>
+  <div class="col-md-3">
+    <div class="mt-element-ribbon bg-yellow">
+      <a href="#">
+        <div class="ribbon ribbon-border-hor ribbon-clip ribbon-color-warning uppercase">
+            <div class="ribbon-sub ribbon-clip"></div> PROMEDIO </div>
+      </a>
+		<a class="dashboard-stat dashboard-stat-v2 yellow" href="#">
+				<div class="visual">
+				</div>
+				<div class="details">
+						<div class="number">
+								<span data-counter="counterup" data-value="58">0</span>
+						</div>
+						<div class="desc"> Promedio </div>
+				</div>
+		</a>
+    </div>
   </div>
-</div>
+
 </div>
 <div class="row">
   <div class="col-md-12">
