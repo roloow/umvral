@@ -36,6 +36,7 @@ class Command(BaseCommand):
         IMPORTANT = 4
         READ = 10
         DELETED = 4
+        NOTAS = 10
         if (options['create']):
             # USERS
             clients = []
@@ -126,6 +127,14 @@ class Command(BaseCommand):
                     sm.course = cou
                     sm.save()
                 aux2.append(s)
+
+            for alumno in students:
+                for i in range(NOTAS):
+                    nota = CalificationModel()
+                    nota.value = randint(0,100)
+                    nota.name = "Certamen " + str(i)
+                    nota.owner = alumno
+                    nota.save()
 
             e1 = ExperienceModel()
             e1.name = "Caida Libre"
