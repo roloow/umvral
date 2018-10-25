@@ -1,0 +1,143 @@
+{% extends "web/base_page.html" %}
+
+{% load static %}
+
+{% block title %}
+Crear prueba
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block breadcrumb %}
+<li>
+  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course_name}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_experience' course_id %}"><span>Experiencias</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_experience' course_id %}"><span>{{experience_name}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Editar Prueba</span>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="note note-info">
+  <h4 class="block">Instrucciones</h4>
+  <p>
+    Haz clic en las preguntas de la columna "Preguntas disponibles" que deseas ver en la prueba de esta experiencia (columna "Preguntas en prueba"). El orden en el que las preguntas figuran en la columna "Preguntas en prueba" será el orden en el que aparecerán en la aplicación.
+  </p>
+  <p>
+    Se permite un máximo de <b>10</b> preguntas por prueba.
+  </p>
+  <br>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-body form">
+                <form action="{% url 'web:experience_test_edit' course_id experience_id %}" method="post" class="form-horizontal form-row-seperated">
+                    {% csrf_token %}
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                                <select multiple="multiple" class="multi-select" id="preguntas_select" name="preguntas_select">
+                                    {% for q in selected_questions %}
+                                    <option value="{{q.question.pk}}" selected>{{q.question.statement}}</option>
+                                    {% endfor %}
+                                    {% for question in available_questions %}
+                                    <option value="{{question.pk}}">{{question.statement}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">
+                                    <i class="fa fa-check"></i>
+                                    Guardar
+                                </button>
+                                <a href="{% url 'web:course_experience' course_id %}" class="btn grey-salsa btn-outline" role="button">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+{% endblock %}
+
+{% block plugin_js %}
+<script type="text/javascript" src="{% static "web/global/plugins/jquery-multi-select/js/jquery.multi-select.js" %}"></script>
+<script>
+var _multiSelect, selectables, options;
+var selectedOrder = [];
+var limit = 10;
+
+$('#preguntas_select').multiSelect({
+  selectableHeader: "<div class='custom-header'>Preguntas disponibles</div>",
+  selectionHeader: "<div class='custom-header'>Preguntas en prueba</div>",
+  keepOrder: true,
+  afterInit: function () {
+			_multiSelect = this;
+			if (this.$element.val() != null) {
+				if (this.$element.val().length >= limit) {
+					// disable all selectable elements
+					selectables = this.$container.find(".ms-elem-selectable");
+					selectables.addClass(_multiSelect.options.disabledClass);
+
+					// disable all <option>
+					//options = _multiSelect.$element.find("option");
+					//options.prop("disabled", true);
+				}
+			}
+		},
+		afterSelect: function (value) {
+			selectedOrder.push(value[0]);
+      $('#preguntas_select option[value="'+value+'"]').remove();
+      $('#preguntas_select').append($("<option></option>").attr("value",value).attr('selected', 'selected'));
+			if (this.$element.val().length >= limit) {
+				// disable all selectable elements
+				selectables = this.$container.find(".ms-elem-selectable");
+				selectables.addClass(_multiSelect.options.disabledClass);
+
+				// disable all <option>
+				//options = _multiSelect.$element.find("option");
+				//options.prop("disabled", true);
+			}
+		},
+		afterDeselect: function (value) {
+			selectedOrder.splice(selectedOrder.indexOf(value[0]), 1);
+			if (this.$element.val() && this.$element.val().length <= limit) {
+				// enable all selectable elements
+				selectables = this.$container.find(".ms-elem-selectable");
+				selectables.removeClass(_multiSelect.options.disabledClass);
+
+				// enable all <option>
+				//options = _multiSelect.$element.find("option");
+				//options.prop("disabled", false);
+			}
+		}
+});
+</script>
+{% endblock %}
+
+{% block plugin_css %}
+<link rel="stylesheet" type="text/css" media="screen" href="{% static "web/global/plugins/jquery-multi-select/css/multi-select.css" %}" />
+{% endblock %}

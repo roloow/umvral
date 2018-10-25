@@ -2,10 +2,60 @@ from django.shortcuts import render, redirect
 from .common import get_base_context
 from ..models import CourseModel
 from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+from web.models import *
+import json
+import collections
 
 
+#Funciones Auxiliares para entregar informacion
+def getObjTests(obj, index):
+    if (index in obj):
+        return obj[index]['tests']
+    else:
+        return None
+
+
+def getTestsResults(student_id, course, array=False):
+    course = CourseModel.objects.get(pk=course)
+    student = StudentModel.objects.get(profile_id=student_id, course=course)
+    # Puntaje de pruebas estudiante
+    student_answers = AnswerModel.objects.filter(student=student).values('id','test_id','score')
+    # Pruebas de estudiante
+    tests = []
+    for answ in student_answers:
+        tests.append(answ['test_id'])
+    #Experiencias de Tests
+    expcourse = ExpCourseModel.objects.filter(test__pk__in=tests)
+    if array:
+        test_experiences = []
+        for expc in expcourse:
+            exp_pk = expc.available.experience.pk
+            test_experiences.append({
+                "experience": expc.available.experience.pk,
+                "test": expc.test.pk,
+                "score": student_answers.get(test_id=expc.test.pk)['score']})
+    else:
+        test_experiences = {}
+        for expc in expcourse:
+            exp_pk = expc.available.experience.pk
+            if (exp_pk in test_experiences):
+                test_experiences[exp_pk]['tests'].append({
+                    "experience": expc.available.experience.pk,
+                    "test": expc.test.pk,
+                    "score": student_answers.get(test_id=expc.test.pk)['score']})
+            else:
+                test_experiences[exp_pk] = {"tests": [{
+                    "experience": expc.available.experience.pk,
+                    "test": expc.test.pk,
+                    "score": student_answers.get(test_id=expc.test.pk)['score']}]}
+    return test_experiences
+
+
+#Funciones de la view en particular
 def courses_list(request):
     context = get_base_context(request)
     return render(request, 'web/course_list.html', context)
@@ -56,8 +106,33 @@ def course_read(request, course):
     if (courseobj.professor != request.user.profile):
         return redirect('web:404')
     #TODO: cortocircuitos de totales
-    #context['tot_stu'] = courseobj.students.count()
+    context['tot_stu'] = courseobj.students.count()
+    context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
+    context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
+    #context['tot_eval'] = courseobj.students.count()
+    #context['tot_avg'] = courseobj.students.count()
     return render(request, 'web/course_read.html', context)
+
+@login_required
+def studentCourseProfile(request, student_id, course):
+    context = get_base_context(request)
+    course = CourseModel.objects.get(pk=course)
+    student = StudentModel.objects.get(profile_id=student_id, course=course)
+    if (request.user.profile.pk == course.professor.pk and 
+    student.course == course):
+        try:
+            client = ClientModel.objects.get(pk=student_id)
+        except:
+            return redirect('web:404')
+    else:
+        return redirect('web:404')
+    student_courses = StudentModel.objects.filter(profile=client).values('course_id')
+    courses = CourseModel.objects.filter(professor_id=request.user.pk).filter(id__in=student_courses)
+    context['client'] = client
+    context['courses'] = courses
+    context['course'] = course
+    context['experiences'] = ExpCourseModel.objects.filter(course=course)
+    return render(request, 'web/profile_studentcourse.html', context)
 
 class CourseListJson(BaseDatatableView):
     model = CourseModel
@@ -82,17 +157,130 @@ class CourseListJson(BaseDatatableView):
         search = self.request.GET.get('search[value]', None)
         if search:
             qs = qs.filter(name__istartswith=search)
-
-        '''
-        # more advanced example using extra parameters
-        filter_customer = self.request.GET.get('customer', None)
-
-        if filter_customer:
-            customer_parts = filter_customer.split(' ')
-            qs_params = None
-            for part in customer_parts:
-                q = Q(customer_firstname__istartswith=part)|Q(customer_lastname__istartswith=part)
-                qs_params = qs_params | q if qs_params else q
-            qs = qs.filter(qs_params)
-        '''
         return qs
+
+
+def getStudentResultData(request, student_id, course, exp_id=None):
+    notas = CalificationModel.objects.filter(owner_id=student_id).values('name','value')
+    data = {"tests" : [] , "metrics" : [], "notas": []}
+    print(notas)
+    if exp_id != None:
+        exp_id = int(exp_id)
+        test_experiences = getTestsResults(student_id, course)
+        if exp_id == 1:
+            data = {
+                    "tests" : getObjTests(test_experiences, 1),
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '90% 100 tiros'},
+                            {'name': 'Tiempo', 'value': '01:05:18'},
+                        ],
+                    "notas" : list(notas)
+            }
+        elif exp_id == 2:
+            data = {
+                    "tests" : getObjTests(test_experiences, 2),
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '78% 160 tiros'},
+                            {'name': 'Tiempo', 'value': '01:38:10'},
+                        ],
+                    "notas" : list(notas)
+            }
+        elif exp_id == 3:
+            data = {
+                    "tests" : getObjTests(test_experiences, 3),
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '80% 24 tiros'},
+                            {'name': 'Tiempo', 'value': '00:38:16'},
+                        ],
+                    "notas" : list(notas)
+            }
+        elif exp_id == 4:
+            data = {
+                    "tests" : getObjTests(test_experiences, 4) ,
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '90% 5 tiros'},
+                            {'name': 'Tiempo', 'value': '00:23:06'},
+                        ],
+                    "notas" : list(notas)
+            }
+        #colocar que se hace al tener una experiencia
+    else:
+        test_experiences = getTestsResults(student_id, course, array=True)
+        data = {
+                "tests" : test_experiences,
+                "metrics" : [],
+                "notas" : list(notas)
+        }
+    print(data)
+    return JsonResponse(json.dumps(data), safe=False)
+
+
+'''
+print('expcourse')
+print(expcourse)
+print('test_experiences')
+print(test_experiences)
+camino más rapido (con test_id)
+ExpCourse = ExpCourseModel.objects.filter(test__pk = test_id)[0]
+ExpCourse.available.experience
+print('student')
+print(student)
+print('student_answers')
+print(student_answers)
+'''
+'''
+
+    if exp_id != None:
+        if exp_id == 1:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 1", "nota": '5.0'},
+                            {"name": "Prueba 2", "nota": '4.0'},
+                            {"name": "Prueba 3", "nota": '6.0'},
+                            {"name": "Prueba 4", "nota": '7.0'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '90% 100 tiros'},
+                            {'name': 'Tiempo', 'value': '01:05:18'},
+                        ]
+            }
+        elif exp_id == 2:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 1a", "nota": '4.0'},
+                            {"name": "Prueba 2a", "nota": '4.9'},
+                            {"name": "Prueba 2.5", "nota": '5.0'},
+                            {"name": "Prueba 3", "nota": '7.0'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '78% 160 tiros'},
+                            {'name': 'Tiempo', 'value': '01:38:10'},
+                        ]
+            }
+        elif exp_id == 3:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 1b", "nota": '6.0'},
+                            {"name": "Prueba 2b", "nota": '4.6'},
+                            {"name": "Prueba 3b", "nota": '5.0'},
+                            {"name": "Prueba 4b", "nota": '5.9'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '80% 24 tiros'},
+                            {'name': 'Tiempo', 'value': '00:38:16'},
+                        ]
+            }
+        elif exp_id == 4:
+            data = {
+                    "tests" : [
+                            {"name": "Prueba 5", "nota": '5.2'},
+                            {"name": "Prueba 6", "nota": '6.4'},
+                            {"name": "Prueba 7", "nota": '6.2'},
+                            {"name": "Prueba 8", "nota": '6.9'},
+                        ],
+                    "metrics" : [
+                            {'name': 'Aciertos', 'value': '90% 5 tiros'},
+                            {'name': 'Tiempo', 'value': '00:23:06'},
+                        ]
+            }
+'''

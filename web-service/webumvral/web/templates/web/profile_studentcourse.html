@@ -1,0 +1,354 @@
+{% extends "web/base_page.html" %}
+{% load static %}
+{% block title %}Perfil de usuario{% endblock %}
+{% block breadcrumb %}Usuario > {{client.full_name}} > Resumen{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet ">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="{% static 'web/layouts/layout/img/avatar.png' %}" class="img-responsive" alt=""> </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> {{client.full_name}} </div>
+                    <div class="profile-usertitle-job"> {% if client.isProfessor %}Profesor{% else %}Estudiante{% endif %} </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                  {% if my_profile %}
+                    <a href="{% url 'web:msg_view' client.pk 0 %}" type="button" class="btn btn-circle blue btn-sm">Bandeja de mensaje</a>
+                  {% else %}
+                  <form class="" action="{% url 'web:msg_direct' request.user.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="to" value="{{client.pk}}">
+                    <input type="hidden" name="topic" value="">
+                    <a href="javascript:;" onclick="parentNode.submit();" type="button" class="btn btn-circle red btn-sm">Enviar un mensajes</a>
+                  </form>
+                  {% endif %}
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="{% url 'web:profile' client.pk %}">
+                                <i class="icon-home"></i> Resumen </a>
+                        </li>
+                        {% if my_profile %}
+                        <li>
+                            <a href="{% url 'web:profile_edit' client.pk %}">
+                                <i class="icon-settings"></i> Editar cuenta </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'web:404' %}">
+                                <i class="icon-info"></i> Ayuda </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+            <!-- END PORTLET MAIN -->
+            <!-- PORTLET MAIN -->
+            <div class="portlet light ">
+                <!-- STAT -->
+                <center>PRÓXIMAMENTE<br>Resumen de actividad</center>
+                <div class="row list-separated profile-stat">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <!-- TODO: Resumen real -->
+                        <div class="uppercase profile-stat-title"> 0 </div>
+                        <div class="uppercase profile-stat-text"> Cursos </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 0 </div>
+                        <div class="uppercase profile-stat-text"> Alumnos </div>
+                    </div>
+                </div>
+                <!-- END STAT -->
+            </div>
+            <!-- END PORTLET MAIN -->
+        </div>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- BEGIN PORTLET -->
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Información personal</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                          <div class="table-scrollable table-scrollable-borderless">
+                              <table class="table table-hover table-light">
+                                  <tr>
+                                      <td class="text-right">
+                                        <b>Nombre:</b>
+                                      </td>
+                                      <td> {{client.first_name}} </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-right">
+                                        <b>Apellido:</b>
+                                      </td>
+                                      <td> {{client.last_name}} </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-right">
+                                        <b>Correo:</b>
+                                      </td>
+                                      <td> {{client.email}} </td>
+                                  </tr>
+                                  <tr>
+                                      <td >
+                                      </td>
+                                      <td>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET -->
+                </div>
+            </div>
+						<!-- SECCION : CURSOS INSCRITOS -->
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- BEGIN PORTLET -->
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Cursos inscritos</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+													{% for course in courses %}
+													<a href="{% url 'web:course_read' course.id %}" class="btn btn-circle blue"> {{course.name}} </a>
+													{% endfor %}
+                        </div>
+                    </div>
+                    <!-- END PORTLET -->
+                </div>
+            </div>
+						<div id="dinamicResults">
+						<!-- SECCION : NOTAS ACADEMICAS -->
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- BEGIN PORTLET -->
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Notas Academicas</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+														<div class="text-center" id="chart_div2"></div>
+                            <div class="table-scrollable table-scrollable-borderless">
+                                <table class="table table-hover table-light">
+                                    <thead>
+                                        <tr class="uppercase">
+                                            <th colspan="2"> Evaluación </th>
+                                            <th> Resultado </th>
+                                        </tr>
+                                    </thead>
+                                    <tr v-for="nota in notas">
+                                        <td class="fit">
+                                        </td>
+																				<td>${nota.name}</td>
+																				<td>${nota.value} </td>
+                                    </tr>
+																		<tr>
+                                        <td class="fit">
+                                        </td>
+																				<td><b>PROMEDIO</b></td>
+																				<td><b>${notas_avg} </b></td>
+																		</tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET -->
+                </div>
+            </div>
+						<!-- SECCION : NOTAS TEST UMVRAL -->
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- BEGIN PORTLET -->
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Evaluaciones de umVRal</span>
+                            </div>
+                            <div class="actions">
+                                <div class="btn-group btn-group-devided" data-toggle="buttons">
+																	{% for exp in experiences %}
+																	<label class="btn btn-transparent grey-salsa btn-circle btn-sm active" v-on:click="changeTests" exp_id={{exp.available.experience.id}}>
+																			<input type="radio" name="options" class="toggle" id="option1">{{exp.available.experience.name}}</label>
+																	{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+														<div style="margin: 0 auto; display: inline-block;" id="chart_div3"></div>
+                            <div class="table-scrollable table-scrollable-borderless">
+                                <table class="table table-hover table-light">
+                                    <thead>
+                                        <tr class="uppercase">
+                                            <th colspan="2"> Test </th>
+                                            <th> Nota</th>
+                                        </tr>
+                                    </thead>
+                                    <tr v-for="test in tests">
+                                        <td class="fit">
+                                        </td>
+																				<td>Prueba exp ${test.experience}</td>
+																				<td>${test.score} </td>
+                                    </tr>
+																		<tr v-if="showavgtests">
+                                        <td class="fit">
+                                        </td>
+																				<td><b>PROMEDIO</b></td>
+																				<td><b>${tests_avg} </b></td>
+																		</tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET -->
+                </div>
+            </div>
+						<!-- SECCION : RENDIMIENTO EXPERIENCIAS -->
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- BEGIN PORTLET -->
+                    <div class="portlet light ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Rendimiento en experiencias</span>
+                            </div>
+                            <div class="actions">
+                                <div class="btn-group btn-group-devided" data-toggle="buttons">
+																	{% for exp in experiences %}
+                                    <label class="btn btn-transparent grey-salsa btn-circle btn-sm active" v-on:click="changeMetrics" exp_id={{exp.available.experience.id}}>
+																			<input type="radio" name="options" class="toggle" id="option1">{{exp.available.experience.name}}</label>
+																	{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row number-stats margin-bottom-30">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+																</div>
+                            </div>
+                            <div class="table-scrollable table-scrollable-borderless">
+                                <table class="table table-hover table-light">
+                                    <thead>
+                                        <tr class="uppercase">
+                                            <th colspan="2"> Métrica </th>
+                                            <th> Valor </th>
+                                        </tr>
+                                    </thead>
+                                    <tr v-for="metric in metrics">
+                                        <td class="fit">
+                                        </td>
+																				<td>${metric.name}</td>
+																				<td>${metric.value} </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET -->
+                </div>
+            </div>
+						</div> <!-- dinamicResults -->
+        </div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>
+{% endblock %}
+{% block plugin_js %}
+<script>
+apiurl = '{% url "web:student_getdata" course.pk client.pk %}';
+</script>
+<script src="{% static 'web/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js'%}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/jquery.sparkline.min.js'%}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/gmaps/gmaps.min.js'%}" type="text/javascript"></script>
+<script src="{% static 'web/layouts/global/scripts/quick-nav.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/pages/scripts/profile.min.js'%}" type="text/javascript"></script>
+<script src="{% static 'web/pages/scripts/timeline.min.js'%}" type="text/javascript"></script>
+<script src="{% static 'web/apps/scripts/vue.js'%}" type="text/javascript" /></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+	// Load the Visualization API and the corechart package.
+	google.charts.load('current', {'packages':['corechart']});
+
+	// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(drawChart);
+
+	// Callback that creates and populates a data table,
+	// instantiates the pie chart, passes in the data and
+	// draws it.
+	function drawChart() {
+		fetch(apiurl, {
+			credentials: 'same-origin',
+			headers: { 'X-Requested-With': 'XMLHttpRequest' },
+		})
+		.then(response => response.json())
+		.then(json => {
+			res = JSON.parse(json);
+
+			values3 = []
+			res.tests.forEach(value => {
+				values3.push(['exp'+value.experience, value.score])
+			});
+			var data3 = new google.visualization.DataTable();
+			var options = {
+										 'width':400,
+										 'height':200,
+										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 100 , 'min': 0 } }
+			};
+			data3.addColumn('string', 'Prueba');
+			data3.addColumn('number', 'Notas');
+			data3.addRows(values3);
+			var chart3 = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+			chart3.draw(data3, options);
+
+			values2 = []
+			res.notas.forEach(value => {
+				values2.push([value.name, value.value])
+			});
+			var data2 = new google.visualization.DataTable();
+			var options = {
+										 'width':600,
+										 'height':300,
+										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 100 , 'min': 0 } }
+			};
+			data2.addColumn('string', 'Prueba');
+			data2.addColumn('number', 'Notas');
+			data2.addRows(values2);
+			var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+			chart2.draw(data2, options);
+		});
+	}
+</script>
+<script src="{% static 'web/apps/scripts/0_studentresultsprofile.js'%}" type="text/javascript" /></script>
+{% endblock %}
+{% block plugin_css %}
+<link href="{% static 'web/pages/css/profile.min.css'%}" rel="stylesheet" type="text/css" />
+{% endblock %}

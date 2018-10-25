@@ -22,3 +22,13 @@ class ClientModel(models.Model):
     @property
     def email(self):
         return self.auth_user.email
+
+    def modify(self,nombre=None,apellido=None,clave=None):
+        user = self.auth_user
+        if(nombre):
+            user.first_name = nombre
+        if(apellido):
+            user.last_name = apellido
+        if(clave):
+            user.set_password(clave)
+        user.save()

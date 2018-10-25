@@ -1,0 +1,49 @@
+<!--
+  Generated template for the RegisterUserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Registro de Usuario</ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content class="login-content" padding>
+  <div class="login-box">
+    
+    <form (ngSubmit)="registrarUsuario()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            
+            <ion-item>
+              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-input type="password" placeholder="Contraseña" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Nombre" name="firstName" [(ngModel)]="registerCredentials.firstName" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Apellido" name="lastName" [(ngModel)]="registerCredentials.lastName" required></ion-input>
+            </ion-item>
+            
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Registrar</button>
+        </ion-col>
+      </ion-row>
+      
+    </form>
+  </div>
+</ion-content>
