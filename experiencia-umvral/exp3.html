@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>umVRal - Dilatacion lineal</title>
+    <meta name="description" content="Experiencia VR de dilatación lineal">
+    <script src="assets/javascripts/aframe.min.js"></script>
+    <script src="assets/javascripts/aframe-mouse-cursor-component.min.js"></script>
+		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
+    <script src="assets/javascripts/aframe-material.min.js"></script>
+    <script src="assets/javascripts/aframe-extras.min.js"></script>
+    <script src="assets/javascripts/moment-with-locales.js"></script>
+    <script src="assets/javascripts/aframe-environment-component.min.js"></script>
+		<script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script> 
+    <script type="text/javascript">
+      $ = (sel) => document.querySelector(sel)
+      $$ = (sel) => document.querySelectorAll(sel)
+      on = (elem, type, hand) => elem.addEventListener(type,hand)
+    </script>
+  </head>
+  <body>
+    <a-scene background="color: #ECECEC">
+      <a-box id="" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow
+				              animation__color="property: material.color; dir: alternate; dur: 1000;
+                                easing: easeInSine; loop: true; to: #FFF"
+				></a-box>
+      <a-sphere id="sphere" position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+      <a-cylinder id="cylinder" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+			<a-button id="btn1" color="blue" position="2 0.5 -3"></a-button>
+			<a-button id="btn2" color"green" position="5 0.5 -3"></a-button>
+			<a-button id="btn3" color="red" position="8 0.5 -3"></a-button>
+
+
+		<script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script> 
+      <a-plane position="0 0 0" rotation="-90 0 0" width="60" height="40" color="#7BC8A4" shadow></a-plane>
+
+
+      <!-- Inicio de Controles -->
+      <a-entity id="camWrapper" position="0 0 3" rotation="0 +20 0">
+        <a-entity id="cam" camera look-controls wasd-controls>
+          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="color: black; shader: flat">
+              <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+              <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+        </a-entity>
+      </a-entity>
+      <!-- Fin de Controles -->
+
+
+
+    </a-scene>
+  </body>
+	<script>
+    var sphere = document.querySelector("#sphere");
+    var btn1 = document.querySelector("#btn1");
+    var btn2 = document.querySelector("#btn2");
+    var btn3 = document.querySelector("#btn3");
+    var cylinder = document.querySelector("#cylinder");
+		console.log("holaa")
+
+    btn1.addEventListener('click', function(){
+			console.log("pressing")
+			sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #4286f4");
+		})
+    btn2.addEventListener('click', function(){
+			sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #88f936");
+		})
+    btn3.addEventListener('click', function(){
+			sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #f23b2e");
+		})
+
+
+		/*
+		AFRAME.anime({
+			targets: '#sphere',
+			color: ['rgb(255,0,0)', '#FFF'], // Animate the background color to #FFF (from 'rgb(0,0,0)' to 'rgb(255,255,255)')
+			duration: 1500
+		});
+		*/
+	</script>
+</html>
+
