@@ -23,7 +23,7 @@ Lo primero será crear y activar el ambiente de desarrollo en la carpeta donde s
 Una vez aparesca el **(CARPET)** significará que se ha activado correctamente. Es tiempo de instalar los paquetes de python
 
 ```
-(CARPET) :CarpetaDestino> pip install -r requirements.txt
+(CARPET) :CarpetaDestino> pip3 install -r requirements.txt
 ```
 Habiendo realizado esto podemos proceder a los ajustes iniciales de la aplicación. Para esto deberemos utilizar comandos* del sistema. (*Los comandos se encuentran más detallados en la sección Comandos*)
 
@@ -53,14 +53,7 @@ El servidor, una vez realizadas las configuraciones anteriores debe ser corrido 
 
 ### comandos
 
-Para inicialmente tener alguna información, se creó un comando que genera 900 alumnos, 100 profesores, 2 cursos por profesor (1 normal y 1 eliminado), mensajes entre usuarios, cada alumno pertenece a almenos 1 curso no eliminado.
-
+Para inicialmente tener alguna información, se creó un comando que genera 900 alumnos, 100 profesores, 2 cursos por profesor (1 normal y 1 eliminado), mensajes entre usuarios, cada alumno pertenece a almenos 1 curso no eliminado. Luego agregar experiencias dummy, se genera 5 experiencias, y se agrega a por cada profesor un AvailableModel de forma tal que 4 de 5 experiencias tengan video, luego para todos los cursos del profesor, se crea un ExpCourseModel por cada AvailableModel, dejando a todos los cursos con 4 experiencias, 2 visibles y 2 no visibles.
 ```
 (CARPET) :CarpetaDestino\webumvral> python manage.py dummy --create
-```
-
-Para luego agregar experiencias dummy, se genera 5 experiencias, y se agrega a por cada profesor un AvailableModel de forma tal que 4 de 5 experiencias tengan video, luego para todos los cursos del profesor, se crea un ExpCourseModel por cada AvailableModel, dejando a todos los cursos con 4 experiencias, 2 visibles y 2 no visibles.
-
-```
-(CARPET) :CarpetaDestino\webumvral> python manage.py dummy --extra
 ```

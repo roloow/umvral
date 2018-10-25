@@ -5,7 +5,7 @@ from .code import *
 from .configuration import *
 from .course import *
 from .expcourse import *
-from .expdisp import *
+from .availability import *
 from .experience import *
 from .message import *
 from .question import *

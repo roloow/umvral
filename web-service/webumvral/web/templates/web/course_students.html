@@ -9,7 +9,7 @@ Mis alumnos
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <a href="{% url 'web:course_read' course.pk %}"><span> {{course.pk}} </span></a>
+  <a href="{% url 'web:course_read' course.pk %}"><span> {{course.name}} </span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
@@ -54,8 +54,6 @@ var render_checkbox = function(student_id) {
 var render_options = function(student_id, sprofile_id, course_id, user_id, course_name){
 	var url1 = "{% url 'web:profile' 0 %}".replace('0', sprofile_id);
   var url2 = "{% url 'web:msg_direct' 0 %}".replace('0', user_id);
-  console.log(course_id);
-  console.log(student_id);
   var url3 = "{% url 'web:course_ban' 88888888 99999999 %}".replace('88888888', course_id).replace('99999999', student_id);
   return `<div class="btn-group">
             <button class="btn btn-xs orange dropdown-toggle" type="button"
@@ -77,13 +75,13 @@ var render_options = function(student_id, sprofile_id, course_id, user_id, cours
           </div>`
 };
 var render_name = function(sprofile_id, name){
-	var url = "{% url 'web:profile' 0 %}".replace('0', sprofile_id);
+	var url = "{% url 'web:student_courseprofile' 0 1 %}".replace('0','{{course.pk}}').replace('1',sprofile_id)
 	return `<a href="${url}"> ${name} </a>`
 }
 $(document).ready(function() {
-		var course_id = {{course.pk}};
+		var course_id = "{{course.pk}}";
     var course_name = "{{course.name}}";
-    var user_id = {{request.user.profile.pk}};
+    var user_id = "{{request.user.profile.pk}}";
     var dt_table = $('#table').DataTable({
 			processing: true,
 			serverSide: true,
@@ -131,7 +129,7 @@ $(document).ready(function() {
       ],
       searching: true,
       stateSave: true,
-			ajax: '{% url "web:course_student_list_json" %}',
+			ajax: '{% url "web:course_student_list_json" %}'+'?course_id='+course_id,
       data: {'course_id': course_id}
     });
 });
