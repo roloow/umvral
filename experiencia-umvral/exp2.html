@@ -58,7 +58,8 @@
       </a-entity>
       <!-- Fin de Controles -->
       <!-- Environment -->
-      <a-entity id="env" environment="active: true; preset: egypt; skyType: atmosphere; ground: hills; playArea: 1.2; dressingAmount: 3; fog: 0.5;"></a-entity>
+      <a-entity id="env" environment="active: true; preset: egypt; skyType: atmosphere; ground: hills; playArea: 1.2 ;dressing:stones; dressingAmount: 20; fog: 0.5;lightPosition:0 4.65 -1;"></a-entity>
+      <!--a-entity id="env" environment="active:true;preset:egypt;skyType:atmosphere;playArea:1.2;dressingAmount:20;fog:0.5;seed:26;skyColor:#1b7660;horizonColor:#e4b676;lightPosition:0 4.65 -1;groundYScale:5;groundTexture:walkernoise;groundColor:#a8785a;groundColor2:#875e47;dressing:stones;dressingColor:#7c5c45;dressingScale:4;dressingVariance:20 20 20;grid:spots;gridColor:#e4b676;shadowSize:20" visible=""><a-entity class="environment" position="0 50 0" light="type:hemisphere;color:#CEE4F0;intensity:0.5888241556472172;groundColor:#a8785a" visible=""></a-entity><a-entity class="environment" position="0 4.65 -1" light="intensity:0.5888241556472172;shadowCameraLeft:-20;shadowCameraBottom:-20;shadowCameraRight:20;shadowCameraTop:20" visible=""></a-entity><a-entity rotation="-90 0 0" class="environmentGround environment" visible="" scale="1 1 5" shadow="cast:false;receive:false"></a-entity><a-entity class="environmentDressing environment" visible=""></a-entity><a-sky radius="200" geometry="" theta-length="110" class="environment" material="shader:skyshader;sunPosition:0 0.9776483112944344 -0.21024694866546975" visible=""></a-sky><a-entity id="stars"></a-entity></a-entity>
       <!-- /Environment -->
 
       <!-- Bola de cañon -->
@@ -179,7 +180,7 @@
             value=""
             height = "7"
             width="7"
-            position="-0,5 5 -6"
+            position="0 5 -6"
             rotation="0 0 0"
             color="black"
             visible="false"
@@ -561,8 +562,9 @@
 				targetPos(t.horangl, t.vel, t.vertangl);
 			}
 			else {
-				target0.setAttribute("visible",false)
-				console.log("Experiencia Finalizada!")
+				target0.setAttribute("visible",false);
+				console.log("Experiencia Finalizada!");
+        indicadorcoordenadas.setAttribute('value','Experiencia Finalizada!');
 			}
 			return true;
 		}
