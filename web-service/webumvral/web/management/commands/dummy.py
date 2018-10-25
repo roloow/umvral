@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from web.models import *
 from django.contrib.auth.models import User
-from random import choice
+from random import choice, randint
 
 class Command(BaseCommand):
     help = 'Fill the database with dummy info'
@@ -36,6 +36,7 @@ class Command(BaseCommand):
         IMPORTANT = 4
         READ = 10
         DELETED = 4
+        NOTAS = 10
         if (options['create']):
             # USERS
             clients = []
@@ -71,45 +72,70 @@ class Command(BaseCommand):
                         m.important = True
                         IMPORTANT -= 1
                         m.topic = "Asunto N. " + str(i)
-                        m.content = "Contenido del mensaje"
+                        m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                         m.save()
                         continue
                     if (READ != 0):
                         m.read = True
                         m.topic = "Asunto N. " + str(i)
-                        m.content = "Contenido del mensaje"
+                        m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                         m.save()
                         continue
                     if (DELETED != 0):
                         m.deleted = True
                         m.topic = "Asunto N. " + str(i)
-                        m.content = "Contenido del mensaje"
+                        m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                         m.save()
                         continue
                     m.topic = "Asunto N. " + str(i)
-                    m.content = "Contenido del mensaje"
+                    m.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum magna suscipit felis vestibulum placerat. Praesent ipsum nunc, porttitor ac ligula a, sollicitudin sollicitudin arcu. Mauris consequat risus at dui convallis ultrices. Curabitur est nibh, volutpat sit amet suscipit at, gravida vitae ligula"
                     m.save()
 
             courses = []
             for p in professors:
                 c1 = CourseModel()
-                c1.name = "Curso numero 1"
-                c1.description = "Curso dummy 1"
+                c1.name = "Fisica II medio"
+                c1.description = "Curso para estudiar fisica de II medio"
                 c1.erase = True
                 c1.professor = p
                 c1.save()
                 c2 = CourseModel()
-                c2.name = "Curso numero 2"
-                c2.description = "Curso dummy 2"
+                c2.name = "Fisica III medio"
+                c2.description = "Curso para estudiar fisica de III medio"
                 c2.professor = p
                 c2.save()
+                c3 = CourseModel()
+                c3.name = "Fisica IV medio"
+                c3.description = "Curso para estudiar fisica de IV medio"
+                c3.professor = p
+                c3.save()
                 courses.append(c2)
-            reals = []
+                courses.append(c3)
+
+            aux2 = []
             for s in students:
-                sm = StudentModel()
-                sm.profile = s
-                sm.course = choice(courses)
-        if (options['extra']):
+                aux = []
+                if s in aux2:
+                    continue
+                for iteration in range(3):
+                    sm = StudentModel()
+                    sm.profile = s
+                    cou = choice(courses)
+                    while (cou in aux):
+                        cou = choice(courses)
+                    aux.append(cou)
+                    sm.course = cou
+                    sm.save()
+                aux2.append(s)
+
+            for alumno in students:
+                for i in range(NOTAS):
+                    nota = CalificationModel()
+                    nota.value = randint(0,100)
+                    nota.name = "Certamen " + str(i)
+                    nota.owner = alumno
+                    nota.save()
+
             e1 = ExperienceModel()
             e1.name = "Caida Libre"
             e1.description = "Fenomeno fisico, donde se puede apreciar un pelota caer en distintos escenarios y bajo distintas variables involucradas."
@@ -130,8 +156,8 @@ class Command(BaseCommand):
             e5.name = "Conservación de energía"
             e5.description = "Fenomeno fisico, donde se puede apreciar como en distintos ambientes la energía se transforma más nunca se crea ni destruye."
             e5.save()
-            usuarios = ClientModel.objects.filter(isProfessor=True)
-            for u in usuarios:
+
+            for u in professors:
                 courses = u.courses.all()
                 if (not courses):
                     continue
@@ -181,3 +207,42 @@ class Command(BaseCommand):
                     ex4.course = course
                     ex4.visible = False
                     ex4.save()
+
+            for j in [e1,e2,e3,e4,e5]:
+                for i in range(10):
+                    PG = QuestionModel()
+                    PG.experience = j
+                    PG.statement = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    PG.optionA = "Solucion tipo A"
+                    PG.optionA = "Solucion tipo B"
+                    PG.optionA = "Solucion tipo C"
+                    PG.optionA = "Solucion tipo D"
+                    PG.correct = choice(['A','B','C','D'])
+                    PG.save()
+
+            ExpCourses =  ExpCourseModel.objects.filter(visible=True)
+            for expc in ExpCourses:
+                test = TestModel()
+                test.total_questions = 5
+                test.visible = True
+                test.erase = False
+                test.save()
+                expc.test = test
+                expc.save()
+
+                alumnos = expc.course.students.all()
+                for alumno in alumnos:
+                    answer = AnswerModel()
+                    answer.student = alumno
+                    answer.test = test
+                    answer.score = randint(0,100)
+                    answer.save()
+
+                EXP = expc.available.experience
+                questions = QuestionModel.objects.filter(experience=EXP)
+                for i in range(5):
+                    conf = ConfigurationModel()
+                    conf.test = test
+                    conf.question = choice(questions)
+                    conf.position = i
+                    conf.save()

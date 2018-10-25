@@ -25,8 +25,9 @@ def login_method(request):
     if (request.method == 'POST'):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user:
-            login(request, user)
-            return render(request, 'web/home.html', context)
+            if (user.profile.isProfessor):
+                login(request, user)
+                return render(request, 'web/home.html', context)
         context['error'] = True
         return render(request, 'web/login.html', context)
 

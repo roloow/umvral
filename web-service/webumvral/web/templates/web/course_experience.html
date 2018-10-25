@@ -15,7 +15,7 @@ Experiencias disponibles
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <a href="{% url 'web:course_read' course_id %}"><span>{{course_id}}</span></a>
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course_name}}</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
@@ -38,13 +38,21 @@ Experiencias disponibles
   <form  action="{% url 'web:course_experience' course_id %}" method="post">
     {% csrf_token %}
 <div class="col-md-12">
+  <div class="col-md-12">
+    <div class="col-md-3"><button type="submit" class="btn btn-success"> <i class="fa fa-edit"></i> Guardar cambios</button></div>
+    <div class="col-md-5"></div>
+    <div class="col-md-2"><a href="{% url 'web:video' course_id %}" class="btn btn-default"><i class="fa fa-gamepad"></i> Agregar experiencia</a></div>
+    <div class="col-md-2"><a id="movement" class="btn btn-info"><i class="fa fa-lock"></i> Activar movimiento</a></div>
+  </div>
+
+  <br><br>
   <div class="portlet light portlet-fit bordered">
       <div class="portlet-body">
           <div class="table-scrollable table-scrollable-borderless">
-              <table class="table table-hover  sorted_table">
+              <table id="tablasorteable" class="table table-hover sorted_table">
                   <thead>
                       <tr class="uppercase">
-                          <th> Posición</th>
+                          <th> </th>
                           <th> Nombre </th>
                           <th> Descripción </th>
                           <th> Video </th>
@@ -57,7 +65,8 @@ Experiencias disponibles
                     {% for exp in experiences  %}
                       <tr>
                         <input type="hidden" name="pos-{{ forloop.counter0 }}" value="{{exp.pk}}">
-                        <td> {{exp.available.position}}</td>
+                        <td> <i class="fa fa-arrows-alt"></i>
+                        </td>
                         <td > {{exp.available.experience.name}} </td>
                         <td> {{exp.available.experience.description|truncatechars:50}} </td>
                           <td>{% if exp.available.video %}
@@ -67,16 +76,20 @@ Experiencias disponibles
                           {% endif %}</td>
                         <td>
                           {% if exp.visible %}
-                            <span class="label label-sm label-warning "> Visible </span>
+                          <span class="label label-sm label-success "> Visible </span>
                           {% else %}
-                          <span class="label label-sm label-default "> No visible </span>
+                          <span class="label label-sm label-danger "> No visible </span>
                           {% endif %}
                        </td>
                        <td>
                          {% if exp.test %}
-                           <span class="label label-sm label-success "> Creada </span>
+                         {% if exp.test.visible %}
+                           <span class="label label-sm label-success "> Activa </span>
                          {% else %}
-                         <span class="label label-sm label-default "> Sin crear </span>
+                           <span class="label label-sm label-default "> Creada </span>
+                         {% endif %}
+                         {% else %}
+                         <span class="label label-sm label-danger "> Sin crear </span>
                          {% endif %}
                       </td>
                       <td>
@@ -89,15 +102,38 @@ Experiencias disponibles
                           <ul class="dropdown-menu pull-right" role="menu">
                             <li>
                               <a href="">
-                              <i class="icon-note"></i> Crear prueba </a>
+                              <i class="icon-note"></i> Editar video </a>
+                            </li>
+                            <li class="divider" role="separator"></li>
+                            {% if exp.test %}
+                            {% if not exp.test.visible %}
+                            <li>
+                              <a href="{% url 'web:experience_test_edit' course_id exp.available.experience.pk %}">
+                              <i class="icon-note"></i> Editar prueba </a>
                             </li>
                             <li>
+                              <a href="{% url 'web:experience_test_delete' course_id exp.available.experience.pk %}">
+                              <i class="icon-ban"></i> Eliminar prueba </a>
+                            </li>
+                            <li class="divider" role="separator"></li>
+                            {% endif %}
+                            <li>
+                              <a href="{% url 'web:experience_test_visibility' course_id exp.available.experience.pk %}">
+                              <i class="fa fa-eye"></i> Cambiar visibilidad prueba </a>
+                            </li>
+                            {% else %}
+                            <li>
+                              <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
+                              <i class="icon-note"></i> Crear prueba </a>
+                            </li>
+                            {% endif %}
+                            <li>
                               <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">
-                              <i class="fa fa-eye"></i> Cambiar visibilidad </a>
+                              <i class="fa fa-eye"></i> Cambiar visibilidad para el curso</a>
                             </li>
                             <li class="divider" role="separator"></li>
                             <li>
-                              <a href="">
+                              <a href="{% url 'web:erase_video' course_id exp.available.pk %}">
                               <i class="icon-ban"></i> Eliminar experiencia del curso </a>
                             </li>
                           </ul>
@@ -106,10 +142,10 @@ Experiencias disponibles
                     {% endfor %}
                   </tbody>
               </table>
+              <br><br><br><br><br><br><br><br><br><br>
           </div>
       </div>
   </div>
-  <button type="submit" class="btn btn-success" >Guardar cambios</button>
 </div>
 
 </form>
@@ -121,11 +157,34 @@ Experiencias disponibles
 <script type="text/javascript" src="{% static "web/global/plugins/jquery-sortable/jquery-sortable.js" %}"></script>
 <script>
 $(document).ready(function(){
+  var activar = '<i class="fa fa-lock"></i> Activar movimiento';
+  var desactivar = '<i class="fa fa-unlock"></i> Desactivar movimiento';
+  var sorteable = "table table-hover sorted_table";
+  var unsorteable = "table table-hover";
+  var active_color = "btn btn-info";
+  var deactive_color = "btn btn-danger";
+
   $('.sorted_table').sortable({
   containerSelector: 'table',
   itemPath: '> tbody',
   itemSelector: 'tr',
-  placeholder: '<tr><td><td><br></td> </td><td> </td><td> </td></tr>',
+  placeholder: '<tr><td><td><br></td></td> <td></td> <td> </td></tr>',
+  });
+  $('.sorted_table').sortable('disable');
+  $('#movement').click(function(){
+    console.log("boton");
+    if ($('#movement')[0].innerHTML == activar){
+      console.log("activar");
+      $('.sorted_table').sortable('enable');
+      $('#movement')[0].innerHTML = desactivar;
+      $('#movement')[0].setAttribute('class', deactive_color);
+    }
+    else if ($('#movement')[0].innerHTML == desactivar){
+      console.log("desactivar");
+      $('.sorted_table').sortable('disable');
+      $('#movement')[0].innerHTML = activar;
+      $('#movement')[0].setAttribute('class', active_color);
+    }
   });
 })
 </script>
