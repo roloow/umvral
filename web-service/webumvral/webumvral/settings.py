@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'web',
     'tastypie',
     'corsheaders'
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
