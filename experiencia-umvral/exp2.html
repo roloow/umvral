@@ -175,6 +175,18 @@
             >
       </a-text>
 
+      <a-text id="indicadorcoordenadas"
+            value=""
+            height = "7"
+            width="7"
+            position="-0,5 5 -6"
+            rotation="0 0 0"
+            color="black"
+            visible="false"
+            text="anchor: align; align: center; baseline: top"
+            >
+      </a-text>
+
       <a-text id="textoPizarra45grados"
             value="Ecuaciones que describen el movimiento: \n x(t)= vt(set(45)) + x0 \n y(t)= -9.81(t^2)/2 + vt(cos(45)) + y0 \n sen(45)= 0.707 \n cos(45)= 0.707"
             height = "3"
@@ -236,7 +248,7 @@
 
     var video = document.querySelector("#tutorial");
     var playTV = document.querySelector("#playTV");
-
+    var indicadorcoordenadas = document.querySelector('#indicadorcoordenadas');
     var alfa1= document.querySelector("#alfa1");
     var alfa2= document.querySelector("#alfa2");
     var alfa3= document.querySelector("#alfa3");
@@ -282,6 +294,7 @@
       comenzo = true;
       target0.setAttribute('visible', 'true');
       start.setAttribute('visible', 'false');
+      indicadorcoordenadas.setAttribute('visible','true');
     });
 
     cannon1.addEventListener('click', function(){
@@ -609,6 +622,10 @@
 			}
       yTarget=Math.floor((p_y+1)*100)/100;
       xTarget=Math.floor(Math.sqrt(p_x*p_x + p_z*p_z)*100)/100;
+
+      indicadorcoordenadas.setAttribute('value','( '+xTarget+'[m] , '+yTarget+'[m] )');
+
+
 			return [p_x, p_y+1, p_z];
     }
 
