@@ -41,4 +41,6 @@ urlpatterns = [
     re_path(r'user/(?P<client_id>\d+)/inbox/message/direct$', views.msg_direct, name='msg_direct'),
     re_path(r'support/$', views.support, name='support'),
     re_path(r'support/exp$', views.send_experience, name='support_experience'),
+    re_path(r'course/read/(?P<course>\w+)/experiences/video/$', views.experience_video, name="video"),
+    re_path(r'course/read/(?P<course>\w+)/experiences/(?P<available>\w+)/delete/$', views.erase_video, name="erase_video"),
 ]
