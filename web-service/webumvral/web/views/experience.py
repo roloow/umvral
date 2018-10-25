@@ -218,3 +218,60 @@ def change_position(lista):
         expcou.position = i
         expcou.save()
     return lista
+
+def change_position_2(lista):
+    for i in range(len(lista)):
+        expcou= lista[i]
+        expcou.position = i
+        expcou.save()
+    return lista
+
+def experience_video(request, course):
+    context = get_base_context(request)
+    context['course_id'] = int(course)
+    context['course'] = CourseModel.objects.get(pk=int(course))
+    if (request.method == 'GET'):
+        context['experiences'] = filter_experiences(request.user.profile.pk)
+        return render(request, 'web/experience_video.html', context)
+    if (request.method == 'POST'):
+        if (request.POST['exp'] == 'None'):
+            context['experiences'] = filter_experiences(request.user.profile.pk)
+            context['error_1'] = True
+        if ((request.POST['video'] == '') or ('youtube' not in request.POST['video'])):
+            context['experiences'] = filter_experiences(request.user.profile.pk)
+            context['error_2'] = True
+        if (("error_1" in context) or ("error_2" in context)):
+            return render(request, 'web/experience_video.html', context)
+        ava = AvailabilityModel()
+        ava.professor = request.user.profile
+        ava.experience = ExperienceModel.objects.get(pk=int(request.POST['exp']))
+        ava.video = request.POST['video']
+        ava.position = len(AvailabilityModel.objects.filter(professor=request.user.profile))
+        ava.save()
+        expC= ExpCourseModel()
+        expC.available = ava
+        expC.course = context['course']
+        expC.save()
+        return redirect('web:course_experience', course=course)
+    return render(request, 'web/experience_video.html', context)
+
+def filter_experiences(professor_id):
+    availables = AvailabilityModel.objects.filter(professor__id = professor_id)
+    myExps = []
+    for av in availables:
+        myExps.append(av.experience)
+    experiences = ExperienceModel.objects.all()
+    filtered = []
+    for exp in experiences:
+        if (exp in myExps):
+            continue
+        filtered.append(exp)
+    return filtered
+
+def erase_video(request, course, available):
+    context = get_base_context(request)
+    av = AvailabilityModel.objects.get(pk=int(available))
+    av.delete()
+    avs = AvailabilityModel.objects.filter(professor=request.user.profile).order_by('position')
+    change_position_2(avs)
+    return redirect('web:course_experience', course=course)

@@ -39,9 +39,10 @@ Experiencias disponibles
     {% csrf_token %}
 <div class="col-md-12">
   <div class="col-md-12">
-    <div class="col-md-3"><button type="submit" class="btn btn-success" >Guardar cambios</button></div>
-    <div class="col-md-7"></div>
-    <div class="col-md-2"><a id="movement" class="btn btn-danger">Desactivar movimiento</a></div>
+    <div class="col-md-3"><button type="submit" class="btn btn-success"> <i class="fa fa-edit"></i> Guardar cambios</button></div>
+    <div class="col-md-5"></div>
+    <div class="col-md-2"><a href="{% url 'web:video' course_id %}" class="btn btn-default"><i class="fa fa-gamepad"></i> Agregar experiencia</a></div>
+    <div class="col-md-2"><a id="movement" class="btn btn-info"><i class="fa fa-lock"></i> Activar movimiento</a></div>
   </div>
 
   <br><br>
@@ -99,23 +100,27 @@ Experiencias disponibles
                             <i class="fa fa-angle-down"></i>
                           </button>
                           <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                              <a href="">
+                              <i class="icon-note"></i> Editar video </a>
+                            </li>
+                            <li class="divider" role="separator"></li>
                             {% if exp.test %}
                             {% if not exp.test.visible %}
                             <li>
                               <a href="{% url 'web:experience_test_edit' course_id exp.available.experience.pk %}">
                               <i class="icon-note"></i> Editar prueba </a>
                             </li>
+                            <li>
+                              <a href="{% url 'web:experience_test_delete' course_id exp.available.experience.pk %}">
+                              <i class="icon-ban"></i> Eliminar prueba </a>
+                            </li>
+                            <li class="divider" role="separator"></li>
                             {% endif %}
                             <li>
                               <a href="{% url 'web:experience_test_visibility' course_id exp.available.experience.pk %}">
                               <i class="fa fa-eye"></i> Cambiar visibilidad prueba </a>
                             </li>
-                            {% if not exp.test.visible %}
-                            <li>
-                              <a href="{% url 'web:experience_test_delete' course_id exp.available.experience.pk %}">
-                              <i class="icon-ban"></i> Eliminar prueba </a>
-                            </li>
-                            {% endif %}
                             {% else %}
                             <li>
                               <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
@@ -124,11 +129,11 @@ Experiencias disponibles
                             {% endif %}
                             <li>
                               <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">
-                              <i class="fa fa-eye"></i> Cambiar visibilidad curso</a>
+                              <i class="fa fa-eye"></i> Cambiar visibilidad para el curso</a>
                             </li>
                             <li class="divider" role="separator"></li>
                             <li>
-                              <a href="">
+                              <a href="{% url 'web:erase_video' course_id exp.available.pk %}">
                               <i class="icon-ban"></i> Eliminar experiencia del curso </a>
                             </li>
                           </ul>
@@ -137,7 +142,7 @@ Experiencias disponibles
                     {% endfor %}
                   </tbody>
               </table>
-              <br><br><br><br><br><br><br>
+              <br><br><br><br><br><br><br><br><br><br>
           </div>
       </div>
   </div>
@@ -152,8 +157,8 @@ Experiencias disponibles
 <script type="text/javascript" src="{% static "web/global/plugins/jquery-sortable/jquery-sortable.js" %}"></script>
 <script>
 $(document).ready(function(){
-  var activar = 'Activar movimiento';
-  var desactivar = 'Desactivar movimiento';
+  var activar = '<i class="fa fa-lock"></i> Activar movimiento';
+  var desactivar = '<i class="fa fa-unlock"></i> Desactivar movimiento';
   var sorteable = "table table-hover sorted_table";
   var unsorteable = "table table-hover";
   var active_color = "btn btn-info";
@@ -165,19 +170,19 @@ $(document).ready(function(){
   itemSelector: 'tr',
   placeholder: '<tr><td><td><br></td></td> <td></td> <td> </td></tr>',
   });
-
+  $('.sorted_table').sortable('disable');
   $('#movement').click(function(){
     console.log("boton");
-    if ($('#movement')[0].innerText == activar){
+    if ($('#movement')[0].innerHTML == activar){
       console.log("activar");
       $('.sorted_table').sortable('enable');
-      $('#movement')[0].innerText = desactivar;
+      $('#movement')[0].innerHTML = desactivar;
       $('#movement')[0].setAttribute('class', deactive_color);
     }
-    else if ($('#movement')[0].innerText == desactivar){
+    else if ($('#movement')[0].innerHTML == desactivar){
       console.log("desactivar");
       $('.sorted_table').sortable('disable');
-      $('#movement')[0].innerText = activar;
+      $('#movement')[0].innerHTML = activar;
       $('#movement')[0].setAttribute('class', active_color);
     }
   });

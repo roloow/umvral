@@ -1,0 +1,75 @@
+{% extends "web/base_page.html" %}
+{% load static %}
+{% block title %}
+Agregar experiencia
+{% endblock %}
+{% block breadcrumb %}
+<li>
+  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_read' course_id %}"><span>{{course.name}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_experience' course_id %}"><span>Experiencias</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <span>Habilitar experiencias</span>
+</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12 ">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+      <div class="portlet-body form">
+        <form class="form-horizontal" action="" role="form" method="POST">
+        {% csrf_token %}
+        <div class="form-body">
+          <div>
+            <h3>Agregue un video a la experiencia para agregarlo</h3>
+          </div>
+          <div class="form-group {% if error_1 %}has-error{% endif %}">
+            <label class="col-md-3 control-label">Experiencias<span class="required"> * </span></label>
+            <div class="col-md-9">
+              <select class="bs-select form-control" name="exp" data-live-search="true" data-size="8" tabindex="-98">
+                <option value="None" selected>No hay selección</option>
+                {% for experience in experiences %}
+                  <option value="{{experience.pk}}">{{experience.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group {% if error_2 %}has-error{% endif %}">
+            <label class="col-md-3 control-label">
+              URL del video<span class="required"> * </span>
+            </label>
+            <div class="col-md-9">
+              <input id="video" name="video" type="text"
+                     class="form-control input-large"
+                     placeholder="Ej. https://www.youtube.com/watch?v=y-TMHR0f8nY"
+                     value="">
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <button type="submit" class="btn green">
+                <i class="icon-note"></i>
+                Guardar Curso
+              </button>
+              <a href="{% url 'web:course_experience' course.pk %}" class="btn default">Cancelar</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- END SAMPLE FORM PORTLET-->
+</div>
+</div>
+{% endblock %}
