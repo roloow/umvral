@@ -32,7 +32,10 @@ var app = new Vue({
 			{'name': 'Aciertos', 'value': '78% 100 tiros'},
 			{'name': 'Tiempo', 'value': '01:05:18'},
 		],
-		notas: []
+		notas: [],
+		notas_avg : 0,
+		tests_avg : 0,
+		showavgtests : true
 	},
   methods: {
     fetchData: function (event) {
@@ -47,6 +50,16 @@ var app = new Vue({
 				res = JSON.parse(json);
 				self.$set(self, 'tests', res.tests);
 				self.$set(self, 'notas', res.notas);
+				sum = 0
+				res.notas.forEach(a => {
+					sum += a.value;
+				})
+				self.$set(self, 'notas_avg', sum/res.notas.length);
+				sum2 = 0
+				res.tests.forEach(a => {
+					sum2 += a.score;
+				})
+				self.$set(self, 'tests_avg', sum2/res.tests.length);
 				//self.$set(self, 'pending_tasks', tasks.data);
 				//self.$set(self, 'pending_length', tasks.recordsTotal);
 			});
@@ -62,6 +75,7 @@ var app = new Vue({
 			.then(json => {
 				res = JSON.parse(json);
 				this.$set(that, 'tests', res.tests);
+				this.$set(that, 'showavgtests', false);
 			});
 		},
 		changeMetrics: function (event) {

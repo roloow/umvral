@@ -169,6 +169,12 @@
 																				<td>${nota.name}</td>
 																				<td>${nota.value} </td>
                                     </tr>
+																		<tr>
+                                        <td class="fit">
+                                        </td>
+																				<td><b>PROMEDIO</b></td>
+																				<td><b>${notas_avg} </b></td>
+																		</tr>
                                 </table>
                             </div>
                         </div>
@@ -211,6 +217,12 @@
 																				<td>Prueba exp ${test.experience}</td>
 																				<td>${test.score} </td>
                                     </tr>
+																		<tr v-if="showavgtests">
+                                        <td class="fit">
+                                        </td>
+																				<td><b>PROMEDIO</b></td>
+																				<td><b>${tests_avg} </b></td>
+																		</tr>
                                 </table>
                             </div>
                         </div>
