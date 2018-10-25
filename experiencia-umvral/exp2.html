@@ -299,16 +299,19 @@
     });
 
     cannon1.addEventListener('click', function(){
+      orange.setAttribute('material','color: orange; shader: flat');
       cannonL1.setAttribute('visible', 'true');
       cannonL2.setAttribute('visible', 'false');
       cannonL3.setAttribute('visible', 'false');
     });
     cannon2.addEventListener('click', function(){
+      orange.setAttribute('material','color: black; shader: flat');
       cannonL1.setAttribute('visible', 'false');
       cannonL2.setAttribute('visible', 'true');
       cannonL3.setAttribute('visible', 'false');
     });
     cannon3.addEventListener('click', function(){
+      orange.setAttribute('material','color: blue; shader: flat');
       cannonL1.setAttribute('visible', 'false');
       cannonL2.setAttribute('visible', 'false');
       cannonL3.setAttribute('visible', 'true');
