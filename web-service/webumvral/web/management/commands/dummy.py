@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from web.models import *
 from django.contrib.auth.models import User
-from random import choice
+from random import choice, randint
 
 class Command(BaseCommand):
     help = 'Fill the database with dummy info'
