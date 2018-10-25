@@ -141,6 +141,7 @@
                     <!-- END PORTLET -->
                 </div>
             </div>
+						<div id="dinamicResults">
 						<!-- SECCION : NOTAS ACADEMICAS -->
             <div class="row">
                 <div class="col-md-8">
@@ -153,6 +154,7 @@
                             </div>
                         </div>
                         <div class="portlet-body">
+														<div class="text-center" id="chart_div2"></div>
                             <div class="table-scrollable table-scrollable-borderless">
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -161,44 +163,11 @@
                                             <th> Resultado </th>
                                         </tr>
                                     </thead>
-                                    <tr>
+                                    <tr v-for="nota in notas">
                                         <td class="fit">
                                         </td>
-                                        <td>
-																					<span>Prueba 1</span>
-                                        </td>
-                                        <td> 5.1 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fit">
-                                        </td>
-                                        <td>
-																					<span>Prueba 2</span>
-                                        </td>
-                                        <td> 5.8 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fit">
-                                        </td>
-                                        <td>
-																					<span>Prueba 3</span>
-                                        </td>
-                                        <td> 4.2 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fit">
-                                        </td>
-                                        <td>
-																					<span>Prueba 4</span>
-                                        </td>
-                                        <td> 5.0 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fit">
-                                        </td>
-                                        <td colspan="2">
-																					<span>PROMEDIO: </span> <span>5.0</span>
-                                        </td>
+																				<td>${nota.name}</td>
+																				<td>${nota.value} </td>
                                     </tr>
                                 </table>
                             </div>
@@ -208,7 +177,6 @@
                 </div>
             </div>
 						<!-- SECCION : NOTAS TEST UMVRAL -->
-						<div id="dinamicResults">
             <div class="row">
                 <div class="col-md-8">
                     <!-- BEGIN PORTLET -->
@@ -224,14 +192,11 @@
 																	<label class="btn btn-transparent grey-salsa btn-circle btn-sm active" v-on:click="changeTests" exp_id={{exp.available.experience.id}}>
 																			<input type="radio" name="options" class="toggle" id="option1">{{exp.available.experience.name}}</label>
 																	{% endfor %}
-																	<experiences-test></experiences-test>
                                 </div>
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <div class="row number-stats margin-bottom-30">
-															<!-- Colocar Graficos aqui -->
-                            </div>
+														<div style="margin: 0 auto; display: inline-block;" id="chart_div3"></div>
                             <div class="table-scrollable table-scrollable-borderless">
                                 <table class="table table-hover table-light">
                                     <thead>
@@ -243,8 +208,8 @@
                                     <tr v-for="test in tests">
                                         <td class="fit">
                                         </td>
-																				<td>${test.name}</td>
-																				<td>${test.nota} </td>
+																				<td>Prueba exp ${test.experience}</td>
+																				<td>${test.score} </td>
                                     </tr>
                                 </table>
                             </div>
@@ -315,6 +280,61 @@ apiurl = '{% url "web:student_getdata" course.pk client.pk %}';
 <script src="{% static 'web/pages/scripts/profile.min.js'%}" type="text/javascript"></script>
 <script src="{% static 'web/pages/scripts/timeline.min.js'%}" type="text/javascript"></script>
 <script src="{% static 'web/apps/scripts/vue.js'%}" type="text/javascript" /></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+	// Load the Visualization API and the corechart package.
+	google.charts.load('current', {'packages':['corechart']});
+
+	// Set a callback to run when the Google Visualization API is loaded.
+	google.charts.setOnLoadCallback(drawChart);
+
+	// Callback that creates and populates a data table,
+	// instantiates the pie chart, passes in the data and
+	// draws it.
+	function drawChart() {
+		fetch(apiurl, {
+			credentials: 'same-origin',
+			headers: { 'X-Requested-With': 'XMLHttpRequest' },
+		})
+		.then(response => response.json())
+		.then(json => {
+			res = JSON.parse(json);
+
+			values3 = []
+			res.tests.forEach(value => {
+				values3.push(['exp'+value.experience, value.score])
+			});
+			var data3 = new google.visualization.DataTable();
+			var options = {
+										 'width':400,
+										 'height':200,
+										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 100 , 'min': 0 } }
+			};
+			data3.addColumn('string', 'Prueba');
+			data3.addColumn('number', 'Notas');
+			data3.addRows(values3);
+			var chart3 = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+			chart3.draw(data3, options);
+
+			values2 = []
+			res.notas.forEach(value => {
+				values2.push([value.name, value.value])
+			});
+			var data2 = new google.visualization.DataTable();
+			var options = {
+										 'width':600,
+										 'height':300,
+										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 100 , 'min': 0 } }
+			};
+			data2.addColumn('string', 'Prueba');
+			data2.addColumn('number', 'Notas');
+			data2.addRows(values2);
+			var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+			chart2.draw(data2, options);
+		});
+	}
+</script>
 <script src="{% static 'web/apps/scripts/0_studentresultsprofile.js'%}" type="text/javascript" /></script>
 {% endblock %}
 {% block plugin_css %}

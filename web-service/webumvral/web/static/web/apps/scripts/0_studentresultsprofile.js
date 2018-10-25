@@ -13,6 +13,11 @@ function getCookie(name) {
   return cookieValue
 }
 
+// Set chart options
+var options = {'title':'Evaluaciones umVRal',
+							 'width':600,
+							 'height':300};
+
 var app = new Vue({
 	el: '#dinamicResults',
   delimiters: ['${', '}'],
@@ -26,7 +31,8 @@ var app = new Vue({
 		metrics: [
 			{'name': 'Aciertos', 'value': '78% 100 tiros'},
 			{'name': 'Tiempo', 'value': '01:05:18'},
-		]
+		],
+		notas: []
 	},
   methods: {
     fetchData: function (event) {
@@ -38,7 +44,9 @@ var app = new Vue({
       })
 			.then(response => response.json())
 			.then(json => {
-				console.log(JSON.parse(json));
+				res = JSON.parse(json);
+				self.$set(self, 'tests', res.tests);
+				self.$set(self, 'notas', res.notas);
 				//self.$set(self, 'pending_tasks', tasks.data);
 				//self.$set(self, 'pending_length', tasks.recordsTotal);
 			});
