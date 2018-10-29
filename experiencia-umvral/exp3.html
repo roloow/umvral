@@ -111,13 +111,7 @@
 			length1 = getLength(initHeight,cylinder1,temp);
 			length2 = getLength(initHeight,cylinder2,temp);
 			length3 = getLength(initHeight,cylinder3,temp);
-			//cylinder1.dom.setAttribute('height',length1);
-			//cylinder2.dom.setAttribute('height',length2);
-			//cylinder3.dom.setAttribute('height',length3);
-			//cylinder1.dom.object3D.position.y = (length1/2);
-			//cylinder2.dom.object3D.position.y = (length2/2);
-			//cylinder3.dom.object3D.position.y = (length3/2);
-			sphere.setAttribute('animation__color',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp));
+			sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp));
 			cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
 			cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
 			cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
