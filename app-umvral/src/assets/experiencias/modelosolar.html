@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>umVRal - Sistema Solar</title>
+  <meta name="description" content="">
+  <script src="assets/javascripts/aframe.min.js"></script>
+  <script src="https://rawgit.com/bryik/aframe-cubemap-component/master/dist/aframe-cubemap-component.min.js"></script>
+  <script type="text/javascript">
+    $ = (sel) => document.querySelector(sel)
+    $$ = (sel) => document.querySelectorAll(sel)
+    on = (elem, type, hand) => elem.addEventListener(type,hand)
+  </script>
+</head>
+
+<body>
+
+  <a-scene>
+    <a-assets>
+      <img id="sun-map" src="objetos/sun.jpg" />
+      <img id="mercury-map" src="objetos/mercurymap.jpg" />
+      <img id="venus-map" src="objetos/venusmap.jpg" />
+      <img id="earth-map" src="objetos/earthmap4k.jpg" />
+      <img id="mars-map" src="objetos/marsmap.jpg" />
+      <img id="jupiter-map" src="objetos/jupitermap.jpg" />
+      <img id="saturn-map" src="objetos/saturnmap.jpg" />
+      <img id="saturn-ring-map" src="objetos/saturnringcolor.jpg" />
+      <img id="uranus-map" src="objetos/uranusmap.jpg" />
+      <img id="uranus-ring-map" src="objetos/uranusringcolor.jpg"/>
+      <img id="neptune-map" src="objetos/neptunemap.jpg" />
+      <a-asset-item id="sun-obj" src="/objetos/sun.obj"></a-asset-item>
+      <a-asset-item id="sun-mtl" src="/objetos/sun.mtl"></a-asset-item>
+      <a-asset-item id="satelite-obj" src="/objetos/satelite.obj"></a-asset-item>
+      <a-asset-item id="satelite-mtl" src="/objetos/satelite.mtl"></a-asset-item>
+    </a-assets>
+
+    <a-entity id="nave1" obj-model="obj: #satelite-obj; mtl: #satelite-mtl" scale="0.003 0.003 0.003" position="-10 78.305 -30.590" rotation="45 0 0">
+    </a-entity>
+    <a-entity id="nave2" obj-model="obj: #satelite-obj; mtl: #satelite-mtl" scale="0.003 0.003 0.003" position="214.761 17.958 -79.225" rotation="45 -45 0">
+    </a-entity>
+    <a-entity id="nave3" obj-model="obj: #satelite-obj; mtl: #satelite-mtl" scale="0.003 0.003 0.003" position="-10 10 150" rotation="180 0 0">
+    </a-entity>
+
+    <a-entity id="sol" obj-model="obj: #sun-obj; mtl: #sun-mtl" scale="0.305 0.305 0.305" position="-10 0 -30.590" >
+      <a-animation attribute="rotation" from="0 0 0" to="0 0 0" dur="50000" repeat="indefinite" fill="none" easing="linear">
+    </a-animation>
+    </a-entity>
+    <a-sphere radius="30" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="50000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere id="mercurio" radius="3" position="40 0 0" material="src: #mercury-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="10000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="100000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere radius="2" position="50 0 0" material="src: #venus-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="10000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="150000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere id="tierra" radius="3" position="60 0 0" material="src: #earth-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="10000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="200000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere radius="2.5" position="70 0 0" material="src: #mars-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="10000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="300000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere radius="9" position="100 0 0" material="src: #jupiter-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="100000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map" rotation="20 0 0">
+      <a-animation attribute="rotation" to="0 360 0" dur="500000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere radius="6" position="120 0 0" material="src: #saturn-map">
+        <a-animation attribute="rotation" dur="10000" repeat="indefinite" fill="none" easing="linear" to="0 360 0"></a-animation>
+      </a-sphere>
+      <a-entity position="120 0 0" rotation="-90 0 0">
+        <a-ring radius-inner="8" radius-outer="10" src="#saturn-ring-map">
+        </a-ring>
+      </a-entity>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="550000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere radius="4" position="140 0 0" material="src: #uranus-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="100000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+      <a-entity position="140 0 0">
+        <a-ring radius-inner="5" radius-outer="7" src="#uranus-ring-map">
+        </a-ring>
+      </a-entity>
+    </a-sphere>
+    <a-sphere radius="9" position="-10 0 0" material="src: #sun-map">
+      <a-animation attribute="rotation" to="0 360 0" dur="400000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      <a-sphere radius="4" position="160 0 0" material="src: #neptune-map">
+        <a-animation attribute="rotation" to="0 360 0" dur="10000" repeat="indefinite" fill="none" easing="linear"></a-animation>
+      </a-sphere>
+    </a-sphere>
+    <a-entity cubemap="folder: objetos/" edgeLength="10000"></a-entity>
+    <a-entity id='cameraWrapper' position="-10 10 120">
+      <a-animation begin="movement" attribute="position" dur="10000" fill="none"></a-animation>
+      <a-camera id="camera" look-controls-enabled wasd-controls-enabled>
+        <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            material="color: white; shader: flat">
+            <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+            <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+          </a-entity>
+        </a-camera>
+    </a-entity>
+
+  </a-scene>
+</body>
+
+<script>
+$('#nave1').addEventListener('click', function(){
+  console.log("Apretado");
+  var x = this.object3D.position['x']
+  var y = this.object3D.position['y']
+  var z = this.object3D.position['z']
+  $("#cameraWrapper").object3D.position.set(x,y-22,z);
+});
+$('#nave2').addEventListener('click', function(){
+  console.log("Apretado");
+  var x = this.object3D.position['x']
+  var y = this.object3D.position['y']
+  var z = this.object3D.position['z']
+  $("#cameraWrapper").object3D.position.set(x,y-22,z);
+});
+$('#nave3').addEventListener('click', function(){
+  console.log("Apretado");
+  var x = this.object3D.position['x']
+  var y = this.object3D.position['y']
+  var z = this.object3D.position['z']
+  $("#cameraWrapper").object3D.position.set(x,y,120);
+});
+
+</script>
+</html>
