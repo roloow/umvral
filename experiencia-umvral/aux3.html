@@ -26,6 +26,20 @@
     <!-- Inicio Marco -->
     <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; iterations: 100;">
       <a-assets>
+        <a-asset-item id="panel-obj" src="/objetos/meson.obj"></a-asset-item>
+        <a-asset-item id="panel-mtl" src="/objetos/meson.mtl"></a-asset-item>
+        <a-asset-item id="panelquimico-obj" src="/objetos/panelquimico.obj"></a-asset-item>
+        <a-asset-item id="panelquimico-mtl" src="/objetos/panelquimico.mtl"></a-asset-item>
+        <a-asset-item id="pared-obj" src="/objetos/paredlineal.obj"></a-asset-item>
+        <a-asset-item id="pared-mtl" src="/objetos/paredlineal.mtl"></a-asset-item>
+        <a-asset-item id="horno-obj" src="/objetos/horno.obj"></a-asset-item>
+        <a-asset-item id="horno-mtl" src="/objetos/horno.mtl"></a-asset-item>
+        <a-asset-item id="paredcircular-obj" src="/objetos/paredcircular.obj"></a-asset-item>
+        <a-asset-item id="paredcircular-mtl" src="/objetos/paredcircular.mtl"></a-asset-item>
+      </a-assets>
+
+
+      <a-assets>
         <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
       </a-assets>
       <!-- Inicio de Controles -->
@@ -45,6 +59,17 @@
 
 
       <a-plane id="techo" scale="100 100 100 " position="0 5 0" rotation="90 0 0 " material="color: white; shader: flat"></a-plane>
+
+      <a-entity id="mesa1" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="3.5 0 0" rotation="270 0 0"></a-entity>
+      <a-entity id="mesa2" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-1.5 0 0" rotation="270 0 0"></a-entity>
+      <a-entity id="panelquimico" obj-model="obj: #panelquimico-obj; mtl: #panelquimico-mtl" scale="0.00025 0.00025 0.00025" position="1 0 0" rotation="270 0 0"></a-entity>
+      <a-entity id="pared1" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.01 0.01 0.01" position="-10.871635158436208 0 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared2" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.03 0.01 0.0037" position="-3 2.35 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared3" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.005 0.001 0.01" position="-1.5 0 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared3" obj-model="obj: #paredcircular-obj;mtl: #paredcircular-mtl" scale="0.02 0.02 0.02" position="10 0 3.5" rotation="270 0 0"></a-entity>
+
+      <a-entity id="horno1" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="-5 0 -3.5" rotation="270 32 0"></a-entity>
+      <a-entity id="horno2" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="2 0 -3.5" rotation="270 32 0"></a-entity>
 
       <!-- ESCENA -->
     </a-scene>
