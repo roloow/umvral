@@ -1,0 +1,10 @@
+# Exported from 3D Builder
+
+newmtl DefaultDiffuse_0
+Kd 0.501961 0.501961 0.501961
+
+newmtl White_1_1_0
+Kd 1.000000 1.000000 1.000000
+
+newmtl Turquoise_1_2_0
+Kd 0.000000 0.627451 0.909804
