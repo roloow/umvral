@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.db.models import Avg
 from web.models import *
 import json
 import collections
@@ -109,8 +110,9 @@ def course_read(request, course):
     context['tot_stu'] = courseobj.students.count()
     context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
     context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
-    #context['tot_eval'] = courseobj.students.count()
-    #context['tot_avg'] = courseobj.students.count()
+    students = StudentModel.objects.filter(course=courseobj)
+    notas = AnswerModel.objects.filter(student__in=students).aggregate(Avg('score'))
+    context['tot_avg'] = round(notas['score__avg'], 1)
     return render(request, 'web/course_read.html', context)
 
 @login_required
@@ -163,7 +165,6 @@ class CourseListJson(BaseDatatableView):
 def getStudentResultData(request, student_id, course, exp_id=None):
     notas = CalificationModel.objects.filter(owner_id=student_id).values('name','value')
     data = {"tests" : [] , "metrics" : [], "notas": []}
-    print(notas)
     if exp_id != None:
         exp_id = int(exp_id)
         test_experiences = getTestsResults(student_id, course)
@@ -211,76 +212,5 @@ def getStudentResultData(request, student_id, course, exp_id=None):
                 "metrics" : [],
                 "notas" : list(notas)
         }
-    print(data)
     return JsonResponse(json.dumps(data), safe=False)
 
-
-'''
-print('expcourse')
-print(expcourse)
-print('test_experiences')
-print(test_experiences)
-camino más rapido (con test_id)
-ExpCourse = ExpCourseModel.objects.filter(test__pk = test_id)[0]
-ExpCourse.available.experience
-print('student')
-print(student)
-print('student_answers')
-print(student_answers)
-'''
-'''
-
-    if exp_id != None:
-        if exp_id == 1:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 1", "nota": '5.0'},
-                            {"name": "Prueba 2", "nota": '4.0'},
-                            {"name": "Prueba 3", "nota": '6.0'},
-                            {"name": "Prueba 4", "nota": '7.0'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '90% 100 tiros'},
-                            {'name': 'Tiempo', 'value': '01:05:18'},
-                        ]
-            }
-        elif exp_id == 2:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 1a", "nota": '4.0'},
-                            {"name": "Prueba 2a", "nota": '4.9'},
-                            {"name": "Prueba 2.5", "nota": '5.0'},
-                            {"name": "Prueba 3", "nota": '7.0'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '78% 160 tiros'},
-                            {'name': 'Tiempo', 'value': '01:38:10'},
-                        ]
-            }
-        elif exp_id == 3:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 1b", "nota": '6.0'},
-                            {"name": "Prueba 2b", "nota": '4.6'},
-                            {"name": "Prueba 3b", "nota": '5.0'},
-                            {"name": "Prueba 4b", "nota": '5.9'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '80% 24 tiros'},
-                            {'name': 'Tiempo', 'value': '00:38:16'},
-                        ]
-            }
-        elif exp_id == 4:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 5", "nota": '5.2'},
-                            {"name": "Prueba 6", "nota": '6.4'},
-                            {"name": "Prueba 7", "nota": '6.2'},
-                            {"name": "Prueba 8", "nota": '6.9'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '90% 5 tiros'},
-                            {'name': 'Tiempo', 'value': '00:23:06'},
-                        ]
-            }
-'''
