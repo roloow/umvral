@@ -28,6 +28,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterUserPage } from '../pages/register-user/register-user';
 import { MensajesPage } from '../pages/mensajes/mensajes';
 import { HomePage } from '../pages/home/home';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { HomePage } from '../pages/home/home';
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(ConferenceApp)
+    IonicModule.forRoot(ConferenceApp),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

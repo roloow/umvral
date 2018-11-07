@@ -13,6 +13,10 @@ export class NotasPage {
   promedio: number;
   suma: number;
   contar: number;
+  vnota: number[];
+  knota: string[];
+  public lineChartData:Array<any>;
+  public lineChartLabels:Array<any>;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams, 
@@ -24,6 +28,11 @@ export class NotasPage {
       this.notas = result;
       console.log(this.notas);
       this.calcpromedio();
+      this.separarNotas();
+      this.lineChartData = [
+        {data: this.vnota, label: 'Notas'} //valor nota
+      ];
+      this.lineChartLabels = this.knota;
       }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log(errorData);
@@ -44,6 +53,18 @@ export class NotasPage {
     }
     this.promedio = this.suma/this.contar;
     console.log(this.promedio);
+  }
+  separarNotas(){
+    this.contar = 0;
+    this.vnota = [];
+    this.knota = [];
+    for (let nota of this.notas){
+      console.log(nota);
+      this.vnota.push(nota.valor);
+      console.log(this.vnota);
+      this.knota.push(nota.nombre);
+      this.contar +=1;
+    }
   }
 
   async addNota() {
@@ -96,4 +117,30 @@ export class NotasPage {
     });
   }
   
+  //grafico
+  public lineChartOptions:any = {
+    responsive:true,
+    maintainAspectRatio: false
+  };
+  public lineChartColors:Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  public lineChartLegend:boolean = true;
+  public lineChartType:string = 'line';
+
+  // events
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+  
+  public chartHovered(e:any):void {
+    console.log(e);
+  }
 }
