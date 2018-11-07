@@ -2,4 +2,7 @@ page-materia-1 {
     .scroll-content {
         overflow: hidden !important;
       }
+      .materia-content {
+        background: color($colors, dark);
+    }
 }
