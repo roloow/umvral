@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { CursosPage } from '../cursos/cursos';
+import { MensajesPage } from '../mensajes/mensajes';
+import { PerfilPage } from '../perfil/perfil';
 
 @Component({
   selector: 'page-home',
@@ -12,6 +15,15 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+  }
+  loadCursosPage() {
+    this.navCtrl.push(CursosPage);
+  }
+  loadMensajesPage() {
+    this.navCtrl.push(MensajesPage);
+  }
+  loadPerfilPage() {
+    this.navCtrl.push(PerfilPage);
   }
 
 }

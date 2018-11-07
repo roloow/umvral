@@ -18,18 +18,18 @@
   <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <button ion-button color="secondary" class="cursos-btn" block>
+          <button ion-button color="secondary" class="cursos-btn" (click)="loadCursosPage()" block>
             Mis Cursos
           </button>
         </ion-col>
         <ion-col>
           <ion-row>
-            <button ion-button color="primary" block>
+            <button ion-button color="primary" (click)="loadPerfilPage()" block>
               Mi Perfil
             </button>
           </ion-row>
           <ion-row>
-              <button ion-button color="favorite" block>
+              <button ion-button color="favorite" (click)="loadMensajesPage()" block>
                 Mis Mensajes
               </button>
             </ion-row>
