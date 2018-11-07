@@ -7,12 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="cursos-content">
   <h3>Selecciona un Curso:</h3>
 
-
   <div padding *ngIf="cursos?.length > 0">
-    
     <ion-list *ngFor="let curso of cursos; let i = index">
       <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>
         {{curso[0].course_name}}<br>{{curso[0].profesor_name}}
@@ -23,14 +21,6 @@
     <h3>
       Usted no tiene cursos.
     </h3>
-
   </div>
-
-
-
-
-  
-
-
 
 </ion-content>
