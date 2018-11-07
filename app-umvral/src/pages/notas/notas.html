@@ -20,8 +20,20 @@
   </div>
 
 <!-- Si hay una o más notas  -->
-
-  <div padding style='height: 80%' *ngIf="notas?.length > 0">
+  <div padding style="height: 60%" *ngIf="notas?.length > 0">
+    <!--grafico-->
+    <canvas baseChart 
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+  <div padding style='height: 30%' *ngIf="notas?.length > 0">
     Promedio: {{promedio}}
     <ion-list *ngFor="let nota of notas; let i = index">
       <ion-grid>
@@ -32,12 +44,6 @@
           <ion-col col-3>
             {{nota.valor}}
           </ion-col>
-          <!--<ion-col col-1>
-            <button ion-button color="primary" (click)="delNota(nota.id)" block>X</button>
-            <button ion-button round icon-only (click)="delNota(nota.id)" clear small>
-              <ion-icon name="close-circle"></ion-icon>
-            </button>
-          </ion-col>-->
         </ion-row>
       </ion-grid>
     </ion-list>  
