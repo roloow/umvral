@@ -36,8 +36,8 @@
 			</a-entity>
 
 			<a-entity id="volumes">
-				<a-sphere id="vol1" color="green" position="-1 0.75 -5" radius="1" color="#EF2D5E" shadow></a-sphere>
-				<a-box id="vol2" color="green" position="-4 0.75 -5" height="2" width="1" depth="1"></a-box>
+				<a-sphere id="vol1" color="green" position="-1 1 -5" radius="1" color="#EF2D5E" shadow></a-sphere>
+				<a-box id="vol2" color="green" position="-4 1 -5" height="2" width="1" depth="1"></a-box>
 			</a-entity>
 
 
@@ -94,29 +94,25 @@
 
 		volume1 = coef_vol.oro
 		volume1.dom = document.querySelector("#vol1");
+		volume1.position_org = volume1.dom.getAttribute('position')
 		volume1.original = volume1.dom.getAttribute('geometry')
 
 		volume2 = coef_vol.aluminio
 		volume2.dom = document.querySelector("#vol2");
+		volume2.position_org = volume2.dom.getAttribute('position')
 		volume2.original = volume2.dom.getAttribute('geometry')
-		//volume2.dom.getAttribute('geometry')
-		//console.log(volume2.dom.getAttribute('geometry'))
 
 		initDom()
 
     btn1.addEventListener('click', function(){
-			console.log("pressing")
-			//sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #4286f4");
 			changeLength(temp[0]);
 			changeVolume(temp[0]);
 		})
     btn2.addEventListener('click', function(){
-			//sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #88f936");
 			changeLength(temp[1]);
 			changeVolume(temp[1]);
 		})
     btn3.addEventListener('click', function(){
-			//sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #f23b2e");
 			changeLength(temp[2]);
 			changeVolume(temp[2]);
 		})
@@ -136,7 +132,6 @@
 			length1 = getLength(initHeight,cylinder1,temp);
 			length2 = getLength(initHeight,cylinder2,temp);
 			length3 = getLength(initHeight,cylinder3,temp);
-			//sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp));
 			cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
 			cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
 			cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
@@ -154,30 +149,20 @@
 			red = Math.round((t_act * 255)/t_max);
 			blue = 255 - red;
 			result = 'rgb('+red+',0,'+blue+')'
-			console.log(result);
 			return result;
 		}
 
 		function changeVolume(temp){
 			//vol1 : la esfera
 			//vol2 : el cubo
-			console.log("changing lengths")
 			sphere = volume1.original
 			cube = volume2.original
-			//volume2.dom.setAttribute('geometry', {'height': 1})
 			vol1_ = (4/3)*Math.PI*Math.pow(sphere.radius, 3)
 			vol2_ = cube.height*cube.width*cube.depth 
 			newvol1 = getVolume(vol1_,volume1,temp)
 			newvol2 = getVolume(vol2_,volume2,temp)
-			console.log("volumenes")
-			//console.log(vol1_)
-			console.log(vol2_)
-			//console.log(newvol1)
-			console.log(newvol2)
 			changeVolumeCube(newvol2,volume2)
 			changeVolumeSphere(newvol1,volume1)
-			//volume1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
-			//volume2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
 		}
 
 		function getVolume(V_o, obj, temp){
@@ -192,9 +177,11 @@
 			x_ = Math.pow(final_volume*((x*x)/(y*z)),1/3)
 			y_ = x_ * (y/x)
 			z_ = x_ * (z/x)
+			new_y = y_/2
 			obj.dom.setAttribute('animation__height',"property: geometry.height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+y_);
 			obj.dom.setAttribute('animation__width',"property: geometry.width; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+x_);
 			obj.dom.setAttribute('animation__depth',"property: geometry.depth; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+z_);
+			obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+new_y);
 			return true
 		}
 
@@ -202,9 +189,8 @@
 			sphere = obj.original
 			r = sphere.radius
 			r_ = Math.pow((final_volume*3)/(4*Math.PI),1/3)
-		
 			obj.dom.setAttribute('animation__sphere',"property: geometry.radius; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
-			//obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+(r_-r)/2);
+			obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
 			return true
 		}
 
