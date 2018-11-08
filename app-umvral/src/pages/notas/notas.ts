@@ -43,6 +43,10 @@ export class NotasPage {
     console.log('ionViewDidLoad NotasPage');
   }
 
+  roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
   calcpromedio(){
     this.suma = 0;
     this.contar = 0;
@@ -51,7 +55,8 @@ export class NotasPage {
       console.log(nota.valor);
       this.contar +=1;
     }
-    this.promedio = this.suma/this.contar;
+    this.promedio = (this.suma/this.contar);
+    this.promedio = this.roundToTwo(this.promedio);
     console.log(this.promedio);
   }
   separarNotas(){
@@ -80,6 +85,11 @@ export class NotasPage {
               this.notas = result;
               console.log(this.notas);
               this.calcpromedio();
+              this.separarNotas();
+              this.lineChartData = [
+                {data: this.vnota, label: 'Notas'} //valor nota
+              ];
+              this.lineChartLabels = this.knota;
               }, (err) => {
               console.log(err);
             });
@@ -111,6 +121,11 @@ export class NotasPage {
     this.umvralApiProvider.delNotas(notaid).then((result) => {
       this.notas = result;
       this.calcpromedio();
+      this.separarNotas();
+      this.lineChartData = [
+        {data: this.vnota, label: 'Notas'} //valor nota
+      ];
+      this.lineChartLabels = this.knota;
       console.log(this.notas);
       }, (err) => {
       console.log(err);

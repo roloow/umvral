@@ -43,8 +43,13 @@
           <ion-col>
             {{nota.nombre}}
           </ion-col>
-          <ion-col col-3>
+          <ion-col col-2>
             {{nota.valor}}
+          </ion-col>
+          <ion-col col-1 style="background: #222222">
+            <button ion-button clear class="del-button" (click)="delNota(nota.id)" block>
+              <ion-icon name="remove-circle"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
       </ion-grid>
