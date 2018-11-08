@@ -7,6 +7,8 @@ from web.models import StudentModel
 from web.models import CourseModel
 from web.models import CalificationModel
 from web.models import ExpCourseModel
+from web.models import AnswerModel
+from web.models import ConfigurationModel
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
@@ -35,6 +37,12 @@ class ExperienceResource(ModelResource):
             url(r"^(?P<resource_name>%s)/video%s$" %
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('video'), name="api_exp_video"),
+            url(r"^(?P<resource_name>%s)/test%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('test'), name="api_exp_test"),
+            url(r"^(?P<resource_name>%s)/testResp%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('testResp'), name="api_exp_testResp"),
 
         ]
 
@@ -62,22 +70,33 @@ class ExperienceResource(ModelResource):
         student_id=request.POST.get('student_id','')
         exp_course_id=request.POST.get('exp_course_id')
         test_id = 'Null'
+        answer_id= 'Null'
         try:
             expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
-            if expCourse.test.visible != False :
+            if (expCourse.test.visible != False) :
                 test_id = expCourse.test.pk
+                try:
+                    answer = AnswerModel.objects.get(test__pk=test_id, student__pk =student_id)
+                    answer_id = answer.pk
+                    answer_score = answer.score
+                except:
+                    answer_id = 'Null'
 
         except:
             return self.create_response(request, {
                 'student_id': student_id,
                 'exp_course_id': exp_course_id,
-                'test_id': 'Null'
+                'test_id': 'Null',
+                'answer_id': 'Null',
+                'answer_score': 'Null'
                 })
 
         return self.create_response(request, {
             'student_id': student_id,
             'exp_course_id': exp_course_id,
-            'test_id': test_id
+            'test_id': test_id,
+            'answer_id': answer_id,
+            'answer_score': answer_score
             })
 
     def video(self,request, **kwargs):
@@ -101,6 +120,61 @@ class ExperienceResource(ModelResource):
             'student_id': student_id,
             'exp_course_id': exp_course_id,
             'video_url': expCourse.available.video
+            })
+            
+    def test(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        test_id=request.POST.get('test_id','')
+        preguntas=[]
+        try:
+            questiones = ConfigurationModel.objects.filter(test__pk=test_id)
+            for p in questiones:
+                pregunta={"titulo":p.question.statement,"A":p.question.optionA,"B":p.question.optionB,"C":p.question.optionC,"D":p.question.optionD, "R":p.question.correct,"position":p.position}
+
+        except:
+            preguntas= 'Null'
+        return self.create_response(request, {
+            'student_id': student_id,
+            'test_id': test_id,
+            'preguntas':preguntas
+            })
+
+    def testResp(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        test_id=request.POST.get('test_id','')
+        score = request.POST.get('score','')
+        if (score == ''):
+            return self.create_response(request, {
+                'error': 'esta mal'
+                })
+        answer_id ='Null'
+        an = AnswerModel()
+        try:
+            st = StudentModel.objects.get(pk=student_id)
+
+        except:
+            return self.create_response(request, {
+                'student_id': 'no existe'
+                })
+        try:
+            test = TestModel.objects.get(pk=test_id)
+
+        except:
+            return self.create_response(request, {
+                'test_id': 'no existe'
+                })
+
+        an.student=st
+        an.test=test
+        an.score=score
+        an.save()
+        return self.create_response(request, {
+            'student_id': student_id,
+            'test_id': test_id,
+            'answer_id':answer_id,
+            'score':score
             })
 
 #Mensajes
