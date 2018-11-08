@@ -9,6 +9,7 @@ from web.models import CalificationModel
 from web.models import ExpCourseModel
 from web.models import AnswerModel
 from web.models import ConfigurationModel
+from web.models import TestModel
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
