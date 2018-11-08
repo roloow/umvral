@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>umVRal - Lanzamiento de Proyectil</title>
+    <meta name="description" content="Experiencia VR de lanzamiento de proyectil.">
+    <script src="assets/javascripts/aframe.min.js"></script>
+    <script src="assets/javascripts/aframe-mouse-cursor-component.min.js"></script>
+		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
+    <script src="assets/javascripts/aframe-material.min.js"></script>
+    <script src="assets/javascripts/aframe-extras.min.js"></script>
+    <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
+    <script src="assets/javascripts/moment-with-locales.js"></script>
+    <script src="assets/javascripts/aframe-environment-component.min.js"></script>
+
+    <script type="text/javascript">
+      $ = (sel) => document.querySelector(sel)
+      $$ = (sel) => document.querySelectorAll(sel)
+      on = (elem, type, hand) => elem.addEventListener(type,hand)
+    </script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
+  </head>
+  <body>
+    <!-- Inicio Marco -->
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; iterations: 100;">
+      <a-assets>
+        <a-asset-item id="panel-obj" src="/objetos/meson.obj"></a-asset-item>
+        <a-asset-item id="panel-mtl" src="/objetos/meson.mtl"></a-asset-item>
+        <a-asset-item id="panelquimico-obj" src="/objetos/panelquimico.obj"></a-asset-item>
+        <a-asset-item id="panelquimico-mtl" src="/objetos/panelquimico.mtl"></a-asset-item>
+        <a-asset-item id="pared-obj" src="/objetos/paredlineal.obj"></a-asset-item>
+        <a-asset-item id="pared-mtl" src="/objetos/paredlineal.mtl"></a-asset-item>
+        <a-asset-item id="horno-obj" src="/objetos/horno.obj"></a-asset-item>
+        <a-asset-item id="horno-mtl" src="/objetos/horno.mtl"></a-asset-item>
+        <a-asset-item id="paredcircular-obj" src="/objetos/paredcircular.obj"></a-asset-item>
+        <a-asset-item id="paredcircular-mtl" src="/objetos/paredcircular.mtl"></a-asset-item>
+        <a-asset-item id="sistemaquimico-obj" src="/objetos/sistemaquimico.obj"></a-asset-item>
+        <a-asset-item id="sistemaquimico-mtl" src="/objetos/sistemaquimico.mtl"></a-asset-item>
+      </a-assets>
+
+
+      <a-assets>
+        <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+      </a-assets>
+      <!-- Inicio de Controles -->
+      <a-entity id="camWrapper" position="0 1.6 4">
+        <a-entity id="cam" camera look-controls wasd-controls>
+          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="color: black; shader: flat">
+              <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+              <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity id="env" environment="active: true; preset: dream; skyType: atmosphere; ground: hills; playArea: 5; dressingAmount: 0; fog: 0.5;skyColor:#000000;lightPosition:0 1 0;groundYScale:1;groundTexture:checkerboard;groundColor:#4d4d4d;groundColor2:#ffffff;"></a-entity>
+
+
+      <a-plane id="techo" scale="100 100 100 " position="0 5 0" rotation="90 0 0 " material="color: white; shader: flat"></a-plane>
+      <a-plane id="suelohorno" scale="4 4 4" position="-5 0.01 -5.5" rotation="270 0 0 " material="color: red; shader: flat"></a-plane>
+      <a-plane id="fondohorno" scale="4 3 4" position="-5 1.5 -7.5" rotation="0 0 0" material="color: red; shader: flat"></a-plane>
+      <a-plane id="lateral1horno" scale="4 3 4" position="-7 1.5 -5.5" rotation="0 90 0" material="color: red; shader: flat"></a-plane>
+      <a-plane id="lateral2horno" scale="4 3 4" position="-3 1.5 -5.5" rotation="0 270 0" material="color: red; shader: flat"></a-plane>
+      <a-plane id="techohorno" scale="4 4 4" position="-5 3 -5.5" rotation="90 0 0 " material="color: red; shader: flat"></a-plane>
+
+
+      <a-plane id="suelorefri" scale="4 4 4" position="2 0.01 -5.5" rotation="270 0 0 " material="color: blue; shader: flat"></a-plane>
+      <a-plane id="fondorefri" scale="4 3 4" position="2 1.5 -7.5" rotation="0 0 0" material="color: blue; shader: flat"></a-plane>
+      <a-plane id="lateral1refri" scale="4 3 4" position="0 1.5 -5.5" rotation="0 90 0" material="color: blue; shader: flat"></a-plane>
+      <a-plane id="lateral2refri" scale="4 3 4" position="4 1.5 -5.5" rotation="0 270 0" material="color: blue; shader: flat"></a-plane>
+      <a-plane id="techorefri" scale="4 4 4" position="2 3 -5.5" rotation="90 0 0 " material="color: blue; shader: flat"></a-plane>
+
+
+      <a-entity id="mesa1" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="3.5 0 0" rotation="270 0 0"></a-entity>
+      <a-entity id="mesa2" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-1.5 0 0" rotation="270 0 0"></a-entity>
+      <a-entity id="panelquimico" obj-model="obj: #panelquimico-obj; mtl: #panelquimico-mtl" scale="0.00025 0.00025 0.00025" position="1 0 0" rotation="270 0 0"></a-entity>
+      <a-entity id="pared1" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.01 0.01 0.01" position="-10.871635158436208 0 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared2" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.026 0.01 0.0037" position="-5 2.35 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared3" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.005 0.001 0.01" position="-1.5 0 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared4" obj-model="obj: #pared-obj;mtl: #pared-mtl" scale="0.003 0.001 0.01" position="5 0 -3.5" rotation="270 0 0"></a-entity>
+      <a-entity id="pared5" obj-model="obj:/objetos/paredlineal.obj;mtl:/objetos/paredlineal.mtl" scale="0.009 0.01 0.01" position="10.2 0 3.1648537465179034" rotation="270 -90 0"></a-entity>
+
+      <a-entity id="paredcircular1" obj-model="obj:/objetos/paredcircular.obj;mtl:/objetos/paredcircular.mtl" scale="0.04 0.1 0.04" position="9.3 0 -4" rotation="270 -32 0"></a-entity>
+      <a-entity id="horno1" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="-5 0 -3.5" rotation="270 32 0"></a-entity>
+      <a-entity id="horno2" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="2 0 -3.5" rotation="270 32 0"></a-entity>
+      <a-entity id="horno3" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.015 0.015 0.015" position="8 0 -2" rotation="270 0 0"></a-entity>
+      <a-entity id="sistemaquimico1" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="9.747582104015574 0 2.014189237890888" rotation="270 -90 0"></a-entity>
+      <a-entity id="sistemaquimico2" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="-8.97931839842611 -0.03256746715209635 -3.281528527918544" rotation="270 0 0"></a-entity>
+      <!-- ESCENA -->
+    </a-scene>
+  </body>
+</html>

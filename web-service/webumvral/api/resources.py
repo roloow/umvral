@@ -121,7 +121,7 @@ class ExperienceResource(ModelResource):
             'exp_course_id': exp_course_id,
             'video_url': expCourse.available.video
             })
-            
+
     def test(self,request, **kwargs):
         self.method_check(request, allowed=['post'])
         student_id=request.POST.get('student_id','')
@@ -131,7 +131,7 @@ class ExperienceResource(ModelResource):
             questiones = ConfigurationModel.objects.filter(test__pk=test_id)
             for p in questiones:
                 pregunta={"titulo":p.question.statement,"A":p.question.optionA,"B":p.question.optionB,"C":p.question.optionC,"D":p.question.optionD, "R":p.question.correct,"position":p.position}
-
+                preguntas.append(pregunta)
         except:
             preguntas= 'Null'
         return self.create_response(request, {
