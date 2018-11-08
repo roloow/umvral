@@ -120,16 +120,40 @@ export class NotasPage {
   //grafico
   public lineChartOptions:any = {
     responsive:true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        ticks: {
+          fontColor: '#e3dada',  // x axe labels (can be hexadecimal too)
+        },
+        gridLines: {
+          color: '#645B5B'  // grid line color (can be removed or changed)
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          fontColor: '#e3dada'  // y axes numbers color (can be hexadecimal too)
+        },
+        gridLines: {
+          color: '#645B5B'  // grid line color (can be removed or changed)
+        },
+      }]
+    },
+    legend: {
+      display: true,
+      labels: {
+        fontColor: '#e3dada', // legend color (can be hexadecimal too)
+      },
+    }
   };
   public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+    { //Verde DeepGrow
+      backgroundColor: 'rgba(60,123,57,0.2)',
+      borderColor: 'rgba(60,123,57,1)',
+      pointBackgroundColor: 'rgba(60,123,57,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(60,123,57,0.8)'
     }
   ];
   public lineChartLegend:boolean = true;

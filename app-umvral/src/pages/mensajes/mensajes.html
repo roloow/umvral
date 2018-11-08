@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="favorite">
     <ion-title>Mis Mensajes</ion-title>
   </ion-navbar>
 </ion-header>
@@ -24,7 +24,7 @@
     </ion-list>
   </div>
   <div padding style='height: 80%' *ngIf= "!mensajes">
-    <h3>
+    <h3 ion-text color="light" style="text-align: center;">
       Usted no tiene mensajes.
     </h3>
   </div>

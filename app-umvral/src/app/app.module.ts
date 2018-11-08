@@ -19,7 +19,6 @@ import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { HelpMateria1Page } from '../pages/experiencia-1/materia/materia';
 import { HelpMateria2Page } from '../pages/experiencia-2/materia/materia';
 import { HelpMateria3Page } from '../pages/experiencia-3/materia/materia';
-import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { NotasPage } from '../pages/notas/notas';
 import { CursosPage } from '../pages/cursos/cursos';
@@ -40,7 +39,6 @@ import { ChartsModule } from 'ng2-charts';
     HelpMateria1Page,
     HelpMateria2Page,
     HelpMateria3Page,
-    ExpPage,
     PerfilPage,
     NotasPage,
     CursosPage,
@@ -66,7 +64,6 @@ import { ChartsModule } from 'ng2-charts';
     HelpMateria1Page,
     HelpMateria2Page,
     HelpMateria3Page,
-    ExpPage,
     PerfilPage,
     NotasPage,
     CursosPage,

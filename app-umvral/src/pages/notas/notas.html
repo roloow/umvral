@@ -7,12 +7,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding class="notas-content">
 
 <!-- Si no existen notas  -->
 
-  <div padding style='height: 25%' *ngIf="notas?.length == 0">
-    <h3>No tienes notas ingresadas.</h3>
+  <div padding style='height: 25%; text-align: center' *ngIf="notas?.length == 0">
+    <h3><b>No tienes notas ingresadas.</b></h3>
   </div>
   
   <div style='height: 60%' *ngIf="notas?.length == 0">
@@ -20,7 +20,10 @@
   </div>
 
 <!-- Si hay una o más notas  -->
-  <div padding style="height: 60%" *ngIf="notas?.length > 0">
+  <div padding style="text-align: center" *ngIf="notas?.length > 0">
+    <h3><b>Promedio: {{promedio}}</b></h3>
+  </div>
+  <div padding class="grafico" *ngIf="notas?.length > 0">
     <!--grafico-->
     <canvas baseChart 
       [datasets]="lineChartData"
@@ -33,8 +36,7 @@
       (chartClick)="chartClicked($event)">
     </canvas>
   </div>
-  <div padding style='height: 30%' *ngIf="notas?.length > 0">
-    Promedio: {{promedio}}
+  <ion-scroll scrollY="true" padding style='height: 40%' *ngIf="notas?.length > 0">
     <ion-list *ngFor="let nota of notas; let i = index">
       <ion-grid>
         <ion-row>
@@ -47,13 +49,11 @@
         </ion-row>
       </ion-grid>
     </ion-list>  
-  </div>
+  </ion-scroll>
+</ion-content>
 
 <!-- El botón siempre se ve  -->
 
-  <div class='final'>
+<ion-footer>
     <button ion-button color="primary" (click)="addNota()" block>Añadir Nota</button>
-  </div>
-
-
-</ion-content>
+</ion-footer>
