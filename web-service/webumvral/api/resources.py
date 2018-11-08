@@ -171,6 +171,7 @@ class ExperienceResource(ModelResource):
         an.test=test
         an.score=score
         an.save()
+        answer_id=an.pk
         return self.create_response(request, {
             'student_id': student_id,
             'test_id': test_id,
