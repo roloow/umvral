@@ -72,6 +72,7 @@ class ExperienceResource(ModelResource):
         exp_course_id=request.POST.get('exp_course_id')
         test_id = 'Null'
         answer_id= 'Null'
+        answer_score='Null'
         try:
             expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
             if (expCourse.test.visible != False) :
