@@ -138,9 +138,15 @@
                                       </a>
                                   </li>
                                   <li class="nav-item">
-																		<a href="{% url 'web:course_list' %}" class="nav-link">
+										<a href="{% url 'web:course_list' %}" class="nav-link">
                                           <i class="icon-users"></i>
                                           <span class="title">Mis Cursos</span>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+										<a href="{% url 'web:myexps' request.user.profile.pk %}" class="nav-link">
+                                          <i class="icon-users"></i>
+                                          <span class="title">Mis Experiencias</span>
                                       </a>
                                   </li>
                                   {% else %}

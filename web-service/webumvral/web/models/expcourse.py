@@ -8,6 +8,7 @@ class ExpCourseModel(models.Model):
     test = models.ForeignKey('TestModel', on_delete=models.SET_NULL, null=True, blank=True)
     date_visible = models.DateTimeField(null=True, blank=True)
     visible = models.BooleanField(default=False)
+    position = models.IntegerField(blank=True, null=True)
 
 
 #exp1 = ExpCourseModel.objects.filter(course_pk=course__id, available__experience__pk=experiencia_id)
