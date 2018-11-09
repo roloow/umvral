@@ -11,3 +11,4 @@ from .message import *
 from .question import *
 from .students import *
 from .test import *
+from .metric import *

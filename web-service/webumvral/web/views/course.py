@@ -11,14 +11,6 @@ import json
 import collections
 
 
-#Funciones Auxiliares para entregar informacion
-def getObjTests(obj, index):
-    if (index in obj):
-        return obj[index]['tests']
-    else:
-        return None
-
-
 def getTestsResults(student_id, course, array=False):
     course = CourseModel.objects.get(pk=course)
     student = StudentModel.objects.get(profile_id=student_id, course=course)
@@ -160,12 +152,38 @@ class CourseListJson(BaseDatatableView):
         return qs
 
 
+#Funciones Auxiliares para entregar informacion
+def getObjTests(obj, index):
+    if (index in obj):
+        return obj[index]['tests']
+    else:
+        return None
+
+def getObjMetrics(obj, index):
+    print(obj)
+    data = []
+    shoot = 0
+    target = 0
+    for metric in obj:
+        aux = {}
+        aux['name'] = metric['slug']
+        aux['value'] = metric['value_num']
+        if aux['name'] == 'disparo':
+            shoot = metric['value_num']
+        elif aux['name'] == 'acierto':
+            target = metric['value_num']
+        data.append(aux)
+    if index == 2:
+        data.append({'name': '% aciertos', 'value': str(round((target*100/shoot),1))+'%'})
+    return data
+
+
 def getStudentResultData(request, student_id, course, exp_id=None):
     notas = CalificationModel.objects.filter(owner_id=student_id).values('name','value')
     data = {"tests" : [] , "metrics" : [], "notas": []}
-    print(notas)
     if exp_id != None:
         exp_id = int(exp_id)
+        metrics = MetricModel.objects.filter(student_id=student_id, experience_id=exp_id).values('slug','value_num')
         test_experiences = getTestsResults(student_id, course)
         if exp_id == 1:
             data = {
@@ -179,10 +197,7 @@ def getStudentResultData(request, student_id, course, exp_id=None):
         elif exp_id == 2:
             data = {
                     "tests" : getObjTests(test_experiences, 2),
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '78% 160 tiros'},
-                            {'name': 'Tiempo', 'value': '01:38:10'},
-                        ],
+                    "metrics" : getObjMetrics(metrics, 2),
                     "notas" : list(notas)
             }
         elif exp_id == 3:
@@ -211,76 +226,4 @@ def getStudentResultData(request, student_id, course, exp_id=None):
                 "metrics" : [],
                 "notas" : list(notas)
         }
-    print(data)
     return JsonResponse(json.dumps(data), safe=False)
-
-
-'''
-print('expcourse')
-print(expcourse)
-print('test_experiences')
-print(test_experiences)
-camino más rapido (con test_id)
-ExpCourse = ExpCourseModel.objects.filter(test__pk = test_id)[0]
-ExpCourse.available.experience
-print('student')
-print(student)
-print('student_answers')
-print(student_answers)
-'''
-'''
-
-    if exp_id != None:
-        if exp_id == 1:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 1", "nota": '5.0'},
-                            {"name": "Prueba 2", "nota": '4.0'},
-                            {"name": "Prueba 3", "nota": '6.0'},
-                            {"name": "Prueba 4", "nota": '7.0'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '90% 100 tiros'},
-                            {'name': 'Tiempo', 'value': '01:05:18'},
-                        ]
-            }
-        elif exp_id == 2:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 1a", "nota": '4.0'},
-                            {"name": "Prueba 2a", "nota": '4.9'},
-                            {"name": "Prueba 2.5", "nota": '5.0'},
-                            {"name": "Prueba 3", "nota": '7.0'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '78% 160 tiros'},
-                            {'name': 'Tiempo', 'value': '01:38:10'},
-                        ]
-            }
-        elif exp_id == 3:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 1b", "nota": '6.0'},
-                            {"name": "Prueba 2b", "nota": '4.6'},
-                            {"name": "Prueba 3b", "nota": '5.0'},
-                            {"name": "Prueba 4b", "nota": '5.9'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '80% 24 tiros'},
-                            {'name': 'Tiempo', 'value': '00:38:16'},
-                        ]
-            }
-        elif exp_id == 4:
-            data = {
-                    "tests" : [
-                            {"name": "Prueba 5", "nota": '5.2'},
-                            {"name": "Prueba 6", "nota": '6.4'},
-                            {"name": "Prueba 7", "nota": '6.2'},
-                            {"name": "Prueba 8", "nota": '6.9'},
-                        ],
-                    "metrics" : [
-                            {'name': 'Aciertos', 'value': '90% 5 tiros'},
-                            {'name': 'Tiempo', 'value': '00:23:06'},
-                        ]
-            }
-'''
