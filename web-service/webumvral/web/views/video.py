@@ -64,4 +64,5 @@ def addexperiences(request, client_id):
         ava.video = get_url(request.POST['video'])
         ava.position = len(AvailabilityModel.objects.filter(professor=request.user.profile))
         ava.save()
+        return redirect('web:myexps', client_id=client_id)
     return render(request, 'web/videos.html', context)
