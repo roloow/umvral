@@ -9,7 +9,6 @@
 		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
     <script src="assets/javascripts/aframe-material.min.js"></script>
     <script src="assets/javascripts/aframe-extras.min.js"></script>
-    <script src="https://rawgit.com/bryik/aframe-cubemap-component/master/dist/aframe-cubemap-component.min.js"></script>
     <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
@@ -45,19 +44,7 @@
       <a-assets>
         <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
       </a-assets>
-      <!-- Inicio de Controles -->
-      <a-entity id='cameraWrapper' position="0 0 3">
-        <a-animation begin="movement" attribute="position" dur="10000" fill="none"></a-animation>
-        <a-camera id="camera" look-controls-enabled wasd-controls-enabled>
-          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
-              position="0 0 -1"
-              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-              material="color: white; shader: flat">
-              <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-              <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-            </a-entity>
-          </a-camera>
-      </a-entity>
+
 
       <a-entity id="env" environment="active: true; preset: dream; skyType: atmosphere; ground: hills; playArea: 5; dressingAmount: 0; fog: 0.5;skyColor:#000000;lightPosition:0 1 0;groundYScale:1;groundTexture:checkerboard;groundColor:#4d4d4d;groundColor2:#ffffff;"></a-entity>
 
@@ -92,11 +79,10 @@
       <a-button id="boton2000horno" scale="1 1 1" position ="-8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="2000 C"></a-button>
 
       <a-button id="botonfrigorifico" scale="2 2 2" position="1 3 -3.499" value="Frigorifico" button="buttonColor:#fd0e0b"></a-button>
-      <a-button id="boton20frigorifico" scale="1.05 1 1" position ="-1 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
-      <a-button id="boton0frigorifico" scale="1.1 1 1" position ="-1 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 0 C"></a-button>
-      <a-button id="boton150frigorifico" scale="1 1 1" position ="-1 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-150 C"></a-button>
-      <a-button id="boton273frigorifico" scale="1 1 1" position ="-1 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-273 C"></a-button>
-
+      <a-button id="boton20frigorifico" scale="1.05 1 1" position ="-0.8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
+      <a-button id="boton0frigorifico" scale="1.1 1 1" position ="-0.8 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 0 C"></a-button>
+      <a-button id="boton150frigorifico" scale="1 1 1" position ="-0.8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-150 C"></a-button>
+      <a-button id="boton273frigorifico" scale="1 1 1" position ="-0.8 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-273 C"></a-button>
 
 
       <a-plane id="pared1" material="color:grey;shader:flat" scale="6.5 4 2" position="-9.75 2 -3.5" rotation="" geometry=""></a-plane>
@@ -116,120 +102,201 @@
       <!--a-entity id="sistemaquimico1" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="9.747582104015574 0 2.014189237890888" rotation="270 -90 0"></a-entity>
       <a-entity id="sistemaquimico2" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="-10.7 -0.03256746715209635 -3.281528527918544" rotation="270 0 0"></a-entity-->
 
-      <a-box id="" position="-1 -5 -3" rotation="0 45 0" color="#4CC3D9" shadow
-				              animation__color="property: material.color; dir: alternate; dur: 1000;
-                                easing: easeInSine; loop: true; to: #FFF"
-				></a-box>
-      <a-sphere id="sphere" position="9 1.25 -3.4" radius="1.25" color="#EF2D5E" shadow></a-sphere>
-			<a-button id="btn1" color="blue" position="2 0.5 -3" value="0°"></a-button>
-			<a-button id="btn2" color"green" position="5 0.5 -3" value="20°"></a-button>
-			<a-button id="btn3" color="red" position="8 0.5 -3" value="50°"></a-button>
+
+
+			<a-button id="btn1" color="blue" position="0 0.5 -3" value="0"></a-button>
+			<a-button id="btn2" color"green" position="1 0.5 -3" value="20"></a-button>
+			<a-button id="btn3" color="red" position="2 0.5 -3" value="50"></a-button>
 
 			<a-entity id="cylinders">
 				<a-cylinder id="cylinder1" position="1.2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
 				<a-cylinder id="cylinder2" position="2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
 				<a-cylinder id="cylinder3" position="2.8 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-        <a-cylinder id="cylinder4" position="-6 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-				<a-cylinder id="cylinder5" position="-5.2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-				<a-cylinder id="cylinder6" position="-4.4 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-
+        <a-cylinder id="cylinder4" position="-5.6 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder5" position="-4.8 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder6" position="-4 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
       </a-entity>
 
-      <!-- ESCENA -->
+      <a-entity id="volumes">
+				<a-sphere id="vol1" color="green" position="9 1.25 -3.4" radius="1" color="#EF2D5E" shadow></a-sphere>
+				<a-box id="vol2" color="green" position="9 1.25 -3.4" height="2" width="1" depth="1" visible="false"></a-box>
+			</a-entity>
+
+      <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script> 
+
+      <!-- Inicio de Controles -->
+      <a-entity id='cameraWrapper' position="0 0 3">
+        <a-animation begin="movement" attribute="position" dur="10000" fill="none"></a-animation>
+        <a-camera id="camera" look-controls-enabled wasd-controls-enabled>
+          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="color: black; shader: flat">
+              <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+              <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+          </a-camera>
+      </a-entity>
+
+      <!-- Fin de Controles -->
     </a-scene>
   </body>
   <script>
 
 
-    var teleporthorno = document.querySelector("#botonhorno");
     var sphere = document.querySelector("#sphere");
     var btn1 = document.querySelector("#btn1");
     var btn2 = document.querySelector("#btn2");
     var btn3 = document.querySelector("#btn3");
-    var initHeight = 1.5;
-    var temp = [0,20000,50000]
+		var initHeight = 1.5;
+		var temp = [0,20000,50000]
 
-    // alpha esta en unidad 10^-6 C°^-1
-    var coef = {
-      'oro' : {alpha: 14, color: '#D7C505'},
-      'cobre' : {alpha: 17, color: '#D17813'},
-      'plata' : {alpha: 19, color: '#9D9D9D'},
-      'aluminio' : {alpha: 23, color: '#7E8CA9'},
-      'hierro' : {alpha: 12, color: '#555D6E'},
-    }
+		// alpha esta en unidad 10^-6 C°^-1
+		var coef = {
+			'oro' : {alpha: 14, color: '#D7C505'},
+			'cobre' : {alpha: 17, color: '#D17813'},
+			'plata' : {alpha: 19, color: '#9D9D9D'},
+			'aluminio' : {alpha: 23, color: '#7E8CA9'},
+			'hierro' : {alpha: 12, color: '#555D6E'},
+		}
 
-    cylinder1 = coef.oro
-    cylinder1.dom = document.querySelector("#cylinder1");
-    cylinder2 = coef.plata
-    cylinder2.dom = document.querySelector("#cylinder2");
-    cylinder3 = coef.cobre
-    cylinder3.dom = document.querySelector("#cylinder3");
+		var coef_vol = {
+			'oro' : {alpha: 42, color: '#D7C505'},
+			'cobre' : {alpha: 51, color: '#D17813'},
+			'plata' : {alpha: 54, color: '#9D9D9D'},
+			'aluminio' : {alpha: 69, color: '#7E8CA9'},
+			'hierro' : {alpha: 33.3, color: '#555D6E'},
+		}
 
-  
+		cylinder1 = coef.oro
+		cylinder1.dom = document.querySelector("#cylinder1");
+		cylinder2 = coef.plata
+		cylinder2.dom = document.querySelector("#cylinder2");
+		cylinder3 = coef.cobre
+		cylinder3.dom = document.querySelector("#cylinder3");
+
+		volume1 = coef_vol.oro
+		volume1.dom = document.querySelector("#vol1");
+		volume1.position_org = volume1.dom.getAttribute('position')
+		volume1.original = volume1.dom.getAttribute('geometry')
+
+		volume2 = coef_vol.aluminio
+		volume2.dom = document.querySelector("#vol2");
+		volume2.position_org = volume2.dom.getAttribute('position')
+		volume2.original = volume2.dom.getAttribute('geometry')
+
     teleporthorno.addEventListener('click',funtion(){
       $("#cameraWrapper").object3D.position.set(-6,0,0);
     })
 
+    teleportfrigorifico.addEventListener('click',funtion(){
+      $("#cameraWrapper").object3D.position.set(1,0,0);
+    })
+
+    teleport3d.addEventListener('click',funtion(){
+      $("#cameraWrapper").object3D.position.set(5,0,1);
+    })
+
+		initDom()
+
     btn1.addEventListener('click', function(){
-      console.log("pressing")
-      //sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #4286f4");
-      changeLength(temp[0]);
-    })
+			changeLength(temp[0]);
+			changeVolume(temp[0]);
+		})
     btn2.addEventListener('click', function(){
-      //sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #88f936");
-      changeLength(temp[1]);
-    })
+			changeLength(temp[1]);
+			changeVolume(temp[1]);
+		})
     btn3.addEventListener('click', function(){
-      //sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: #f23b2e");
-      changeLength(temp[2]);
-    })
+			changeLength(temp[2]);
+			changeVolume(temp[2]);
+		})
 
-    function initDom() {
-      cylinder1.dom.setAttribute('color',cylinder1.color);
-      cylinder2.dom.setAttribute('color',cylinder2.color);
-      cylinder3.dom.setAttribute('color',cylinder3.color);
-      btn1.setAttribute('value',temp[0]+'°');
-      btn2.setAttribute('value',temp[1]+'°');
-      btn3.setAttribute('value',temp[2]+'°');
-    }
 
-    function changeLength(temp){
-      length1 = getLength(initHeight,cylinder1,temp);
-      length2 = getLength(initHeight,cylinder2,temp);
-      length3 = getLength(initHeight,cylinder3,temp);
-      sphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp));
-      cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
-      cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
-      cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
-      cylinder1.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1/2);
-      cylinder2.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2/2);
-      cylinder3.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3/2);
-    }
 
-    function getLength(L_o, obj, temp){
-      return L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp)
-    }
+		function initDom() {
+			cylinder1.dom.setAttribute('color',cylinder1.color);
+			cylinder2.dom.setAttribute('color',cylinder2.color);
+			cylinder3.dom.setAttribute('color',cylinder3.color);
+			btn1.setAttribute('value',temp[0]+'°');
+			btn2.setAttribute('value',temp[1]+'°');
+			btn3.setAttribute('value',temp[2]+'°');
+			volume1.dom.setAttribute('color',volume1.color);
+			volume2.dom.setAttribute('color',volume2.color);
+		}
 
-    function backgroundColor(t_act) {
-      t_max = temp[2];
-      red = Math.round((t_act * 255)/t_max);
-      blue = 255 - red;
-      result = 'rgb('+red+',0,'+blue+')'
-      console.log(result);
-      return result;
-    }
+		function changeLength(temp){
+			length1 = getLength(initHeight,cylinder1,temp);
+			length2 = getLength(initHeight,cylinder2,temp);
+			length3 = getLength(initHeight,cylinder3,temp);
+			cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
+			cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
+			cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
+			cylinder1.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1/2);
+			cylinder2.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2/2);
+			cylinder3.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3/2);
+		}
 
-    //funtion getFinalLength(alpha, :wa)
+		function getLength(L_o, obj, temp){
+			return L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp)
+		}
 
-    /*
-    AFRAME.anime({
-      targets: '#sphere',
-      color: ['rgb(255,0,0)', '#FFF'], // Animate the background color to #FFF (from 'rgb(0,0,0)' to 'rgb(255,255,255)')
-      duration: 1500
-    });
-    */
+		function backgroundColor(t_act) {
+			t_max = temp[2];
+			red = Math.round((t_act * 255)/t_max);
+			blue = 255 - red;
+			result = 'rgb('+red+',0,'+blue+')'
+			return result;
+		}
+
+		function changeVolume(temp){
+			//vol1 : la esfera
+			//vol2 : el cubo
+			sphere = volume1.original
+			cube = volume2.original
+			vol1_ = (4/3)*Math.PI*Math.pow(sphere.radius, 3)
+			vol2_ = cube.height*cube.width*cube.depth
+			newvol1 = getVolume(vol1_,volume1,temp)
+			newvol2 = getVolume(vol2_,volume2,temp)
+			changeVolumeCube(newvol2,volume2)
+			changeVolumeSphere(newvol1,volume1)
+		}
+
+		function getVolume(V_o, obj, temp){
+			return V_o + (obj.alpha*Math.pow(10,-6)*V_o*temp)
+		}
+
+		function changeVolumeCube(final_volume,obj){
+			cube = obj.original
+			x = cube.width
+			y = cube.height
+			z = cube.depth
+			x_ = Math.pow(final_volume*((x*x)/(y*z)),1/3)
+			y_ = x_ * (y/x)
+			z_ = x_ * (z/x)
+			new_y = y_/2
+			obj.dom.setAttribute('animation__height',"property: geometry.height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+y_);
+			obj.dom.setAttribute('animation__width',"property: geometry.width; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+x_);
+			obj.dom.setAttribute('animation__depth',"property: geometry.depth; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+z_);
+			obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+new_y);
+			return true
+		}
+
+		function changeVolumeSphere(final_volume,obj){
+			sphere = obj.original
+			r = sphere.radius
+			r_ = Math.pow((final_volume*3)/(4*Math.PI),1/3)
+			obj.dom.setAttribute('animation__sphere',"property: geometry.radius; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
+			obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
+			return true
+		}
+
+		/*AFRAME.anime({
+			targets: '#sphere',
+			color: ['rgb(255,0,0)', '#FFF'], // Animate the background color to #FFF (from 'rgb(0,0,0)' to 'rgb(255,255,255)')
+			duration: 1500
+		});*/
+
+
   </script>
-
-
-
 </html>
