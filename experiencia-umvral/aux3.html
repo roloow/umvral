@@ -12,7 +12,8 @@
     <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="assets/javascripts/aframe-animation-component.min.js"></script>  
+    <script src="assets/javascripts/aframe-slice9-component.min.js"></script>
     <script type="text/javascript">
       $ = (sel) => document.querySelector(sel)
       $$ = (sel) => document.querySelectorAll(sel)
@@ -62,8 +63,6 @@
       <a-plane id="lateral1refri" scale="4 3 4" position="0 1.5 -5.5" rotation="0 90 0" material="color: blue; shader: flat"></a-plane>
       <a-plane id="lateral2refri" scale="4 3 4" position="4 1.5 -5.5" rotation="0 270 0" material="color: blue; shader: flat"></a-plane>
       <a-plane id="techorefri" scale="4 4 4" position="2 3 -5.5" rotation="90 0 0 " material="color: blue; shader: flat"></a-plane>
-
-      <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
 
       <!--a-entity id="mesa1" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="4 0 4" rotation="270 0 90"></a-entity>
       <a-entity id="mesa2" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="0 0 7" rotation="270 0 0"></a-entity>
@@ -121,8 +120,6 @@
 				<a-sphere id="vol1" color="green" position="9 1.25 -3.4" radius="1" color="#EF2D5E" shadow></a-sphere>
 				<a-box id="vol2" color="green" position="9 1.25 -3.4" height="2" width="1" depth="1" visible="false"></a-box>
 			</a-entity>
-
-      <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script> 
 
       <!-- Inicio de Controles -->
       <a-entity id='cameraWrapper' position="0 0 3">
@@ -185,17 +182,18 @@
 		volume2.position_org = volume2.dom.getAttribute('position')
 		volume2.original = volume2.dom.getAttribute('geometry')
 
-    teleporthorno.addEventListener('click',funtion(){
+		/*
+    teleporthorno.addEventListener('click',function(){
       $("#cameraWrapper").object3D.position.set(-6,0,0);
     })
 
-    teleportfrigorifico.addEventListener('click',funtion(){
+    teleportfrigorifico.addEventListener('click',function(){
       $("#cameraWrapper").object3D.position.set(1,0,0);
     })
 
-    teleport3d.addEventListener('click',funtion(){
+    teleport3d.addEventListener('click',function(){
       $("#cameraWrapper").object3D.position.set(5,0,1);
-    })
+    })*/
 
 		initDom()
 
@@ -236,7 +234,6 @@
 			cylinder2.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2/2);
 			cylinder3.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3/2);
 		}
-
 		function getLength(L_o, obj, temp){
 			return L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp)
 		}
