@@ -4872,10 +4872,6 @@ textarea::-webkit-input-placeholder {
   padding-left: 2px;
 }
 
-textarea:-ms-input-placeholder {
-  padding-left: 2px;
-}
-
 textarea::-ms-input-placeholder {
   padding-left: 2px;
 }
@@ -39893,6 +39889,10 @@ ion-navbar.toolbar {
 }
 
 page-materia-1 .scroll-content {
+  overflow: hidden !important;
+}
+
+page-prueba-1 .scroll-content {
   overflow: hidden !important;
 }
 

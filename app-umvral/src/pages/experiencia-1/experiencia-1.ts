@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HelpMateria1Page } from '../experiencia-1/materia/materia';
+import { HelpPrueba1Page } from '../experiencia-1/prueba/prueba';
 //import { ExpPage } from '../experiencia-1/experiencia/experiencia';
 import { Httpd, HttpdOptions } from '@ionic-native/httpd';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
@@ -14,6 +15,8 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 })
 export class Experiencia1Page {
   prueba: any = 1;
+  answer: any = 1;
+  nota: any = 1;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
@@ -24,10 +27,23 @@ export class Experiencia1Page {
     {
       this.nav = nav;
       this.prueba = this.umvralApiProvider.pruebaid;
-      console.log(this.prueba);
+      this.answer = this.umvralApiProvider.answerid;
+      this.nota = this.umvralApiProvider.notaAnswer;
+      console.log(this.answer);
     }
   openMateriaPage() {
     this.nav.push(HelpMateria1Page);
+  } 
+
+  openPruebaPage() {
+    this.umvralApiProvider.prueba().then((result) => {
+      console.log(result);
+      this.nav.push(HelpPrueba1Page);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
+    
   } 
   
   openExpPage() {

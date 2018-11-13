@@ -19,6 +19,7 @@ import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { HelpMateria1Page } from '../pages/experiencia-1/materia/materia';
 import { HelpMateria2Page } from '../pages/experiencia-2/materia/materia';
 import { HelpMateria3Page } from '../pages/experiencia-3/materia/materia';
+import { HelpPrueba1Page } from '../pages/experiencia-1/prueba/prueba';
 import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { NotasPage } from '../pages/notas/notas';
@@ -38,6 +39,7 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
     HelpMateria1Page,
     HelpMateria2Page,
     HelpMateria3Page,
+    HelpPrueba1Page,
     ExpPage,
     PerfilPage,
     NotasPage,
@@ -62,6 +64,7 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
     HelpMateria1Page,
     HelpMateria2Page,
     HelpMateria3Page,
+    HelpPrueba1Page,
     ExpPage,
     PerfilPage,
     NotasPage,

@@ -19,6 +19,9 @@ export class UmvralApiProvider {
   exps: any;
   expcursid: number;
   pruebaid: any;
+  preguntas: any;
+  notaAnswer: any = 'Null';
+  answerid: any = 'Null';
 
   constructor(public http: Http) {
     this.isLoggedIn = false;
@@ -60,14 +63,21 @@ export class UmvralApiProvider {
     });
   }
 
+  compararpreguntas(a,b) {
+    if (a.position < b.position)
+      return -1;
+    if (a.position > b.position)
+      return 1;
+    return 0;
+  }
+
   compararexps(a,b) {
     if (a[0].position < b[0].position)
       return -1;
     if (a[0].position > b[0].position)
       return 1;
     return 0;
-  }
-    
+  } 
   experiencias(){
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
@@ -102,6 +112,8 @@ export class UmvralApiProvider {
           let cursoInfo = JSON.parse(res["_body"]);
           console.log(res);
           this.pruebaid = cursoInfo.test_id;
+          this.answerid = cursoInfo.answer_id;
+          this.notaAnswer = cursoInfo.answer_score;
           console.log(this.pruebaid);
           resolve(res);
         }, (err) => {
@@ -110,21 +122,52 @@ export class UmvralApiProvider {
         });
     });
   }
-/*
-  metodo(valores) {
+
+  prueba(){
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
     let options = new RequestOptions({ headers: hdrs});
 
-    return new Promise((resolve, reject) =>{
-      //this.http.post(link,valores,options).subscribe(res => { hacer cosas res , resolve}, err => {hacer cosas error ,reject})
-      //this.http.get(link,options).subscribe(res => { hacer cosas res }, err => {hacer cosas error})
-    }
-  
-  
-  )
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/experience/test/', "student_id="+this.stuid+"&test_id="+this.pruebaid, options)
+        .subscribe(res => {
+          let Prueba = JSON.parse(res["_body"]);
+          this.preguntas = Prueba.preguntas;
+          console.log(this.preguntas);
+          this.preguntas.sort(this.compararpreguntas);
+          console.log(this.preguntas);
+          this.answerid = Prueba.answer_id;
+          this.notaAnswer = Prueba.answer_score;
+          resolve(res);
+        }, (err) => {
+          this.exps = "nope";
+          reject(err);
+        });
+    });
   }
-*/
+
+  subirNota(nota) {
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
+  
+    let dataStr = "student_id="+this.stuid+"&test_id="+this.pruebaid +"&score="+nota;
+  
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/experience/testResp/', dataStr, options).subscribe(data => {
+        console.log("SUCCESS")
+        let resultado = JSON.parse(data["_body"]);
+        this.notaAnswer = resultado.score;
+        this.answerid = resultado.answer_id;
+        console.log(resultado);
+        resolve(resultado);
+      }, err => {
+        console.log("FAIL")
+        reject(err);
+      });
+    });
+  }
+  
 
   getStuCurs(){
     return (this.stucurs);
