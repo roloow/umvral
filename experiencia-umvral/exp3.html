@@ -25,7 +25,7 @@
 				              animation__color="property: material.color; dir: alternate; dur: 1000;
                                 easing: easeInSine; loop: true; to: #FFF"
 				></a-box-->
-      <!--a-sphere id="sphere" position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere-->
+      <a-sphere id="sphere" position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
 			<a-button id="btn1" color="blue" position="2 0.5 -3" value="0°"></a-button>
 			<a-button id="btn2" color"green" position="5 0.5 -3" value="20°"></a-button>
 			<a-button id="btn3" color="red" position="8 0.5 -3" value="50°"></a-button>
@@ -60,12 +60,12 @@
     </a-scene>
   </body>
 	<script>
-    var sphere = document.querySelector("#sphere");
+    var tempsphere = document.querySelector("#sphere");
     var btn1 = document.querySelector("#btn1");
     var btn2 = document.querySelector("#btn2");
     var btn3 = document.querySelector("#btn3");
 		var initHeight = 1.5;
-		var temp = [0,20000,50000]
+		var temp = [-10000,-5000,200]
 
 		// alpha esta en unidad 10^-6 C°^-1
 		var coef = {
@@ -84,19 +84,31 @@
 			'hierro' : {alpha: 33.3, color: '#555D6E'},
 		}
 
-		cylinder1 = coef.oro
+		class termicObject{
+			constructor(element){
+				this.alpha = element.alpha
+				this.color = element.color
+			}
+			assignElement(element){
+				this.alpha = element.alpha
+				this.color = element.color
+				return true
+			}
+		}
+
+		cylinder1 = new termicObject(coef.oro)
 		cylinder1.dom = document.querySelector("#cylinder1");
-		cylinder2 = coef.plata
+		cylinder2 = new termicObject(coef.plata)
 		cylinder2.dom = document.querySelector("#cylinder2");
-		cylinder3 = coef.cobre
+		cylinder3 = new termicObject(coef.cobre)
 		cylinder3.dom = document.querySelector("#cylinder3");
 
-		volume1 = coef_vol.oro
+		volume1 = new termicObject(coef_vol.oro)
 		volume1.dom = document.querySelector("#vol1");
 		volume1.position_org = volume1.dom.getAttribute('position')
 		volume1.original = volume1.dom.getAttribute('geometry')
 
-		volume2 = coef_vol.aluminio
+		volume2 = new termicObject(coef_vol.aluminio)
 		volume2.dom = document.querySelector("#vol2");
 		volume2.position_org = volume2.dom.getAttribute('position')
 		volume2.original = volume2.dom.getAttribute('geometry')
@@ -128,6 +140,7 @@
 		}
 
 		function changeLength(temp){
+			tempsphere.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp));
 			length1 = getLength(initHeight,cylinder1,temp);
 			length2 = getLength(initHeight,cylinder2,temp);
 			length3 = getLength(initHeight,cylinder3,temp);
@@ -145,9 +158,17 @@
 
 		function backgroundColor(t_act) {
 			t_max = temp[2];
-			red = Math.round((t_act * 255)/t_max);
-			blue = 255 - red;
-			result = 'rgb('+red+',0,'+blue+')'
+			t_min = temp[0];
+			if (t_act >= 0){
+				red = Math.round((t_act * 255)/t_max);
+				blue = 255 - red;
+				result = 'rgb('+red+',0,'+blue+')'
+			}
+			else {
+				white = Math.round((t_act * 255)/t_min);
+				//white = 255 - white;
+				result = 'rgb('+white+','+white+','+255+')'
+			}
 			return result;
 		}
 
@@ -169,6 +190,9 @@
 		}
 
 		function changeVolumeCube(final_volume,obj){
+			console.log("final volume vale: ")
+			console.log(final_volume)
+
 			cube = obj.original
 			x = cube.width
 			y = cube.height
