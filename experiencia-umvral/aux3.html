@@ -12,7 +12,7 @@
     <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
-    <script src="assets/javascripts/aframe-animation-component.min.js"></script>  
+    <script src="assets/javascripts/aframe-animation-component.min.js"></script>
     <script src="assets/javascripts/aframe-slice9-component.min.js"></script>
     <script type="text/javascript">
       $ = (sel) => document.querySelector(sel)
@@ -39,6 +39,12 @@
         <a-asset-item id="paredcircular-mtl" src="/objetos/paredcircular.mtl"></a-asset-item>
         <a-asset-item id="sistemaquimico-obj" src="/objetos/sistemaquimico.obj"></a-asset-item>
         <a-asset-item id="sistemaquimico-mtl" src="/objetos/sistemaquimico.mtl"></a-asset-item>
+        <a-asset-item id="pizarra-obj" src="/objetos/pizarra.obj"></a-asset-item>
+        <a-asset-item id="pizarra-mtl" src="/objetos/pizarra.mtl"></a-asset-item>
+        <a-asset-item id="vaso-obj" src="/objetos/vasoquimico.obj"></a-asset-item>
+        <a-asset-item id="vaso-mtl" src="/objetos/vasoquimico.mtl"></a-asset-item>
+        <a-asset-item id="tabla-obj" src="/objetos/tablaperiodica.obj"></a-asset-item>
+        <a-asset-item id="tabla-mtl" src="/objetos/tablaperiodica.mtl"></a-asset-item>
       </a-assets>
 
 
@@ -64,26 +70,44 @@
       <a-plane id="lateral2refri" scale="4 3 4" position="4 1.5 -5.5" rotation="0 270 0" material="color: blue; shader: flat"></a-plane>
       <a-plane id="techorefri" scale="4 4 4" position="2 3 -5.5" rotation="90 0 0 " material="color: blue; shader: flat"></a-plane>
 
-      <!--a-entity id="mesa1" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="4 0 4" rotation="270 0 90"></a-entity>
+      <!-- adornos  -->
+      <a-entity id="mesa1" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="4 0 4" rotation="270 0 90"></a-entity>
       <a-entity id="mesa2" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="0 0 7" rotation="270 0 0"></a-entity>
       <a-entity id="mesa3" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-10 0 4" rotation="270 0 90"></a-entity>
-      <a-entity id="mesa4" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-4 0 4" rotation="270 0 90"></a-entity-->
-
+      <a-entity id="mesa4" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-4 0 4" rotation="270 0 90"></a-entity>
+      <a-entity id="tabla" obj-model="obj: #tabla-obj; mtl: #tabla-mtl" scale="0.001 0.001 0.001" position="-6 1 0" rotation="270 0 90"></a-entity>
+      <a-entity id="pizarra" obj-model="obj: #pizarra-obj; mtl: #pizarra-mtl" scale="0.0001 0.0001 0.0001" position="-10 0 4" rotation="270 0 90"></a-entity>
+      <a-entity id="vaso" obj-model="obj: #vaso-obj; mtl: #vaso-mtl" scale="0.001 0.001 0.001" position="-4 2 4" rotation="270 0 90"></a-entity>
       <a-entity id="panelquimico" obj-model="obj: #panelquimico-obj; mtl: #panelquimico-mtl" scale="0.00025 0.00025 0.00025" position="0 -0.2 0" rotation="270 0 0"></a-entity>
+      <a-entity id="sistemaquimico1" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="9.747582104015574 0 2.014189237890888" rotation="270 -90 0"></a-entity>
+      <a-entity id="sistemaquimico2" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="-10.7 -0.03256746715209635 -3.281528527918544" rotation="270 0 0"></a-entity>
+      <!-- fin adornos  -->
 
+      <!-- btn Horno  -->
       <a-button id="botonhorno" scale="2 2 2" position="-6 3 -3.499" value="horno" button="buttonColor:#fd0e0b"></a-button>
       <a-button id="boton20horno" scale="1.1 1 1" position ="-8 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
-      <a-button id="boton200horno" scale="1.05 1 1" position ="-8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 500 C"></a-button>
+      <a-button id="boton500horno" scale="1.05 1 1" position ="-8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 500 C"></a-button>
       <a-button id="boton1000horno" scale="1 1 1" position ="-8 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="1000 C"></a-button>
       <a-button id="boton2000horno" scale="1 1 1" position ="-8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="2000 C"></a-button>
+      <!-- Fin btn Horno  -->
 
+      <!-- btn Frigorifico  -->
       <a-button id="botonfrigorifico" scale="2 2 2" position="1 3 -3.499" value="Frigorifico" button="buttonColor:#fd0e0b"></a-button>
       <a-button id="boton20frigorifico" scale="1.05 1 1" position ="-0.8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
       <a-button id="boton0frigorifico" scale="1.1 1 1" position ="-0.8 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 0 C"></a-button>
       <a-button id="boton150frigorifico" scale="1 1 1" position ="-0.8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-150 C"></a-button>
       <a-button id="boton273frigorifico" scale="1 1 1" position ="-0.8 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-273 C"></a-button>
+      <!-- Fin btn Frigorifico  -->
 
+      <!-- Horno 3D  -->
+      <a-button id="botonhorno3d" scale="2 2 2" position="7 3.5 -2.4" value="horno" rotation="0 -32 0" button="buttonColor:#fd0e0b"></a-button>
+      <a-button id="boton20horno3d" scale="1.1 1 1" position ="4.4 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
+      <a-button id="boton-272horno3d" scale="1.05 1 1" position ="4.4 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" -273 C"></a-button>
+      <a-button id="cambioFigura" scale="1 1 1" position ="4.4 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="cambio"></a-button>
+      <a-button id="boton2000horno3d" scale="1 1 1" position ="4.4 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="2000 C"></a-button>
+      <!-- Fin Horno 3D  -->
 
+      <!-- paredes 3D  -->
       <a-plane id="pared1" material="color:grey;shader:flat" scale="6.5 4 2" position="-9.75 2 -3.5" rotation="" geometry=""></a-plane>
       <a-plane id="pared2" material="color:grey;shader:flat" scale="11 2 2" position="-1.5 3 -3.5" rotation="" geometry=""></a-plane>
       <a-plane id="pared3" material="color:grey;shader:flat" scale="4 4 4" position="-1.5 2 -3.5" rotation="" geometry=""></a-plane>
@@ -93,24 +117,24 @@
       <a-plane id="pared7"  material="color: #707070; shader: flat" scale="14 4 4" position="-13 2 3" rotation="0 90 0"></a-plane>
       <a-plane id="pared8" material="color:grey;shader:flat" scale="6.5 1 2" position="8.231886792537802 3.5 -1.8654553143192079" rotation="0 -32 0" ></a-plane>
       <a-plane id="pared9" material="color:grey;shader:flat" scale="0.3 4 2" position="5.62749882070162 2 -3.358539054096435" rotation="0 -32 0" geometry=""></a-plane>
+      <!-- fin paredes 3D  -->
 
       <a-entity id="paredcircular1" obj-model="obj:/objetos/paredcircular.obj;mtl:/objetos/paredcircular.mtl" scale="0.04 0.1 0.04" position="9.3 0 -4" rotation="270 -32 0"></a-entity>
       <a-entity id="horno1" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="-5 0 -3.5" rotation="270 32 0"></a-entity>
       <a-entity id="horno2" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="2 0 -3.5" rotation="270 32 0"></a-entity>
       <a-entity id="horno3" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.015 0.015 0.015" position="8 0 -2" rotation="270 0 0"></a-entity>
-      <!--a-entity id="sistemaquimico1" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="9.747582104015574 0 2.014189237890888" rotation="270 -90 0"></a-entity>
-      <a-entity id="sistemaquimico2" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="-10.7 -0.03256746715209635 -3.281528527918544" rotation="270 0 0"></a-entity-->
 
 
-
-			<a-button id="btn1" color="blue" position="0 0.5 -3" value="0"></a-button>
+			<!--a-button id="btn1" color="blue" position="0 0.5 -3" value="0"></a-button>
 			<a-button id="btn2" color"green" position="1 0.5 -3" value="20"></a-button>
-			<a-button id="btn3" color="red" position="2 0.5 -3" value="50"></a-button>
+			<a-button id="btn3" color="red" position="2 0.5 -3" value="50"></a-button-->
 
 			<a-entity id="cylinders">
+        <!-- Frigorifico -->
 				<a-cylinder id="cylinder1" position="1.2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
 				<a-cylinder id="cylinder2" position="2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
 				<a-cylinder id="cylinder3" position="2.8 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+        <!-- horno -->
         <a-cylinder id="cylinder4" position="-5.6 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
 				<a-cylinder id="cylinder5" position="-4.8 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
 				<a-cylinder id="cylinder6" position="-4 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
@@ -140,13 +164,31 @@
   </body>
   <script>
 
-
+    var boolEsfera = 1;
     var sphere = document.querySelector("#sphere");
-    var btn1 = document.querySelector("#btn1");
-    var btn2 = document.querySelector("#btn2");
-    var btn3 = document.querySelector("#btn3");
 		var initHeight = 1.5;
-		var temp = [0,20000,50000]
+		var temp = [200,5000,10000,20000,200,0,-150,-2730];
+
+    //btnes horno
+    var btn1 = document.querySelector('#boton20horno');
+    var btn2 = document.querySelector('#boton500horno');
+    var btn3 = document.querySelector('#boton1000horno');
+    var btn4 = document.querySelector('#boton2000horno');
+
+    //btnes Frigorifico
+    var btn5 = document.querySelector('#boton20frigorifico');
+    var btn6 = document.querySelector('#boton0Frigorifico');
+    var btn7 = document.querySelector('#boton150frigorifico');
+    var btn8 = document.querySelector('#boton273frigorifico');
+
+    //btnes Horno3D
+    var btn9 = document.querySelector('#boton20horno3d');
+    var btn10 = document.querySelector('#boton20horno3d');
+    var btn11 = document.querySelector('#boton2000horno3d');
+    //cambio de figura
+    var btnCambio = document.querySelector('#cambioFigura');
+
+
 
 		// alpha esta en unidad 10^-6 C°^-1
 		var coef = {
@@ -171,6 +213,12 @@
 		cylinder2.dom = document.querySelector("#cylinder2");
 		cylinder3 = coef.cobre
 		cylinder3.dom = document.querySelector("#cylinder3");
+    cylinder4 = {alpha: 14, color: '#D7C505'}
+		cylinder4.dom = document.querySelector("#cylinder4");
+		cylinder5 = {alpha: 19, color: '#9D9D9D'}
+		cylinder5.dom = document.querySelector("#cylinder5");
+		cylinder6 = {alpha: 17, color: '#D17813'}
+		cylinder6.dom = document.querySelector("#cylinder6");
 
 		volume1 = coef_vol.oro
 		volume1.dom = document.querySelector("#vol1");
@@ -182,7 +230,14 @@
 		volume2.position_org = volume2.dom.getAttribute('position')
 		volume2.original = volume2.dom.getAttribute('geometry')
 
-		/*
+
+    var teleporthorno = document.querySelector('#botonhorno');
+		var teleportfrigorifico = document.querySelector('#botonfrigorifico');
+    var teleport3d = document.querySelector('#botonhorno3d');
+    var teleportinicio = document.querySelector('#panelquimico');
+
+    initDom()
+
     teleporthorno.addEventListener('click',function(){
       $("#cameraWrapper").object3D.position.set(-6,0,0);
     })
@@ -193,47 +248,116 @@
 
     teleport3d.addEventListener('click',function(){
       $("#cameraWrapper").object3D.position.set(5,0,1);
-    })*/
+    })
 
-		initDom()
+    teleportinicio.addEventListener('click', function(){
+      $("#cameraWrapper").object3D.position.set(0,0,3);
+    })
 
+    btnCambio.addEventListener('click',function(){
+      if(boolEsfera){
+         $('#vol1').setAttribute('visible','false');
+         $('#vol2').setAttribute('visible','true');
+         boolEsfera = 0;
+      }else {
+         $('#vol1').setAttribute('visible','true');
+         $('#vol2').setAttribute('visible','false');
+         boolEsfera = 1;
+      }
+    })
+
+
+
+
+    //horno 20
     btn1.addEventListener('click', function(){
-			changeLength(temp[0]);
-			changeVolume(temp[0]);
+			changeLength(temp[0],0);
+
 		})
+    //horno 500
     btn2.addEventListener('click', function(){
-			changeLength(temp[1]);
-			changeVolume(temp[1]);
+			changeLength(temp[1],0);
+
 		})
+    //horno 1000
     btn3.addEventListener('click', function(){
-			changeLength(temp[2]);
-			changeVolume(temp[2]);
+			changeLength(temp[2],0);
+
 		})
+    //horno 2000
+    btn4.addEventListener('click', function(){
+			changeLength(temp[3],0);
+
+		})
+
+    //refri 20
+    btn5.addEventListener('click', function(){
+			changeLength(temp[4],1);
+
+		})
+    //refri 0
+    btn6.addEventListener('click', function(){
+			changeLength(temp[5],1);
+
+		})
+    //refri -150
+    btn7.addEventListener('click', function(){
+			changeLength(temp[6],1);
+
+		})
+    //refri -273
+    btn8.addEventListener('click', function(){
+			changeLength(temp[7],1);
+
+		})
+
+    //volume
 
 
 
 		function initDom() {
-			cylinder1.dom.setAttribute('color',cylinder1.color);
-			cylinder2.dom.setAttribute('color',cylinder2.color);
-			cylinder3.dom.setAttribute('color',cylinder3.color);
-			btn1.setAttribute('value',temp[0]+'°');
-			btn2.setAttribute('value',temp[1]+'°');
-			btn3.setAttribute('value',temp[2]+'°');
+			cylinder1.dom.setAttribute('color',cylinder4.color);
+			cylinder2.dom.setAttribute('color',cylinder5.color);
+			cylinder3.dom.setAttribute('color',cylinder6.color);
+      cylinder4.dom.setAttribute('color',cylinder4.color);
+			cylinder5.dom.setAttribute('color',cylinder5.color);
+			cylinder6.dom.setAttribute('color',cylinder6.color);
+			//btn1.setAttribute('value',temp[0]+'°');
+			//btn2.setAttribute('value',temp[1]+'°');
+			//btn3.setAttribute('value',temp[2]+'°');
 			volume1.dom.setAttribute('color',volume1.color);
 			volume2.dom.setAttribute('color',volume2.color);
 		}
 
-		function changeLength(temp){
-			length1 = getLength(initHeight,cylinder1,temp);
-			length2 = getLength(initHeight,cylinder2,temp);
-			length3 = getLength(initHeight,cylinder3,temp);
-			cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
-			cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
-			cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
-			cylinder1.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1/2);
-			cylinder2.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2/2);
-			cylinder3.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3/2);
+    /*
+     * tipo { 0 : horno , 1 : Frigorifico  }
+     */
+		function changeLength(temp,tipo){
+      if(tipo == 0){
+        length4 = getLength(initHeight,cylinder4,temp);
+  			length5 = getLength(initHeight,cylinder5,temp);
+  			length6 = getLength(initHeight,cylinder6,temp);
+        cylinder4.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length4);
+        cylinder5.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length5);
+        cylinder6.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length6);
+        cylinder4.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length4/2);
+        cylinder5.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length5/2);
+        cylinder6.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length6/2);
+      }
+      if(tipo == 1){
+        length1 = getLength(initHeight,cylinder1,temp);
+        length2 = getLength(initHeight,cylinder2,temp);
+        length3 = getLength(initHeight,cylinder3,temp);
+        cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
+        cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
+        cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
+        cylinder1.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1/2);
+  			cylinder2.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2/2);
+  			cylinder3.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3/2);
+      }
+
 		}
+
 		function getLength(L_o, obj, temp){
 			return L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp)
 		}
