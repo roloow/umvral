@@ -237,23 +237,23 @@
       <!-- /Escena #1 -->
       <!-- World -->
       <a-entity id="world1" >
-          <a-sphere id="obj1" position="-5 1 -1.7" radius="0.25" color="red">
+          <a-sphere id="obj1_w" position="-5 1 -1.7" radius="0.25" color="red">
               <a-animation attribute="position" from="-5 1 -1.7" to="-5 1.5 -1.7" dur="1500" direction="alternate" repeat="indefinite"></a-animation>
           </a-sphere>
-          <a-box id="box1" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 -1.7"></a-box>
-          <a-button id="p1" position="-4 -0.3 -2.3" rotation="0 -90 0" name="peso1"  value="0.5 kg"></a-button>
+          <a-box id="box1_w" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 -1.7"></a-box>
+          <a-button id="p1_w" position="-4 -0.3 -2.3" rotation="0 -90 0" name="peso1"  value="0.5 kg"></a-button>
   
-          <a-sphere id="obj2" position="-5 1 1.5" radius="0.6" color="blue">
+          <a-sphere id="obj2_w" position="-5 1 1.5" radius="0.6" color="blue">
             <a-animation attribute="position" from="-5 1 1.5" to="-5 1.5 1.5" dur="2000" direction="alternate" repeat="indefinite"></a-animation>
           </a-sphere>
-          <a-box id="box2" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 1.5"></a-box>
-          <a-button id="p2" position="-4 -0.3 1" rotation="0 -90 0" name="peso2"  value="10 kg"></a-button>
+          <a-box id="box2_w" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 1.5"></a-box>
+          <a-button id="p2_w" position="-4 -0.3 1" rotation="0 -90 0" name="peso2"  value="10 kg"></a-button>
   
-          <a-sphere id="obj3" position="-5 1 4.9" radius="1" color="blue">
+          <a-sphere id="obj3_w" position="-5 1 4.9" radius="1" color="blue">
             <a-animation attribute="position" from="-5 1 4.9" to="-5 1.5 4.9" dur="2500" direction="alternate" repeat="indefinite"></a-animation>
           </a-sphere>
-          <a-box id="box3" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 4.9"></a-box>
-          <a-button id="p3" position="-4 -0.3 4.3" rotation="0 -90 0" name="peso3"  value="100 kg"></a-button>
+          <a-box id="box3_w" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 4.9"></a-box>
+          <a-button id="p3_w" position="-4 -0.3 4.3" rotation="0 -90 0" name="peso3"  value="100 kg"></a-button>
         <!-- botones de la regla-->
         <a-entity id="m100"  geometry="primitive: box" material="color: #9dee96 " position="8 100 -15" rotation="45 0 0" scale ="10 3 0.5" value="100 metros" ></a-entity>
         <a-entity id="m35"  geometry="primitive: box" material="color: #9dee96 " position="6.5 35 -15" rotation="30 0 0"  scale ="7.5 2 0.5"  value="35 metros" ></a-entity>
@@ -296,6 +296,9 @@
       let p1 = $('#p1');
       let p2 = $('#p2');
       let p3 = $('#p3');
+      let p1_w = $('#p1_w');
+      let p2_w = $('#p2_w');
+      let p3_w = $('#p3_w');
       let	reset5 	= $('#m5');
     	let	reset15 =$('#m15');
     	let	reset35 = $('#m35');
@@ -464,9 +467,40 @@
           weight = "100";
           radius = "1";
         }
+        else if (value == 'p1_w') {
+          $('#obj1_w').setAttribute('color', 'red')
+          $('#obj2_w').setAttribute('color', 'blue')
+          $('#obj3_w').setAttribute('color', 'blue')
+          weight = "0.5";
+          radius = "0.25";
+        }
+        else if (value == 'p2_w') {
+          $('#obj1_w').setAttribute('color', 'blue')
+          $('#obj2_w').setAttribute('color', 'red')
+          $('#obj3_w').setAttribute('color', 'blue')
+          weight = "10";
+          radius = "0.6";
+        }
+        else if (value == 'p3_w') {
+          $('#obj1_w').setAttribute('color', 'blue')
+          $('#obj2_w').setAttribute('color', 'blue')
+          $('#obj3_w').setAttribute('color', 'red')
+          weight = "100";
+          radius = "1";
+        }
       }
     </script>
     <script type="text/javascript">
+
+      p1_w.addEventListener('click', function () {
+        changeColor('p1_w');
+      });
+      p2_w.addEventListener('click', function () {
+        changeColor('p2_w');
+      });
+      p3_w.addEventListener('click', function () {
+        changeColor('p3_w');
+      });
       p1.addEventListener('click', function () {
         changeColor('p1');
       });
@@ -476,6 +510,15 @@
       p3.addEventListener('click', function () {
         changeColor('p3');
       });
+      $('#obj1_w').addEventListener('click', function () {
+        changeColor('p1_w');
+      });
+      $('#obj2_w').addEventListener('click', function () {
+        changeColor('p2_w');
+      });
+      $('#obj3_w').addEventListener('click', function () {
+        changeColor('p3_w');
+      });
       $('#obj1').addEventListener('click', function () {
         changeColor('p1');
       });
@@ -484,6 +527,15 @@
       });
       $('#obj3').addEventListener('click', function () {
         changeColor('p3');
+      });
+      $('#box1_w').addEventListener('click', function () {
+        changeColor('p1_w');
+      });
+      $('#box2_w').addEventListener('click', function () {
+        changeColor('p2_w');
+      });
+      $('#box3_w').addEventListener('click', function () {
+        changeColor('p3_w');
       });
       $('#box1').addEventListener('click', function () {
         changeColor('p1');
