@@ -66,6 +66,8 @@
         <a-asset-item id="tierra-mtl" src="/objetos/tierra.mtl"></a-asset-item>
         <a-asset-item id="luna-obj" src="/objetos/luna.obj"></a-asset-item>
         <a-asset-item id="luna-mtl" src="/objetos/luna.mtl"></a-asset-item>
+        <a-asset-item id="tab-obj" src="/objetos/tablerofuturo.obj"></a-asset-item>
+        <a-asset-item id="tab-mtl" src="/objetos/tablerofuturo.mtl"></a-asset-item>
       </a-assets>
       <!-- Inicio de Controles -->
       <a-entity id="camWrapper" position="0 0 4" rotation="0 0 0">
@@ -237,23 +239,12 @@
       <!-- /Escena #1 -->
       <!-- World -->
       <a-entity id="world1" >
-          <a-sphere id="obj1_w" position="-5 1 -1.7" radius="0.25" color="red">
-              <a-animation attribute="position" from="-5 1 -1.7" to="-5 1.5 -1.7" dur="1500" direction="alternate" repeat="indefinite"></a-animation>
-          </a-sphere>
-          <a-box id="box1_w" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 -1.7"></a-box>
-          <a-button id="p1_w" position="-4 -0.3 -2.3" rotation="0 -90 0" name="peso1"  value="0.5 kg"></a-button>
-  
-          <a-sphere id="obj2_w" position="-5 1 1.5" radius="0.6" color="blue">
-            <a-animation attribute="position" from="-5 1 1.5" to="-5 1.5 1.5" dur="2000" direction="alternate" repeat="indefinite"></a-animation>
-          </a-sphere>
-          <a-box id="box2_w" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 1.5"></a-box>
-          <a-button id="p2_w" position="-4 -0.3 1" rotation="0 -90 0" name="peso2"  value="10 kg"></a-button>
-  
-          <a-sphere id="obj3_w" position="-5 1 4.9" radius="1" color="blue">
-            <a-animation attribute="position" from="-5 1 4.9" to="-5 1.5 4.9" dur="2500" direction="alternate" repeat="indefinite"></a-animation>
-          </a-sphere>
-          <a-box id="box3_w" color="gray" depth="2" height="0.5" width="2" position="-5 -0.3 4.9"></a-box>
-          <a-button id="p3_w" position="-4 -0.3 4.3" rotation="0 -90 0" name="peso3"  value="100 kg"></a-button>
+
+          <a-entity id="tab" obj-model="obj: #tab-obj; mtl: #tab-mtl" rotatio="" scale="0.004 0.004 0.004" position="-5 0.51 1.0200000000000002" rotation="270 90 0"></a-entity>
+          <a-button id="p1_w" button-color="blue" position="-4.95 1.23 0.35" rotation="0 90 0" name="peso1"  value="0.5 kg"></a-button>
+          <a-button id="p2_w" button-color="blue" position="-4.95 1.23 1.42" rotation="0 90 0" name="peso2"  value="10 kg"></a-button>
+          <a-button id="p3_w" button-color="blue" position="-4.95 1.23 2.51" rotation="0 90 0" name="peso3"  value="100 kg"></a-button>
+          <a-text  position="-4.95 1.68 2.51" rotation="0 90 0" label="15" color="black" value= "Cambia el peso del objeto"></a-text>
         <!-- botones de la regla-->
         <a-entity id="m100"  geometry="primitive: box" material="color: #9dee96 " position="8 100 -15" rotation="45 0 0" scale ="10 3 0.5" value="100 metros" ></a-entity>
         <a-entity id="m35"  geometry="primitive: box" material="color: #9dee96 " position="6.5 35 -15" rotation="30 0 0"  scale ="7.5 2 0.5"  value="35 metros" ></a-entity>
@@ -468,25 +459,31 @@
           radius = "1";
         }
         else if (value == 'p1_w') {
-          $('#obj1_w').setAttribute('color', 'red')
-          $('#obj2_w').setAttribute('color', 'blue')
-          $('#obj3_w').setAttribute('color', 'blue')
+          $('#p1_w').setAttribute('button-color', 'red')
+          $('#p2_w').setAttribute('button-color', 'blue')
+          $('#p3_w').setAttribute('button-color', 'blue')
           weight = "0.5";
           radius = "0.25";
+          $('#ball').body.position.set(0,3,-15);
+          $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
         }
         else if (value == 'p2_w') {
-          $('#obj1_w').setAttribute('color', 'blue')
-          $('#obj2_w').setAttribute('color', 'red')
-          $('#obj3_w').setAttribute('color', 'blue')
+          $('#p1_w').setAttribute('button-color', 'blue')
+          $('#p2_w').setAttribute('button-color', 'red')
+          $('#p3_w').setAttribute('button-color', 'blue')
           weight = "10";
           radius = "0.6";
+          $('#ball').body.position.set(0,3,-15);
+          $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
         }
         else if (value == 'p3_w') {
-          $('#obj1_w').setAttribute('color', 'blue')
-          $('#obj2_w').setAttribute('color', 'blue')
-          $('#obj3_w').setAttribute('color', 'red')
+          $('#p1_w').setAttribute('button-color', 'blue')
+          $('#p2_w').setAttribute('button-color', 'blue')
+          $('#p3_w').setAttribute('button-color', 'red')
           weight = "100";
           radius = "1";
+          $('#ball').body.position.set(0,3,-15);
+          $('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
         }
       }
     </script>
@@ -510,15 +507,6 @@
       p3.addEventListener('click', function () {
         changeColor('p3');
       });
-      $('#obj1_w').addEventListener('click', function () {
-        changeColor('p1_w');
-      });
-      $('#obj2_w').addEventListener('click', function () {
-        changeColor('p2_w');
-      });
-      $('#obj3_w').addEventListener('click', function () {
-        changeColor('p3_w');
-      });
       $('#obj1').addEventListener('click', function () {
         changeColor('p1');
       });
@@ -527,15 +515,6 @@
       });
       $('#obj3').addEventListener('click', function () {
         changeColor('p3');
-      });
-      $('#box1_w').addEventListener('click', function () {
-        changeColor('p1_w');
-      });
-      $('#box2_w').addEventListener('click', function () {
-        changeColor('p2_w');
-      });
-      $('#box3_w').addEventListener('click', function () {
-        changeColor('p3_w');
       });
       $('#box1').addEventListener('click', function () {
         changeColor('p1');
