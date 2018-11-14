@@ -19,8 +19,8 @@ export class NotasPage {
   public lineChartLabels:Array<any>;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams, 
-    public alertCtrl: AlertController, 
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
     public umvralApiProvider: UmvralApiProvider
   ) {
     this.count = 0;
@@ -43,8 +43,8 @@ export class NotasPage {
     console.log('ionViewDidLoad NotasPage');
   }
 
-  roundToTwo(num) {    
-    return +(Math.round(num + "e+2")  + "e-2");
+  roundToTwo(num) {
+    return +(Math.round(num + 'e+2')  + 'e-2');
 }
 
   calcpromedio(){
@@ -131,7 +131,7 @@ export class NotasPage {
       console.log(err);
     });
   }
-  
+
   //grafico
   public lineChartOptions:any = {
     responsive:true,
@@ -178,7 +178,7 @@ export class NotasPage {
   public chartClicked(e:any):void {
     console.log(e);
   }
-  
+
   public chartHovered(e:any):void {
     console.log(e);
   }
