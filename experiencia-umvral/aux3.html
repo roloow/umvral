@@ -52,6 +52,8 @@
       </a-assets>
 
 
+
+
       <a-assets>
         <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
       </a-assets>
@@ -62,14 +64,14 @@
 
       <a-plane id="techo" scale="50 50 50 " position="0 3.9 0" rotation="90 0 0 " material="color: white; shader: flat"></a-plane>
 
-      <a-plane id="suelohorno" scale="4 4 4" position="-5 0.01 -5.5" rotation="270 0 0 " material="color: red; shader: flat"></a-plane>
+      <a-plane id="suelohorno" scale="4 4 4" position="-5 0.01 -5.5" rotation="270 0 0 " material="color: rgb(0,0,0); shader: flat"></a-plane>
       <a-plane id="fondohorno" scale="4 3 4" position="-5 1.5 -7.5" rotation="0 0 0" material="color: #4d4d4d; shader: flat"></a-plane>
       <a-plane id="lateral1horno" scale="4 3 4" position="-7 1.5 -5.5" rotation="0 90 0" material="color: grey; shader: flat"></a-plane>
       <a-plane id="lateral2horno" scale="4 3 4" position="-3 1.5 -5.5" rotation="0 270 0" material="color: grey; shader: flat"></a-plane>
       <a-plane id="techohorno" scale="4 4 4" position="-5 3 -5.5" rotation="90 0 0 " material="color: red; shader: flat"></a-plane>
 
 
-      <a-plane id="suelorefri" scale="4 4 4" position="2 0.01 -5.5" rotation="270 0 0 " material="color: blue; shader: flat"></a-plane>
+      <a-plane id="suelorefri" scale="4 4 4" position="2 0.01 -5.5" rotation="270 0 0 " material="color: rgb(0,0,255); shader: flat"></a-plane>
       <a-plane id="fondorefri" scale="4 3 4" position="2 1.5 -7.5" rotation="0 0 0" material="color: #4d4d4d; shader: flat"></a-plane>
       <a-plane id="lateral1refri" scale="4 3 4" position="0 1.5 -5.5" rotation="0 90 0" material="color: grey; shader: flat"></a-plane>
       <a-plane id="lateral2refri" scale="4 3 4" position="4 1.5 -5.5" rotation="0 270 0" material="color: grey; shader: flat"></a-plane>
@@ -88,6 +90,8 @@
       <a-entity id="mesa4" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-4 0 4" rotation="270 0 90"></a-entity>
       <a-entity id="tabla" obj-model="obj: #tabla-obj; mtl: #tabla-mtl" scale="0.0001 0.0001 0.0001" position="-13 1.5 0" rotation="270 0 90"></a-entity>
       <a-entity id="pizarra" obj-model="obj: #pizarra-obj; mtl: #pizarra-mtl" scale="0.012 0.008 0.009" position="0 0 9" rotation="270 0 0"></a-entity>
+        <a-text id="txtPizarra" position="1.6 2 8.9" value="Dilatacion Termica \n " scale="1 1 1" rotation="0 180 0"></a-text>
+
       <a-entity id="vaso" obj-model="obj: #vaso-obj; mtl: #vaso-mtl" scale="0.001 0.001 0.001" position="-3.7 0.73 3.7" rotation="270 0 90"></a-entity>
       <a-entity id="panelquimico" obj-model="obj: #panelquimico-obj; mtl: #panelquimico-mtl" scale="0.00025 0.00025 0.00025" position="0 -0.2 0" rotation="270 0 0"></a-entity>
       <a-entity id="sistemaquimico1" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="9.747582104015574 0 2.014189237890888" rotation="270 -90 0"></a-entity>
@@ -161,9 +165,9 @@
 
 
       <!-- etiquetas -->
-      <a-text id="cuHorno" position="-5.6 2 -3.3" value="Cu" scale="1 1 1" ></a-text>
-      <a-text id="AuHorno" position="-4.8 2 -3.3" value="Au" scale="1 1 1" ></a-text>
-      <a-text id="AgHorno" position="-4.0 2 -3.3" value="Ag" scale="1 1 1" ></a-text>
+      <a-text id="AuHorno" position="-5.6 3 -3.4" value="Cu" scale="1 1 1" visible='false'></a-text>
+      <a-text id="AgHorno" position="-4.8 3 -3.4" value="Au" scale="1 1 1" visible='false'></a-text>
+      <a-text id="CuHorno" position="-4.0 3 -3.4" value="Ag" scale="1 1 1" visible='false'></a-text>
 
 
       <!-- Inicio de Controles -->
@@ -189,7 +193,7 @@
     var sphere = document.querySelector("#sphere");
 		var initHeight = 1.5;
     //temperaturas
-		var temp = [200,5000,10000,20000,200,0,-150,-2730];
+		var temp = [200,5000,10000,20000,200,0,-1500,-2730];
 
     //btnes horno
     var btn1 = document.querySelector('#boton20horno');
@@ -197,11 +201,16 @@
     var btn3 = document.querySelector('#boton1000horno');
     var btn4 = document.querySelector('#boton2000horno');
 
+    var suelohorno = document.querySelector('#suelohorno');
+    var suelorefri = document.querySelector('#suelorefri');
+
     //btnes Frigorifico
     var btn5 = document.querySelector('#boton20frigorifico');
     var btn6 = document.querySelector('#boton0');
     var btn7 = document.querySelector('#boton150');
     var btn8 = document.querySelector('#boton273');
+
+    var suelorefri = document.querySelector('#suelorefri');
 
     //btnes Horno3D
     var btn9 = document.querySelector('#boton-273horno3d');
@@ -210,7 +219,17 @@
     //cambio de figura
     var btnCambio = document.querySelector('#cambioFigura');
 
-
+    class termicObject{
+      constructor(element){
+        this.alpha = element.alpha
+        this.color = element.color
+      }
+      assignElement(element){
+        this.alpha = element.alpha
+        this.color = element.color
+        return true
+      }
+    }
 
 		// alpha esta en unidad 10^-6 C°^-1
 		var coef = {
@@ -229,17 +248,17 @@
 			'hierro' : {alpha: 33.3, color: '#555D6E'},
 		}
 
-		cylinder1 = coef.oro
+		cylinder1 = new termicObject(coef.oro)
 		cylinder1.dom = document.querySelector("#cylinder1");
-		cylinder2 = coef.plata
+		cylinder2 = new termicObject(coef.plata)
 		cylinder2.dom = document.querySelector("#cylinder2");
-		cylinder3 = coef.cobre
+		cylinder3 =new termicObject(coef.cobre)
 		cylinder3.dom = document.querySelector("#cylinder3");
-    cylinder4 = {alpha: 14, color: '#D7C505'}
+    cylinder4 = new termicObject(coef.oro)
 		cylinder4.dom = document.querySelector("#cylinder4");
-		cylinder5 = {alpha: 19, color: '#9D9D9D'}
+		cylinder5 = new termicObject(coef.plata)
 		cylinder5.dom = document.querySelector("#cylinder5");
-		cylinder6 = {alpha: 17, color: '#D17813'}
+		cylinder6 = new termicObject(coef.cobre)
 		cylinder6.dom = document.querySelector("#cylinder6");
 
 		volume1 = coef_vol.oro
@@ -273,6 +292,10 @@
     })
 
     teleportinicio.addEventListener('click', function(){
+      $("#cameraWrapper").object3D.position.set(0,0,3);
+    })
+
+    $('#volverInicio').addEventListener('click', function(){
       $("#cameraWrapper").object3D.position.set(0,0,3);
     })
 
@@ -377,14 +400,20 @@
 		function changeLength(temp,tipo){
       if(tipo == 0){
         length4 = getLength(initHeight,cylinder4,temp);
-  			length5 = getLength(initHeight,cylinder5,temp);
-  			length6 = getLength(initHeight,cylinder6,temp);
+        length5 = getLength(initHeight,cylinder5,temp);
+        length6 = getLength(initHeight,cylinder6,temp);
+        $('#CuHorno').setAttribute('value','Cu\n'+length4+'[m]');
+        $('#AuHorno').setAttribute('value','Cu\n'+length5+'[m]');
+        $('#AgHorno').setAttribute('value','Cu\n'+length6+'[m]');
         cylinder4.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length4);
         cylinder5.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length5);
         cylinder6.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length6);
         cylinder4.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length4/2);
         cylinder5.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length5/2);
         cylinder6.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length6/2);
+        console.log(backgroundColor(temp,tipo));
+        suelohorno.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp,tipo));
+
       }
       if(tipo == 1){
         length1 = getLength(initHeight,cylinder1,temp);
@@ -396,6 +425,8 @@
         cylinder1.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1/2);
   			cylinder2.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2/2);
   			cylinder3.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3/2);
+        console.log(backgroundColor(temp,tipo));
+        suelorefri.setAttribute('animation__color',"property: material.color; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+backgroundColor(temp,tipo));
       }
 
 		}
@@ -407,13 +438,7 @@
 			return L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp)
 		}
 
-		function backgroundColor(t_act) {
-			t_max = temp[2];
-			red = Math.round((t_act * 255)/t_max);
-			blue = 255 - red;
-			result = 'rgb('+red+',0,'+blue+')'
-			return result;
-		}
+
 
 		function changeVolume(temp){
 			//vol1 : la esfera
@@ -447,6 +472,30 @@
 			obj.dom.setAttribute('animation__depth',"property: geometry.depth; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+z_);
 			obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+new_y);
 			return true
+		}
+
+
+    /*
+     * tipo { 0 : horno , 1 : Frigorifico  }
+     */
+    function backgroundColor(t_act,tipo) {
+			t_max = temp[3];
+			t_min = temp[7];
+			if (tipo==0){
+				red = Math.round((t_act * 255)/t_max);
+				blue = 255 - red;
+				result = 'rgb('+red+',0,0)'
+			}
+			else {
+        if(t_act > 0){
+            t_act=0;
+
+        }
+				white = Math.round((t_act * 255)/t_min);
+				//white = 255 - white;
+				result = 'rgb('+white+','+white+','+255+')'
+			}
+			return result;
 		}
 
 		function changeVolumeSphere(final_volume,obj){
