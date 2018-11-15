@@ -45,6 +45,15 @@ export class Experiencia1Page {
     });
     
   } 
+
+  mostrarMensaje(text) {     
+    let alert = this.alertCtrl.create({
+      title: 'Mensaje',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
   
   openExpPage() {
     let alert = this.alertCtrl.create({
@@ -61,6 +70,10 @@ export class Experiencia1Page {
     });
     alert.present();
   }
+
+  openPopupPrueba() {
+    this.mostrarMensaje("Ya has rendido esta prueba.\nTu nota fue: "+this.nota.toString());
+}
 
   loadExp() {
   console.log("Loading experience...");

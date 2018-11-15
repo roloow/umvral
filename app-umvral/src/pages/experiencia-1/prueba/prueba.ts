@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../../providers/umvral-api/umvral-api';
 
 @Component({
@@ -16,7 +16,8 @@ export class HelpPrueba1Page {
     nota:number;
 
     constructor(public navCtrl: NavController,
-                public umvralApiProvider: UmvralApiProvider) {
+                public umvralApiProvider: UmvralApiProvider,
+                public alertCtrl: AlertController) {
                     this.preguntas = umvralApiProvider.preguntas;
     }
     
@@ -25,7 +26,16 @@ export class HelpPrueba1Page {
         console.log(respU);
         this.respuestas[valor] = respU;
         console.log(this.respuestas);
-    } 
+    }
+
+    mostrarMensaje(text) {     
+        let alert = this.alertCtrl.create({
+          title: 'Mensaje',
+          subTitle: text,
+          buttons: ['OK']
+        });
+        alert.present();
+      }
 
     enviar(){
         this.contador = 0;
@@ -44,7 +54,8 @@ export class HelpPrueba1Page {
         console.log(this.nota);
         this.umvralApiProvider.subirNota(this.nota);
         
-        
+        this.mostrarMensaje("Tu nota es: "+this.nota.toString());
+        this.navCtrl.pop();
     }
 
 }
