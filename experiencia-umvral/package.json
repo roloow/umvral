@@ -10,9 +10,9 @@
   "devDependencies": {
     "browserify": "^12.0.1",
     "budo": "^7.1.0",
+    "ghpages": "0.0.10",
     "shelljs": "^0.6.0",
-    "webpack": "^1.12.9",
-    "ghpages": "0.0.3"
+    "webpack": "^1.12.9"
   },
   "keywords": [
     "aframe",
