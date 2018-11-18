@@ -49,6 +49,9 @@
         <a-asset-item id="puerta-mtl" src="/objetos/puerta_lab.mtl"></a-asset-item>
         <a-asset-item id="ventana-obj" src="/objetos/ventana_lab.obj"></a-asset-item>
         <a-asset-item id="ventana-mtl" src="/objetos/ventana_lab.mtl"></a-asset-item>
+        <a-asset-item id="reja-obj" src="/objetos/reja_lab.obj"></a-asset-item>
+        <a-asset-item id="reja-mtl" src="/objetos/reja_lab.mtl"></a-asset-item>
+
       </a-assets>
 
 
@@ -90,7 +93,11 @@
       <a-entity id="mesa4" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-4 0 4" rotation="270 0 90"></a-entity>
       <a-entity id="tabla" obj-model="obj: #tabla-obj; mtl: #tabla-mtl" scale="0.0001 0.0001 0.0001" position="-13 1.5 0" rotation="270 0 90"></a-entity>
       <a-entity id="pizarra" obj-model="obj: #pizarra-obj; mtl: #pizarra-mtl" scale="0.012 0.008 0.009" position="0 0 9" rotation="270 0 0"></a-entity>
-        <a-text id="txtPizarra" position="1.6 2 8.9" value="Dilatacion Termica \n " scale="1 1 1" rotation="0 180 0"></a-text>
+
+      <a-text id="txtPizarra" position="1.6 2 8.9" value="Dilatacion Termica \n " scale="1 1 1" rotation="0 180 0"></a-text>
+
+      <a-entity id="reja1" obj-model="obj: #reja-obj; mtl: #reja-mtl" scale="0.01 0.001 0.01" position="1.8 0.015 -3.9" rotation="180 0 0"></a-entity>
+      <a-entity id="reja2" obj-model="obj: #reja-obj; mtl: #reja-mtl" scale="0.01 0.001 0.01" position="-5 0.015 -3.9" rotation="180 0 0"></a-entity>
 
       <a-entity id="vaso" obj-model="obj: #vaso-obj; mtl: #vaso-mtl" scale="0.001 0.001 0.001" position="-3.7 0.73 3.7" rotation="270 0 90"></a-entity>
       <a-entity id="panelquimico" obj-model="obj: #panelquimico-obj; mtl: #panelquimico-mtl" scale="0.00025 0.00025 0.00025" position="0 -0.2 0" rotation="270 0 0"></a-entity>
@@ -109,7 +116,7 @@
       <!-- Fin btn Horno  -->
 
       <!-- btn Frigorifico  -->
-      <a-button id="botonfrigorifico" scale="2 2 2" position="1 3 -3.499" value="Frigorifico" button="buttonColor:#fd0e0b"></a-button>
+      <a-button id="botonfrigorifico" scale="2 2 2" width="1.2" position="0.6 3 -3.499" value="Frigorifico" button="buttonColor:#fd0e0b"></a-button>
       <a-button id="boton20frigorifico" scale="1.05 1 1" position ="-0.8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
       <a-button id="boton0" scale="1.1 1 1" position ="-0.8 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 0 C"></a-button>
       <a-button id="boton150" scale="1 1 1" position ="-0.8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-150 C"></a-button>
@@ -148,13 +155,13 @@
 
 			<a-entity id="cylinders">
         <!-- Frigorifico -->
-				<a-cylinder id="cylinder1" position="1.2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-				<a-cylinder id="cylinder2" position="2 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-				<a-cylinder id="cylinder3" position="2.8 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder1" position="1.2 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder2" position="2 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder3" position="2.8 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
         <!-- horno -->
-        <a-cylinder id="cylinder4" position="-5.6 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-				<a-cylinder id="cylinder5" position="-4.8 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
-				<a-cylinder id="cylinder6" position="-4 0.75 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+        <a-cylinder id="cylinder4" position="-5.6 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder5" position="-4.8 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder6" position="-4 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
       </a-entity>
 
       <a-entity id="volumes">
@@ -165,10 +172,13 @@
 
 
       <!-- etiquetas -->
-      <a-text id="AuHorno" position="-5.6 3 -3.4" value="Cu" scale="1 1 1" visible='false'></a-text>
-      <a-text id="AgHorno" position="-4.8 3 -3.4" value="Au" scale="1 1 1" visible='false'></a-text>
-      <a-text id="CuHorno" position="-4.0 3 -3.4" value="Ag" scale="1 1 1" visible='false'></a-text>
+      <a-text id="AuHorno" class='etiquetas' position="-6 1 -3.4" value="Au" scale="1 1 1" visible='false'></a-text>
+      <a-text id="AgHorno" class='etiquetas' position="-5.6 1 -3.4" value="Ag" scale="1 1 1" visible='false'></a-text>
+      <a-text id="CuHorno" class='etiquetas' position="-5.2 1 -3.4" value="Cu" scale="1 1 1" visible='false'></a-text>
 
+      <a-text id="AuFrigorifico" class='etiquetas' position="1 1 -3.4" value="Au" scale="1 1 1" visible='false'></a-text>
+      <a-text id="AgFrigorifico" class='etiquetas' position="1.5 1 -3.4" value="Ag" scale="1 1 1" visible='false'></a-text>
+      <a-text id="CuFrigorifico" class='etiquetas' position="2  1 -3.4" value="Cu" scale="1 1 1" visible='false'></a-text>
 
       <!-- Inicio de Controles -->
       <a-entity id='cameraWrapper' position="0 0 3">
@@ -248,16 +258,22 @@
 			'hierro' : {alpha: 33.3, color: '#555D6E'},
 		}
 
+    //oro congelador
 		cylinder1 = new termicObject(coef.oro)
 		cylinder1.dom = document.querySelector("#cylinder1");
+    //plata congelador
 		cylinder2 = new termicObject(coef.plata)
 		cylinder2.dom = document.querySelector("#cylinder2");
+    //cobre congelador
 		cylinder3 =new termicObject(coef.cobre)
 		cylinder3.dom = document.querySelector("#cylinder3");
+    //oro horno
     cylinder4 = new termicObject(coef.oro)
 		cylinder4.dom = document.querySelector("#cylinder4");
+    //plata horno
 		cylinder5 = new termicObject(coef.plata)
 		cylinder5.dom = document.querySelector("#cylinder5");
+    //cobre horno
 		cylinder6 = new termicObject(coef.cobre)
 		cylinder6.dom = document.querySelector("#cylinder6");
 
@@ -311,7 +327,43 @@
       }
     })
 
+    cylinder1.dom.addEventListener('click',function(){
+      oculatarEtiquetas();
+      document.querySelector('#AuFrigorifico').setAttribute('visible',true);
 
+    })
+
+    cylinder2.dom.addEventListener('click',function(){
+      oculatarEtiquetas();
+      document.querySelector('#AgFrigorifico').setAttribute('visible',true);
+
+    })
+
+    cylinder3.dom.addEventListener('click',function(){
+      oculatarEtiquetas();
+      document.querySelector('#CuFrigorifico').setAttribute('visible',true);
+
+    })
+
+
+
+    cylinder4.dom.addEventListener('click',function(){
+      oculatarEtiquetas();
+      document.querySelector('#AuHorno').setAttribute('visible',true);
+
+    })
+
+    cylinder5.dom.addEventListener('click',function(){
+      oculatarEtiquetas();
+      document.querySelector('#AgHorno').setAttribute('visible',true);
+
+    })
+
+    cylinder6.dom.addEventListener('click',function(){
+      oculatarEtiquetas();
+      document.querySelector('#CuHorno').setAttribute('visible',true);
+
+    })
 
 
     //horno 20
@@ -390,10 +442,21 @@
 			//btn1.setAttribute('value',temp[0]+'°');
 			//btn2.setAttribute('value',temp[1]+'°');
 			//btn3.setAttribute('value',temp[2]+'°');
+      $('#CuHorno').setAttribute('value','Cu\n 1.5[m]');
+      $('#AuHorno').setAttribute('value','Au\n 1.5[m]');
+      $('#AgHorno').setAttribute('value','Ag\n 1.5[m]');
 			volume1.dom.setAttribute('color',volume1.color);
 			volume2.dom.setAttribute('color',volume2.color);
 		}
 
+
+    function oculatarEtiquetas(){
+      var etiquetados = document.querySelectorAll('.etiquetas');
+      console.log(etiquetados);
+      for(item of etiquetados){
+        item.setAttribute('visible','false');
+      }
+    }
     /*
      * tipo { 0 : horno , 1 : Frigorifico  }
      */
@@ -402,9 +465,12 @@
         length4 = getLength(initHeight,cylinder4,temp);
         length5 = getLength(initHeight,cylinder5,temp);
         length6 = getLength(initHeight,cylinder6,temp);
-        $('#CuHorno').setAttribute('value','Cu\n'+length4+'[m]');
-        $('#AuHorno').setAttribute('value','Cu\n'+length5+'[m]');
-        $('#AgHorno').setAttribute('value','Cu\n'+length6+'[m]');
+        REALlength4 = getLengthReal(initHeight,cylinder4,temp);
+        REALlength5 = getLengthReal(initHeight,cylinder5,temp);
+        REALlength6 = getLengthReal(initHeight,cylinder6,temp);
+        $('#CuHorno').setAttribute('value','Cu\n'+REALlength6+'[m]');
+        $('#AuHorno').setAttribute('value','Au\n'+REALlength4+'[m]');
+        $('#AgHorno').setAttribute('value','Ag\n'+REALlength5+'[m]');
         cylinder4.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length4);
         cylinder5.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length5);
         cylinder6.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length6);
@@ -419,6 +485,12 @@
         length1 = getLength(initHeight,cylinder1,temp);
         length2 = getLength(initHeight,cylinder2,temp);
         length3 = getLength(initHeight,cylinder3,temp);
+        REALlength1 = getLengthReal(initHeight,cylinder1,temp);
+        REALlength2 = getLengthReal(initHeight,cylinder2,temp);
+        REALlength3 = getLengthReal(initHeight,cylinder3,temp);
+        $('#CuFrigorifico').setAttribute('value','Cu\n'+REALlength3+'[m]');
+        $('#AuFrigorifico').setAttribute('value','Au\n'+REALlength1+'[m]');
+        $('#AgFrigorifico').setAttribute('value','Ag\n'+REALlength2+'[m]');
         cylinder1.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length1);
         cylinder2.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length2);
         cylinder3.dom.setAttribute('animation',"property: height; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+length3);
@@ -431,7 +503,16 @@
 
 		}
 
+
+    function getLengthReal(L_o, obj, temp){
+      temp = temp/10;
+      console.log(L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp));
+      console.log(obj.alpha);
+			return L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp)
+		}
+
 		function getLength(L_o, obj, temp){
+      oculatarEtiquetas();
       console.log(L_o + (obj.alpha*Math.pow(10,-6)*L_o*temp));
       console.log(obj.alpha);
 
@@ -443,6 +524,7 @@
 		function changeVolume(temp){
 			//vol1 : la esfera
 			//vol2 : el cubo
+      oculatarEtiquetas();
 			sphere = volume1.original
 			cube = volume2.original
 			vol1_ = (4/3)*Math.PI*Math.pow(sphere.radius, 3)
