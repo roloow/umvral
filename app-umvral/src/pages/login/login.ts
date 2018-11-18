@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { RegisterUserPage } from '../register-user/register-user';
-import { HomePage } from '../home/home';
+import { CursosPage } from '../cursos/cursos';
 
 /**
  * Generated class for the LoginPage page.
@@ -46,7 +46,7 @@ export class LoginPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(CursosPage);
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("FAIL");
