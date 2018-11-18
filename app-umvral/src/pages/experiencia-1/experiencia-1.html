@@ -10,10 +10,13 @@
 
 <ion-content padding class="experiencia-content">
     <ion-list> 
-        <button ion-button color="secondary" (click)="openMateriaPage()" block>Materia</button>
-        <button ion-button color="secondary" (click)="openExpPage()" block>Iniciar Experiencia</button>
-        <div *ngIf="prueba!='Null'">
-            <button ion-button color="secondary" block> Prueba {{prueba}} </button>
+        <button ion-button color="primary" (click)="openMateriaPage()" block>Materia</button>
+        <button ion-button color="primary" (click)="openExpPage()" block>Iniciar Experiencia</button>
+        <div *ngIf="prueba!='Null' && answer!='Null'">
+            <button ion-button color="primary" (click)="openPopupPrueba()" block> Prueba {{prueba}}</button>
+        </div>
+        <div *ngIf="prueba!='Null' && answer=='Null'">
+            <button ion-button color="primary" (click)="openPruebaPage()" block> Prueba {{prueba}} </button>
         </div>
         <div *ngIf="prueba=='Null'">
             <button ion-button color="light" block>Prueba</button>
