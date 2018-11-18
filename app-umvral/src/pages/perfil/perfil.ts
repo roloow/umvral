@@ -44,7 +44,7 @@ export class PerfilPage {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
 
   getUserData() {
