@@ -1,0 +1,78 @@
+{% extends "web/base_page.html" %}
+{% load static %}
+{% block title %}
+Agregar experiencia
+{% endblock %}
+{% block breadcrumb %}
+<li>
+    <a href="{% url 'web:myexps' client_id %}"><span>Mis Experiencias disponibles</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+    <span>Editar experiencia</span>
+</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+        {% if Ok %}
+        <div class="alert alert-success">
+            <strong>Éxito</strong> El video ha cambiado correctamente. </div>
+        {% endif %}
+        {% if Bad %}
+    <div class="alert alert-danger">
+        <strong>Error</strong> El video no ha cambiado correctamente. </div>
+    {% endif %}
+  <div class="col-md-12 ">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+      <div class="portlet-body form">
+        <form class="form-horizontal" action="{% url 'web:editexps' client_id ava.pk %}" role="form" method="POST">
+        {% csrf_token %}
+        <div class="form-body">
+          <div>
+            <h3>Cambie el video referenciado en la experiencia</h3>
+          </div>
+          <div>
+            <br><br>
+            <center>
+                <iframe width="300" height="169" src="https://www.youtube.com/embed/{{ava.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </center><br><br>
+          </div>
+          <div class="form-group {% if error_1 %}has-error{% endif %}">
+            <label class="col-md-3 control-label">Experiencias<span class="required"> * </span></label>
+            <div class="col-md-9">
+              <select class="bs-select form-control" name="exp" data-live-search="true" data-size="8" tabindex="-98">
+                <option value="{{ava.pk}}" selected disabled>{{ava.experience.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group {% if error_2 %}has-error{% endif %}">
+            <label class="col-md-3 control-label">
+              URL del video<span class="required"> * </span>
+            </label>
+            <div class="col-md-9">
+              <input id="video" name="video" type="text"
+                     class="form-control input-large"
+                     placeholder="Ej. https://www.youtube.com/watch?v=y-TMHR0f8nY"
+                     value="https://www.youtube.com/watch?v={{ava.video}}">
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <button type="submit" class="btn green">
+                <i class="icon-note"></i>
+                Cambiar video
+              </button>
+              <a href="{% url 'web:myexps' client_id %}" class="btn default">Cancelar</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- END SAMPLE FORM PORTLET-->
+</div>
+</div>
+{% endblock %}

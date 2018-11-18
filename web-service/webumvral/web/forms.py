@@ -18,13 +18,22 @@ class SupportForm(forms.Form):
             raise forms.ValidationError('Tienes que escribir algo!')
 
 class ExperienceForm(forms.Form):
+
     nombre = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=254)
     nombre_experiencia = forms.CharField(max_length=254)
+    nivel = forms.ChoiceField(choices=[])
+    contenido = forms.ChoiceField(choices=[])
     mensaje = forms.CharField(
         max_length=10000,
         widget=forms.Textarea(),
         help_text='Describe como debe ser tu experiencia.'
+    )
+    interaccion = forms.CharField(
+        max_length=10000,
+        widget=forms.Textarea(),
+        help_text='Describe como el estudiante realiza la interacción',
+        label="Interacción"
     )
 
     def clean(self):
