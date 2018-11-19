@@ -1,4 +1,4 @@
-<ion-header no-border>
+<!--<ion-header no-border>
   <ion-navbar transparent>
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -37,4 +37,11 @@
       </ion-row>
     </ion-grid>
 
-</ion-footer>
+</ion-footer>-->
+
+<ion-tabs #tabmenu tabsHighlight=true tabsLayout="icon-top" tabsPlacement="bottom" main name="app" swipeBackEnabled="true">
+    <ion-tab [root]="cursosRoot" tabTitle="Cursos" tabIcon="school"></ion-tab>
+    <ion-tab [root]="mensajesRoot" tabTitle="Mensajes" tabIcon="paper-plane"></ion-tab>
+    <ion-tab [root]="notasRoot" tabTitle="Notas" tabIcon="book"></ion-tab>
+    <ion-tab [root]="perfilRoot" tabTitle="Perfil" tabIcon="contact"></ion-tab>
+  </ion-tabs>

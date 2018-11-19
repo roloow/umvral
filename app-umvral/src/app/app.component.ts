@@ -20,6 +20,7 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
 export class ConferenceApp {
   // the root nav is a child of the root app component
   // @ViewChild(Nav) gets a reference to the app's root nav
+  //@ViewChild(Nav) nav: Nav;
   @ViewChild(Nav) nav: Nav;
 
   // List of pages that can be navigated to from the left menu
@@ -35,8 +36,7 @@ export class ConferenceApp {
     public umvralApiProvider: UmvralApiProvider
   ) {
     // Check if the user has already seen the tutorial
-    this.isLoggedIn = false;
-    if (this.getLoggedInStatus) {
+    if (!umvralApiProvider.isUserLoggedIn()) {
       console.log("usuario no ha iniciado sesión.");
       this.rootPage = LoginPage;
     } else {
@@ -44,9 +44,10 @@ export class ConferenceApp {
       this.rootPage = ExperienceListPage;
     }
     
-
-    this.platform.ready().then(() => {
-      this.splashScreen.hide();
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      splashScreen.hide();
     });
   }
 
