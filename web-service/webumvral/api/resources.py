@@ -15,6 +15,7 @@ from tastypie.authentication import Authentication
 from django.conf.urls import url
 from tastypie.utils import trailing_slash
 from tastypie.http import HttpUnauthorized, HttpForbidden
+from django.utils import timezone
 
 
 #Experiencia
@@ -49,6 +50,14 @@ class ExperienceResource(ModelResource):
     def curso(self,request, **kwargs):
         self.method_check(request, allowed=['post'])
         student_id=request.POST.get('student_id','')
+
+        #revisar por si hay expCourse visible false pero con fecha en que debe estar visible
+        exCo = ExpCourseModel.objects.filter(visible = False).exclude(date_visible = None)
+        for e in exCo:
+            if e.date_visible <= timezone.now():
+                e.visible = True
+                e.save()
+        # fin revision de fecha
         try:
             st = StudentModel.objects.get(pk=student_id)
         except:
@@ -121,7 +130,7 @@ class ExperienceResource(ModelResource):
             'exp_course_id': exp_course_id,
             'video_url': expCourse.available.video
             })
-            
+
     def test(self,request, **kwargs):
         self.method_check(request, allowed=['post'])
         student_id=request.POST.get('student_id','')
