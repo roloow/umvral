@@ -33,6 +33,7 @@ gulp.task('js_exp1', function() {
 gulp.task('js_exp2', function() {
   return gulp.src('./assets/javascripts/exp2_v2.js')
     // Minify the file
+	  //.pipe(rename("exp2_v2.min.js"))
     .pipe(uglify())
     // Output
     .pipe(gulp.dest('./assets/javascripts/dist'))
