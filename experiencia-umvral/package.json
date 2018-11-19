@@ -1,26 +1,32 @@
 {
-  "name": "aframe-material-boilerplate",
-  "description": "Boilerplate for aframe-material",
-  "version": "1.0.03",
-  "license": "MIT",
-  "repository": "etiennepinchon/aframe-rounded",
-  "scripts": {
-    "start": "budo --live --verbose --port 3000 --open"
-  },
-  "devDependencies": {
-    "browserify": "^12.0.1",
-    "budo": "^7.1.0",
-    "ghpages": "0.0.10",
-    "shelljs": "^0.6.0",
-    "webpack": "^1.12.9"
-  },
-  "keywords": [
-    "aframe",
-    "aframe-component",
-    "webvr",
-    "vr"
-  ],
-  "dependencies": {
-    "aframe-physics-system": "^3.1.2"
-  }
+	"name": "aframe-material-boilerplate",
+	"description": "Boilerplate for aframe-material",
+	"version": "1.0.03",
+	"license": "MIT",
+	"repository": "etiennepinchon/aframe-rounded",
+	"scripts": {
+		"start": "budo --live --verbose --port 3000 --open",
+		"build": "webpack -p",
+		"watch": "webpack --watch"
+	},
+	"devDependencies": {
+		"browserify": "^12.0.1",
+		"budo": "^7.1.0",
+		"del": "^2.0.2",
+		"ghpages": "0.0.10",
+		"gulp": "^3.9.0",
+		"gulp-uglify-es": "^1.0.4",
+		"run-sequence": "^1.2.2",
+		"shelljs": "^0.6.0"
+	},
+	"keywords": [
+		"aframe",
+		"aframe-component",
+		"webvr",
+		"vr"
+	],
+	"dependencies": {
+		"aframe-physics-system": "^3.1.2",
+		"uglify-js": "^3.4.9"
+	}
 }
