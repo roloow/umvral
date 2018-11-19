@@ -7,6 +7,7 @@ from web.models import StudentModel
 from web.models import CourseModel
 from web.models import CalificationModel
 from web.models import ExpCourseModel
+from web.models import MetricModel
 from web.models import AnswerModel
 from web.models import ConfigurationModel
 from web.models import TestModel
@@ -16,6 +17,7 @@ from tastypie.authentication import Authentication
 from django.conf.urls import url
 from tastypie.utils import trailing_slash
 from tastypie.http import HttpUnauthorized, HttpForbidden
+import json
 
 
 #Experiencia
@@ -401,3 +403,52 @@ class ExpcourseResource(ModelResource):
         authentication = Authentication()
         authorization = Authorization()
         #allowed_methods = ['get']
+
+
+#Metricas Experiencias
+class MetricResource(ModelResource):
+    class Meta:
+        queryset = MetricModel.objects.all()
+        resource_name = 'metric'
+        authentication = Authentication()
+        authorization = Authorization()
+        #allowed_methods = ['get']
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/post%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('crearMetrica'), name="crear_metrica"),
+        ]
+
+    def crearMetrica(self, request, **kwargs):
+        print(request.POST)
+        data = json.loads(request.POST['json'])
+        print(data['student_id'])
+        self.method_check(request, allowed=['post'])
+        student_id = data.get('student_id','')
+        experience = data.get('experience_id',None)
+        slug = data.get('slug','')
+        value = data.get('value',None)
+        value_num = data.get('value_num',None)
+        try:
+            student = StudentModel.objects.get(pk=student_id)
+        except:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'error':'incorrecto'
+                })
+        metric, created = MetricModel.objects.get_or_create(
+            experience_id=experience,
+            student_id=student_id,
+            slug=slug,
+            defaults={'value_num': 0}
+        )
+        metric.value_num = metric.value_num + 1
+        metric.save()
+        return self.create_response(request, {
+            'student': student_id,
+            'slug': slug,
+            'value': value,
+            'value_num': value_num
+            })

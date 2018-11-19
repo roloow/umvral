@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>umVRal - Dilatacion Termica</title>
+    <meta name="description" content="Experiencia VR Dilatación Termica.">
+
+    <script src="assets/javascripts/aframe.min.js"></script>
+    <script src="assets/javascripts/aframe-mouse-cursor-component.min.js"></script>
+		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
+    <script src="assets/javascripts/aframe-material.min.js"></script>
+    <script src="assets/javascripts/aframe-extras.min.js"></script>
+    <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
+    <script src="assets/javascripts/moment-with-locales.js"></script>
+    <script src="assets/javascripts/aframe-environment-component.min.js"></script>
+    <script src="assets/javascripts/aframe-animation-component.min.js"></script>
+    <script src="assets/javascripts/aframe-slice9-component.min.js"></script>
+
+    <script type="text/javascript">
+      $ = (sel) => document.querySelector(sel)
+      $$ = (sel) => document.querySelectorAll(sel)
+      on = (elem, type, hand) => elem.addEventListener(type,hand)
+    </script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
+  </head>
+  <body>
+    <!-- Inicio Marco -->
+    <a-scene id="source" cursor="rayOrigin: mouse" physics="driver: local; iterations: 100;">
+      <a-assets>
+        <a-asset-item id="panel-obj" src="/objetos/meson.obj"></a-asset-item>
+        <a-asset-item id="panel-mtl" src="/objetos/meson.mtl"></a-asset-item>
+        <a-asset-item id="panelquimico-obj" src="/objetos/panelquimico.obj"></a-asset-item>
+        <a-asset-item id="panelquimico-mtl" src="/objetos/panelquimico.mtl"></a-asset-item>
+        <a-asset-item id="pared-obj" src="/objetos/paredlineal.obj"></a-asset-item>
+        <a-asset-item id="pared-mtl" src="/objetos/paredlineal.mtl"></a-asset-item>
+        <a-asset-item id="horno-obj" src="/objetos/horno.obj"></a-asset-item>
+        <a-asset-item id="horno-mtl" src="/objetos/horno.mtl"></a-asset-item>
+        <a-asset-item id="paredcircular-obj" src="/objetos/paredcircular.obj"></a-asset-item>
+        <a-asset-item id="paredcircular-mtl" src="/objetos/paredcircular.mtl"></a-asset-item>
+        <a-asset-item id="sistemaquimico-obj" src="/objetos/sistemaquimico.obj"></a-asset-item>
+        <a-asset-item id="sistemaquimico-mtl" src="/objetos/sistemaquimico.mtl"></a-asset-item>
+
+        <a-asset-item id="pizarra-obj" src="/objetos/pizarra.obj"></a-asset-item>
+        <a-asset-item id="pizarra-mtl" src="/objetos/pizarra.mtl"></a-asset-item>
+        <a-asset-item id="vaso-obj" src="/objetos/vasoquimico.obj"></a-asset-item>
+        <a-asset-item id="vaso-mtl" src="/objetos/vasoquimico.mtl"></a-asset-item>
+        <a-asset-item id="tabla-obj" src="/objetos/tablaperiodica.obj"></a-asset-item>
+        <a-asset-item id="tabla-mtl" src="/objetos/tablaperiodica.mtl"></a-asset-item>
+        <a-asset-item id="puerta-obj" src="/objetos/puerta_lab.obj"></a-asset-item>
+        <a-asset-item id="puerta-mtl" src="/objetos/puerta_lab.mtl"></a-asset-item>
+        <a-asset-item id="ventana-obj" src="/objetos/ventana_lab.obj"></a-asset-item>
+        <a-asset-item id="ventana-mtl" src="/objetos/ventana_lab.mtl"></a-asset-item>
+        <a-asset-item id="reja-obj" src="/objetos/reja_lab.obj"></a-asset-item>
+        <a-asset-item id="reja-mtl" src="/objetos/reja_lab.mtl"></a-asset-item>
+
+      </a-assets>
+
+
+
+
+      <a-assets>
+        <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+      </a-assets>
+
+
+
+      <a-entity id="env" environment="active: true; preset: dream; skyType: atmosphere; ground: hills; playArea: 5; dressingAmount: 0; fog: 0.5;skyColor:#000000;lightPosition:0 1 0;groundYScale:1;groundTexture:checkerboard;groundColor:#4d4d4d;groundColor2:#ffffff;"></a-entity>
+
+
+      <a-plane id="techo" scale="50 50 50 " position="0 3.9 0" rotation="90 0 0 " material="color: white; shader: flat"></a-plane>
+
+      <a-plane id="suelohorno" scale="4 4 4" position="-5 0.01 -5.5" rotation="270 0 0 " material="color: rgb(0,0,0); shader: flat"></a-plane>
+      <a-plane id="fondohorno" scale="4 3 4" position="-5 1.5 -7.5" rotation="0 0 0" material="color: #4d4d4d; shader: flat"></a-plane>
+      <a-plane id="lateral1horno" scale="4 3 4" position="-7 1.5 -5.5" rotation="0 90 0" material="color: grey; shader: flat"></a-plane>
+      <a-plane id="lateral2horno" scale="4 3 4" position="-3 1.5 -5.5" rotation="0 270 0" material="color: grey; shader: flat"></a-plane>
+      <a-plane id="techohorno" scale="4 4 4" position="-5 3 -5.5" rotation="90 0 0 " material="color: red; shader: flat"></a-plane>
+
+
+      <a-plane id="suelorefri" scale="4 4 4" position="2 0.01 -5.5" rotation="270 0 0 " material="color: rgb(0,0,255); shader: flat"></a-plane>
+      <a-plane id="fondorefri" scale="4 3 4" position="2 1.5 -7.5" rotation="0 0 0" material="color: #4d4d4d; shader: flat"></a-plane>
+      <a-plane id="lateral1refri" scale="4 3 4" position="0 1.5 -5.5" rotation="0 90 0" material="color: grey; shader: flat"></a-plane>
+      <a-plane id="lateral2refri" scale="4 3 4" position="4 1.5 -5.5" rotation="0 270 0" material="color: grey; shader: flat"></a-plane>
+      <a-plane id="techorefri" scale="4 4 4" position="2 3 -5.5" rotation="90 0 0 " material="color: blue; shader: flat"></a-plane>
+
+      <!-- adornos  -->
+      <a-entity id="puerta1" obj-model="obj: #puerta-obj; mtl: #puerta-mtl" scale="0.009 0.008 0.007" position="7.5 -0.1 9.95" rotation="270 0 180"></a-entity>
+      <a-entity id="puerta2" obj-model="obj: #puerta-obj; mtl: #puerta-mtl" scale="0.009 0.008 0.007" position="10 -0.1 7.5" rotation="270 0 -90"></a-entity>
+      <a-entity id="ventana1" obj-model="obj: #ventana-obj; mtl: #ventana-mtl" scale="0.003 0.003 0.003" position="-13.02 3.2 7.1" rotation="270 0 90"></a-entity>
+      <a-entity id="ventana2" obj-model="obj: #ventana-obj; mtl: #ventana-mtl" scale="0.003 0.003 0.003" position="-13.02 3.2 0.114" rotation="270 0 90"></a-entity>
+      <a-entity id="ventana3" obj-model="obj: #ventana-obj; mtl: #ventana-mtl" scale="0.003 0.003 0.003" position="-4.3 3.2 9.9" rotation="270 0 0"></a-entity>
+      <a-entity id="ventana4" obj-model="obj: #ventana-obj; mtl: #ventana-mtl" scale="0.003 0.003 0.003" position="3 3.2 9.9" rotation="270 0 0"></a-entity>
+      <a-entity id="mesa1" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="4 0 4" rotation="270 0 90"></a-entity>
+      <!--a-entity id="mesa2" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="0 0 7" rotation="270 0 0"></a-entity-->
+      <a-entity id="mesa3" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-9.5 0 4" rotation="270 0 90"></a-entity>
+      <a-entity id="mesa4" obj-model="obj: #panel-obj; mtl: #panel-mtl" scale="0.001 0.001 0.001" position="-4 0 4" rotation="270 0 90"></a-entity>
+      <a-entity id="tabla" obj-model="obj: #tabla-obj; mtl: #tabla-mtl" scale="0.0001 0.0001 0.0001" position="-13 1.5 0" rotation="270 0 90"></a-entity>
+      <a-entity id="pizarra" obj-model="obj: #pizarra-obj; mtl: #pizarra-mtl" scale="0.012 0.008 0.009" position="0 0 9" rotation="270 0 0"></a-entity>
+
+      <a-text id="txtPizarra" position="1.6 2 8.9" value="Dilatacion Termica \n " scale="1 1 1" rotation="0 180 0"></a-text>
+
+      <a-entity id="reja1" obj-model="obj: #reja-obj; mtl: #reja-mtl" scale="0.01 0.001 0.01" position="1.8 0.015 -3.9" rotation="180 0 0"></a-entity>
+      <a-entity id="reja2" obj-model="obj: #reja-obj; mtl: #reja-mtl" scale="0.01 0.001 0.01" position="-5 0.015 -3.9" rotation="180 0 0"></a-entity>
+
+      <a-entity id="vaso" obj-model="obj: #vaso-obj; mtl: #vaso-mtl" scale="0.001 0.001 0.001" position="-3.7 0.73 3.7" rotation="270 0 90"></a-entity>
+      <a-entity id="panelquimico" obj-model="obj: #panelquimico-obj; mtl: #panelquimico-mtl" scale="0.00025 0.00025 0.00025" position="0 -0.2 0" rotation="270 0 0"></a-entity>
+      <a-entity id="sistemaquimico1" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="9.747582104015574 0 2.014189237890888" rotation="270 -90 0"></a-entity>
+      <a-entity id="sistemaquimico2" obj-model="obj:/objetos/sistemaquimico.obj;mtl:/objetos/sistemaquimico.mtl" scale="0.01 0.01 0.01" position="-10.7 -0.03256746715209635 -3.281528527918544" rotation="270 0 0"></a-entity>
+      <!-- fin adornos  -->
+
+      <a-cone id="volverInicio" position="0 3 3" scale="0.4 0.7 0.4" material="color:#ff9d00;shader:flat" geometry="" rotation="180 0 0"></a-cone>
+
+      <!-- btn Horno  -->
+      <a-button id="botonhorno" scale="2 2 2" position="-6 3 -3.499" value="horno" button="buttonColor:#fd0e0b"></a-button>
+      <a-button id="boton20horno" scale="1.1 1 1" position ="-8 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
+      <a-button id="boton500horno" scale="1.05 1 1" position ="-8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 500 C"></a-button>
+      <a-button id="boton1000horno" scale="1 1 1" position ="-8 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="1000 C"></a-button>
+      <a-button id="boton2000horno" scale="1 1 1" position ="-8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="2000 C"></a-button>
+      <!-- Fin btn Horno  -->
+
+      <!-- btn Frigorifico  -->
+      <a-button id="botonfrigorifico" scale="2 2 2" width="1.2" position="0.6 3 -3.499" value="Frigorifico" button="buttonColor:#fd0e0b"></a-button>
+      <a-button id="boton20frigorifico" scale="1.05 1 1" position ="-0.8 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
+      <a-button id="boton0" scale="1.1 1 1" position ="-0.8 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" 0 C"></a-button>
+      <a-button id="boton150" scale="1 1 1" position ="-0.8 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-150 C"></a-button>
+      <a-button id="boton273" scale="1 1 1" position ="-0.8 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="-273 C"></a-button>
+      <!-- Fin btn Frigorifico  -->
+
+      <!-- Horno 3D  -->
+      <a-button id="botonhorno3d" scale="2 2 2" position="7 3.5 -2.4" value="horno" rotation="0 -32 0" button="buttonColor:#fd0e0b"></a-button>
+      <a-button id="boton20horno3d" scale="1.1 1 1" position ="4.4 1.2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="  20 C"></a-button>
+      <a-button id="boton-273horno3d" scale="1.05 1 1" position ="4.4 0.8 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value=" -273 C"></a-button>
+      <a-button id="cambioFigura" scale="1 1 1" position ="4.4 2 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="cambio"></a-button>
+      <a-button id="boton2000horno3d" scale="1 1 1" position ="4.4 1.6 -3.499" material="color:blue; shader:flat" rotation="0 0 0" value="2000 C"></a-button>
+      <!-- Fin Horno 3D  -->
+
+      <!-- paredes 3D  -->
+      <a-plane id="pared1" material="color:grey;shader:flat" scale="6.5 4 2" position="-9.75 2 -3.5" rotation="" geometry=""></a-plane>
+      <a-plane id="pared2" material="color:grey;shader:flat" scale="11 2 2" position="-1.5 3 -3.5" rotation="" geometry=""></a-plane>
+      <a-plane id="pared3" material="color:grey;shader:flat" scale="4 4 4" position="-1.5 2 -3.5" rotation="" geometry=""></a-plane>
+      <a-plane id="pared4" material="color:grey;shader:flat" scale="2.4 4 4" position="4.700198810232626 2 -3.5" rotation="" geometry=""></a-plane>
+      <a-plane id="pared5" material="color: #707070;shader:flat" scale="10.50011 4 4" position="10 2 4.75" rotation="0 -90 0" geometry=""></a-plane>
+      <a-plane id="pared6"  material="color: grey; shader: flat" scale="23 4 4" position="-1.5 2 10" rotation="180 0 0"></a-plane>
+      <a-plane id="pared7"  material="color: #707070; shader: flat" scale="14 4 4" position="-13 2 3" rotation="0 90 0"></a-plane>
+      <a-plane id="pared8" material="color:grey;shader:flat" scale="6.5 1 2" position="8.231886792537802 3.5 -1.8654553143192079" rotation="0 -32 0" ></a-plane>
+      <a-plane id="pared9" material="color:grey;shader:flat" scale="0.3 4 2" position="5.62749882070162 2 -3.358539054096435" rotation="0 -32 0" geometry=""></a-plane>
+      <!-- fin paredes 3D  -->
+
+      <a-entity id="paredcircular1" obj-model="obj:/objetos/paredcircular.obj;mtl:/objetos/paredcircular.mtl" scale="0.04 0.1 0.04" position="9.3 0 -4" rotation="270 -32 0"></a-entity>
+      <a-entity id="horno1" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="-5 0 -3.5" rotation="270 32 0"></a-entity>
+      <a-entity id="horno2" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.01 0.01 0.01" position="2 0 -3.5" rotation="270 32 0"></a-entity>
+      <a-entity id="horno3" obj-model="obj: #horno-obj;mtl: #horno-mtl" scale="0.015 0.015 0.015" position="8 0 -2" rotation="270 0 0"></a-entity>
+
+
+			<!--a-button id="btn1" color="blue" position="0 0.5 -3" value="0"></a-button>
+			<a-button id="btn2" color"green" position="1 0.5 -3" value="20"></a-button>
+			<a-button id="btn3" color="red" position="2 0.5 -3" value="50"></a-button-->
+
+			<a-entity id="cylinders">
+        <!-- Frigorifico -->
+				<a-cylinder id="cylinder1" position="1.2 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder2" position="2 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder3" position="2.8 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+        <!-- horno -->
+        <a-cylinder id="cylinder4" position="-5.6 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder5" position="-4.8 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+				<a-cylinder id="cylinder6" position="-4 0.95 -5" radius="0.2" height="1.5" color="#FFC65D" shadow></a-cylinder>
+      </a-entity>
+
+      <a-entity id="volumes">
+				<a-sphere id="vol1" color="green" position="9 1.25 -3.4" radius="1" color="#EF2D5E" shadow></a-sphere>
+				<a-box id="vol2" color="green" position="9 1.25 -3.4" height="2" width="1" depth="1" visible="false"></a-box>
+			</a-entity>
+
+
+
+      <!-- etiquetas -->
+      <a-text id="AuHorno" class='etiquetas' position="-6 1 -3.4" value="Au" scale="1 1 1" visible='false'></a-text>
+      <a-text id="AgHorno" class='etiquetas' position="-5.6 1 -3.4" value="Ag" scale="1 1 1" visible='false'></a-text>
+      <a-text id="CuHorno" class='etiquetas' position="-5.2 1 -3.4" value="Cu" scale="1 1 1" visible='false'></a-text>
+
+      <a-text id="AuFrigorifico" class='etiquetas' position="1 1 -3.4" value="Au" scale="1 1 1" visible='false'></a-text>
+      <a-text id="AgFrigorifico" class='etiquetas' position="1.5 1 -3.4" value="Ag" scale="1 1 1" visible='false'></a-text>
+      <a-text id="CuFrigorifico" class='etiquetas' position="2  1 -3.4" value="Cu" scale="1 1 1" visible='false'></a-text>
+
+
+			<!-- boton tutorial -->
+			<a-button  class="btn_tutorial" id="btn_tooltips" color="blue" position="-2 1 -3" value="Tutorial"></a-button>
+			<!-- fin boton tutorial -->
+
+      <!-- Inicio de Controles -->
+      <a-entity id='cameraWrapper' position="0 0 3">
+        <a-animation begin="movement" attribute="position" dur="10000" fill="none"></a-animation>
+        <a-camera id="camera" look-controls-enabled wasd-controls-enabled>
+					<!-- tooltips -->
+					<a-entity id="tooltips">
+						<a-entity id="hint_rectangle" slice9="width: 1; height: 0.3; left: 20; right: 43; top: 20; bottom: 43; src: assets/images/tooltip.png; transparent: true; opacity: 0;" position="0.04 0.44 -1.3"></a-entity>
+						<a-entity material="opacity: 0;" id="hints" text="font: roboto ; value: Ook, pongamonos serios. Veamos si el test de los mensajes funciona bien ; color: white; width: 0.8; wrap-pixels: 800; opacity: 0" position="0.06 0.41 -1.2" visible="false"></a-entity>
+					</a-entity>
+					<!-- fin tooltips -->
+          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+              material="color: black; shader: flat">
+              <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+              <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+            </a-entity>
+          </a-camera>
+      </a-entity>
+
+      <!-- Fin de Controles -->
+    </a-scene>
+  </body>
+	<script src="assets/javascripts/dist/exp3.js"></script>
+</html>
