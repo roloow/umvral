@@ -187,6 +187,10 @@ class Hint {
 		setTimeout(function(){ 
 			that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
 			that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
+			setTimeout(function(){
+				that.hint_rectangle.setAttribute('visible', 'false');
+				that.dom.setAttribute('visible', 'false');
+			}, 1000);
 		}, 1000);
 	};
 	fade_in() {
