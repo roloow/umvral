@@ -201,7 +201,6 @@
   <script>
 
     var boolEsfera = 1;
-    var sphere = document.querySelector("#sphere");
 		var initHeight = 1.5;
     //temperaturas
 		var temp = [200,5000,10000,20000,200,0,-1500,-2730];
@@ -278,15 +277,8 @@
 		cylinder6 = new termicObject(coef.cobre)
 		cylinder6.dom = document.querySelector("#cylinder6");
 
-		volume1 = coef_vol.oro
-		volume1.dom = document.querySelector("#vol1");
-		volume1.position_org = volume1.dom.getAttribute('position')
-		volume1.original = volume1.dom.getAttribute('geometry')
-
-		volume2 = coef_vol.aluminio
-		volume2.dom = document.querySelector("#vol2");
-		volume2.position_org = volume2.dom.getAttribute('position')
-		volume2.original = volume2.dom.getAttribute('geometry')
+		volume1 =new termicObject(coef_vol.oro)
+		volume2 = new termicObject(coef_vol.aluminio)
 
 
     var teleporthorno = document.querySelector('#botonhorno');
@@ -446,8 +438,23 @@
       $('#CuHorno').setAttribute('value','Cu\n 1.5[m]');
       $('#AuHorno').setAttribute('value','Au\n 1.5[m]');
       $('#AgHorno').setAttribute('value','Ag\n 1.5[m]');
-			volume1.dom.setAttribute('color',volume1.color);
+
+      volume2.dom = document.querySelector("#vol2");
+  		volume2.position_org = volume2.dom.getAttribute('position');
+  		volume2.original = document.querySelector('#vol2').getAttribute('geometry')
+      console.log(volume2.original);
+      volume1.dom = document.querySelector("#vol1");
+      volume1.position_org = volume1.dom.getAttribute('position');
+      volume1.original = document.querySelector('#vol1').getAttribute('geometry')
+      console.log("valores");
+      console.log(volume1);
+      console.log(volume1.original);
+      volume1.dom.setAttribute('color',volume1.color);
 			volume2.dom.setAttribute('color',volume2.color);
+
+
+
+
 		}
 
 
@@ -528,8 +535,8 @@
       oculatarEtiquetas();
 			sphere = volume1.original
 			cube = volume2.original
-			vol1_ = (4/3)*Math.PI*Math.pow(sphere.radius, 3)
-			vol2_ = cube.height*cube.width*cube.depth
+			vol1_ = (4/3)*Math.PI*Math.pow(1, 3)
+			vol2_ = 2*1*1
       console.log("cambio volumen");
 			newvol1 = getVolume(vol1_,volume1,temp)
 			newvol2 = getVolume(vol2_,volume2,temp)
@@ -543,9 +550,9 @@
 
 		function changeVolumeCube(final_volume,obj){
 			cube = obj.original
-			x = cube.width
-			y = cube.height
-			z = cube.depth
+			x = 1
+			y = 2
+			z = 1
 			x_ = Math.pow(final_volume*((x*x)/(y*z)),1/3)
 			y_ = x_ * (y/x)
 			z_ = x_ * (z/x)
@@ -583,7 +590,7 @@
 
 		function changeVolumeSphere(final_volume,obj){
 			sphere = obj.original
-			r = sphere.radius
+			r = 1
 			r_ = Math.pow((final_volume*3)/(4*Math.PI),1/3)
 			obj.dom.setAttribute('animation__sphere',"property: geometry.radius; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
 			obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
