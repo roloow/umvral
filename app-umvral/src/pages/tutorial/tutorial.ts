@@ -30,11 +30,11 @@ export class TutorialPage {
       .then(() => this.storage.set('has_seen_tutorial', true));
   }
 
-  onSlideChangeStart(event) {
+  /*onSlideChangeStart(event) {
     event.target.isEnd().then(isEnd => {
       this.showSkip = !isEnd;
     });
-  }
+  }*/
 
   ionViewWillEnter() {
     /*this.storage.get('has_seen_tutorial').then(res => {

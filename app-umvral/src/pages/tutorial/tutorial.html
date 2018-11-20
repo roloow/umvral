@@ -1,47 +1,36 @@
-<ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Saltar</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+<ion-content no-bounce>
+  <ion-slides #slides pager="true" centeredSlides="true">
     <ion-slide>
-      <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
+      <img src="assets/img/logo-texto.png" class="slide-image" />
       <h2 class="slide-title">
-        Welcome to
-        <b>ICA</b>
+        Bienvenido a <b>umVRal</b>
       </h2>
       <p>
-        The
-        <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code
-        use.
+        En unos momentos más estarás rompiendo las barreras entre un ejemplo y una experiencia.
       </p>
     </ion-slide>
 
     <ion-slide>
-      <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
-      <h2 class="slide-title">What is Ionic?</h2>
+      <img src="assets/img/barra-inferior.jpg" class="slide-image" />
+      <h2 class="slide-title">Elije lo que quieres hacer</h2>
       <p>
-        <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies
-        like HTML, CSS, and JavaScript.</p>
+        Puedes revisar tus <b>cursos</b> inscritos, ver los <b>mensajes</b> de tus profesores,
+        revisar tus <b>notas</b> y modificar tu <b>perfil</b>.
+      </p>
+      </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/experiencias.jpg" class="slide-image" />
+      <h2 class="slide-title">Experimenta la física</h2>
+      <p>
+        En cada curso, elije la <b>experiencia</b> que deseas realizar.</p>
     </ion-slide>
 
     <ion-slide>
-      <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
-      <h2 class="slide-title">What is Ionic Pro?</h2>
-      <p>
-        <b>Ionic Pro</b> is a powerful set of services and features built on top of Ionic Framework that brings a totally new
-        level of app development agility to mobile dev teams.</p>
-    </ion-slide>
-
-    <ion-slide>
-      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-      <h2 class="slide-title">Ready to Play?</h2>
+      <img src="assets/img/logo-texto.png" class="slide-image" />
+      <h2 class="slide-title">Listo para aprender?</h2>
       <ion-button fill="clear" (click)="startApp()">
-        Continue
+        Continuar
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-slide>

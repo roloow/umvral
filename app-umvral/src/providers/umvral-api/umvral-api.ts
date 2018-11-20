@@ -40,6 +40,7 @@ export class UmvralApiProvider {
 
   logout() {
     this.storage.set('is_logged_in', false);
+    this.storage.set('has_seen_tutorial', false);
     this.storage.remove('user_id');
     this.storage.remove('cursos');
     this.isLoggedIn = false;
