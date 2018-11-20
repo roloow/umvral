@@ -9,6 +9,7 @@ from web.models import CalificationModel
 from web.models import ExpCourseModel
 from web.models import AnswerModel
 from web.models import ConfigurationModel
+from web.models import TestModel
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
@@ -80,6 +81,7 @@ class ExperienceResource(ModelResource):
         exp_course_id=request.POST.get('exp_course_id')
         test_id = 'Null'
         answer_id= 'Null'
+        answer_score='Null'
         try:
             expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
             if (expCourse.test.visible != False) :
@@ -140,7 +142,7 @@ class ExperienceResource(ModelResource):
             questiones = ConfigurationModel.objects.filter(test__pk=test_id)
             for p in questiones:
                 pregunta={"titulo":p.question.statement,"A":p.question.optionA,"B":p.question.optionB,"C":p.question.optionC,"D":p.question.optionD, "R":p.question.correct,"position":p.position}
-
+                preguntas.append(pregunta)
         except:
             preguntas= 'Null'
         return self.create_response(request, {
@@ -179,6 +181,7 @@ class ExperienceResource(ModelResource):
         an.test=test
         an.score=score
         an.save()
+        answer_id=an.pk
         return self.create_response(request, {
             'student_id': student_id,
             'test_id': test_id,
