@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { RegisterUserPage } from '../register-user/register-user';
-import { CursosPage } from '../cursos/cursos';
 import { HomePage } from '../home/home';
 
 /**
@@ -20,7 +19,7 @@ import { HomePage } from '../home/home';
 export class LoginPage {
   data = {username: "", password: ""};
   loading: Loading;
-
+  test: any;
 
   constructor(
     public navCtrl: NavController,
@@ -47,6 +46,7 @@ export class LoginPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
+      
       this.navCtrl.setRoot(HomePage);
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));

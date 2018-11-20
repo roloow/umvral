@@ -29,6 +29,7 @@ import { RegisterUserPage } from '../pages/register-user/register-user';
 import { MensajesPage } from '../pages/mensajes/mensajes';
 import { HomePage } from '../pages/home/home';
 import { ChartsModule } from 'ng2-charts';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ChartsModule } from 'ng2-charts';
     HttpModule,
     HttpClientModule,
     IonicModule.forRoot(ConferenceApp),
+    IonicStorageModule.forRoot(),
     ChartsModule
   ],
   bootstrap: [IonicApp],
