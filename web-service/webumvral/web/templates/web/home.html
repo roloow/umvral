@@ -2,40 +2,46 @@
 {% load static %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-<div class="note note-info">
-  <h4 class="block">Contenidos en desarrollo</h4>
-  <p>Hola {{ request.user.profile.full_name }}, <br>
-    Duis mollis, est non commodo luctus, nisi erat porttitor ligula, mattis consectetur purus sit amet eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, mattis consectetur purus sit amet eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
-    Duis mollis, est non commodo luctus, nisi erat porttitor ligula, mattis consectetur purus sit amet eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
-    Duis mollis, est non commodo luctus, nisi erat porttitor ligula, mattis consectetur purus sit amet eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
-  </p>
-  <br>
-</div>
 <div class="row margin-bottom-20">
     <div class="col-lg-3 col-md-6">
+        <div class="portlet light">
+            <div class="card-icon">
+                <a href="{% url 'web:profile' request.user.profile.pk %}"> <i class="icon-user theme-font" style="color:rgb(52, 6, 58)"></i></a>
+            </div>
+            <div class="card-title">
+                <span> Mi Perfil </span>
+            </div>
+        </div>
     </div>
     <div class="col-lg-3 col-md-6">
         <div class="portlet light">
             <div class="card-icon">
-                <a href=""> <i class="icon-magnifier font-green-haze theme-font"></i></a>
+                <a href="{% url 'web:course_list' %}"> <i class="icon-graduation theme-font" style="color:rgb(29, 67, 102)"></i></a>
             </div>
             <div class="card-title">
-                <span> Investigación </span>
+                <span> Mis Cursos </span>
             </div>
         </div>
     </div>
     <div class="col-lg-3 col-md-6">
       <div class="portlet light">
           <div class="card-icon">
-            <a href=""> <i class="icon-user-follow font-red-sunglo theme-font"></i></a>
+            <a href="{% url 'web:myexps' request.user.profile.pk %}"> <i class="icon-rocket theme-font" style="color:rgb(11, 97, 18)"></i></a>
           </div>
           <div class="card-title">
-              <span> Usuarios </span>
+              <span> Mis Experiencias </span>
           </div>
       </div>
     </div>
     <div class="col-lg-3 col-md-6">
-
+        <div class="portlet light">
+            <div class="card-icon">
+                <a href="{% url 'web:support' %}"> <i class="icon-question theme-font" style="color:rgb(143, 120, 18)"></i></a>
+            </div>
+            <div class="card-title">
+                <span> Soporte </span>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
