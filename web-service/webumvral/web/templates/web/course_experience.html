@@ -43,10 +43,10 @@ Experiencias disponibles
                           <th> </th>
                           <th> Nombre </th>
                           <th> Descripción </th>
-                          <th> Video </th>
-                          <th> Estado </th>
-                          <th> Prueba </th>
-                          <th> Acciones</th>
+                          <th> <center>Video</center> </th>
+                          <th> <center>Estado</center> </th>
+                          <th> <center>Prueba</center> </th>
+                          <th> <center>Acciones</center></th>
                       </tr>
                   </thead>
                   <tbody>
@@ -57,19 +57,15 @@ Experiencias disponibles
                         </td>
                         <td > {{exp.available.experience.name}} </td>
                         <td> {{exp.available.experience.description|truncatechars:50}} </td>
-                          <td>{% if exp.available.video %}
-                          <span class="label label-sm label-success "> Asignado </span>
-                          {% else %}
-                          <span class="label label-sm label-danger "> No asignado </span>
-                          {% endif %}</td>
-                        <td>
+                          <td><center><a href="http://youtube.com/watch?v={{exp.video}}" target="_blank"><i class="fa fa-youtube-play fa-2x" style="color:red"></i></a></center></td>
+                        <td><center>
                           {% if exp.visible %}
-                          <span class="label label-sm label-success "> Visible </span>
+                          <i class="fa fa-eye" style="color:black"></i>
                           {% else %}
-                          <span class="label label-sm label-danger "> No visible </span>
-                          {% endif %}
+                          <i class="fa fa-eye-slash" style="color:gray"></i>
+                          {% endif %}</center>
                        </td>
-                       <td>
+                       <td><center>
                          {% if exp.test %}
                          {% if exp.test.visible %}
                            <span class="label label-sm label-success "> Activa </span>
@@ -78,9 +74,9 @@ Experiencias disponibles
                          {% endif %}
                          {% else %}
                          <span class="label label-sm label-danger "> Sin crear </span>
-                         {% endif %}
+                         {% endif %}</center>
                       </td>
-                      <td>
+                      <td><center>
                         <div class="btn-group">
                           <button class="btn btn-xs orange dropdown-toggle" type="button"
                                   data-toggle="dropdown" aria-expanded="false">
@@ -125,7 +121,7 @@ Experiencias disponibles
                               <i class="icon-ban"></i> Eliminar experiencia del curso </a>
                             </li>
                           </ul>
-                        </div>
+                        </div></center>
                       </td>
                     {% endfor %}
                   </tbody>
