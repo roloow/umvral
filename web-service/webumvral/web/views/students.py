@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 
 def course_students(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context["course"] = courseobj
@@ -17,6 +18,7 @@ def course_students(request, course):
 
 def course_ban(request, course, student_id):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         print ("HOLA", course, student_id)
         student = StudentModel.objects.get(pk=student_id)
@@ -28,6 +30,7 @@ def course_ban(request, course, student_id):
 
 def course_invite(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context["course"] = courseobj

@@ -75,11 +75,13 @@ def profile(request, client_id):
         except:
             return redirect('web:404')
     context['client'] = client
+    context['section'] = 'profile'
     return render(request, 'web/profile.html', context)
 
 @login_required
 def profile_edit(request, client_id):
     context = get_base_context(request)
+    context['section'] = 'profile'
     if (not request.user.is_staff):
         if (request.user.profile.pk != int(client_id)):
             return redirect('web:404')
@@ -133,6 +135,7 @@ def profile_edit(request, client_id):
 @login_required
 def message_view(request, client_id, inbox_type):
     context = get_base_context(request)
+    context['section'] = 'profile'
     try:
         client = ClientModel.objects.get(pk=client_id)
         context['client'] = client
@@ -212,6 +215,7 @@ def message_view(request, client_id, inbox_type):
                 context['to'] = int(to)
                 context['subject'] = subject
                 context['message'] = message
+                context['section'] = 'profile'
                 return render(request, 'web/inbox.html', context)
             msg = MessageModel()
             msg.sender = client
@@ -230,12 +234,15 @@ def message_view(request, client_id, inbox_type):
             page = request.GET.get("page")
             msgs = paginator.get_page(page)
             context['messages'] = msgs
+            context['section'] = 'profile'
             return render(request, 'web/inbox.html', context)
+        context['section'] = 'profile'
         return render(request, 'web/inbox.html', context)
     # 3- write a msg to certain person(post)
     if (int(inbox_type) == 3):
         context['compose'] = True
         context['header'] = 'Bandeja de entrada > Redactar'
+        context['section'] = 'profile'
         return render(request, 'web/inbox.html', context)
     return redirect('web:404')
 
@@ -269,6 +276,7 @@ def msg_direct(request, client_id):
         context["subject"] = topic
         context["compose"] = True
         context["client"] = client
+        context['section'] = 'profile'
         return render(request, 'web/inbox.html', context)
     if (request.method == "GET"):
         return redirect("web:404")

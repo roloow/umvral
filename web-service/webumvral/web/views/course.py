@@ -50,10 +50,12 @@ def getTestsResults(student_id, course, array=False):
 #Funciones de la view en particular
 def courses_list(request):
     context = get_base_context(request)
+    context['section'] = 'course'
     return render(request, 'web/course_list.html', context)
 
 def course_edit(request, course=None):
     context = get_base_context(request)
+    context['section'] = 'course'
     editing = False
     if course:
         try:
@@ -90,6 +92,7 @@ def course_delete(request, course=None):
 
 def course_read(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context['course'] = courseobj
@@ -108,6 +111,7 @@ def course_read(request, course):
 @login_required
 def studentCourseProfile(request, student_id, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     course = CourseModel.objects.get(pk=course)
     student = StudentModel.objects.get(profile_id=student_id, course=course)
     if (request.user.profile.pk == course.professor.pk and 
