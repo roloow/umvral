@@ -1,7 +1,16 @@
 {% extends "web/base_page.html" %}
 {% load static %}
 {% block title %}Perfil de usuario{% endblock %}
-{% block breadcrumb %}Usuario > {{client.full_name}} > Edición{% endblock %}
+{% block breadcrumb %}
+    <li>
+			<a href="{% url 'web:profile' client.pk %}">Perfil: {{client.full_name}}</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+			<a href="{% url 'web:profile_edit' client.pk %}">Editar Perfil</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-12">

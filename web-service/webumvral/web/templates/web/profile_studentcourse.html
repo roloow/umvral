@@ -1,7 +1,24 @@
 {% extends "web/base_page.html" %}
 {% load static %}
 {% block title %}Perfil de usuario{% endblock %}
-{% block breadcrumb %}Usuario > {{client.full_name}} > Resumen{% endblock %}
+{% block breadcrumb %}
+<li>
+  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_read' course.pk %}"><span> {{course.name}} </span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:course_students' course.pk %}"><span> Mis Alumnos </span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+  <a href="{% url 'web:student_courseprofile' course.pk client.pk %}"><span>Resumen: {{client.full_name}}</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-12">

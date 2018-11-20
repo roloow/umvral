@@ -2,6 +2,16 @@
 {% load static %}
 {% load humanize %}
 {% block title %}Mensajes{% endblock %}
+{% block breadcrumb %}
+    <li>
+			<a href="{% url 'web:profile' client.pk %}">Perfil: {{client.full_name}}</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+			<a href="{% url 'web:msg_view' client.pk 0 %}">Mensajes</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+{% endblock %}
 {% block content %}
 <div class="inbox">
     <div class="row">

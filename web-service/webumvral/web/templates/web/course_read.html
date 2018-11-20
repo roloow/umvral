@@ -12,11 +12,12 @@
 
 {% block breadcrumb %}
 <li>
-  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
-  <i class="fa fa-angle-right"></i>
+	<a href="{% url 'web:course_list' %}">Mis Cursos</a>
+	<i class="fa fa-angle-right"></i>
 </li>
 <li>
-  {{course.name}}
+	<a href="{% url 'web:course_read' course.pk %}">{{course.name}}</a>
+	<i class="fa fa-angle-right"></i>
 </li>
 {% endblock %}
 
