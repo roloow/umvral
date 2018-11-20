@@ -26,26 +26,14 @@ Experiencias disponibles
   <span>Lista de Experiencias</span>
 </li>
 {% endblock %}
-
+{% block page_actions %}
+<a href="{% url 'web:video' course_id %}" class="btn btn-default"><i class="fa fa-gamepad"></i> Agregar experiencia</a>
+<a id="movement" class="btn btn-info"><i class="fa fa-lock"></i> Activar movimiento</a>
+{% endblock %}
 {% block content %}
-<div class="note note-info">
-  <h4 class="block">Cambios de orden</h4>
-  <p> Para poder realizar un cambio de orden en las posiciones de las experiencias, se debe arrastrar la fila deseada a la posición que se quiera dejar, y luego se deben guardar los cambios.
-  </p>
-  <br>
-</div>
 <div class="row">
-  <form  action="{% url 'web:course_experience' course_id %}" method="post">
+  <form id="myForm" action="{% url 'web:course_experience' course_id %}" method="post">
     {% csrf_token %}
-<div class="col-md-12">
-  <div class="col-md-12">
-    <div class="col-md-3"><button type="submit" class="btn btn-success"> <i class="fa fa-edit"></i> Guardar cambios</button></div>
-    <div class="col-md-5"></div>
-    <div class="col-md-2"><a href="{% url 'web:video' course_id %}" class="btn btn-default"><i class="fa fa-gamepad"></i> Agregar experiencia</a></div>
-    <div class="col-md-2"><a id="movement" class="btn btn-info"><i class="fa fa-lock"></i> Activar movimiento</a></div>
-  </div>
-
-  <br><br>
   <div class="portlet light portlet-fit bordered">
       <div class="portlet-body">
           <div class="table-scrollable table-scrollable-borderless">
@@ -55,33 +43,29 @@ Experiencias disponibles
                           <th> </th>
                           <th> Nombre </th>
                           <th> Descripción </th>
-                          <th> Video </th>
-                          <th> Estado </th>
-                          <th> Prueba </th>
-                          <th> Acciones</th>
+                          <th> <center>Video</center> </th>
+                          <th> <center>Estado</center> </th>
+                          <th> <center>Prueba</center> </th>
+                          <th> <center>Acciones</center></th>
                       </tr>
                   </thead>
                   <tbody>
                     {% for exp in experiences  %}
                       <tr>
                         <input type="hidden" name="pos-{{ forloop.counter0 }}" value="{{exp.pk}}">
-                        <td> <i class="fa fa-arrows-alt"></i>
+                        <td> <i class="moveIcon"></i>
                         </td>
                         <td > {{exp.available.experience.name}} </td>
                         <td> {{exp.available.experience.description|truncatechars:50}} </td>
-                          <td>{% if exp.available.video %}
-                          <span class="label label-sm label-success "> Asignado </span>
-                          {% else %}
-                          <span class="label label-sm label-danger "> No asignado </span>
-                          {% endif %}</td>
-                        <td>
+                          <td><center><a href="http://youtube.com/watch?v={{exp.video}}" target="_blank"><i class="fa fa-youtube-play fa-2x" style="color:red"></i></a></center></td>
+                        <td><center>
                           {% if exp.visible %}
-                          <span class="label label-sm label-success "> Visible </span>
+                          <i class="fa fa-eye" style="color:black"></i>
                           {% else %}
-                          <span class="label label-sm label-danger "> No visible </span>
-                          {% endif %}
+                          <i class="fa fa-eye-slash" style="color:gray"></i>
+                          {% endif %}</center>
                        </td>
-                       <td>
+                       <td><center>
                          {% if exp.test %}
                          {% if exp.test.visible %}
                            <span class="label label-sm label-success "> Activa </span>
@@ -90,9 +74,9 @@ Experiencias disponibles
                          {% endif %}
                          {% else %}
                          <span class="label label-sm label-danger "> Sin crear </span>
-                         {% endif %}
+                         {% endif %}</center>
                       </td>
-                      <td>
+                      <td><center>
                         <div class="btn-group">
                           <button class="btn btn-xs orange dropdown-toggle" type="button"
                                   data-toggle="dropdown" aria-expanded="false">
@@ -137,7 +121,7 @@ Experiencias disponibles
                               <i class="icon-ban"></i> Eliminar experiencia del curso </a>
                             </li>
                           </ul>
-                        </div>
+                        </div></center>
                       </td>
                     {% endfor %}
                   </tbody>
@@ -154,11 +138,11 @@ Experiencias disponibles
 {% endblock %}
 
 {% block plugin_js %}
-<script type="text/javascript" src="{% static "web/global/plugins/jquery-sortable/jquery-sortable.js" %}"></script>
+<script type="text/javascript" src="{% static 'web/global/plugins/jquery-sortable/jquery-sortable.js' %}"></script>
 <script>
 $(document).ready(function(){
   var activar = '<i class="fa fa-lock"></i> Activar movimiento';
-  var desactivar = '<i class="fa fa-unlock"></i> Desactivar movimiento';
+  var desactivar = '<i class="fa fa-unlock"></i> Guardar cambios';
   var sorteable = "table table-hover sorted_table";
   var unsorteable = "table table-hover";
   var active_color = "btn btn-info";
@@ -172,18 +156,22 @@ $(document).ready(function(){
   });
   $('.sorted_table').sortable('disable');
   $('#movement').click(function(){
-    console.log("boton");
     if ($('#movement')[0].innerHTML == activar){
-      console.log("activar");
+      for (var i=0; i < $('.moveIcon').length; i++){
+        $('.moveIcon')[i].setAttribute('class', 'moveIcon fa fa-arrows-alt');
+      }
       $('.sorted_table').sortable('enable');
       $('#movement')[0].innerHTML = desactivar;
       $('#movement')[0].setAttribute('class', deactive_color);
     }
     else if ($('#movement')[0].innerHTML == desactivar){
-      console.log("desactivar");
+      for (var i=0; i < $('.moveIcon').length; i++){
+        $('.moveIcon')[i].setAttribute('class', 'moveIcon');
+      }
       $('.sorted_table').sortable('disable');
       $('#movement')[0].innerHTML = activar;
       $('#movement')[0].setAttribute('class', active_color);
+      $('#myForm').submit();
     }
   });
 })
