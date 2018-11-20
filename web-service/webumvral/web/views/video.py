@@ -12,9 +12,11 @@ def myexperiences(request, client_id):
     return render(request, 'web/myexps.html', context)
 
 def get_url(string):
-    if ('watch?v=' not in string):
-        return (False, None)
-    return string.split('watch?v=')[1]
+    if ('watch?v=' in string):
+        return string.split('watch?v=')[1].split('?')[0]
+    if ('youtu.be' in string):
+        return string.split('be/')[1].split('?')[0]
+    return False
 
 def editexperiences(request, client_id, ava_id):
     context = get_base_context(request)
@@ -24,7 +26,7 @@ def editexperiences(request, client_id, ava_id):
     if (request.method == "GET"):
         return render(request, 'web/editvideos.html', context)
     if (request.method == "POST"):
-        if ((request.POST['video'] == '') or ('youtube' not in request.POST['video']) or ('watch?v=' not in request.POST['video'])):
+        if ((request.POST['video'] == '') or ('youtu' not in request.POST['video'])):
             context['experiences'] = filter_experiences(request.user.profile.pk)
             context['error_2'] = True
             context['Bad'] = True
@@ -53,7 +55,7 @@ def addexperiences(request, client_id):
         if (request.POST['exp'] == 'None'):
             context['experiences'] = filter_experiences(request.user.profile.pk)
             context['error_1'] = True
-        if ((request.POST['video'] == '') or ('youtube' not in request.POST['video']) or ('watch?v=' not in request.POST['video'])):
+        if ((request.POST['video'] == '') or ('youtu' not in request.POST['video'])):
             context['experiences'] = filter_experiences(request.user.profile.pk)
             context['error_2'] = True
         if (("error_1" in context) or ("error_2" in context)):
