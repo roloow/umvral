@@ -142,6 +142,7 @@ def message_view(request, client_id, inbox_type):
     if (int(inbox_type) == 0):
         context['inbox'] = True
         context['header'] = 'Bandeja de entrada'
+        context['subheader'] = ''
         if (request.method == "GET"):
             context['label0'] = True
             messages = MessageModel.objects.filter(receiver=client, deleted=False).order_by('-date')
@@ -186,7 +187,8 @@ def message_view(request, client_id, inbox_type):
     # 1- read a msg
     if (int(inbox_type) == 1):
         context['read'] = True
-        context['header'] = 'Bandeja de entrada > Mensaje'
+        context['header'] = 'Bandeja de entrada'
+        context['subheader'] = 'Mensaje'
         if (request.method == "POST"):
             print (request.POST)
             msg_id = int(request.POST['msg_id'])
@@ -200,7 +202,8 @@ def message_view(request, client_id, inbox_type):
     # 2- write a msg
     if (int(inbox_type) == 2):
         context['compose'] = True
-        context['header'] = 'Bandeja de entrada > Redactar'
+        context['header'] = 'Bandeja de entrada'
+        context['subheader'] = 'Redactar'
         allusers = ClientModel.objects.all()
         context['users'] = allusers
         if (request.method == "POST"):
