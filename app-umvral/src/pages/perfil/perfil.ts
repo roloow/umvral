@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController, Loading, App } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { LoginPage } from '../login/login';
 
@@ -17,7 +17,8 @@ export class PerfilPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public umvralApiProvider: UmvralApiProvider,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private app: App
   ) {
     this.navCtrl = navCtrl;
     console.log('constructor PerfilPage');
@@ -44,7 +45,7 @@ export class PerfilPage {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
 
   getUserData() {
@@ -57,7 +58,7 @@ export class PerfilPage {
 
   cerrarSesion() {
     this.umvralApiProvider.logout();
-    this.navCtrl.setRoot(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   updateFirstName(name) {

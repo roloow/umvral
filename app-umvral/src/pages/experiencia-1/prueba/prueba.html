@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Prueba
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-scroll scrollY="true" style="width: 100%; height: 75%;" text-justify>
+        <ion-list *ngFor="let pregunta of preguntas; let i = index">
+            {{i+1}}. {{pregunta.titulo}}
+            <button ion-button color="light" (click)="Responde(pregunta.position,'A')" block>A. {{pregunta.A}}</button>
+            <button ion-button color="light" (click)="Responde(pregunta.position,'B')" block>B. {{pregunta.B}}</button>
+            <button ion-button color="light" (click)="Responde(pregunta.position,'C')" block>C. {{pregunta.C}}</button>
+            <button ion-button color="light" (click)="Responde(pregunta.position,'D')" block>D. {{pregunta.D}}</button>
+        </ion-list>  
+    </ion-scroll>
+
+    <div class='final' padding>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let pregunta of preguntas; let i = index">
+                    {{i+1}}
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col *ngFor="let pregunta of preguntas; let i = index">
+                    {{respuestas[i]}}
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <button ion-button color="primary" (click)="enviar()" block>Enviar Prueba</button>
+    </div>
+</ion-content>

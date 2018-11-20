@@ -1,11 +1,8 @@
 #!/bin/bash -v
-
 set -e
-
 # Build Ionic App for Android
-cordova platform add android --nofetch
+ionic cordova platform add android --nofetch
 patch -p0 < build-fix.patch
-
 if [[ "$TRAVIS_BRANCH" != "master" ]]
 then
     ionic cordova build android

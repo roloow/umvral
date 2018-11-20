@@ -1,36 +1,25 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    
     <ion-title>Mis Cursos</ion-title>
+    
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Selecciona un Curso:</h3>
-
+<ion-content padding class="cursos-content">
+  <h3 ion-text color="light">Selecciona un Curso:</h3>
 
   <div padding *ngIf="cursos?.length > 0">
-    
     <ion-list *ngFor="let curso of cursos; let i = index">
       <button ion-button color="primary" (click)="openListaPage(curso[0].student_id)" block>
-        {{curso[0].course_name}}<br>{{curso[0].profesor_name}}
+        {{curso[0].course_name}}<br>Prof. {{curso[0].profesor_name}}
       </button>
     </ion-list>  
   </div>
   <div padding *ngIf="cursos?.length == 0">
-    <h3>
-      Usted no tiene cursos.
+    <h3 ion-text color="light">
+      No tienes cursos inscritos.
     </h3>
-
   </div>
-
-
-
-
-  
-
-
 
 </ion-content>

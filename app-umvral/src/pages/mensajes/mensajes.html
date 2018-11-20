@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="mensajes-content">
   <div padding style='height: 80%' *ngIf="mensajes">
     <ion-list *ngFor="let mensaje of mensajes.mensajes">
       <ion-card>
@@ -22,5 +22,10 @@
         </ion-card-content>
       </ion-card>
     </ion-list>
-    </div>
+  </div>
+  <div padding style='height: 80%' *ngIf= "!mensajes">
+    <h3 ion-text color="light" style="text-align: center;">
+      Usted no tiene mensajes.
+    </h3>
+  </div>
 </ion-content>

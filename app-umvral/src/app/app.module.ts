@@ -19,7 +19,7 @@ import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { HelpMateria1Page } from '../pages/experiencia-1/materia/materia';
 import { HelpMateria2Page } from '../pages/experiencia-2/materia/materia';
 import { HelpMateria3Page } from '../pages/experiencia-3/materia/materia';
-import { ExpPage } from '../pages/experiencia-1/experiencia/experiencia';
+import { HelpPrueba1Page } from '../pages/experiencia-1/prueba/prueba';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { NotasPage } from '../pages/notas/notas';
 import { CursosPage } from '../pages/cursos/cursos';
@@ -27,6 +27,9 @@ import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
 import { LoginPage } from '../pages/login/login';
 import { RegisterUserPage } from '../pages/register-user/register-user';
 import { MensajesPage } from '../pages/mensajes/mensajes';
+import { HomePage } from '../pages/home/home';
+import { ChartsModule } from 'ng2-charts';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -38,19 +41,22 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
     HelpMateria1Page,
     HelpMateria2Page,
     HelpMateria3Page,
-    ExpPage,
+    HelpPrueba1Page,
     PerfilPage,
     NotasPage,
     CursosPage,
     LoginPage,
     RegisterUserPage,
-    MensajesPage
+    MensajesPage,
+    HomePage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(ConferenceApp)
+    IonicModule.forRoot(ConferenceApp),
+    IonicStorageModule.forRoot(),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -62,13 +68,14 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
     HelpMateria1Page,
     HelpMateria2Page,
     HelpMateria3Page,
-    ExpPage,
+    HelpPrueba1Page,
     PerfilPage,
     NotasPage,
     CursosPage,
     LoginPage,
     RegisterUserPage,
-    MensajesPage
+    MensajesPage,
+    HomePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
