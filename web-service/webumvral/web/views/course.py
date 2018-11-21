@@ -112,8 +112,8 @@ def course_read(request, course):
 def studentCourseProfile(request, student_id, course):
     context = get_base_context(request)
     context['section'] = 'course'
-    #course = CourseModel.objects.get(pk=int(course))
-    course = CourseModel.objects.get(pk=course)
+    course = CourseModel.objects.get(pk=int(course))
+    #course = CourseModel.objects.get(pk=course)
     student = StudentModel.objects.get(profile_id=student_id, course=course)
     if (request.user.profile.pk == course.professor.pk and 
     student.course == course):
