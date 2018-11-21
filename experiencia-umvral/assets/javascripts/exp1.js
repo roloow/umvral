@@ -317,9 +317,10 @@ function changeColor(value) {
 		$('#p3_w').setAttribute('button-color', 'blue');
 		weight = "0.5";
 		radius = "0.25";
-		$('#ball').body.position.set(0,3,-15);
-		$('#ball').removeAttribute('geometry');
+		$('#ball').removeAttribute('dynamic-body');
+		$('#ball').object3D.position.set(0,3,-15);
 		$('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+		$('#ball').setAttribute('dynamic-body','mass:'+weight+';');
 	}
 	else if (value == 'p2_w') {
 		$('#p1_w').setAttribute('button-color', 'blue');
@@ -327,10 +328,11 @@ function changeColor(value) {
 		$('#p3_w').setAttribute('button-color', 'blue');
 		weight = "10";
 		radius = "0.6";
-
-		$('#ball').body.position.set(0,3,-15);
+		$('#ball').removeAttribute('dynamic-body');
+		$('#ball').object3D.position.set(0,3,-15);
 		$('#ball').removeAttribute('geometry');
 		$('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+		$('#ball').setAttribute('dynamic-body','mass:'+weight+';');
 	}
 	else if (value == 'p3_w') {
 		$('#p1_w').setAttribute('button-color', 'blue');
@@ -338,9 +340,10 @@ function changeColor(value) {
 		$('#p3_w').setAttribute('button-color', 'red');
 		weight = "100";
 		radius = "1";
-		$('#ball').body.position.set(0,3,-15);
-		$('#ball').removeAttribute('geometry');
+		$('#ball').removeAttribute('dynamic-body');
+		$('#ball').object3D.position.set(0,3,-15);
 		$('#ball').setAttribute('geometry', 'primitive:sphere; radius: '+ radius +';');
+		$('#ball').setAttribute('dynamic-body','mass:'+weight+';');
 	}
 }
 
