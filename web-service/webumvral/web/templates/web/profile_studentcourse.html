@@ -45,7 +45,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="to" value="{{client.pk}}">
                     <input type="hidden" name="topic" value="">
-                    <a href="javascript:;" onclick="parentNode.submit();" type="button" class="btn btn-circle red btn-sm">Enviar un mensajes</a>
+                    <a href="javascript:;" onclick="parentNode.submit();" type="button" class="btn btn-circle red btn-sm">Enviar un mensaje</a>
                   </form>
                   {% endif %}
                 </div>
@@ -185,6 +185,15 @@
                                         </td>
 																				<td>${nota.name}</td>
 																				<td>${nota.value} </td>
+																				<td>
+																					<form class="" action="{% url 'web:msg_direct' request.user.pk %}" method="post">
+																						{% csrf_token %}
+																						<input type="hidden" name="to" value="{{client.pk}}">
+																						<input type="hidden" name="topic" v-bind:value="'Feedback: '+nota.name">
+																						<a href="javascript:;" onclick="parentNode.submit();" class="btn btn-outline btn-circle btn-xs blue">
+																						<i class="fa fa-edit"></i> Feedback </a>
+																					</form>
+																				</td>
                                     </tr>
 																		<tr>
                                         <td class="fit">
@@ -233,6 +242,15 @@
                                         </td>
 																				<td>Prueba exp ${test.experience}</td>
 																				<td>${test.score} </td>
+																				<td>
+																					<form class="" action="{% url 'web:msg_direct' request.user.pk %}" method="post">
+																						{% csrf_token %}
+																						<input type="hidden" name="to" value="{{client.pk}}">
+																						<input type="hidden" name="topic" v-bind:value="'Feedback: Prueba exp '+test.experience">
+																						<a href="javascript:;" onclick="parentNode.submit();" class="btn btn-outline btn-circle btn-xs blue">
+																						<i class="fa fa-edit"></i> Feedback </a>
+																					</form>
+																				</td>
                                     </tr>
 																		<tr v-if="showavgtests">
                                         <td class="fit">
@@ -338,7 +356,7 @@ apiurl = '{% url "web:student_getdata" course.pk client.pk %}';
 			var options = {
 										 'width':400,
 										 'height':200,
-										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 100 , 'min': 0 } }
+										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 7 , 'min': 0 } }
 			};
 			data3.addColumn('string', 'Prueba');
 			data3.addColumn('number', 'Notas');
@@ -354,7 +372,7 @@ apiurl = '{% url "web:student_getdata" course.pk client.pk %}';
 			var options = {
 										 'width':600,
 										 'height':300,
-										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 100 , 'min': 0 } }
+										'vAxis': {'viewWindowMode':'explicit', 'viewWindow': { 'max': 7 , 'min': 0 } }
 			};
 			data2.addColumn('string', 'Prueba');
 			data2.addColumn('number', 'Notas');
