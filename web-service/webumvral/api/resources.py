@@ -158,7 +158,7 @@ class ExperienceResource(ModelResource):
         student_id=request.POST.get('student_id','')
         test_id=request.POST.get('test_id','')
         score = request.POST.get('score','')
-        if (score == ''):
+        if score == '':
             return self.create_response(request, {
                 'error': 'esta mal'
                 })
@@ -177,6 +177,17 @@ class ExperienceResource(ModelResource):
         except:
             return self.create_response(request, {
                 'test_id': 'no existe'
+                })
+
+        # revisar si ya se ingreso score
+        answers = AnswerModel.objects.filter(test__pk = test_id,student__pk= student_id)
+        for a in answers:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'test_id': test_id,
+                'answer_id':a.pk,
+                'score':a.score,
+                'error':'ya existe registro, no se modifico'
                 })
 
         an.student=st
