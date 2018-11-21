@@ -62,9 +62,9 @@ def course_invite(request, course):
                 new_stu.course = courseobj
                 new_stu.save()
                 try:
-                    text = 'Hola '+u.first_name+'!, bienvenido a umVRal. En unos momentos, podras utilizar la Realidad Virtual para poder complementar tus estudios, y mejorar tu comprensión. Ingresa el siguiente código en tu telefono, para poder activar el curso en que te inscribiste'
+                    text = 'Hola '+u.first_name+'!, bienvenido a nuevo curso '+ new_stu.course.name +'. Desde este momento podras vivir nuevas experiencias y aprender sin limites. \n \n saludos, equipo umVRal.'
                     send_mail(
-                        '¡Bienvenido a umVRal!',
+                        '¡Bienvenido al '+ new_stu.course.name +'!',
                         text,
                         'appumvral@gmail.com',
                         [u.email],
