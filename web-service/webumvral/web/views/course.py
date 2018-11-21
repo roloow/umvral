@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.db.models import Avg
 from web.models import *
 import json
 import collections
@@ -102,6 +103,9 @@ def course_read(request, course):
     context['tot_stu'] = courseobj.students.count()
     context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
     context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
+    students = StudentModel.objects.filter(course=courseobj)
+    notas = AnswerModel.objects.filter(student__in=students).aggregate(Avg('score'))
+    context['tot_avg'] = round(notas['score__avg'], 1)
     return render(request, 'web/course_read.html', context)
 
 @login_required
@@ -228,3 +232,4 @@ def getStudentResultData(request, student_id, course, exp_id=None):
                 "notas" : list(notas)
         }
     return JsonResponse(json.dumps(data), safe=False)
+
