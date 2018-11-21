@@ -104,8 +104,12 @@ def course_read(request, course):
     context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
     context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
     students = StudentModel.objects.filter(course=courseobj)
+
     notas = AnswerModel.objects.filter(student__in=students).aggregate(Avg('score'))
-    context['tot_avg'] = round(notas['score__avg'], 1)
+    try:
+        context['tot_avg'] = round(notas['score__avg'], 1)
+    except:
+        context['tot_avg'] = 0
     return render(request, 'web/course_read.html', context)
 
 @login_required
@@ -115,7 +119,7 @@ def studentCourseProfile(request, student_id, course):
     course = CourseModel.objects.get(pk=int(course))
     #course = CourseModel.objects.get(pk=course)
     student = StudentModel.objects.get(profile_id=student_id, course=course)
-    if (request.user.profile.pk == course.professor.pk and 
+    if (request.user.profile.pk == course.professor.pk and
     student.course == course):
         try:
             client = ClientModel.objects.get(pk=student_id)
@@ -232,4 +236,3 @@ def getStudentResultData(request, student_id, course, exp_id=None):
                 "notas" : list(notas)
         }
     return JsonResponse(json.dumps(data), safe=False)
-
