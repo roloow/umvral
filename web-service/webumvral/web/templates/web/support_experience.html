@@ -145,7 +145,7 @@
 	$(document).ready(function () {
 			var optionsAsString = "";
 			for (var i = 0; i < 4; i++) {
-					optionsAsString += "<option value='"+i+"'>" + contenidos[i].category + "</option>";
+					optionsAsString += "<option value='"+contenidos[i].category+"'>" + contenidos[i].category + "</option>";
 			}
 			$('#id_nivel').append(optionsAsString);
 
@@ -183,7 +183,6 @@
 <!-- END THEME GLOBAL STYLES -->
 <!-- BEGIN THEME LAYOUT STYLES -->
 <link href="{% static 'web/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
-<link href="{% static 'web/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 <link href="{% static 'web/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
