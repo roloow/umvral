@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavParams, Loading, LoadingController, AlertController, Nav } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { RegisterUserPage } from '../register-user/register-user';
@@ -23,9 +23,8 @@ export class LoginPage {
   loading: Loading;
   test: any;
 
-  @ViewChild(Nav) nav: Nav;
-
   constructor(
+    public nav: Nav,
     public navParams: NavParams,
     public umvralApiProvider: UmvralApiProvider,
     private alertCtrl: AlertController,

@@ -18,9 +18,9 @@ export class TutorialPage {
   showSkip = true;
 
   @ViewChild('slides') slides: Slides;
-  @ViewChild(Nav) nav: Nav;
 
   constructor(
+    public nav: Nav,
     public navParams: NavParams,
     public storage: Storage) {}
 

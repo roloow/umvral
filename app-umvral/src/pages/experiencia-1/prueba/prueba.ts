@@ -51,6 +51,7 @@ export class HelpPrueba1Page {
             this.contador +=1;
         }
         this.nota = (this.suma/this.preguntas.length)*6 + 1;
+        this.nota = this.nota*10;
         console.log(this.nota);
         this.umvralApiProvider.subirNota(this.nota).then((data) => {
             console.log(data);
