@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, Loading, App } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { LoginPage } from '../login/login';
+import { TutorialPage } from '../tutorial/tutorial';
 
 @Component({
   selector: 'page-perfil',
@@ -59,6 +60,10 @@ export class PerfilPage {
   cerrarSesion() {
     this.umvralApiProvider.logout();
     this.app.getRootNav().setRoot(LoginPage);
+  }
+
+  launchTutorial() {
+    this.app.getRootNav().setRoot(TutorialPage);
   }
 
   updateFirstName(name) {

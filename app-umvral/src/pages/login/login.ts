@@ -3,6 +3,8 @@ import { NavController, NavParams, Loading, LoadingController, AlertController }
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { RegisterUserPage } from '../register-user/register-user';
 import { HomePage } from '../home/home';
+import { Storage } from '@ionic/storage';
+import { TutorialPage } from '../tutorial/tutorial';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +28,8 @@ export class LoginPage {
     public navParams: NavParams,
     public umvralApiProvider: UmvralApiProvider,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private storage: Storage) {
     console.log("constructor loginPage");
   }
 
@@ -46,8 +49,14 @@ export class LoginPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
-      
-      this.navCtrl.setRoot(HomePage);
+      //El usuario ha visto el tutorial?
+      this.storage.get('has_seen_tutorial').then((status) => {
+        if (status == true) {
+          this.navCtrl.setRoot(HomePage);
+        } else {
+          this.navCtrl.setRoot(TutorialPage);
+        }
+      });
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
       console.log("FAIL");

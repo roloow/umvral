@@ -26,6 +26,7 @@ export class UmvralApiProvider {
         console.log("is_logged_in already exists.");
       } else {
         storage.set('is_logged_in', false);
+        storage.set('has_seen_tutorial', false);
         console.log("Created is_logged_in, initialized it to false.");
       }
     });
@@ -39,6 +40,7 @@ export class UmvralApiProvider {
 
   logout() {
     this.storage.set('is_logged_in', false);
+    this.storage.set('has_seen_tutorial', false);
     this.storage.remove('user_id');
     this.storage.remove('cursos');
     this.isLoggedIn = false;
