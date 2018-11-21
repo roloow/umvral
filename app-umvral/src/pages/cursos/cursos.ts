@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Loading, LoadingController } from 'ionic-angular';
 import { ExperienceListPage } from '../experience-list/experience-list';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 
@@ -9,11 +9,36 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 })
 export class CursosPage {
   cursos: any;
+  loading: Loading;
 
-  constructor(public nav: NavController, public umvralApiProvider: UmvralApiProvider) {
+  constructor(
+    public nav: NavController,
+    public umvralApiProvider: UmvralApiProvider,
+    private loadingCtrl: LoadingController) {
     this.nav = nav;
-    this.cursos = umvralApiProvider.getStuCurs();
-    
+
+    this.getCursos();
+  }
+
+  mostrarCargando() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Cargando...',
+      dismissOnPageChange: true
+    });
+    this.loading.present();
+  }
+
+  getCursos() {
+    //this.mostrarCargando();
+    this.umvralApiProvider.getStuCurs()
+    .then(data => {
+      //this.loading.dismiss();
+      this.cursos = data;
+    }, (err) => {
+      //this.loading.dismiss();
+      console.log("Error: "+err);
+    });
+
   }
 
   openListaPage(stu_id) {

@@ -1,8 +1,17 @@
 {% extends "web/base_page.html" %}
 {% load static %}
 {% load widget_tweaks %}
-{% block title %}Soporte{% endblock %}
-{% block breadcrumb %}<a href="{% url 'web:support'%}">Soporte</a> > Solicitud Experiencia {% endblock %}
+{% block title %}Solicitud Experiencia{% endblock %}
+{% block breadcrumb %}
+<li>
+	<a href="{% url 'web:support' %}">Soporte</a>
+	<i class="fa fa-angle-right"></i>
+</li>
+<li>
+	<a href="{% url 'web:support_experience' %}">Solicitud Experiencia</a>
+	<i class="fa fa-angle-right"></i>
+</li>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-md-12">

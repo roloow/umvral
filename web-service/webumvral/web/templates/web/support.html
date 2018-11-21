@@ -2,7 +2,12 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block title %}Soporte{% endblock %}
-{% block breadcrumb %}Soporte{% endblock %}
+{% block breadcrumb %}
+    <li>
+      <a href="{% url 'web:support' %}">Soporte</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+{% endblock %}
 {% block page_actions %}
 <a href="{% url 'web:support_experience' %}" type="button" class="btn btn-primary" style="margin-right: 20px;">
   <i class="icon-plus"></i>

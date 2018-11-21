@@ -49,8 +49,16 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="static/web/favicon.ico" /> </head>
     <!-- END HEAD -->
+    <style>
+    .login-image-content {
+        background-image: url({% static 'web/pages/media/bg/sky5.jpg' %});
+        background-repeat: no-repeat;
+        background-size: cover;
 
-    <body class=" login">
+    }
+    </style>
+
+    <body class=" login login-image-content">
         <!-- BEGIN LOGO -->
         <div class="logo">
             <a href="{% url 'web:home' %}">

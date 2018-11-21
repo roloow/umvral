@@ -1,24 +1,24 @@
 page-notas {
-    .displayed {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        
-    }
-    
-    .final {
-        position: fixed;
-        bottom: 5px;
-        left: 7px;
-        right: 7px;
-        margin: auto;
+    .notas-content {
+        background: color($colors, dark);
+        color: color($colors, light);
     }
     
     .col{
-        border:1px solid white;
-        background: #ff4848;
+        border:2px solid color($colors, dark);
+        background: color($colors, primary);
         border-radius: 10px;
         color: white;
-        }
+    }
+    
+    .grafico {
+        height: 50%;
+        background: color($colors, dark);
+    }
+    
+    .del-button {
+        height: 100%;
+        color: color($colors, light);
+    }
 }
 
