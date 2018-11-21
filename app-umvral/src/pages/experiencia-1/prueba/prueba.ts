@@ -52,9 +52,13 @@ export class HelpPrueba1Page {
         }
         this.nota = (this.suma/this.preguntas.length)*6 + 1;
         console.log(this.nota);
-        this.umvralApiProvider.subirNota(this.nota);
-        
-        this.mostrarMensaje("Tu nota es: "+this.nota.toString());
+        this.umvralApiProvider.subirNota(this.nota).then((data) => {
+            console.log(data);
+            this.mostrarMensaje("Tu nota es: "+this.nota.toString());
+        }, (err) => {
+            console.log(err);
+            this.mostrarMensaje("Ocurrió un error al guardar tu nota, puede que ya exista un registro previo");
+        });
         this.navCtrl.pop();
     }
 

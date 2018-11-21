@@ -166,12 +166,19 @@ export class UmvralApiProvider {
       this.http.post(this.apiUrl+'/experience/testResp/', dataStr, options).subscribe(data => {
         console.log("SUCCESS")
         let resultado = JSON.parse(data["_body"]);
-        this.notaAnswer = resultado.score;
-        this.answerid = resultado.answer_id;
-        console.log(resultado);
-        resolve(resultado);
+        console.log("Prueba: mensaje error = "+resultado.error);
+        if (!resultado.error){
+          this.notaAnswer = resultado.score;
+          this.answerid = resultado.answer_id;
+          console.log("Nota subida: "+resultado);
+          resolve('exito');
+        }
+        else{
+          console.log("Error al subir: nota ya existente");
+          reject('Error');
+        }
       }, err => {
-        console.log("FAIL")
+        console.log("Error al subir: error en request");
         reject(err);
       });
     });
