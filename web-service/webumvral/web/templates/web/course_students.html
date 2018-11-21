@@ -71,7 +71,7 @@ var render_options = function(student_id, sprofile_id, course_id, user_id, cours
           </div>`
 };
 var render_name = function(sprofile_id, name){
-	var url = "{% url 'web:student_courseprofile' 0 1 %}".replace('0','{{course.pk}}').replace('1',sprofile_id)
+	var url = "{% url 'web:student_courseprofile' 888888888 99999999 %}".replace('888888888','{{course.pk}}').replace('99999999',sprofile_id)
 	return `<a href="${url}"> ${name} </a>`
 }
 $(document).ready(function() {
@@ -82,9 +82,7 @@ $(document).ready(function() {
 			processing: true,
 			serverSide: true,
 			language: {
-				zeroRecords: "No hay entradas que mostrar",
-				lengthMenu: "Mostrar _MENU_ entradas por página",
-				search: "Buscar:"
+				url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
 			},
       order: [[ 0, "asc" ]],
       columnDefs: [

@@ -1,12 +1,7 @@
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the UmvralApiProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UmvralApiProvider {
   apiUrl = 'http://vps.csaldias.cl:8000/api';
@@ -19,17 +14,33 @@ export class UmvralApiProvider {
   exps: any;
   expcursid: number;
   pruebaid: any;
+  preguntas: any;
+  notaAnswer: any = 'Null';
+  answerid: any = 'Null';
 
-  constructor(public http: Http) {
-    this.isLoggedIn = false;
+  constructor(
+    public http: Http,
+    private storage: Storage) {
+    storage.get('is_logged_in').then((status) => {
+      if (status) {
+        console.log("is_logged_in already exists.");
+      } else {
+        storage.set('is_logged_in', false);
+        console.log("Created is_logged_in, initialized it to false.");
+      }
+    });
     console.log('Hello UmvralApiProvider Provider');
   }
 
-  isUserLoggedIn() {
-    return this.isLoggedIn;
+  async isUserLoggedIn() {
+    const val = await this.storage.get('is_logged_in');
+    return val;
   }
 
   logout() {
+    this.storage.set('is_logged_in', false);
+    this.storage.remove('user_id');
+    this.storage.remove('cursos');
     this.isLoggedIn = false;
     this.userid = 0;
     this.stucurs = '';
@@ -44,20 +55,27 @@ export class UmvralApiProvider {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl+'/user/login/', "username="+data.username+"&password="+data.password, options)
         .subscribe(res => {
-          this.isLoggedIn = true;
+          this.storage.set('is_logged_in', true);
+
           let userData = JSON.parse(res["_body"]);
-          this.userid = userData.user_id;
-          this.stucurs = userData.cursos;
-          /*console.log(this.stucurs[0]);
-          this.stucurs.sort(this.compararstucurs);
-          console.log(this.stucurs[0]);*/
+          this.storage.set('user_id', userData.user_id);
+          this.storage.set('cursos', userData.cursos);
+
           console.log("Login successful with ID "+this.userid);
           resolve(res);
         }, (err) => {
-          this.isLoggedIn = false;
+          this.storage.set('is_logged_in', false);
           reject(err);
         });
     });
+  }
+
+  compararpreguntas(a,b) {
+    if (a.position < b.position)
+      return -1;
+    if (a.position > b.position)
+      return 1;
+    return 0;
   }
 
   compararexps(a,b) {
@@ -66,8 +84,7 @@ export class UmvralApiProvider {
     if (a[0].position > b[0].position)
       return 1;
     return 0;
-  }
-    
+  } 
   experiencias(){
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
@@ -102,6 +119,8 @@ export class UmvralApiProvider {
           let cursoInfo = JSON.parse(res["_body"]);
           console.log(res);
           this.pruebaid = cursoInfo.test_id;
+          this.answerid = cursoInfo.answer_id;
+          this.notaAnswer = cursoInfo.answer_score;
           console.log(this.pruebaid);
           resolve(res);
         }, (err) => {
@@ -110,24 +129,68 @@ export class UmvralApiProvider {
         });
     });
   }
-/*
-  metodo(valores) {
+
+  prueba(){
     let hdrs = new Headers();
     hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
     let options = new RequestOptions({ headers: hdrs});
 
-    return new Promise((resolve, reject) =>{
-      //this.http.post(link,valores,options).subscribe(res => { hacer cosas res , resolve}, err => {hacer cosas error ,reject})
-      //this.http.get(link,options).subscribe(res => { hacer cosas res }, err => {hacer cosas error})
-    }
-  
-  
-  )
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/experience/test/', "student_id="+this.stuid+"&test_id="+this.pruebaid, options)
+        .subscribe(res => {
+          let Prueba = JSON.parse(res["_body"]);
+          this.preguntas = Prueba.preguntas;
+          console.log(this.preguntas);
+          this.preguntas.sort(this.compararpreguntas);
+          console.log(this.preguntas);
+          this.answerid = Prueba.answer_id;
+          this.notaAnswer = Prueba.answer_score;
+          resolve(res);
+        }, (err) => {
+          this.exps = "nope";
+          reject(err);
+        });
+    });
   }
-*/
+
+  subirNota(nota) {
+    let hdrs = new Headers();
+    hdrs.append('Content-Type', "application/x-www-form-urlencoded");      
+    let options = new RequestOptions({ headers: hdrs});
+  
+    let dataStr = "student_id="+this.stuid+"&test_id="+this.pruebaid +"&score="+nota;
+  
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl+'/experience/testResp/', dataStr, options).subscribe(data => {
+        console.log("SUCCESS")
+        let resultado = JSON.parse(data["_body"]);
+        this.notaAnswer = resultado.score;
+        this.answerid = resultado.answer_id;
+        console.log(resultado);
+        resolve(resultado);
+      }, err => {
+        console.log("FAIL")
+        reject(err);
+      });
+    });
+  }
+  
 
   getStuCurs(){
-    return (this.stucurs);
+    console.log("Fetching courses from localStorage...");
+    return new Promise((resolve, reject) => {
+      this.storage.get('user_id').then((userid) => {
+        this.userid = userid;
+        this.storage.get('cursos').then((cursos) => {
+          this.stucurs = cursos;
+          resolve(this.stucurs);
+        }, err => {
+          reject(err);
+        });
+      }, err => {
+        reject(err);
+      });
+    });
   }
 
 

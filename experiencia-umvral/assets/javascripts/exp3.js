@@ -25,7 +25,7 @@ class Hint {
 		let that = this;
 		that.active = true;
 		that.dom.setAttribute('visible', true);
-		setTimeout(function(){ 
+		setTimeout(function(){
 			that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0.7");
 			that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0.8");
 			//that.step = 1;
@@ -34,7 +34,7 @@ class Hint {
 	fade_out() {
 		let that = this;
 		this.active = false;
-		setTimeout(function(){ 
+		setTimeout(function(){
 			that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
 			that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
 			setTimeout(function(){
@@ -44,7 +44,7 @@ class Hint {
 		}, 4000);
 	};
 	changeHintText(text) {
-		this.dom.setAttribute('text', {'value': text}) 
+		this.dom.setAttribute('text', {'value': text})
 	}
 
 	/* Funciones de Pasos*/
@@ -189,6 +189,11 @@ var sphere = document.querySelector("#sphere");
 var initHeight = 1.5;
 //temperaturas
 var temp = [200,5000,10000,20000,200,0,-1500,-2730];
+
+var radioesfera = 1;
+var altocubo = 2;
+var anchocubo = 1;
+var largocubo =1;
 
 //btnes horno
 var btn1 = document.querySelector('#boton20horno');
@@ -528,8 +533,8 @@ function changeVolume(temp){
 	oculatarEtiquetas();
 	sphere = volume1.original
 	cube = volume2.original
-	vol1_ = (4/3)*Math.PI*Math.pow(sphere.radius, 3)
-	vol2_ = cube.height*cube.width*cube.depth
+	vol1_ = (4/3)*Math.PI*Math.pow(radioesfera, 3)
+	vol2_ = altocubo*anchocubo*largocubo
 	console.log("cambio volumen");
 	newvol1 = getVolume(vol1_,volume1,temp)
 	newvol2 = getVolume(vol2_,volume2,temp)
@@ -543,9 +548,9 @@ function getVolume(V_o, obj, temp){
 
 function changeVolumeCube(final_volume,obj){
 	cube = obj.original
-	x = cube.width
-	y = cube.height
-	z = cube.depth
+	x = anchocubo
+	y = altocubo
+	z = largocubo
 	x_ = Math.pow(final_volume*((x*x)/(y*z)),1/3)
 	y_ = x_ * (y/x)
 	z_ = x_ * (z/x)
@@ -583,7 +588,7 @@ function backgroundColor(t_act,tipo) {
 
 function changeVolumeSphere(final_volume,obj){
 	sphere = obj.original
-	r = sphere.radius
+	r = radioesfera
 	r_ = Math.pow((final_volume*3)/(4*Math.PI),1/3)
 	obj.dom.setAttribute('animation__sphere',"property: geometry.radius; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
 	obj.dom.setAttribute('animation__pos',"property: object3D.position.y; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: "+r_);
