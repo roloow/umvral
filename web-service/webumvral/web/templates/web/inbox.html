@@ -3,22 +3,14 @@
 {% load humanize %}
 {% block title %}Mensajes{% endblock %}
 {% block breadcrumb %}
-<li>
-    <a href="{% url 'web:profile' request.user.profile.pk %}"><span>{{request.user.profile.full_name}}</span></a>
-<i class="fa fa-angle-right"></i>
-</li>
-<li>
-{% if subheader %} 
-<a href="{% url 'web:msg_view' request.user.profile.pk 0 %}"><span>Bandeja de entrada</span></a>
-<i class="fa fa-angle-right"></i>
-</li>
-<li>
-    <span>{{subheader}}</span>
-</li>
-{% else %}
-<span>Bandeja de entrada</span>
-</li>
-{% endif %}
+    <li>
+			<a href="{% url 'web:profile' client.pk %}">Perfil: {{client.full_name}}</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+			<a href="{% url 'web:msg_view' client.pk 0 %}">Mensajes</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
 {% endblock %}
 {% block content %}
 <div class="inbox">

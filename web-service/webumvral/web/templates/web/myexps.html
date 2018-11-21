@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Experiencias disponibles
+Mis Experiencias
 {% endblock %}
 
 {% block subtitle %}
@@ -11,7 +11,7 @@ Experiencias disponibles
 
 {% block breadcrumb %}
 <li>
-  <span>Mis Experiencias disponibles</span>
+	<a href="{% url 'web:myexps' client_id %}"><span>Mis Experiencias</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 {% endblock %}

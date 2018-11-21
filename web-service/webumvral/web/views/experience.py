@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 def course_experience(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     try:
@@ -29,6 +30,7 @@ def change_visibility(expcou):
 
 def course_exp_visibility(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     try:
         experience = ExpCourseModel.objects.get(pk=experience)
@@ -39,6 +41,7 @@ def course_exp_visibility(request, course, experience):
 
 def experience_test(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -97,6 +100,7 @@ def experience_test(request, course, experience):
 
 def experience_test_edit(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -167,6 +171,7 @@ def experience_test_edit(request, course, experience):
 
 def experience_test_visibility(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -187,6 +192,7 @@ def experience_test_visibility(request, course, experience):
 
 def experience_test_delete(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -219,6 +225,7 @@ def change_position(lista):
 
 def experience_video(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = int(course)
     context['course'] = CourseModel.objects.get(pk=int(course))
     print(course)

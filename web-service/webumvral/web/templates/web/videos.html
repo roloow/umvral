@@ -5,11 +5,12 @@ Agregar experiencia
 {% endblock %}
 {% block breadcrumb %}
 <li>
-    <a href="{% url 'web:myexps' client_id %}"><span>Mis Experiencias disponibles</span></a>
+    <a href="{% url 'web:myexps' client_id %}"><span>Mis Experiencias</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-    <span>Agregar experiencia</span>
+	<a href="{% url 'web:addexps' client_id %}"><span>Agregar Experiencia</span></a>
+  <i class="fa fa-angle-right"></i>
 </li>
 {% endblock %}
 {% block content %}

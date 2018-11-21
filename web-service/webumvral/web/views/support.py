@@ -11,6 +11,7 @@ from ..forms import SupportForm, ExperienceForm
 @login_required
 def support(request):
     context = get_base_context(request)
+    context['section'] = 'support'
     if (request.method == "POST"):
         form = SupportForm(request.POST)
         if form.is_valid():
@@ -34,6 +35,7 @@ def support(request):
 @login_required
 def send_experience(request):
     context = get_base_context(request)
+    context['section'] = 'support'
     if (request.method == "POST"):
         form = ExperienceForm(request.POST)
         if form.is_valid():

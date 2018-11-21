@@ -6,6 +6,7 @@ from .experience import filter_experiences
 
 def myexperiences(request, client_id):
     context = get_base_context(request)
+    context['section'] = 'experience'
     context['client_id'] = client_id
     experiencias = AvailabilityModel.objects.filter(professor__pk=client_id)
     context['experiencias'] = experiencias
@@ -20,6 +21,7 @@ def get_url(string):
 
 def editexperiences(request, client_id, ava_id):
     context = get_base_context(request)
+    context['section'] = 'experience'
     context['client_id'] = client_id
     ava = AvailabilityModel.objects.get(pk=ava_id)
     context['ava'] = ava
@@ -38,6 +40,7 @@ def editexperiences(request, client_id, ava_id):
 
 def delexperiences(request, client_id, ava_id):
     context = get_base_context(request)
+    context['section'] = 'experience'
     try:
         ava = AvailabilityModel.objects.get(pk=int(ava_id))
         ava.delete()
@@ -48,6 +51,7 @@ def delexperiences(request, client_id, ava_id):
 
 def addexperiences(request, client_id):
     context = get_base_context(request)
+    context['section'] = 'experience'
     context['client_id'] = client_id
     experiencias = filter_experiences(client_id)
     context['experiencias'] = experiencias

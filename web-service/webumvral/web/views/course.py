@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.db.models import Avg
 from web.models import *
 import json
 import collections
@@ -48,10 +49,12 @@ def getTestsResults(student_id, course, array=False):
 #Funciones de la view en particular
 def courses_list(request):
     context = get_base_context(request)
+    context['section'] = 'course'
     return render(request, 'web/course_list.html', context)
 
 def course_edit(request, course=None):
     context = get_base_context(request)
+    context['section'] = 'course'
     editing = False
     if course:
         try:
@@ -88,6 +91,7 @@ def course_delete(request, course=None):
 
 def course_read(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context['course'] = courseobj
@@ -99,12 +103,17 @@ def course_read(request, course):
     context['tot_stu'] = courseobj.students.count()
     context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
     context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
+    students = StudentModel.objects.filter(course=courseobj)
+    notas = AnswerModel.objects.filter(student__in=students).aggregate(Avg('score'))
+    context['tot_avg'] = round(notas['score__avg'], 1)
     return render(request, 'web/course_read.html', context)
 
 @login_required
 def studentCourseProfile(request, student_id, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     course = CourseModel.objects.get(pk=int(course))
+    #course = CourseModel.objects.get(pk=course)
     student = StudentModel.objects.get(profile_id=student_id, course=course)
     if (request.user.profile.pk == course.professor.pk and 
     student.course == course):
@@ -223,3 +232,4 @@ def getStudentResultData(request, student_id, course, exp_id=None):
                 "notas" : list(notas)
         }
     return JsonResponse(json.dumps(data), safe=False)
+

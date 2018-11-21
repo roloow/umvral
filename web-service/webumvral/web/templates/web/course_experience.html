@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Experiencias disponibles
+Lista de Experiencias
 {% endblock %}
 
 {% block subtitle %}
@@ -11,7 +11,7 @@ Experiencias disponibles
 
 {% block breadcrumb %}
 <li>
-  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <a href="{% url 'web:course_list' %}"><span>Mis Cursos</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
@@ -19,11 +19,8 @@ Experiencias disponibles
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>Experiencias</span>
+  <a href="{% url 'web:course_experience' course_id %}"><span>Lista de Experiencias</span></a>
   <i class="fa fa-angle-right"></i>
-</li>
-<li>
-  <span>Lista de Experiencias</span>
 </li>
 {% endblock %}
 {% block page_actions %}

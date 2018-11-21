@@ -2,8 +2,10 @@
 {% load static %}
 {% block title %}Perfil de usuario{% endblock %}
 {% block breadcrumb %}
-<li><span>{{client.full_name}}</span> <i class="fa fa-angle-right"></i></li>
-<li><span>Resumen</span></li>
+    <li>
+			<a href="{% url 'web:profile' client.pk %}">Perfil: {{client.full_name}}</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
 {% endblock %}
 {% block content %}
 <div class="row">
