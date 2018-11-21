@@ -62,7 +62,7 @@ def course_invite(request, course):
                 new_stu.course = courseobj
                 new_stu.save()
                 try:
-                    text = 'Hola '+u.first_name+'!, bienvenido al nuevo curso "'+ new_stu.course.name +'". Desde este momento podrás vivir nuevas experiencias y aprender sin límites. \n \n saludos, equipo umVRal.'
+                    text = 'Hola '+u.first_name+'!, bienvenido al nuevo curso "'+ new_stu.course.name +'". Desde este momento podrás vivir nuevas experiencias y aprender sin límites. \n \n Saludos, equipo umVRal.'
                     send_mail(
                         '¡Bienvenido a un nuevo curso umVRal, '+ new_stu.course.name +'!',
                         text,
