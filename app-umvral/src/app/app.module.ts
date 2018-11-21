@@ -30,6 +30,7 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
 import { HomePage } from '../pages/home/home';
 import { ChartsModule } from 'ng2-charts';
 import { IonicStorageModule } from '@ionic/storage';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     RegisterUserPage,
     MensajesPage,
-    HomePage
+    HomePage,
+    TutorialPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     RegisterUserPage,
     MensajesPage,
-    HomePage
+    HomePage,
+    TutorialPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
