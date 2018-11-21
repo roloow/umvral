@@ -1,16 +1,13 @@
 {% extends "web/base_list.html" %}
 {% load static %}
 {% block title %}
-Cursos Disponibles
+Mis Cursos
 {% endblock %}
 {% block breadcrumb %}
-<li>
-  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
-  <i class="fa fa-angle-right"></i>
-</li>
-<li>
-  <span>Lista de cursos</span>
-</li>
+    <li>
+			<a href="{% url 'web:course_list' %}">Mis Cursos</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
 {% endblock %}
 {% block page_actions %}
 <a href="{% url 'web:course_create' %}" class="btn btn-fit-height default" role="button">

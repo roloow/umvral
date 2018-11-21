@@ -22,8 +22,8 @@ class ExperienceForm(forms.Form):
     nombre = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=254)
     nombre_experiencia = forms.CharField(max_length=254)
-    nivel = forms.ChoiceField(choices=[])
-    contenido = forms.ChoiceField(choices=[])
+    nivel = forms.CharField(widget=forms.Select)
+    contenido = forms.CharField(widget=forms.Select)
     mensaje = forms.CharField(
         max_length=10000,
         widget=forms.Textarea(),
