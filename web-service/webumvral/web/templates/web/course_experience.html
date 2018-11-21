@@ -58,23 +58,27 @@ Experiencias disponibles
                         <td > {{exp.available.experience.name}} </td>
                         <td> {{exp.available.experience.description|truncatechars:50}} </td>
                           <td><center><a href="http://youtube.com/watch?v={{exp.video}}" target="_blank"><i class="fa fa-youtube-play fa-2x" style="color:red"></i></a></center></td>
-                        <td><center>
-                          {% if exp.visible %}
-                          <i class="fa fa-eye" style="color:black"></i>
-                          {% else %}
-                          <i class="fa fa-eye-slash" style="color:gray"></i>
-                          {% endif %}</center>
+                        <td>
+                          <center>
+                            {% if exp.visible %}
+                            <i class="fa fa-eye" style="color:black"></i>
+                            {% else %}
+                            <i class="fa fa-eye-slash" style="color:gray"></i>
+                            {% endif %}
+                          </center>
                        </td>
-                       <td><center>
-                         {% if exp.test %}
-                         {% if exp.test.visible %}
-                           <span class="label label-sm label-success "> Activa </span>
-                         {% else %}
-                           <span class="label label-sm label-default "> Creada </span>
-                         {% endif %}
-                         {% else %}
-                         <span class="label label-sm label-danger "> Sin crear </span>
-                         {% endif %}</center>
+                       <td>
+                         <center>
+                          {% if exp.test %}
+                          {% if exp.test.visible %}
+                            <span class="label label-sm label-success "> Activa </span>
+                          {% else %}
+                            <span class="label label-sm label-default "> Creada </span>
+                          {% endif %}
+                          {% else %}
+                            <span class="label label-sm label-danger "> Sin crear </span>
+                          {% endif %}
+                        </center>
                       </td>
                       <td><center>
                         <div class="btn-group">
@@ -131,12 +135,9 @@ Experiencias disponibles
       </div>
   </div>
 </div>
-
 </form>
-
 </div>
 {% endblock %}
-
 {% block plugin_js %}
 <script type="text/javascript" src="{% static 'web/global/plugins/jquery-sortable/jquery-sortable.js' %}"></script>
 <script>
@@ -147,7 +148,6 @@ $(document).ready(function(){
   var unsorteable = "table table-hover";
   var active_color = "btn btn-info";
   var deactive_color = "btn btn-danger";
-
   $('.sorted_table').sortable({
   containerSelector: 'table',
   itemPath: '> tbody',
@@ -177,7 +177,6 @@ $(document).ready(function(){
 })
 </script>
 {% endblock %}
-
 {% block plugin_css %}
 <link rel="stylesheet" href="{% static "web/global/css/jquery-sortable/jquery-sortable.css" %}">
 {% endblock %}

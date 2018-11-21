@@ -10,7 +10,6 @@ from web.models import *
 import json
 import collections
 
-
 def getTestsResults(student_id, course, array=False):
     course = CourseModel.objects.get(pk=course)
     student = StudentModel.objects.get(profile_id=student_id, course=course)
@@ -45,7 +44,6 @@ def getTestsResults(student_id, course, array=False):
                     "test": expc.test.pk,
                     "score": student_answers.get(test_id=expc.test.pk)['score']}]}
     return test_experiences
-
 
 #Funciones de la view en particular
 def courses_list(request):
@@ -101,14 +99,12 @@ def course_read(request, course):
     context['tot_stu'] = courseobj.students.count()
     context['tot_exp'] = ExpCourseModel.objects.filter(course=courseobj).count()
     context['tot_eval'] = ExpCourseModel.objects.filter(course=courseobj, test__isnull=False).count()
-    #context['tot_eval'] = courseobj.students.count()
-    #context['tot_avg'] = courseobj.students.count()
     return render(request, 'web/course_read.html', context)
 
 @login_required
 def studentCourseProfile(request, student_id, course):
     context = get_base_context(request)
-    course = CourseModel.objects.get(pk=course)
+    course = CourseModel.objects.get(pk=int(course))
     student = StudentModel.objects.get(profile_id=student_id, course=course)
     if (request.user.profile.pk == course.professor.pk and 
     student.course == course):
