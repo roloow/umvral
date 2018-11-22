@@ -1,0 +1,7 @@
+Para generar una fuente compatible con A-Frame, ir al siguiente sitio-generador:
+https://msdf-bmfont.donmccurdy.com/
+
+Seguir las instrucciones, y utilizar el charset a continuación:
+
+Charset:
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;.:áéíóúñ°-_!¡¿?1234567890+*{}[] 

@@ -90,7 +90,7 @@ export class Experiencia2Page {
     };
     const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
       console.log('Server is live');
-      const browser = this.iab.create(url+"/exp-2.html", "_blank", options);
+      const browser = this.iab.create(url+"/experiencia2.html", "_blank", options);
       browser.on('exit').subscribe(() => {
         httpServer.unsubscribe();
         browser.close();
