@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { NavParams, Loading, LoadingController, AlertController, Nav } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 import { RegisterUserPage } from '../register-user/register-user';
 import { HomePage } from '../home/home';
@@ -24,7 +24,7 @@ export class LoginPage {
   test: any;
 
   constructor(
-    public navCtrl: NavController,
+    public nav: Nav,
     public navParams: NavParams,
     public umvralApiProvider: UmvralApiProvider,
     private alertCtrl: AlertController,
@@ -39,7 +39,7 @@ export class LoginPage {
 
   registrarUsuario() {
     console.log("Boton presionado para registrar!");
-    this.navCtrl.push(RegisterUserPage);
+    this.nav.push(RegisterUserPage);
   }
 
   iniciarSesion() {
@@ -52,9 +52,9 @@ export class LoginPage {
       //El usuario ha visto el tutorial?
       this.storage.get('has_seen_tutorial').then((status) => {
         if (status == true) {
-          this.navCtrl.setRoot(HomePage);
+          this.nav.setRoot(HomePage);
         } else {
-          this.navCtrl.setRoot(TutorialPage);
+          this.nav.setRoot(TutorialPage);
         }
       });
     }, (err) => {
