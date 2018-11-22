@@ -47,4 +47,5 @@ urlpatterns = [
     re_path(r'user/(?P<client_id>\d+)/experiences/add$', views.addexperiences, name="addexps"),
     re_path(r'user/(?P<client_id>\d+)/experiences/(?P<ava_id>\d+)/edit$', views.editexperiences, name="editexps"),
     re_path(r'user/(?P<client_id>\d+)/experiences/(?P<ava_id>\d+)/delete$', views.delexperiences, name="delexps"),
+    re_path(r'user/(?P<client_id>\d+)/expcourse/(?P<expcourse>\d+)/date$', views.datepicker, name="date"),
 ]

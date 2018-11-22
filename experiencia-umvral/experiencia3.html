@@ -11,7 +11,6 @@
 		<script src="assets/javascripts/aframe-physics-system.min.js"></script>
     <script src="assets/javascripts/aframe-material.min.js"></script>
     <script src="assets/javascripts/aframe-extras.min.js"></script>
-    <script src="assets/javascripts/aframe-physics-extras.min.js"></script>
     <script src="assets/javascripts/moment-with-locales.js"></script>
     <script src="assets/javascripts/aframe-environment-component.min.js"></script>
     <script src="assets/javascripts/aframe-animation-component.min.js"></script>
@@ -187,7 +186,8 @@
 
 
 			<!-- boton tutorial -->
-			<a-button  class="btn_tutorial" id="btn_tooltips" color="blue" position="-2 1 -3" value="Tutorial"></a-button>
+			<a-button  button-color="#9ef442" color="white" class="btn_tutorial" id="btn_tooltips" color="blue" position="-0.6 0.93 0.05" rotation="-41 0 0" value="Tutorial"></a-button>
+
 			<!-- fin boton tutorial -->
 
       <!-- Inicio de Controles -->
@@ -200,10 +200,10 @@
 						<a-entity material="opacity: 0;" id="hints" text="font: assets/fonts/Roboto-Regular-msdf.json; fontImage: assets/fonts/Roboto-Regular.png; negate: false; color: white; width: 0.8; wrap-pixels: 800; opacity: 0" position="0.06 0.41 -1.2" visible="false"></a-entity>
 					</a-entity>
 					<!-- fin tooltips -->
-          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 1000"
+          <a-entity id="selector" cursor="fuse: true; fuseTimeout: 600"
               position="0 0 -1"
               geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-              material="color: black; shader: flat">
+              material="color: black; shader: flat; opacity: 0.6">
               <a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
               <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1000" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
             </a-entity>
@@ -213,5 +213,5 @@
       <!-- Fin de Controles -->
     </a-scene>
   </body>
-	<script src="assets/javascripts/dist/exp3.js"></script>
+	<script src="assets/javascripts/dist/exp3.min.js"></script>
 </html>
