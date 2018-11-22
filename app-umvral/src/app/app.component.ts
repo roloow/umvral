@@ -5,7 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
 import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
+//import { HomePage } from '../pages/home/home';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { NotasPage } from '../pages/notas/notas';
+import { CursosPage } from '../pages/cursos/cursos';
+import { MensajesPage } from '../pages/mensajes/mensajes';
 
 @Component({
   templateUrl: 'app.template.html'
@@ -41,11 +45,25 @@ export class ConferenceApp {
     this.umvralApiProvider.isUserLoggedIn().then((status) => {
       if (status == true) {
         console.log("Usuario ha iniciado sesión");
-        this.rootPage = HomePage;
+        this.rootPage = CursosPage;
       } else {
         console.log("usuario no ha iniciado sesión.");
         this.rootPage = LoginPage;
       }
     });
+  }
+
+  openPerfilPage() {
+    this.nav.push(PerfilPage);
+  }
+  openNotasPage() {
+    this.nav.push(NotasPage);
+  }
+  openCursosPage() {
+    this.nav.push(CursosPage);
+  }
+
+  openMensajesPage() {
+    this.nav.push(MensajesPage);
   }
 }

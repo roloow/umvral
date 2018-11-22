@@ -82,17 +82,19 @@ export class Experiencia1Page {
       port: 8080,
       localhost_only: true
   };
+
   const options: InAppBrowserOptions = {
     zoom: 'no',
     location: 'no',
     hardwareback: 'no',
   };
+
   const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
     console.log('Server is live');
-    console.log('Url: '+url+"/experiencia2.html");
-    const browser = this.iab.create("http://www.usm.cl", "_blank", options);
-    browser.show();
+    console.log('Url: '+url+"/experiencia1.html");
+    const browser = this.iab.create(url+"/experiencia1.html", "_blank", options);
     console.log("Browser launched.");
+
     browser.on('exit').subscribe(() => {
       console.log("Browser closed.");
       httpServer.unsubscribe();

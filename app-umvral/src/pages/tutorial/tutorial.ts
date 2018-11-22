@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavParams, Slides, Nav } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { NavParams, Slides, NavController } from 'ionic-angular';
+//import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
+import { CursosPage } from '../cursos/cursos';
 
 /**
  * Generated class for the TutorialPage page.
@@ -20,13 +21,13 @@ export class TutorialPage {
   @ViewChild('slides') slides: Slides;
 
   constructor(
-    public nav: Nav,
+    public nav: NavController,
     public navParams: NavParams,
     public storage: Storage) {}
 
   startApp() {
     this.nav
-      .setRoot(HomePage)
+      .setRoot(CursosPage)
       .then(() => this.storage.set('has_seen_tutorial', true));
   }
 
