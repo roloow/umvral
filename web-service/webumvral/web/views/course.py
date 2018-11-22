@@ -236,3 +236,10 @@ def getStudentResultData(request, student_id, course, exp_id=None):
                 "notas" : list(notas)
         }
     return JsonResponse(json.dumps(data), safe=False)
+
+def datepicker(request, client_id, expcourse):
+    expc = ExpCourseModel.objects.get(pk=int(expcourse))
+    expc.date_visible = request.POST['dateselected']
+    expc.visible = False
+    expc.save()
+    return redirect('web:course_experience', course=expc.course.pk)
