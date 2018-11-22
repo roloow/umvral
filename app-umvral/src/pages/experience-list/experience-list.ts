@@ -38,7 +38,7 @@ export class ExperienceListPage {
           this.nav.push(Experiencia2Page); //Lanzamiento de Proyectil
         break;
 
-        case 'Dilatacion y calor':
+        case 'Dilatación y calor':
           this.nav.push(Experiencia3Page); //Dilatacion y calor
         break;
 

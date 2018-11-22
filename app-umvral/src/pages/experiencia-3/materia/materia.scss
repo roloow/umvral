@@ -2,4 +2,8 @@ page-materia-3 {
     .scroll-content {
         overflow: hidden !important;
       }
+      .materia-content {
+        background: color($colors, dark);
+        color: color($colors, light)
+    }
 }

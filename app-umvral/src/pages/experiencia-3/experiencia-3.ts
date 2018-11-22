@@ -7,6 +7,7 @@ import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser'
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
+import { HttpdOptions, Httpd } from '@ionic-native/httpd';
 
 @Component({
   selector: 'page-experiencia-3',
@@ -22,6 +23,7 @@ export class Experiencia3Page {
     private iab: InAppBrowser,
     public splashScreen: SplashScreen,
     private alertCtrl: AlertController,
+    private httpd: Httpd,
     public umvralApiProvider: UmvralApiProvider)
     {
       this.nav = nav;
@@ -74,12 +76,25 @@ export class Experiencia3Page {
     this.mostrarMensaje("Ya has rendido esta prueba.\nTu nota fue: "+this.nota.toString());
 }
 
-  loadExp() {
-    const options: InAppBrowserOptions = {
-      zoom: 'no',
-      location: 'no',
-      hardwareback: 'no',
-    }
-    this.iab.create("http://vps.csaldias.cl/umvral/", "_blank", options);
-  }
+loadExp() {
+  console.log("Loading experience...");
+  const serverOptions: HttpdOptions = {
+      www_root: 'assets/experiencias', // relative path to app's www directory
+      port: 8080,
+      localhost_only: true
+  };
+  const options: InAppBrowserOptions = {
+    zoom: 'no',
+    location: 'no',
+    hardwareback: 'no',
+  };
+  const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
+    console.log('Server is live');
+    const browser = this.iab.create(url+"/experiencia3.html", "_blank", options);
+    browser.on('exit').subscribe(() => {
+      httpServer.unsubscribe();
+      browser.close();
+   });
+  });
+}
 }
