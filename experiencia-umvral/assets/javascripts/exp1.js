@@ -65,6 +65,7 @@ class Hint {
 			that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
 			that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
 			setTimeout(function(){
+				that.active = false;
 				that.hint_rectangle.setAttribute('visible', 'false');
 				that.dom.setAttribute('visible', 'false');
 			}, 1000);
@@ -77,28 +78,28 @@ class Hint {
 	/* Funciones de Pasos*/
 	toStep1(){
 		let that = this;
-		if (that.step === 0){
+		if (that.step === 0 && that.active){
 			that.changeHintText('Bien!. Ahora, selecciona el planeta en el cual quieres experimentar la caida libre, en el panel de la izquierda.');
 			that.step = 1;
 		}
 	}
 	toStep2(){
 		let that = this;
-		if (that.step === 1){
+		if (that.step === 1 && that.active){
 			that.changeHintText('¡Bienvenido '+that.planet+'!. Ahora, centra la mira en las etiquetas destacadas de la regla Vertical, para lanzar pelota unas '+that.drop+' veces.');
 			that.step = 2;
 		}
 	}
 	toStep3(){
 		let that = this;
-		if (that.step === 2){
+		if (that.step === 2 && that.active){
 			that.changeHintText('Ahora, cambia la masa del objeto soltado en el panel de la izquierda. Selecciona un peso diferente a 0.5 kg.');
 			that.step = 3;
 		}
 	}
 	toStep4(){
 		let that = this;
-		if (that.step === 3){
+		if (that.step === 3 && that.active){
 			that.changeHintText('Bien!. Ahora lanza de nuevo la pelota una vez.');
 			that.step = 4;
 		}
@@ -137,6 +138,7 @@ class Hint {
 hints = new Hint();
 
 hints.btn_tooltips1.addEventListener('click', function(){
+	hints.active = true;
 	hints.fade_in();
 	hints.btn_tooltips2.setAttribute('visible', 'false')
 	pay = {
@@ -151,6 +153,7 @@ hints.btn_tooltips1.addEventListener('click', function(){
 })
 
 hints.btn_tooltips2.addEventListener('click', function(){
+	hints.active = true;
 	hints.step = 2;
 	hints.fade_in();
 	hints.btn_tooltips1.setAttribute('visible', 'false')
@@ -371,12 +374,15 @@ p3.addEventListener('click', function () {
 	hints.toStep1();
 });
 $('#obj1').addEventListener('click', function () {
+	hints.toStep1();
 	changeColor('p1');
 });
 $('#obj2').addEventListener('click', function () {
+	hints.toStep1();
 	changeColor('p2');
 });
 $('#obj3').addEventListener('click', function () {
+	hints.toStep1();
 	changeColor('p3');
 });
 $('#box1').addEventListener('click', function () {

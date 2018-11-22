@@ -1,28 +1,5 @@
-pay = {
-	student_id: 301,
-	experience_id: 2,
-	slug: 'inicio',
-	value: true,
-	//value_num: algun numero
-}
-//send2api(pay)
-
-var webpage = "http://192.168.0.24:8000/api/metric/post/";
-function send2api(payload){
-	var data = new FormData();
-	data.append( 'json', JSON.stringify( payload ) );
-	fetch("http://192.168.0.24:8000/api/metric/post/",
-		//fetch("http://localhost:8000/api/metric/post/",
-		{
-			method: "POST",
-			body: data
-		})
-		.then(function(res){ return res.json(); })
-		.then(function(data){ console.log("metric sent") })
-}
-
 /*************************
-				VARIABLES
+						VARIABLES
  *************************/
 
 // Valores posibles de seleccion
@@ -57,7 +34,9 @@ var textoPizarra60grados = document.querySelector("#textoPizarra60grados");
 
 var offset_z = 4; //offset de calculos de targets respecto a punto de lanzamiento
 var offset_y = 0;
+//var target_1 = document.querySelector('#target-1');
 var target0 = document.querySelector('#target0');
+//var target1 = document.querySelector('#target1');
 var orange = document.querySelector('#orange');
 var shoot = document.querySelector(".cannon");
 
@@ -75,138 +54,6 @@ var angle_1 = document.querySelector('#v1');
 var angle0 = document.querySelector('#v2');
 var angle1 = document.querySelector('#v3');
 
-// Tutorial - Tooltips
-/*STEPS:
-	0: Usuario inicia experiencia, tiene que apretar emprezar
-	1: Usuario ya apreto "Empezar"
-	2: Debe cambiar posicion horizontar par de veces
-	3: Debe cambiar angulo par de veces
-	4: Lanza la pelota
-	5: Debe acertar a un blanco
-	*/
-class Hint {
-	constructor() {
-		this.btn_tooltips = document.querySelector('#btn_tooltips');
-		this.hint_rectangle = document.querySelector("#hint_rectangle");
-		this.dom = document.querySelector("#hints");
-		this.active = false;
-		this.step = 0;
-		//tengo q cambiar angulo horizontal 2 veces
-		this.pos_count = 3;
-		this.angle_count = 3;
-		this.changeHintText("Hola, bienvenido a la experiencia N°2 de umVRal. Para comenzar, aprieta el botón 'empezar'.");
-	}
-	reset() {
-		this.step = 1;
-		this.active = false;
-		this.change_temp = 0;
-		//tengo q cambiar angulo horizontal 2 veces
-		this.pos_count = 3;
-		this.angle_count = 3;
-	}
-	changeHintText(text) {
-		this.dom.setAttribute('text', {'value': text}) 
-	}
-	change_funct() {
-		let that = this;
-		if((that.change_temp < 2) && that.active) { that.change_temp++; }
-		else {
-			that.changeHintText('Bien!. Continua experimentando en la experiencia, y aprende con nostoros! LH.', that.dom);
-			that.fade_out();
-		}
-	}
-	//start es equivalente a toStep2()
-	start(){
-		let that = this;
-		if (that.step === 1 && that.pos_count > 0){
-			that.changeHintText("La experiencia comienza!. Prueba cambiando la posición del cañon "+that.pos_count+" veces en el panel a tu derecha.");
-			//that.pos_count--;
-			that.step = 2;
-		}
-	}
-	toStep3(){
-		let that = this;
-		if (that.step === 2){
-			that.changeHintText('Prueba ahora cambiando el angulo del cañon '+that.angle_count+' veces');
-			that.step = 3;
-		}
-	}
-	change_position() {
-		let that = this;
-		//if (that.step === 1 && that.pos_count > 0){
-		if (that.step === 2){
-			that.pos_count--;
-			that.changeHintText("La experiencia comienza!. Prueba cambiando la posición del cañon "+that.pos_count+" veces en el panel a tu derecha.");
-			if (that.pos_count <= 0){
-				that.toStep3();
-			}
-		}
-	}
-	change_angle() {
-		let that = this;
-		if (that.step === 3 && that.angle_count > 0){
-			that.angle_count--;
-			that.changeHintText('Prueba ahora cambiando el angulo del cañon '+that.angle_count+' veces');
-			if (that.angle_count <= 0){
-				that.toStep4();
-			}
-		}
-	}
-	toStep4(){
-		let that = this;
-		if (that.step === 3){
-			that.changeHintText('Bien!. Ahora llego la hora de lanzar proyectil. Ajusta coordenadas de cañon, y miralo para lanzar proyectil. Apunta a un Blanco.');
-			that.step = 4;
-		}
-	}
-	launch() {
-		let that = this;
-		if (that.step === 4){
-			that.changeHintText('Bien!. Ahora llego la hora de lanzar proyectil. Ajusta coordenadas de cañon, y miralo para lanzar proyectil. Apunta a un Blanco.');
-			that.step++;
-		}
-	}
-	target() {
-		let that = this;
-		if (that.step === 4 || that.step === 5){
-			that.changeHintText('Ya tienes tu primer acierto!. Ahora, impacta unos 2 blancos más para poder completar la experiencia');
-			that.step++;
-			setTimeout(function(){ 
-				that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
-				that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
-				setTimeout(function(){
-					that.hint_rectangle.setAttribute('visible', false);
-					that.dom.setAttribute('visible', false);
-				},1000);
-			}, 4000);
-		}
-	}
-	fade_out() {
-		let that = this;
-		this.active = false;
-		setTimeout(function(){ 
-			that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
-			that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0");
-			setTimeout(function(){
-				that.hint_rectangle.setAttribute('visible', 'false');
-				that.dom.setAttribute('visible', 'false');
-			}, 1000);
-		}, 1000);
-	};
-	fade_in() {
-		let that = this;
-		//that.reset();
-		that.active = true;
-		that.dom.setAttribute('visible', true);
-		setTimeout(function(){ 
-			that.hint_rectangle.setAttribute('animation',"property: slice9.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0.7");
-			that.dom.setAttribute('animation',"property: text.opacity; dir: alternate; dur: 1000; easing: easeInSine; loop: false; to: 0.8");
-			//that.step = 1;
-		}, 500);
-	}
-}
-hints = new Hint();
-
 var comenzo=false;
 //Generar las respuestas de la experiencia
 generateAnswers();
@@ -214,28 +61,11 @@ nextTarget();
 
 
 /*************************
-	 FUNCIONES DE EVENTOS
+			 FUNCIONES DE EVENTOS
  **************************/
 
-hints.btn_tooltips.addEventListener('click', function(){
-	hints.fade_in();
-	if (hints.step === 1) { hints.start() };
-	pay = {
-		student_id: 301,
-		experience_id: 2,
-		slug: 'tutorial',
-		value: true,
-		//value_num: algun numero
-	}
-	send2api(pay);
-})
-
 start.addEventListener('click', function(){
-	hints.step = 1;
-	hints.start()
 	nextTarget();
-	//TODO : Tengo que ver el problema si el usuario apreta empezar antes,
-	// Para saltar el paso
 	comenzo = true;
 	target0.setAttribute('visible', 'true');
 	start.setAttribute('visible', 'false');
@@ -273,9 +103,24 @@ alfa1.addEventListener('click', function(){
 	cannonL2.object3D.rotation.x = degToRad(90+gamma);
 	cannonL3.object3D.rotation.x = degToRad(90+gamma);
 	// cambio de angulo bala
+
+});
+
+alfa1.addEventListener('click', function(){
+	textoPizarraEnBlanco.setAttribute('visible','false');
+	textoPizarra45grados.setAttribute('visible','false');
+	textoPizarra60grados.setAttribute('visible','false');
+	textoPizarra30grados.setAttribute('visible','true');
+	gamma=30;
+	// cambio en angulo del cañon
+	cannonL1.object3D.rotation.x = degToRad(90+gamma);
+	cannonL2.object3D.rotation.x = degToRad(90+gamma);
+	cannonL3.object3D.rotation.x = degToRad(90+gamma);
+	// cambio de angulo bala
 	if(comenzo){
 		document.querySelector("#coordenadastarget").setAttribute('value','coordenadas ( x='+xTarget+'[m] ,y='+yTarget+'[m] ) \n Velocidad disparo= 18[m/s]');
 	}
+
 });
 
 
@@ -321,7 +166,6 @@ alfa1panel.addEventListener('click', function(){
 	textoPizarra60grados.setAttribute('visible','false');
 	textoPizarra30grados.setAttribute('visible','true');
 	gamma=30;
-	hints.change_angle();
 	// cambio en angulo del cañon
 	cannonL1.object3D.rotation.x = degToRad(90+gamma);
 	cannonL2.object3D.rotation.x = degToRad(90+gamma);
@@ -338,7 +182,6 @@ alfa2panel.addEventListener('click', function(){
 	textoPizarra60grados.setAttribute('visible','false');
 	textoPizarra30grados.setAttribute('visible','false');
 	gamma=45;
-	hints.change_angle();
 	// cambio en angulo del cañon
 	cannonL1.object3D.rotation.x = degToRad(90+gamma);
 	cannonL2.object3D.rotation.x = degToRad(90+gamma);
@@ -355,7 +198,6 @@ alfa3panel.addEventListener('click', function(){
 	textoPizarra60grados.setAttribute('visible','true');
 	textoPizarra30grados.setAttribute('visible','false');
 	gamma=60;
-	hints.change_angle();
 	// cambio en angulo del cañon
 	cannonL1.object3D.rotation.x = degToRad(90+gamma);
 	cannonL2.object3D.rotation.x = degToRad(90+gamma);
@@ -380,18 +222,10 @@ function myHandler(e) {
 
 
 /* Lanzamiento de Bala */
+//shoot.addEventListener('click', function(){
 cannons.addEventListener('click', function(){
 	if (launching_ball === false || orange.body.position < -1 || orange.body.position.y < 0.8) {
 		launching_ball = true;
-		hints.launch();
-		pay = {
-			student_id: 301,
-			experience_id: 2,
-			slug: 'disparo',
-			value: true,
-			//value_num: algun numero
-		}
-		send2api(pay);
 		//Reset de velocidades de la Bala
 		orange.body.angularVelocity.set(0,0,0);
 		orange.body.quaternion.set(0,0,0,1);
@@ -406,15 +240,6 @@ shoot.addEventListener('click', function(){
 	if (launching_ball === false || orange.body.position < -1 || orange.body.position.y < 0.8) {
 		launching_ball = true;
 		//Reset de velocidades de la Bala
-		hints.launch();
-		pay = {
-			student_id: 301,
-			experience_id: 2,
-			slug: 'disparo',
-			value: true,
-			//value_num: algun numero
-		}
-		send2api(pay);
 		orange.body.angularVelocity.set(0,0,0);
 		orange.body.quaternion.set(0,0,0,1);
 		orange.body.position.set(0, 1.5, -4.5);
@@ -426,10 +251,10 @@ shoot.addEventListener('click', function(){
 
 /* Evento de colision de Raycaster de Bala con Target/Plano */
 /* Funcion que se lanza, cuando la bala tiene una colision con un
-	target o el suelo, para poder reiniciar el disparo
+			target o el suelo, para poder reiniciar el disparo
  * Variables Offset: sirven cuando el cañon tinee que moverse de posicion, ya
-	que se asume que el cañon debiese estar en 0.0
-	*/
+			que se asume que el cañon debiese estar en 0.0
+			*/
 orange.addEventListener('raycaster-intersection', function (e) {
 	launching_ball = false;
 	if (e.detail.els[0].getAttribute('id') === 'plano'){
@@ -437,15 +262,6 @@ orange.addEventListener('raycaster-intersection', function (e) {
 		orange.body.position.set(0, -4, -4.5);
 	}
 	else if (e.detail.els[0].getAttribute('id') === 'target0'){
-		hints.target();
-		pay = {
-			student_id: 301,
-			experience_id: 2,
-			slug: 'acierto',
-			value: true,
-			//value_num: algun numero
-		}
-		send2api(pay)
 		orange.body.velocity.set(0, 0, 0);
 		orange.body.position.set(0, -4, -4.5);
 		nextTarget();
@@ -453,9 +269,9 @@ orange.addEventListener('raycaster-intersection', function (e) {
 	// OJO: Este if, fija la respuesta para cierto angulo. Si el target tiene dos respuestas,
 	// entonces no funcionaria, y habria que hacer colisiones con dos versiones
 	/*
-	if (parseInt(e.detail.els[0].getAttribute('angle')) == gamma){
-	}
-	*/
+			if (parseInt(e.detail.els[0].getAttribute('angle')) == gamma){
+			}
+			*/
 });
 
 
@@ -471,7 +287,7 @@ angle1.addEventListener('click', function(){
 });
 
 /**************************
-	 FUNCIONES DE SOPORTE
+			 FUNCIONES DE SOPORTE
  **************************/
 
 // Crear posicion no random para los targets
@@ -502,8 +318,8 @@ function targetPos(angle, v_o, gamma){
 
 /* generateAnswers*/
 /* Genera las respuestas al inicio de la experiencia, que el estudiante
-	tiene que responder para poder completar la experiencia
-	- formato respuesta: [velocidad, angulo_vert, angulo_hor]*/
+			tiene que responder para poder completar la experiencia
+			- formato respuesta: [velocidad, angulo_vert, angulo_hor]*/
 function generateAnswers(){
 	for(i=0; i<cant_respuestas; i++){
 		var aux = {};
@@ -519,10 +335,12 @@ function generateAnswers(){
 function nextTarget(){
 	if(respuestas.length >= 1){
 		let t = respuestas.pop();
+		console.log(t)
 		targetPos(t.horangl, t.vel, t.vertangl);
 	}
 	else {
 		target0.setAttribute("visible",false);
+		console.log("Experiencia Finalizada!");
 		indicadorcoordenadas.setAttribute('value','Experiencia Finalizada!');
 	}
 	return true;
@@ -553,12 +371,12 @@ function getVelocity(v_o, theta, angulo) {
 
 /* Obtener posición próxima de un Target */
 /*
-Obtiene posicion random de un target
-input:
-v_o: Veloicdad inicial correcta
-theta: Angulo correcto de respuesta
-grad: Grado Horizontal
-*/
+		Obtiene posicion random de un target
+		input:
+		v_o: Veloicdad inicial correcta
+		theta: Angulo correcto de respuesta
+		grad: Grado Horizontal
+		*/
 function getTargetPosition(v_o, theta, grad) {
 	theta = degToRad(theta)
 	v_y = v_o * Math.sin(theta);
@@ -597,7 +415,6 @@ function degToRad(deg){
 
 grad20 = degToRad(20);
 function changeCanonPosition(angle) {
-	hints.change_position();
 	if (angle === -1){
 		cannonL1.object3D.rotation.y = grad20;
 		cannonL2.object3D.rotation.y = grad20;

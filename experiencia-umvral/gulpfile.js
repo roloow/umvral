@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var uglify = require('gulp-uglify-es').default;
 var gutil = require('gulp-util');
+var rename = require('gulp-rename');
 var del = require('del');
 
 // Set the browser that you want to support
@@ -23,6 +24,7 @@ const AUTOPREFIXER_BROWSERS = [
 gulp.task('js_exp1', function() {
   return gulp.src('./assets/javascripts/exp1.js')
     // Minify the file
+	  .pipe(rename("exp1.min.js"))
     .pipe(uglify())
     // Output
     .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
@@ -31,9 +33,9 @@ gulp.task('js_exp1', function() {
 
 // Gulp task to minify JavaScript files
 gulp.task('js_exp2', function() {
-  return gulp.src('./assets/javascripts/exp2_v2.js')
+  return gulp.src('./assets/javascripts/exp2.js')
     // Minify the file
-	  //.pipe(rename("exp2_v2.min.js"))
+	  .pipe(rename("exp2.min.js"))
     .pipe(uglify())
     // Output
     .pipe(gulp.dest('./assets/javascripts/dist'))
@@ -43,9 +45,14 @@ gulp.task('js_exp2', function() {
 gulp.task('js_exp3', function() {
   return gulp.src('./assets/javascripts/exp3.js')
     // Minify the file
+	  .pipe(rename("exp3.min.js"))
     .pipe(uglify())
     // Output
     .pipe(gulp.dest('./assets/javascripts/dist'))
+});
+
+gulp.task('watch', function () {
+    gulp.watch('assets/javascripts/*.js', ['default']);
 });
 
 

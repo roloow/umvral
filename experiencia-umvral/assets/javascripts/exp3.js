@@ -93,7 +93,7 @@ class Hint {
 	toStep5(){
 		let that = this;
 		if (that.step === 4){
-			that.changeHintText('Cambia la temperatura del Horno unas '+that.horno_count+' veces, colocando la mira en las temperaturas.');
+			that.changeHintText('Cambia la temperatura del Horno unas '+that.vol_count+' veces, colocando la mira en las temperaturas.');
 			that.step = 5;
 		}
 	}
@@ -139,8 +139,8 @@ class Hint {
 		let that = this;
 		if (that.step === 3){
 			that.horno_count--;
-			if (that.horno_count === 1) {that.changeHintText('Cambia la temperatura del Frigorico '+that.horno_count+' vez, colocando la mira en las temperaturas.');}
-			else {that.changeHintText('Cambia la temperatura del Frigorico unas '+that.horno_count+' veces, colocando la mira en las temperaturas.');}
+			if (that.horno_count === 1) {that.changeHintText('Cambia la temperatura del Horno '+that.horno_count+' vez, colocando la mira en las temperaturas.');}
+			else {that.changeHintText('Cambia la temperatura del Horno unas '+that.horno_count+' veces, colocando la mira en las temperaturas.');}
 			if (that.horno_count <= 0){
 				that.toStep3A();
 			}
@@ -161,7 +161,7 @@ class Hint {
 		let that = this;
 		if (that.step === 5){
 			that.vol_count--;
-			if (that.vol_count === 1) {that.changeHintText('Cambia la temperatura del Frigorico '+that.vol_count+' vez, colocando la mira en las temperaturas.');}
+			if (that.vol_count === 1) {that.changeHintText('Cambia la temperatura del Horno '+that.vol_count+' vez, colocando la mira en las temperaturas.');}
 			else { that.changeHintText('Cambia la temperatura del Frigorico unas '+that.vol_count+' veces, colocando la mira en las temperaturas.');}
 			if (that.vol_count <= 0){
 				that.toStep6();
