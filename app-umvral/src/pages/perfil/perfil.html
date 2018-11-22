@@ -9,7 +9,7 @@
 
 <ion-content class="perfil-content">
   <div padding-top text-center *ngIf="userData">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <img [src]="avatarURL" alt="avatar">
     <h2 ion-text color="light">{{userData.first_name}} {{userData.last_name}}</h2>
     <h5 ion-text color="light">{{userData.email}}</h5>
     

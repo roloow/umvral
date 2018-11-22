@@ -20,7 +20,6 @@ export class Experiencia2Page {
   nota: any = 1;
   constructor(
     public nav: NavController,
-    private iab: InAppBrowser,
     public splashScreen: SplashScreen,
     private alertCtrl: AlertController,
     private httpd: Httpd, 
@@ -90,10 +89,11 @@ export class Experiencia2Page {
     };
     const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
       console.log('Server is live');
-      const browser = this.iab.create(url+"/experiencia2.html", "_blank", options);
-      browser.on('exit').subscribe(() => {
+      console.log('Url: '+url+"/experiencia2.html");
+      let browser = new InAppBrowser();
+      browser.create(url+"/experiencia2.html", "_blank", options).on('exit').subscribe(() => {
         httpServer.unsubscribe();
-        browser.close();
+        //browser.close();
      });
     });
   }

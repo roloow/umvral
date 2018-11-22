@@ -89,8 +89,12 @@ export class Experiencia1Page {
   };
   const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
     console.log('Server is live');
-    const browser = this.iab.create(url+"/experiencia1.html", "_blank", options);
+    console.log('Url: '+url+"/experiencia2.html");
+    const browser = this.iab.create("http://www.usm.cl", "_blank", options);
+    browser.show();
+    console.log("Browser launched.");
     browser.on('exit').subscribe(() => {
+      console.log("Browser closed.");
       httpServer.unsubscribe();
       browser.close();
    });

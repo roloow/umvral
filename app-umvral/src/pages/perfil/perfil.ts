@@ -13,6 +13,8 @@ export class PerfilPage {
   userData: any;
   loading: Loading;
 
+  avatarURL: string = "https://www.gravatar.com/avatar?d=mm&s=140";
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
