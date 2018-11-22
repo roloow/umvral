@@ -24,13 +24,15 @@ export class HelpMateria3Page {
                         this.video.video_id = result;
                         this.url = 'https://www.youtube.com/embed/' + this.video.video_id;
                         console.log(this.video.video_id);
+                        this.loadURL();
                         }, (err) => {
                         console.log(err);
                       });
                     
                 }
                 
-    ionViewWillEnter(): void {
-        this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
-    }            
+    loadURL() {
+    this.trustedVideoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
+    console.log("TrustedURL: "+this.trustedVideoUrl);
+}            
 }

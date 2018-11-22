@@ -39,19 +39,18 @@ export class HelpPrueba1Page {
 
     enviar(){
         this.contador = 0;
-        this.suma = 0;
-        this.nota = 0;
+        this.suma = 0.0;
+        this.nota = 0.0;
         for (let pre of this.preguntas) {
-            console.log(this.contador);
-            console.log(pre.R);
-            console.log(this.respuestas[this.contador]);    
-            if (pre.R == this.respuestas[this.contador]){
-                this.suma +=1;
+            console.log("Pregunta "+this.contador+": "+pre.R+"/"+this.respuestas[this.contador]);  
+            if (pre.R == this.respuestas[this.contador].toLowerCase()){
+                this.suma +=1.0;
             }
+            console.log("Suma = "+this.suma);
             this.contador +=1;
         }
-        this.nota = (this.suma/this.preguntas.length)*6 + 1;
-        this.nota = this.nota*10;
+        console.log(this.suma);
+        this.nota = (this.suma/this.preguntas.length)*6.0 + 1.0;
         console.log(this.nota);
         this.umvralApiProvider.subirNota(this.nota).then((data) => {
             console.log(data);
