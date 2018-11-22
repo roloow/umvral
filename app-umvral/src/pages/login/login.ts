@@ -59,8 +59,9 @@ export class LoginPage {
       });
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
-      console.log("FAIL");
-      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
+      console.log("Error en login: "+errorData.status+" "+errorData.statusText);
+      //this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
+      this.mostrarError("Erorr al acceder: Usuario y/o contraseña incorrectos.");
     });
   }
 

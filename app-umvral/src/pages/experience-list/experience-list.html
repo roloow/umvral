@@ -19,7 +19,7 @@
             <ion-card>
                 <img src="assets/img/libre.png" *ngIf="exp[0].exp_name == 'Caida Libre'"/>
                 <img src="assets/img/proyectil.png" *ngIf="exp[0].exp_name == 'Lanzamiento de proyectil'"/>
-                <img src="assets/img/proyectil.png" *ngIf="exp[0].exp_name == 'Dilatación y calor'"/>
+                <img src="assets/img/calor.png" *ngIf="exp[0].exp_name == 'Dilatación y calor'"/>
                 <div class="card-title">
                     <button ion-button clear (click)="openExperienciaPage(exp[0].exp_course_id,exp[0].exp_name)" block class="card-title">
                         {{exp[0].exp_name}}
