@@ -160,13 +160,14 @@
 
 			$("#id_nivel").change(function () {
 					var val = $(this).val();
-					if (val == "0") {
+					val = (val).replace(/(^\d+)(.+$)/i,'$1');
+					if (val == "1") {
 						changeContents(0);
-					} else if (val == "1") {
-						changeContents(1);
 					} else if (val == "2") {
-						changeContents(2);
+						changeContents(1);
 					} else if (val == "3") {
+						changeContents(2);
+					} else if (val == "4") {
 						changeContents(3);
 					}
 			});
