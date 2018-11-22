@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HelpMateria3Page } from '../experiencia-3/materia/materia';
+import { HelpPrueba3Page } from '../experiencia-3/prueba/prueba';
 //import { ExpPage } from '../experiencia-3/experiencia/experiencia';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,21 +15,45 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 
 export class Experiencia3Page {
   prueba: any = 1;
+  answer: any = 1;
+  nota: any = 1;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
     public splashScreen: SplashScreen,
-    private alertCtrl: AlertController, 
-    public umvralApiProvider: UmvralApiProvider
-  ) {
-    this.nav = nav;
-    this.prueba = this.umvralApiProvider.pruebaid;
-  }
- 
+    private alertCtrl: AlertController,
+    public umvralApiProvider: UmvralApiProvider)
+    {
+      this.nav = nav;
+      this.prueba = this.umvralApiProvider.pruebaid;
+      this.answer = this.umvralApiProvider.answerid;
+      this.nota = this.umvralApiProvider.notaAnswer;
+      console.log(this.answer);
+    }
   openMateriaPage() {
     this.nav.push(HelpMateria3Page);
-  }
+  } 
 
+  openPruebaPage() {
+    this.umvralApiProvider.prueba().then((result) => {
+      console.log(result);
+      this.nav.push(HelpPrueba3Page);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
+    
+  } 
+
+  mostrarMensaje(text) {     
+    let alert = this.alertCtrl.create({
+      title: 'Mensaje',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  
   openExpPage() {
     let alert = this.alertCtrl.create({
       title: 'Información',
@@ -44,6 +69,10 @@ export class Experiencia3Page {
     });
     alert.present();
   }
+
+  openPopupPrueba() {
+    this.mostrarMensaje("Ya has rendido esta prueba.\nTu nota fue: "+this.nota.toString());
+}
 
   loadExp() {
     const options: InAppBrowserOptions = {

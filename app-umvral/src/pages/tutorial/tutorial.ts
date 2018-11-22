@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { NavParams, Slides, Nav } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
 
@@ -20,12 +20,12 @@ export class TutorialPage {
   @ViewChild('slides') slides: Slides;
 
   constructor(
-    public navCtrl: NavController,
+    public nav: Nav,
     public navParams: NavParams,
     public storage: Storage) {}
 
   startApp() {
-    this.navCtrl
+    this.nav
       .setRoot(HomePage)
       .then(() => this.storage.set('has_seen_tutorial', true));
   }

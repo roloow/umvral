@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HelpMateria2Page } from '../experiencia-2/materia/materia';
+import { HelpPrueba2Page } from '../experiencia-2/prueba/prueba';
 //import { ExpPage } from '../experiencia-2/experiencia/experiencia';
 import { Httpd, HttpdOptions } from '@ionic-native/httpd';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
@@ -15,22 +16,46 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 
 export class Experiencia2Page {
   prueba: any = 1;
+  answer: any = 1;
+  nota: any = 1;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
     public splashScreen: SplashScreen,
     private alertCtrl: AlertController,
     private httpd: Httpd, 
-    public umvralApiProvider: UmvralApiProvider
-  ) {
-    this.nav = nav;
-    this.prueba = this.umvralApiProvider.pruebaid;
-  }
- 
+    public umvralApiProvider: UmvralApiProvider)
+    {
+      this.nav = nav;
+      this.prueba = this.umvralApiProvider.pruebaid;
+      this.answer = this.umvralApiProvider.answerid;
+      this.nota = this.umvralApiProvider.notaAnswer;
+      console.log(this.answer);
+    }
   openMateriaPage() {
     this.nav.push(HelpMateria2Page);
-  }
+  } 
 
+  openPruebaPage() {
+    this.umvralApiProvider.prueba().then((result) => {
+      console.log(result);
+      this.nav.push(HelpPrueba2Page);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
+    
+  } 
+
+  mostrarMensaje(text) {     
+    let alert = this.alertCtrl.create({
+      title: 'Mensaje',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  
   openExpPage() {
     let alert = this.alertCtrl.create({
       title: 'Información',
@@ -46,6 +71,10 @@ export class Experiencia2Page {
     });
     alert.present();
   }
+
+  openPopupPrueba() {
+    this.mostrarMensaje("Ya has rendido esta prueba.\nTu nota fue: "+this.nota.toString());
+}
 
   loadExp() {
     console.log("Loading experience...");

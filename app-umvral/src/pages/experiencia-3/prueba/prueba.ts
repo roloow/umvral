@@ -8,7 +8,7 @@ import { UmvralApiProvider } from '../../../providers/umvral-api/umvral-api';
 })
 
 
-export class HelpPrueba1Page {
+export class HelpPrueba3Page {
     preguntas: any;
     respuestas: any = ['-','-','-','-','-','-','-','-','-','-'];
     contador:number;
