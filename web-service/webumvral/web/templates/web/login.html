@@ -49,8 +49,16 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="static/web/favicon.ico" /> </head>
     <!-- END HEAD -->
+    <style>
+    .login-image-content {
+        background-image: url({% static 'web/pages/media/bg/sky5.jpg' %});
+        background-repeat: no-repeat;
+        background-size: cover;
 
-    <body class=" login">
+    }
+    </style>
+
+    <body class=" login login-image-content">
         <!-- BEGIN LOGO -->
         <div class="logo">
             <a href="{% url 'web:home' %}">
@@ -113,7 +121,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <label class="control-label visible-ie8 visible-ie9">Nombre</label>
                     <div class="input-icon">
                         <i class="fa fa-font"></i>
-                        <input class="form-control placeholder-no-fix" type="text" placeholder="Primer nombre" name="firstname" /> </div>
+                        <input class="form-control placeholder-no-fix" type="text" placeholder="Nombre" name="firstname" /> </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Apellido</label>

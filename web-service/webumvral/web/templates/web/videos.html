@@ -1,0 +1,68 @@
+{% extends "web/base_page.html" %}
+{% load static %}
+{% block title %}
+Agregar experiencia
+{% endblock %}
+{% block breadcrumb %}
+<li>
+    <a href="{% url 'web:myexps' client_id %}"><span>Mis Experiencias</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+<li>
+	<a href="{% url 'web:addexps' client_id %}"><span>Agregar Experiencia</span></a>
+  <i class="fa fa-angle-right"></i>
+</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12 ">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bordered">
+      <div class="portlet-body form">
+        <form class="form-horizontal" action="{% url 'web:addexps' client_id %}" role="form" method="POST">
+        {% csrf_token %}
+        <div class="form-body">
+          <div>
+            <h3>Agregue un video a la experiencia para añadirlo a sus experiencias</h3>
+          </div>
+          <div class="form-group {% if error_1 %}has-error{% endif %}">
+            <label class="col-md-3 control-label">Experiencias<span class="required"> * </span></label>
+            <div class="col-md-9">
+              <select class="bs-select form-control" name="exp" data-live-search="true" data-size="8" tabindex="-98">
+                <option value="None" selected>No hay selección</option>
+                {% for experience in experiencias %}
+                  <option value="{{experience.pk}}">{{experience.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group {% if error_2 %}has-error{% endif %}">
+            <label class="col-md-3 control-label">
+              URL del video<span class="required"> * </span>
+            </label>
+            <div class="col-md-9">
+              <input id="video" name="video" type="text"
+                     class="form-control input-large"
+                     placeholder="Ej. https://www.youtube.com/watch?v=y-TMHR0f8nY"
+                     value="">
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+              <button type="submit" class="btn green">
+                <i class="icon-note"></i>
+                Asignar video
+              </button>
+              <a href="{% url 'web:myexps' client_id %}" class="btn default">Cancelar</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- END SAMPLE FORM PORTLET-->
+</div>
+</div>
+{% endblock %}

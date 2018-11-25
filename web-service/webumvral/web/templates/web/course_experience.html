@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Experiencias disponibles
+Lista de Experiencias
 {% endblock %}
 
 {% block subtitle %}
@@ -11,7 +11,7 @@ Experiencias disponibles
 
 {% block breadcrumb %}
 <li>
-  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
+  <a href="{% url 'web:course_list' %}"><span>Mis Cursos</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
@@ -19,33 +19,18 @@ Experiencias disponibles
   <i class="fa fa-angle-right"></i>
 </li>
 <li>
-  <span>Experiencias</span>
+  <a href="{% url 'web:course_experience' course_id %}"><span>Lista de Experiencias</span></a>
   <i class="fa fa-angle-right"></i>
 </li>
-<li>
-  <span>Lista de Experiencias</span>
-</li>
 {% endblock %}
-
+{% block page_actions %}
+<a href="{% url 'web:video' course_id %}" class="btn btn-default"><i class="fa fa-gamepad"></i> Agregar experiencia</a>
+<a id="movement" class="btn btn-info"><i class="fa fa-lock"></i> Activar movimiento</a>
+{% endblock %}
 {% block content %}
-<div class="note note-info">
-  <h4 class="block">Cambios de orden</h4>
-  <p> Para poder realizar un cambio de orden en las posiciones de las experiencias, se debe arrastrar la fila deseada a la posición que se quiera dejar, y luego se deben guardar los cambios.
-  </p>
-  <br>
-</div>
 <div class="row">
-  <form  action="{% url 'web:course_experience' course_id %}" method="post">
+  <form id="myForm" action="{% url 'web:course_experience' course_id %}" method="post">
     {% csrf_token %}
-<div class="col-md-12">
-  <div class="col-md-12">
-    <div class="col-md-3"><button type="submit" class="btn btn-success"> <i class="fa fa-edit"></i> Guardar cambios</button></div>
-    <div class="col-md-5"></div>
-    <div class="col-md-2"><a href="{% url 'web:video' course_id %}" class="btn btn-default"><i class="fa fa-gamepad"></i> Agregar experiencia</a></div>
-    <div class="col-md-2"><a id="movement" class="btn btn-info"><i class="fa fa-lock"></i> Activar movimiento</a></div>
-  </div>
-
-  <br><br>
   <div class="portlet light portlet-fit bordered">
       <div class="portlet-body">
           <div class="table-scrollable table-scrollable-borderless">
@@ -55,44 +40,44 @@ Experiencias disponibles
                           <th> </th>
                           <th> Nombre </th>
                           <th> Descripción </th>
-                          <th> Video </th>
-                          <th> Estado </th>
-                          <th> Prueba </th>
-                          <th> Acciones</th>
+                          <th> <center>Video</center> </th>
+                          <th> <center>Estado</center> </th>
+                          <th> <center>Prueba</center> </th>
+                          <th> <center>Acciones</center></th>
                       </tr>
                   </thead>
                   <tbody>
                     {% for exp in experiences  %}
                       <tr>
                         <input type="hidden" name="pos-{{ forloop.counter0 }}" value="{{exp.pk}}">
-                        <td> <i class="fa fa-arrows-alt"></i>
+                        <td> <i class="moveIcon"></i>
                         </td>
                         <td > {{exp.available.experience.name}} </td>
                         <td> {{exp.available.experience.description|truncatechars:50}} </td>
-                          <td>{% if exp.available.video %}
-                          <span class="label label-sm label-success "> Asignado </span>
-                          {% else %}
-                          <span class="label label-sm label-danger "> No asignado </span>
-                          {% endif %}</td>
+                          <td><center><a href="http://youtube.com/watch?v={{exp.available.video}}" target="_blank"><i class="fa fa-youtube-play fa-2x" style="color:red"></i></a></center></td>
                         <td>
-                          {% if exp.visible %}
-                          <span class="label label-sm label-success "> Visible </span>
-                          {% else %}
-                          <span class="label label-sm label-danger "> No visible </span>
-                          {% endif %}
+                          <center>
+                            {% if exp.visible %}
+                            <i class="fa fa-eye" style="color:black"></i>
+                            {% else %}
+                            <i class="fa fa-eye-slash" style="color:gray"></i>
+                            {% endif %}
+                          </center>
                        </td>
                        <td>
-                         {% if exp.test %}
-                         {% if exp.test.visible %}
-                           <span class="label label-sm label-success "> Activa </span>
-                         {% else %}
-                           <span class="label label-sm label-default "> Creada </span>
-                         {% endif %}
-                         {% else %}
-                         <span class="label label-sm label-danger "> Sin crear </span>
-                         {% endif %}
+                         <center>
+                          {% if exp.test %}
+                          {% if exp.test.visible %}
+                            <span class="label label-sm label-success "> Activa </span>
+                          {% else %}
+                            <span class="label label-sm label-default "> Creada </span>
+                          {% endif %}
+                          {% else %}
+                            <span class="label label-sm label-danger "> Sin crear </span>
+                          {% endif %}
+                        </center>
                       </td>
-                      <td>
+                      <td><center>
                         <div class="btn-group">
                           <button class="btn btn-xs orange dropdown-toggle" type="button"
                                   data-toggle="dropdown" aria-expanded="false">
@@ -101,7 +86,7 @@ Experiencias disponibles
                           </button>
                           <ul class="dropdown-menu pull-right" role="menu">
                             <li>
-                              <a href="">
+                              <a href="{% url 'web:editexps' request.user.profile.pk exp.available.pk %}">
                               <i class="icon-note"></i> Editar video </a>
                             </li>
                             <li class="divider" role="separator"></li>
@@ -121,23 +106,29 @@ Experiencias disponibles
                               <a href="{% url 'web:experience_test_visibility' course_id exp.available.experience.pk %}">
                               <i class="fa fa-eye"></i> Cambiar visibilidad prueba </a>
                             </li>
+                            <li class="divider" role="separator"></li>
                             {% else %}
                             <li>
                               <a href="{% url 'web:experience_test' course_id exp.available.experience.pk %}">
                               <i class="icon-note"></i> Crear prueba </a>
                             </li>
+                            <li class="divider" role="separator"></li>
                             {% endif %}
                             <li>
                               <a href="{% url 'web:course_exp_visibility' course_id exp.pk %}">
                               <i class="fa fa-eye"></i> Cambiar visibilidad para el curso</a>
                             </li>
+                            <li>
+                              <a class="modal-link" data-toggle="modal" name="{{exp.available.experience.name}}" id="{{exp.pk}}"> 
+                              <i class="fa fa-calendar"></i> Agregar fecha de visibilidad</a>
+                            </li>
                             <li class="divider" role="separator"></li>
                             <li>
-                              <a href="{% url 'web:erase_video' course_id exp.available.pk %}">
+                              <a href="{% url 'web:delexpcourse' course_id exp.pk %}">
                               <i class="icon-ban"></i> Eliminar experiencia del curso </a>
                             </li>
                           </ul>
-                        </div>
+                        </div></center>
                       </td>
                     {% endfor %}
                   </tbody>
@@ -147,23 +138,61 @@ Experiencias disponibles
       </div>
   </div>
 </div>
-
 </form>
-
+</div>
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" id="mtitle">Modal Title</h4>
+            </div>
+            <form id="dateform" action="{% url 'web:date' request.user.profile.pk 9999999 %}" method="POST">
+              {% csrf_token %}
+            <div class="row modal-body"> 
+                <div class="row form-group">
+                  <div class="col-md-3"></div>
+                  <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+                      <input name="dateselected" type="text" class="form-control" readonly="">
+                      <span class="input-group-btn">
+                          <button class="btn default" type="button">
+                              <i class="fa fa-calendar"></i>
+                          </button>
+                      </span>
+                  </div>
+                </div>
+                <input type="hidden" name="dateid" id="dateid" value="">
+            </div>
+            <div class="row modal-footer">
+                <div class="col-md-3"></div>
+                <div class="col-md-3"><button type="submit" class="btn green">Asignar fecha</button></div>
+                <div class="col-md-3"><button type="button" class="btn dark btn-outline" data-dismiss="modal">Cerrar</button></div>
+                <div class="col-md-3"></div>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 {% endblock %}
-
 {% block plugin_js %}
-<script type="text/javascript" src="{% static "web/global/plugins/jquery-sortable/jquery-sortable.js" %}"></script>
+<script type="text/javascript" src="{% static 'web/global/plugins/jquery-sortable/jquery-sortable.js' %}"></script>
+<script src="{% static 'web/pages/scripts/components-date-time-pickers.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/moment.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'web/global/plugins/clockface/js/clockface.js' %}" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
   var activar = '<i class="fa fa-lock"></i> Activar movimiento';
-  var desactivar = '<i class="fa fa-unlock"></i> Desactivar movimiento';
+  var desactivar = '<i class="fa fa-unlock"></i> Guardar cambios';
   var sorteable = "table table-hover sorted_table";
   var unsorteable = "table table-hover";
   var active_color = "btn btn-info";
   var deactive_color = "btn btn-danger";
-
   $('.sorted_table').sortable({
   containerSelector: 'table',
   itemPath: '> tbody',
@@ -171,25 +200,45 @@ $(document).ready(function(){
   placeholder: '<tr><td><td><br></td></td> <td></td> <td> </td></tr>',
   });
   $('.sorted_table').sortable('disable');
+  var classname = document.getElementsByClassName("modal-link");
+  console.log(classname);
+  for (var i = 0; i < classname.length; i++) {
+    console.log(classname[i]);
+    classname[i].addEventListener('click',function(){
+      $('#mtitle')[0].innerHTML = "Fecha visible para: " + this.name;
+      $('#dateid')[0].value = this.id;
+      $('#dateform')[0].action = $('#dateform')[0].action.replace('9999999',this.id)
+      $('#basic').modal('toggle');
+    });
+  }
   $('#movement').click(function(){
-    console.log("boton");
     if ($('#movement')[0].innerHTML == activar){
-      console.log("activar");
+      for (var i=0; i < $('.moveIcon').length; i++){
+        $('.moveIcon')[i].setAttribute('class', 'moveIcon fa fa-arrows-alt');
+      }
       $('.sorted_table').sortable('enable');
       $('#movement')[0].innerHTML = desactivar;
       $('#movement')[0].setAttribute('class', deactive_color);
     }
     else if ($('#movement')[0].innerHTML == desactivar){
-      console.log("desactivar");
+      for (var i=0; i < $('.moveIcon').length; i++){
+        $('.moveIcon')[i].setAttribute('class', 'moveIcon');
+      }
       $('.sorted_table').sortable('disable');
       $('#movement')[0].innerHTML = activar;
       $('#movement')[0].setAttribute('class', active_color);
+      $('#myForm').submit();
     }
   });
 })
 </script>
 {% endblock %}
-
 {% block plugin_css %}
-<link rel="stylesheet" href="{% static "web/global/css/jquery-sortable/jquery-sortable.css" %}">
+<link rel="stylesheet" href="{% static 'web/global/css/jquery-sortable/jquery-sortable.css' %}">
+<link href="{% static 'web/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'web/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'web/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'web/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'web/global/plugins/clockface/css/clockface.css' %}" rel="stylesheet" type="text/css">
+
 {% endblock %}

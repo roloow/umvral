@@ -1,21 +1,66 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            Materia
-        </ion-title>
-    </ion-navbar>
-
+    <ion-navbar no-border-bottom color="primary"> 
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Temperatura y Dilatación</ion-title>
+      </ion-navbar>
 </ion-header>
 
-<ion-content padding>    
-    <!--<iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>-->
-    <h3>{{url}}</h3> 
-    <h3>Video: {{ video?.title }}</h3>
+<ion-content padding class="materia-content" no-bounce>    
+    <h3>{{ video?.title }}</h3>  
+    <iframe width="100%" height="30%" [src]="trustedVideoUrl" frameborder="0" allowfullscreen></iframe>
 
-    <ion-scroll scrollY="true" style="width: 95%; height: 50%;" text-justify>
+    <ion-scroll scrollY="true" style="width: 100%; height: 70%;" text-justify>
         <div>
             <h3>Descripción de Temperatura y dilatación</h3>
+            <p>
+                Se considera como dilatación térmica el fenómeno que ocurre cuando las dimensiones de un
+                 cuerpo cambian según la temperatura a la cual está expuesto, es decir, un cuerpo puede
+                 aumentar o disminuir su Largo, Área o Volumen según la variación de temperatura que exista.
+            </p>
+            <p>
+                Dependiendo de las dimensiones a estudiar, el fenómeno anteriormente explicado se llama
+                 dilatación lineal, superficial o volumétrica. Si sólo se estudia una dimensión, por ejemplo
+                  el eje <i>x</i>, fenómeno se llama dilatación lineal, puesto que la variación será sólo 
+                  estudiada en el largo del objeto. Si son dos variables las de estudio, por ejemplo, <i>x</i>
+                  e <i>y</i>, se llama dilatación superficial, puesto que ahora se estudia la variación del área
+                  o superficie en respecto al tiempo. Finalmente, si son consideradas las 3 dimensiones, llamese
+                  <i>z</i>, <i>x</i> e <i>y</i>, se conoce como dilatación volumétrica, puesto que la variación
+                  que se estudia es la que presenta el volumen del objeto. 
+            </p>
+            <p>
+                Identificando como L el largo de un objeto, A el área y V el volumen, además asignando los 
+                 coeficientes de dilatación como &lambda; para la dilatación lineal, &sigma; para la dilatación
+                 superficial y &gamma; para la dilatación volumétrica, en conjunto con &Delta; para hablar de
+                 variación, se tienen las siguientes ecuaciones:
+            </p>
             
+            <h5>
+                &gamma; = 3&lambda;, &sigma; = 2&lambda;
+            </h5>
+
+            <h5>
+                &Delta;T = T<sub>Final</sub>-T<sub>Inicial</sub>
+            </h5>
+
+            <h5>
+                &Delta;L = L<sub>0</sub> (1 + &lambda; &Delta;T)
+            </h5>
+            <h5>
+                &Delta;A = A<sub>0</sub> (1 + &sigma; &Delta;T)
+            </h5>
+            <h5>
+                &Delta;V = V<sub>0</sub> (1 + &gamma; &Delta;T)
+            </h5>
+            
+            <p>
+                De las ecuaciones anteriores, se ve que si el coeficiente de dilatación es mayor a 0,
+                 cuando la temperatura aumenta, el objeto de estudio crece, mientras que si disminuye, el
+                 cuerpo disminuye, ocurriria lo contrario si el coeficiente fuese menor a cero.
+            </p>
+
+
         </div>
     </ion-scroll>
     

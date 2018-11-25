@@ -1,20 +1,33 @@
 <ion-header>
     <ion-navbar no-border-bottom color="primary">
-        <button ion-button icon-only menuToggle>
-            <ion-icon name="menu"></ion-icon>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Experiencias</ion-title>
+        
     </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-    <h3>Selecciona una experiencia:</h3>
+<ion-content padding class="experience-content">
     <div padding *ngIf="experiencias?.length > 0">
+        <h3 ion-text color="light" style="text-align: center;"><b>Selecciona una experiencia</b></h3>
         <ion-list *ngFor="let exp of experiencias; let i = index">
-            <button ion-button color="primary" (click)="openExperienciaPage(exp[0].exp_course_id,exp[0].exp_name)" block>
+            <!-- <button ion-button color="primary" (click)="openExperienciaPage(exp[0].exp_course_id,exp[0].exp_name)" block>
                 {{exp[0].exp_name}}
-            </button>
+            </button> -->
+            <ion-card>
+                <img src="assets/img/libre.png" *ngIf="exp[0].exp_name == 'Caida Libre'"/>
+                <img src="assets/img/proyectil.png" *ngIf="exp[0].exp_name == 'Lanzamiento de proyectil'"/>
+                <img src="assets/img/calor.png" *ngIf="exp[0].exp_name == 'Dilatación y calor'"/>
+                <div class="card-title">
+                    <button ion-button clear (click)="openExperienciaPage(exp[0].exp_course_id,exp[0].exp_name)" block class="card-title">
+                        {{exp[0].exp_name}}
+                    </button>
+                </div>
+                <div class="card-subtitle">
+                </div>
+              </ion-card>
         </ion-list>  
     </div>
 

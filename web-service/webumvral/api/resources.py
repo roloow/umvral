@@ -7,12 +7,18 @@ from web.models import StudentModel
 from web.models import CourseModel
 from web.models import CalificationModel
 from web.models import ExpCourseModel
+from web.models import MetricModel
+from web.models import AnswerModel
+from web.models import ConfigurationModel
+from web.models import TestModel
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from django.conf.urls import url
 from tastypie.utils import trailing_slash
 from tastypie.http import HttpUnauthorized, HttpForbidden
+from django.utils import timezone
+import json
 
 
 #Experiencia
@@ -35,12 +41,26 @@ class ExperienceResource(ModelResource):
             url(r"^(?P<resource_name>%s)/video%s$" %
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('video'), name="api_exp_video"),
+            url(r"^(?P<resource_name>%s)/test%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('test'), name="api_exp_test"),
+            url(r"^(?P<resource_name>%s)/testResp%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('testResp'), name="api_exp_testResp"),
 
         ]
 
     def curso(self,request, **kwargs):
         self.method_check(request, allowed=['post'])
         student_id=request.POST.get('student_id','')
+
+        #revisar por si hay expCourse visible false pero con fecha en que debe estar visible
+        exCo = ExpCourseModel.objects.filter(visible = False).exclude(date_visible = None)
+        for e in exCo:
+            if e.date_visible <= timezone.now():
+                e.visible = True
+                e.save()
+        # fin revision de fecha
         try:
             st = StudentModel.objects.get(pk=student_id)
         except:
@@ -62,22 +82,34 @@ class ExperienceResource(ModelResource):
         student_id=request.POST.get('student_id','')
         exp_course_id=request.POST.get('exp_course_id')
         test_id = 'Null'
+        answer_id= 'Null'
+        answer_score='Null'
         try:
             expCourse= ExpCourseModel.objects.get(pk=exp_course_id)
-            if expCourse.test.visible != False :
+            if (expCourse.test.visible != False) :
                 test_id = expCourse.test.pk
+                try:
+                    answer = AnswerModel.objects.get(test__pk=test_id, student__pk =student_id)
+                    answer_id = answer.pk
+                    answer_score = answer.score
+                except:
+                    answer_id = 'Null'
 
         except:
             return self.create_response(request, {
                 'student_id': student_id,
                 'exp_course_id': exp_course_id,
-                'test_id': 'Null'
+                'test_id': 'Null',
+                'answer_id': 'Null',
+                'answer_score': 'Null'
                 })
 
         return self.create_response(request, {
             'student_id': student_id,
             'exp_course_id': exp_course_id,
-            'test_id': test_id
+            'test_id': test_id,
+            'answer_id': answer_id,
+            'answer_score': answer_score
             })
 
     def video(self,request, **kwargs):
@@ -101,6 +133,73 @@ class ExperienceResource(ModelResource):
             'student_id': student_id,
             'exp_course_id': exp_course_id,
             'video_url': expCourse.available.video
+            })
+
+    def test(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        test_id=request.POST.get('test_id','')
+        preguntas=[]
+        try:
+            questiones = ConfigurationModel.objects.filter(test__pk=test_id)
+            for p in questiones:
+                pregunta={"titulo":p.question.statement,"A":p.question.optionA,"B":p.question.optionB,"C":p.question.optionC,"D":p.question.optionD, "R":p.question.correct,"position":p.position}
+                preguntas.append(pregunta)
+        except:
+            preguntas= 'Null'
+        return self.create_response(request, {
+            'student_id': student_id,
+            'test_id': test_id,
+            'preguntas':preguntas
+            })
+
+    def testResp(self,request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        student_id=request.POST.get('student_id','')
+        test_id=request.POST.get('test_id','')
+        score = request.POST.get('score','')
+        if score == '':
+            return self.create_response(request, {
+                'error': 'esta mal'
+                })
+        answer_id ='Null'
+        an = AnswerModel()
+        try:
+            st = StudentModel.objects.get(pk=student_id)
+
+        except:
+            return self.create_response(request, {
+                'student_id': 'no existe'
+                })
+        try:
+            test = TestModel.objects.get(pk=test_id)
+
+        except:
+            return self.create_response(request, {
+                'test_id': 'no existe'
+                })
+
+        # revisar si ya se ingreso score
+        answers = AnswerModel.objects.filter(test__pk = test_id,student__pk= student_id)
+        for a in answers:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'test_id': test_id,
+                'answer_id':a.pk,
+                'score':a.score,
+                'error':'ya existe registro, no se modifico'
+                })
+
+        an.student=st
+        an.test=test
+        an.score=score
+        an.save()
+        answer_id=an.pk
+        return self.create_response(request, {
+            'student_id': student_id,
+            'test_id': test_id,
+            'answer_id':answer_id,
+            'score':score
             })
 
 #Mensajes
@@ -324,3 +423,52 @@ class ExpcourseResource(ModelResource):
         authentication = Authentication()
         authorization = Authorization()
         #allowed_methods = ['get']
+
+
+#Metricas Experiencias
+class MetricResource(ModelResource):
+    class Meta:
+        queryset = MetricModel.objects.all()
+        resource_name = 'metric'
+        authentication = Authentication()
+        authorization = Authorization()
+        #allowed_methods = ['get']
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/post%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view('crearMetrica'), name="crear_metrica"),
+        ]
+
+    def crearMetrica(self, request, **kwargs):
+        print(request.POST)
+        data = json.loads(request.POST['json'])
+        print(data['student_id'])
+        self.method_check(request, allowed=['post'])
+        student_id = data.get('student_id','')
+        experience = data.get('experience_id',None)
+        slug = data.get('slug','')
+        value = data.get('value',None)
+        value_num = data.get('value_num',None)
+        try:
+            student = StudentModel.objects.get(pk=student_id)
+        except:
+            return self.create_response(request, {
+                'student_id': student_id,
+                'error':'incorrecto'
+                })
+        metric, created = MetricModel.objects.get_or_create(
+            experience_id=experience,
+            student_id=student_id,
+            slug=slug,
+            defaults={'value_num': 0}
+        )
+        metric.value_num = metric.value_num + 1
+        metric.save()
+        return self.create_response(request, {
+            'student': student_id,
+            'slug': slug,
+            'value': value,
+            'value_num': value_num
+            })

@@ -28,6 +28,7 @@ from api.resources import StudentResource
 from api.login import UserResource
 from api.resources import CourseResource
 from api.resources import ExpcourseResource
+from api.resources import MetricResource
 
 experience = ExperienceResource()
 message = MessageResource()
@@ -37,6 +38,7 @@ client = ClientResource()
 student = StudentResource()
 course = CourseResource()
 expcourse = ExpcourseResource()
+metric = MetricResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,4 +53,5 @@ urlpatterns = [
     url(r'^api/', include(student.urls)),
     url(r'^api/', include(course.urls)),
     url(r'^api/', include(expcourse.urls)),
+    url(r'^api/', include(metric.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,11 +12,12 @@
 
 {% block breadcrumb %}
 <li>
-  <a href="{% url 'web:course_list' %}"><span>Cursos</span></a>
-  <i class="fa fa-angle-right"></i>
+	<a href="{% url 'web:course_list' %}">Mis Cursos</a>
+	<i class="fa fa-angle-right"></i>
 </li>
 <li>
-  {{course.name}}
+	<a href="{% url 'web:course_read' course.pk %}">{{course.name}}</a>
+	<i class="fa fa-angle-right"></i>
 </li>
 {% endblock %}
 
@@ -88,7 +89,7 @@
 				</div>
 				<div class="details">
 						<div class="number">
-								<span data-counter="counterup" data-value="58">0</span>
+							<span data-counter="counterup" data-value="{{tot_avg}}">0</span>
 						</div>
 						<div class="desc"> Promedio </div>
 				</div>
@@ -97,13 +98,7 @@
   </div>
 
 </div>
-<div class="row">
-  <div class="col-md-12">
-    <div class="mt-element-ribbon bg-grey-steel">
-        <p class="ribbon-content"></p>
-    </div>
-  </div>
-</div>
+
 <div class="row">
   <div class="col-lg-12 col-xs-12 col-sm-12">
     <div class="portlet light bordered">

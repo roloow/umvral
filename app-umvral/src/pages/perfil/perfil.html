@@ -7,18 +7,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="outer-content">
+<ion-content class="perfil-content">
   <div padding-top text-center *ngIf="userData">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{userData.first_name}} {{userData.last_name}}</h2>
-    <h5>{{userData.email}}</h5>
-
+    <img [src]="avatarURL" alt="avatar">
+    <h2 ion-text color="light">{{userData.first_name}} {{userData.last_name}}</h2>
+    <h5 ion-text color="light">{{userData.email}}</h5>
+    
     <ion-list inset>
       <button ion-item disabled (click)="updatePicture()">Cambiar Foto de Perfil</button>
       <button ion-item (click)="changeFirstName()">Cambiar Nombre</button>
       <button ion-item (click)="changeLastName()">Cambiar Apellido</button>
       <button ion-item (click)="changePassword()">Cambiar Contraseña</button>
-      <button ion-item disabled (click)="support()">Soporte</button>
+      <button ion-item (click)="launchTutorial()">Ver Tutorial</button>
       <button ion-item (click)="cerrarSesion()">Cerrar Sesión</button>
     </ion-list>
   </div>
