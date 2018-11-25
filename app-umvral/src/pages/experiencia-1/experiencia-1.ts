@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HelpMateria1Page } from '../experiencia-1/materia/materia';
+import { HelpPrueba1Page } from '../experiencia-1/prueba/prueba';
 //import { ExpPage } from '../experiencia-1/experiencia/experiencia';
 import { Httpd, HttpdOptions } from '@ionic-native/httpd';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
@@ -14,6 +15,8 @@ import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
 })
 export class Experiencia1Page {
   prueba: any = 1;
+  answer: any = 1;
+  nota: any = 1;
   constructor(
     public nav: NavController,
     private iab: InAppBrowser,
@@ -24,11 +27,33 @@ export class Experiencia1Page {
     {
       this.nav = nav;
       this.prueba = this.umvralApiProvider.pruebaid;
-      console.log(this.prueba);
+      this.answer = this.umvralApiProvider.answerid;
+      this.nota = this.umvralApiProvider.notaAnswer;
+      console.log(this.answer);
     }
   openMateriaPage() {
     this.nav.push(HelpMateria1Page);
   } 
+
+  openPruebaPage() {
+    this.umvralApiProvider.prueba().then((result) => {
+      console.log(result);
+      this.nav.push(HelpPrueba1Page);
+    }, (err) => {
+      let errorData = JSON.parse(JSON.stringify(err));
+      console.log(errorData);
+    });
+    
+  } 
+
+  mostrarMensaje(text) {     
+    let alert = this.alertCtrl.create({
+      title: 'Mensaje',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
   
   openExpPage() {
     let alert = this.alertCtrl.create({
@@ -46,6 +71,10 @@ export class Experiencia1Page {
     alert.present();
   }
 
+  openPopupPrueba() {
+    this.mostrarMensaje("Ya has rendido esta prueba.\nTu nota fue: "+this.nota.toString());
+}
+
   loadExp() {
   console.log("Loading experience...");
   const serverOptions: HttpdOptions = {
@@ -53,15 +82,21 @@ export class Experiencia1Page {
       port: 8080,
       localhost_only: true
   };
+
   const options: InAppBrowserOptions = {
     zoom: 'no',
     location: 'no',
     hardwareback: 'no',
   };
+
   const httpServer = this.httpd.startServer(serverOptions).subscribe((url) => {
     console.log('Server is live');
-    const browser = this.iab.create(url+"/exp-1.html", "_blank", options);
+    console.log('Url: '+url+"/experiencia1.html");
+    const browser = this.iab.create(url+"/experiencia1.html", "_blank", options);
+    console.log("Browser launched.");
+
     browser.on('exit').subscribe(() => {
+      console.log("Browser closed.");
       httpServer.unsubscribe();
       browser.close();
    });

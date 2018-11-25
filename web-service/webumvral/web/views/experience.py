@@ -6,13 +6,12 @@ from django.http import HttpResponse
 
 def course_experience(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     try:
-        experiences = ExpCourseModel.objects.filter(course__pk=course).order_by("available__position")
+        experiences = ExpCourseModel.objects.filter(course__pk=course).order_by("position")
         context['experiences'] = experiences
-        for j in experiences:
-            print(j.available.position)
     except:
         return redirect('web:404')
     if (request.method == "POST"):
@@ -31,6 +30,7 @@ def change_visibility(expcou):
 
 def course_exp_visibility(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     try:
         experience = ExpCourseModel.objects.get(pk=experience)
@@ -41,6 +41,7 @@ def course_exp_visibility(request, course, experience):
 
 def experience_test(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -99,6 +100,7 @@ def experience_test(request, course, experience):
 
 def experience_test_edit(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -169,6 +171,7 @@ def experience_test_edit(request, course, experience):
 
 def experience_test_visibility(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -189,6 +192,7 @@ def experience_test_visibility(request, course, experience):
 
 def experience_test_delete(request, course, experience):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = course
     context['course_name'] = CourseModel.objects.get(pk=course).name
     context['experience_id'] = experience
@@ -214,13 +218,6 @@ def experience_test_delete(request, course, experience):
 
 def change_position(lista):
     for i in range(len(lista)):
-        expcou= lista[i].available
-        expcou.position = i
-        expcou.save()
-    return lista
-
-def change_position_2(lista):
-    for i in range(len(lista)):
         expcou= lista[i]
         expcou.position = i
         expcou.save()
@@ -228,32 +225,46 @@ def change_position_2(lista):
 
 def experience_video(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     context['course_id'] = int(course)
     context['course'] = CourseModel.objects.get(pk=int(course))
+    print(course)
     if (request.method == 'GET'):
-        context['experiences'] = filter_experiences(request.user.profile.pk)
+        context['experiences'] = AvailabilityModel.objects.filter(professor=request.user.profile)
+        context['filtered'] = filter_available(int(course))
         return render(request, 'web/experience_video.html', context)
     if (request.method == 'POST'):
-        if (request.POST['exp'] == 'None'):
-            context['experiences'] = filter_experiences(request.user.profile.pk)
-            context['error_1'] = True
-        if ((request.POST['video'] == '') or ('youtube' not in request.POST['video'])):
-            context['experiences'] = filter_experiences(request.user.profile.pk)
-            context['error_2'] = True
-        if (("error_1" in context) or ("error_2" in context)):
-            return render(request, 'web/experience_video.html', context)
-        ava = AvailabilityModel()
-        ava.professor = request.user.profile
-        ava.experience = ExperienceModel.objects.get(pk=int(request.POST['exp']))
-        ava.video = request.POST['video']
-        ava.position = len(AvailabilityModel.objects.filter(professor=request.user.profile))
-        ava.save()
-        expC= ExpCourseModel()
-        expC.available = ava
-        expC.course = context['course']
-        expC.save()
+        # Quito todas las experiencias de su curso
+        if ("my_multi_select1[]" not in request.POST):
+            request.POST['my_multi_select1[]'] = list()
+        lista = request.POST.getlist('my_multi_select1[]')
+        avs = list()
+        for ID in lista:
+            avs.append(AvailabilityModel.objects.get(pk=int(ID)))
+        expcs= ExpCourseModel.objects.filter(course__pk=int(course))
+        alter_course(expcs, avs, course)
         return redirect('web:course_experience', course=course)
     return render(request, 'web/experience_video.html', context)
+
+def alter_course(expcs, avas, course_id):
+    aux = list()
+    course = CourseModel.objects.get(pk=int(course_id))
+    for obj in avas:
+        if (obj in expcs):
+            aux.append(obj)
+        else:
+            expC = ExpCourseModel()
+            expC.available = obj
+            expC.course = course
+            expC.save()
+    for obj in expcs:
+        if (obj in aux):
+            pass
+        else:
+            obj.delete()
+    expcs= ExpCourseModel.objects.filter(course__pk=int(course_id))
+    change_position(expcs)
+    return True
 
 def filter_experiences(professor_id):
     availables = AvailabilityModel.objects.filter(professor__id = professor_id)
@@ -268,10 +279,16 @@ def filter_experiences(professor_id):
         filtered.append(exp)
     return filtered
 
-def erase_video(request, course, available):
-    context = get_base_context(request)
-    av = AvailabilityModel.objects.get(pk=int(available))
-    av.delete()
-    avs = AvailabilityModel.objects.filter(professor=request.user.profile).order_by('position')
-    change_position_2(avs)
+def filter_available(course_id):
+    expcourses = ExpCourseModel.objects.filter(course__pk = course_id)
+    expcs = list()
+    for expc in expcourses:
+        expcs.append(expc.available)
+    return expcs
+
+def delexpcourse(request, course, expcourse):
+    expc = ExpCourseModel.objects.get(pk=int(expcourse))
+    expc.delete()
+    expcs = ExpCourseModel.objects.filter(course__pk=int(course)).order_by("position")
+    change_position(expcs)
     return redirect('web:course_experience', course=course)

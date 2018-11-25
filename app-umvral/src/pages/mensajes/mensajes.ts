@@ -38,7 +38,7 @@ export class MensajesPage {
     .then(data => {
       this.mensajes = data;
       //console.log(JSON.stringify(this.mensajes));
-      this.loading.dismiss();
+      //this.loading.dismiss();
     });
   }
 }

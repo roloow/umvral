@@ -3,15 +3,12 @@ import { Component, ViewChild } from '@angular/core';
 import { MenuController, Nav, Platform } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { ExperienceListPage } from '../pages/experience-list/experience-list';
-import { PerfilPage } from "../pages/perfil/perfil";
-import { NotasPage } from '../pages/notas/notas';
-import { CursosPage } from '../pages/cursos/cursos';
-import { Experiencia1Page } from '../pages/experiencia-1/experiencia-1';
-import { Experiencia2Page } from '../pages/experiencia-2/experiencia-2';
-import { Experiencia3Page } from '../pages/experiencia-3/experiencia-3';
 import { UmvralApiProvider } from '../providers/umvral-api/umvral-api';
 import { LoginPage } from '../pages/login/login';
+//import { HomePage } from '../pages/home/home';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { NotasPage } from '../pages/notas/notas';
+import { CursosPage } from '../pages/cursos/cursos';
 import { MensajesPage } from '../pages/mensajes/mensajes';
 
 @Component({
@@ -20,13 +17,13 @@ import { MensajesPage } from '../pages/mensajes/mensajes';
 export class ConferenceApp {
   // the root nav is a child of the root app component
   // @ViewChild(Nav) gets a reference to the app's root nav
+  //@ViewChild(Nav) nav: Nav;
   @ViewChild(Nav) nav: Nav;
 
   // List of pages that can be navigated to from the left menu
   // the left menu only works after login
   // the login page disables the left menu
   rootPage: any;
-  isLoggedIn: boolean;
 
   constructor(
     public menu: MenuController,
@@ -34,36 +31,26 @@ export class ConferenceApp {
     public splashScreen: SplashScreen,
     public umvralApiProvider: UmvralApiProvider
   ) {
-    // Check if the user has already seen the tutorial
-    this.isLoggedIn = false;
-    if (this.getLoggedInStatus) {
-      console.log("usuario no ha iniciado sesión.");
-      this.rootPage = LoginPage;
-    } else {
-      console.log("Usuario ha iniciado sesión");
-      this.rootPage = ExperienceListPage;
-    }
+    this.getLoggedInStatus();
     
-
-    this.platform.ready().then(() => {
-      this.splashScreen.hide();
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      splashScreen.hide();
     });
   }
 
   getLoggedInStatus() {
-    this.isLoggedIn = this.umvralApiProvider.isUserLoggedIn();
-  }
-
-  openExperiencia1Page() {
-    this.nav.push(Experiencia1Page);
-  }
-
-  openExperiencia2Page() {
-    this.nav.push(Experiencia2Page);
-  }
-  
-  openExperiencia3Page() {
-    this.nav.push(Experiencia3Page);
+    // Check if the user is logged in
+    this.umvralApiProvider.isUserLoggedIn().then((status) => {
+      if (status == true) {
+        console.log("Usuario ha iniciado sesión");
+        this.rootPage = CursosPage;
+      } else {
+        console.log("usuario no ha iniciado sesión.");
+        this.rootPage = LoginPage;
+      }
+    });
   }
 
   openPerfilPage() {
