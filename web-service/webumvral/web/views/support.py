@@ -11,6 +11,7 @@ from ..forms import SupportForm, ExperienceForm
 @login_required
 def support(request):
     context = get_base_context(request)
+    context['section'] = 'support'
     if (request.method == "POST"):
         form = SupportForm(request.POST)
         if form.is_valid():
@@ -34,6 +35,7 @@ def support(request):
 @login_required
 def send_experience(request):
     context = get_base_context(request)
+    context['section'] = 'support'
     if (request.method == "POST"):
         form = ExperienceForm(request.POST)
         if form.is_valid():
@@ -41,10 +43,12 @@ def send_experience(request):
                 nombre = form.cleaned_data['nombre']
                 nombre_experiencia = form.cleaned_data['nombre_experiencia']
                 email = form.cleaned_data['email']
+                criterios = form.cleaned_data['nivel'] + ' - ' + form.cleaned_data['contenido']
                 mensaje = form.cleaned_data['mensaje']
+                inter = form.cleaned_data['interaccion']
                 send_mail(
                     '[EXPERIENCIA] - '+nombre+' - '+email,
-                    'Nombre Experiencia: '+nombre_experiencia+'\n\nDescripción experiencia: \n'+mensaje,
+                    'Nombre Experiencia: '+nombre_experiencia+'\nCriterios: '+criterios+'\n\nDescripción experiencia: \n'+mensaje+'\n\nInteracción experiencia: \n'+inter,
                     email,
                     ['umvralapp@gmail.com'],
                     fail_silently=False,)

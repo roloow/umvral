@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { NavParams, Loading, LoadingController, AlertController, NavController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
-import { CursosPage } from '../cursos/cursos';
 import { RegisterUserPage } from '../register-user/register-user';
+import { Storage } from '@ionic/storage';
+import { TutorialPage } from '../tutorial/tutorial';
+import { CursosPage } from '../cursos/cursos';
 
 /**
  * Generated class for the LoginPage page.
@@ -19,14 +21,15 @@ import { RegisterUserPage } from '../register-user/register-user';
 export class LoginPage {
   data = {username: "", password: ""};
   loading: Loading;
-
+  test: any;
 
   constructor(
-    public navCtrl: NavController,
+    public nav: NavController,
     public navParams: NavParams,
     public umvralApiProvider: UmvralApiProvider,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private storage: Storage) {
     console.log("constructor loginPage");
   }
 
@@ -36,7 +39,7 @@ export class LoginPage {
 
   registrarUsuario() {
     console.log("Boton presionado para registrar!");
-    this.navCtrl.push(RegisterUserPage);
+    this.nav.push(RegisterUserPage);
   }
 
   iniciarSesion() {
@@ -46,11 +49,19 @@ export class LoginPage {
       let resultData = JSON.parse(JSON.stringify(result));
       console.log("SUCCESS: "+resultData.status+" "+resultData.statusText);
       this.loading.dismiss();
-      this.navCtrl.setRoot(CursosPage);
+      //El usuario ha visto el tutorial?
+      this.storage.get('has_seen_tutorial').then((status) => {
+        if (status == true) {
+          this.nav.setRoot(CursosPage);
+        } else {
+          this.nav.setRoot(TutorialPage);
+        }
+      });
     }, (err) => {
       let errorData = JSON.parse(JSON.stringify(err));
-      console.log("FAIL");
-      this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
+      console.log("Error en login: "+errorData.status+" "+errorData.statusText);
+      //this.mostrarError("Error al acceder: "+errorData.status+" "+errorData.statusText);
+      this.mostrarError("Erorr al acceder: Usuario y/o contraseña incorrectos.");
     });
   }
 
@@ -72,7 +83,7 @@ export class LoginPage {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
 
 }

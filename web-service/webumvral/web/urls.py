@@ -42,5 +42,10 @@ urlpatterns = [
     re_path(r'support/$', views.support, name='support'),
     re_path(r'support/exp$', views.send_experience, name='support_experience'),
     re_path(r'course/read/(?P<course>\w+)/experiences/video/$', views.experience_video, name="video"),
-    re_path(r'course/read/(?P<course>\w+)/experiences/(?P<available>\w+)/delete/$', views.erase_video, name="erase_video"),
+    re_path(r'course/read/(?P<course>\w+)/experiences/(?P<expcourse>\w+)/delete/$', views.delexpcourse, name="delexpcourse"),
+    re_path(r'user/(?P<client_id>\d+)/experiences/$', views.myexperiences, name="myexps"),
+    re_path(r'user/(?P<client_id>\d+)/experiences/add$', views.addexperiences, name="addexps"),
+    re_path(r'user/(?P<client_id>\d+)/experiences/(?P<ava_id>\d+)/edit$', views.editexperiences, name="editexps"),
+    re_path(r'user/(?P<client_id>\d+)/experiences/(?P<ava_id>\d+)/delete$', views.delexperiences, name="delexps"),
+    re_path(r'user/(?P<client_id>\d+)/expcourse/(?P<expcourse>\d+)/date$', views.datepicker, name="date"),
 ]

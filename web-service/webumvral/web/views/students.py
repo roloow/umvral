@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 
 def course_students(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context["course"] = courseobj
@@ -17,6 +18,7 @@ def course_students(request, course):
 
 def course_ban(request, course, student_id):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         print ("HOLA", course, student_id)
         student = StudentModel.objects.get(pk=student_id)
@@ -28,6 +30,7 @@ def course_ban(request, course, student_id):
 
 def course_invite(request, course):
     context = get_base_context(request)
+    context['section'] = 'course'
     try:
         courseobj = CourseModel.objects.get(pk=course)
         context["course"] = courseobj
@@ -59,9 +62,9 @@ def course_invite(request, course):
                 new_stu.course = courseobj
                 new_stu.save()
                 try:
-                    text = 'Hola '+u.first_name+'!, bienvenido a umVRal. En unos momentos, podras utilizar la Realidad Virtual para poder complementar tus estudios, y mejorar tu comprensión. Ingresa el siguiente código en tu telefono, para poder activar el curso en que te inscribiste'
+                    text = 'Hola '+u.first_name+'!, bienvenido al nuevo curso "'+ new_stu.course.name +'". Desde este momento podrás vivir nuevas experiencias y aprender sin límites. \n \n Saludos, equipo umVRal.'
                     send_mail(
-                        '¡Bienvenido a umVRal!',
+                        '¡Bienvenido a un nuevo curso umVRal, '+ new_stu.course.name +'!',
                         text,
                         'appumvral@gmail.com',
                         [u.email],

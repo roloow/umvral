@@ -1,0 +1,47 @@
+<!--<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+      <ion-title>
+        <img height="38" src="assets/img/logo-rectangular.png"/>
+      </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home-content">
+
+</ion-content>
+
+<ion-footer padding no-border>
+  <h1 ion-text color="light">Hola Camilo,<br><b>¿Qué quieres aprender hoy?</b></h1>
+  <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button color="secondary" class="cursos-btn" (click)="loadCursosPage()" block>
+            Mis Cursos
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <button ion-button color="primary" (click)="loadPerfilPage()" block>
+              Mi Perfil
+            </button>
+          </ion-row>
+          <ion-row>
+              <button ion-button color="favorite" (click)="loadMensajesPage()" block>
+                Mis Mensajes
+              </button>
+            </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-footer>-->
+
+<ion-tabs #tabmenu tabsHighlight=true tabsLayout="icon-top" tabsPlacement="bottom" main name="app" swipeBackEnabled="true">
+    <ion-tab [root]="cursosRoot" tabTitle="Cursos" tabIcon="school"></ion-tab>
+    <ion-tab [root]="mensajesRoot" tabTitle="Mensajes" tabIcon="paper-plane"></ion-tab>
+    <ion-tab [root]="notasRoot" tabTitle="Notas" tabIcon="book"></ion-tab>
+    <ion-tab [root]="perfilRoot" tabTitle="Perfil" tabIcon="contact"></ion-tab>
+  </ion-tabs>
