@@ -27,7 +27,7 @@
 		"vr"
 	],
 	"dependencies": {
-		"aframe-physics-system": "^3.1.2",
+		"aframe-physics-system": "^3.3.0",
 		"uglify-js": "^3.4.9"
 	}
 }
