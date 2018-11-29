@@ -25,7 +25,7 @@
   </div>
   <div padding class="grafico" *ngIf="notas?.length > 0">
     <!--grafico-->
-    <canvas baseChart 
+    <canvas baseChart #baseChart="base-chart"
       [datasets]="lineChartData"
       [labels]="lineChartLabels"
       [options]="lineChartOptions"

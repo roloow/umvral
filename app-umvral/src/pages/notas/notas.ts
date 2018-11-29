@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { UmvralApiProvider } from '../../providers/umvral-api/umvral-api';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'page-notas',
   templateUrl: 'notas.html',
 })
+
 export class NotasPage {
+  
+  @ViewChild("baseChart") chart: BaseChartDirective;
   notas: any;
   nombre: string[];
   count: number;
@@ -52,7 +56,6 @@ export class NotasPage {
     this.contar = 0;
     for (let nota of this.notas){
       this.suma += nota.valor;
-      console.log(nota.valor);
       this.contar +=1;
     }
     this.promedio = (this.suma/this.contar);
@@ -64,9 +67,7 @@ export class NotasPage {
     this.vnota = [];
     this.knota = [];
     for (let nota of this.notas){
-      console.log(nota);
       this.vnota.push(nota.valor);
-      console.log(this.vnota);
       this.knota.push(nota.nombre);
       this.contar +=1;
     }
@@ -83,13 +84,13 @@ export class NotasPage {
           handler: (data: any) => {
             this.umvralApiProvider.addNotas(data.nombre, data.nota).then((result) => {
               this.notas = result;
-              console.log(this.notas);
               this.calcpromedio();
               this.separarNotas();
               this.lineChartData = [
                 {data: this.vnota, label: 'Notas'} //valor nota
               ];
               this.lineChartLabels = this.knota;
+              this.chart.chart.config.data.labels =this.lineChartLabels;
               }, (err) => {
               console.log(err);
             });
@@ -126,7 +127,7 @@ export class NotasPage {
         {data: this.vnota, label: 'Notas'} //valor nota
       ];
       this.lineChartLabels = this.knota;
-      console.log(this.notas);
+      this.chart.chart.config.data.labels =this.lineChartLabels;
       }, (err) => {
       console.log(err);
     });
