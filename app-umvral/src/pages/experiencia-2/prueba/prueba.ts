@@ -28,6 +28,10 @@ export class HelpPrueba2Page {
         console.log(this.respuestas);
     }
 
+    roundToTwo(num) {
+        return +(num.toFixed(2));
+    }
+
     mostrarMensaje(text) {     
         let alert = this.alertCtrl.create({
           title: 'Mensaje',
@@ -51,6 +55,7 @@ export class HelpPrueba2Page {
         }
         console.log(this.suma);
         this.nota = (this.suma/this.preguntas.length)*6.0 + 1.0;
+        this.nota = this.roundToTwo(this.nota);
         console.log(this.nota);
         this.umvralApiProvider.subirNota(this.nota).then((data) => {
             console.log(data);
