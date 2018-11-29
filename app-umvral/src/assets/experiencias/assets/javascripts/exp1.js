@@ -17,7 +17,9 @@ let portal1 = $('#portal1');
 let portal2 = $('#portal2');
 let portal3 = $('#portal3');
 let portal4 = $('#portal4');
-let env = $('#env')
+let env = $('#env');
+let tt1 = $('#btn_tooltips1');
+let tt2 = $('#btn_tooltips2');
 //DEFAULT
 let place = 'space';
 let radius = 0.25
@@ -214,6 +216,11 @@ function setScene(world) {
 		cleanButton(p1);
 		cleanButton(p2);
 		cleanButton(p3);
+		cleanButton(tt1);
+		cleanButton(p1_w);
+		cleanButton(p2_w);
+		cleanButton(p3_w);
+		cleanButton(tt2);
 	}
 }
 
